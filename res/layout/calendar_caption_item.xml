@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- android:background="@color/calendar_transparent" iba dentro de LinearLayout 
+	android:layout_height="wrap_content"
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/calendar_transparent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/calendar_caption_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dim_gray"
+        android:textSize="@dimen/calendarCaptionDateSize"
+        android:typeface="monospace"
+        android:gravity="center"
+        android:textIsSelectable="false" >
+    </TextView>
+    
+</LinearLayout>

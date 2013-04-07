@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Elementos de la Actividad Principal (MainActivity) -->
+    <string name="app_name">B&amp;R</string>
+    
+    <!-- Elementos de la Pantalla Principal (ScreenActivity) -->
+    <string name="title_activity_principal_screen">Bares &amp; Restaurantes</string>
+    <string name="title_preferenceScreenConfiguration">Configuración</string>
+    <string name="textViewDeveloper">Aplicación desarrollada por José Luis Neira (&#169;)2013</string>
+    <string name="descriptionTituloLogo">Título de la Aplicación</string>
+	<string name="descriptionLogo">Logo de la Aplicación</string>
+	<string name="descriptionButtonData">Datos</string>
+	<string name="descriptionButtonConfiguration">Configuración</string>
+	<string name="descriptionButtonInforms">Informes</string>
+	<string name="descriptionButtonGraphics">Gráficas</string>
+	<string name="descriptionButtonPrevision">Previsión</string>
+	<string name="menu_settings">Settings</string>
+    
+    <!-- Elementos de la Pantalla Login (LoginActivity) -->
+    <string name="text_buttonLogin">Acceso</string>
+    <string name="title_activity_login">Acceso al programa</string>
+    <string name="textViewWaiterLogin">Introduce los valores para acceder al programa.</string>
+    <string name="textViewLink">(*) Recordar contraseña</string>
+    
+    <!-- Elementos de la Actividad Crear Cuenta (CreateAccountActivity) -->
+    <string name="title_activity_create_account">Crear Cuenta</string>
+    <string name="text_editTextUsername">Nombre de usuario:</string>
+    <string name="text_editTextPassword">Password:</string>
+    <string name="text_editTextPasswordRepeat">Repetir Password:</string>
+    <string name="text_editTextEmail">e-mail:</string>
+    <string name="text_checkBoxShowPassword">Mostrar Contraseñas</string>
+    <string name="descriptionImageWaiter">El camarero te explicará cómo rellenar los campos</string>
+    <string name="textViewWaiterFirst">Introduce los valores correctamente para crear tu cuenta.</string>
+    
+    <!-- Elementos de la Actividad DataActivity) -->
+    <string name="title_activity_datas">Gestión de Datos</string>
+    
+    <string name="title_preference_tipo_configuracion">Tipo de configuración</string>
+   
+	
+	<!-- Elementos del layout de configuración -->
+	<string name="mtTipoConfiguracion">Tipo de Configuración</string>
+	<string name="mtIngresos">Ingresos</string>
+	<string name="mtGastos">Gastos</string>
+	<string name="mtInformes">Informes por defecto</string>
+	<string name="mtPassword">Password</string>
+	<string name="mtEmail">e-mail</string>
+	<string name="stTipoConfiguracion">Elige entre los dos tipos de configuración</string>
+	<string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
+	<string name="stGastos">Inserta o borra conceptos de Gastos</string>
+	<string name="stInformes">Elija el informe a seleccionar por defecto</string>
+	<string name="stPassword">Puede modificar la contraseña de Usuario</string>
+	<string name="stEmail">Puede modificar el e-mail de Usuario</string>
+	<string name="tvConceptos">Gestión de Conceptos</string>
+	<string name="tvOtrasOpciones">Otras Opciones</string>
+	<string name="title_ConfigurationActivity">Configuración</string>
+	
+	<!-- Elementos de los Dialog de Configuracion -->
+	<string name="titleDialogUsername">Nombre de Usuario</string>
+	<string name="titleDialogPassword">Password</string>
+	<string name="titleDialogEmail">e-mail</string>
+	<string name="botonAceptar">Aceptar</string>
+	<string name="botonCancelar">Cancelar</string>
+	
+	<!-- Elementos de las Activities de configuracion de Conceptos -->
+	<string name="descriptionIngresos">Crear concepto de ingresos</string>
+	<string name="textoDescriptionIngresos">Crear concepto de ingreso</string>
+	<string name="descriptionGastos">Crear concepto de gastos</string>
+	<string name="textoDescriptionGastos">Crear concepto de gasto</string>
+	<string name="textViewListViewConceptoIngreso">No hay conceptos de ingreso</string>
+	<string name="textViewListViewConceptoGasto">No hay conceptos de gasto</string>
+	
+	<!-- Elementos de mycalendar -->
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="calendarContentDescriptionInsertedData">Dato insertado</string>
+    <!-- Months -->
+    <string-array name="months_long">
+        <item>ENERO</item>
+        <item>FEBRERO</item>
+        <item>MARZO</item>
+        <item>ABRIL</item>
+        <item>MAYO</item>
+        <item>JUNIO</item>
+        <item>JULIO</item>
+        <item>AGOSTO</item>
+        <item>SEPTIEMBRE</item>
+        <item>OCTUBRE</item>
+        <item>NOVIEMBRE</item>
+        <item>DICIEMBRE</item>
+    </string-array>
+    <string name="ivContenDescriptionSearchDate">Search Date</string>
+    <string-array name="mostrarmeses">
+	    <item>Enero</item>
+	    <item>Febrero</item>
+	    <item>Marzo</item>
+	    <item>Abril</item>
+	    <item>Mayo</item>
+	    <item>Junio</item>
+	    <item>Julio</item>
+	    <item>Agosto</item>
+	    <item>Septiembre</item>
+	    <item>Octubre</item>
+	    <item>Noviembre</item>
+	    <item>Diciembre</item>
+	</string-array>
+	
+    <!-- Elementos de la Lista de la Gestión de Datos -->
+    <string name="tvContentDescriptionBorrar">Borrar elemento</string>
+    <string name="tvContentDescriptionEditar">Editar elemento</string>
+    <string name="ivContentDescriptionBackSearch">Fecha anterior</string>
+    <string name="ivContentDescriptionForwardSearch">Fecha siguiente</string>
+    <string name="listaVaciaGDIngresos">No hay ningún Ingreso</string>
+    <string name="listaVaciaGDGastos">No hay ningún Gasto</string>
+    <string name="tvGDIngresos">Insertar Ingresos</string>
+    <string name="tvGDGastos">Insertar Gastos</string>
+    
+    <!-- Elementos de la Actividad de los Informes (InformesScreenActivity) -->
+    <string name="title_InformesScreenActivity">Informes</string>
+    <string name="title_PestanyaInformeSemanal">Informe Semanal</string>
+    <string name="title_PestanyaInformeMensual">Informe Mensual</string>
+    <string name="title_PestanyaInformeTrimestral">Informe Trimestral</string>
+    <string name="title_PestanyaInformeAnual">Informe Annual </string>
+    <string name="title_PestanyaInformeLibre">Informe Libre</string>
+    <string name="total_ingresos">Total Ingresos: </string>
+    <string name="total_gastos">Total Gastos: </string>
+    <string name="total_balance">Balance: </string>
+    <string name="ivContentDescriptionListadoIngresos">Desplegar Listado Ingresos</string>
+    <string name="ivContentDescriptionListadoGastos">Desplegar Listado Gastos</string>
+    <string name="textViewListadoIngresos">INGRESOS</string>
+    <string name="textViewListadoGastos">GASTOS</string>
+    <string name="textViewPestanyaInformesLibreFechaInicio">Desde: </string>
+    <string name="textViewPestanyaInformesLibreFechaFin">Hasta: </string>
+    <string name="ivContentDescriptionSearchTrimestre">Genera el informe del Trimestre</string>
+    <string name="ivContentDescriptionSearchLibre">Genera el informe del Rango a elegir</string>
+	
+</resources>

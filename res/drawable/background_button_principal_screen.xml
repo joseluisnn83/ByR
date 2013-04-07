@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval" >
+    <!--  
+	<gradient 
+		android:startColor="#FFFFFF" 
+		android:centerColor="#DCDCDC"
+		android:endColor="#A9A9A9"
+		android:angle="270" 
+		/>
+	<padding 
+	    android:left="@dimen/button_principal_screen_padding_left" 
+	    android:top="@dimen/button_principal_screen_padding_top" 
+	    android:right="@dimen/button_principal_screen_padding_right" 
+	    android:bottom="@dimen/button_principal_screen_padding_bottom" 
+		/>
+	<size 
+	    android:height="@dimen/button_principal_screen_size_heigth" 
+	    android:width="@dimen/button_principal_screen_size_width"
+	    />
+	-->
+</shape>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- android:layout_height="fill_parent" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/calendar_header_background"
+        android:orientation="horizontal" >
+		<!-- TextView en la cabecera donde se muestra el mes y el año -->
+        <TextView
+            android:id="@+id/titleCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/calendarTitlePadding"
+            android:textColor="@color/calendar_header_font_color"
+            android:textSize="@dimen/calendarTitleSize"
+            android:textIsSelectable="false"            
+            android:typeface="sans" />
+
+    </RelativeLayout>
+
+    <!-- GridView donde se muestran los días de la semana (Mon,Tue,Wed ....) 
+    android:background="@color/calendar_captions_item_background_color"-->
+    
+    <!-- android:stretchMode="columnWidth"
+    android:textStyle="bold"
+    	
+     
+    -->
+    <GridView
+        android:id="@+id/calendar_captions_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grid_view_captions"
+        android:gravity="center"
+        android:numColumns="7"
+        android:clickable="false"
+         />
+    
+
+   	<!-- GridView donde se muestran los días del mes -->
+   	<!-- android:layout_height="fill_parent" 
+   	android:layout_height="match_parent" 
+   	android:background="@color/calendar_captions_item_background_color"-->
+    <GridView
+        android:id="@+id/calendar_days_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grid_view_days"
+        android:gravity="center"
+        android:numColumns="7"
+         />
+    <!-- android:stretchMode="columnWidth" -->
+
+</LinearLayout>

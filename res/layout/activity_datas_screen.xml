@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LLayoutDatasPrincipal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="5dip"
+    android:background="@color/CalendarioFondoPrincipal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RLCalendario"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+         >
+    </RelativeLayout>
+    
+    <!-- android:layout_height="0dip"
+        android:layout_weight="3" -->
+    
+    <LinearLayout
+       	android:id="@+id/RLBuscarFecha"
+       	android:layout_width="fill_parent"
+       	android:layout_height="wrap_content"       	
+       	android:layout_marginTop="5dip"
+       	android:gravity="center" >
+
+       	<Spinner
+           	android:id="@+id/spinnerMes"
+           	android:layout_width="wrap_content"
+           	android:layout_height="wrap_content"
+    	/>
+        
+        <Spinner
+           	android:id="@+id/spinnerAnyo"
+           	android:layout_width="wrap_content"
+           	android:layout_height="wrap_content"
+        />
+        	        
+        <ImageView
+           	android:id="@+id/ivActivityDatasScreenSearchDate"
+           	android:layout_width="@dimen/calendarImageViewSearchDateWidth"
+           	android:layout_height="@dimen/calendarImageViewSearchDateHeigth"
+           	
+           	android:layout_gravity="center"
+           	android:contentDescription="@string/ivContenDescriptionSearchDate"
+           	android:src="@android:drawable/ic_menu_search" />
+		<!-- android:layout_marginLeft="10dip" -->
+	</LinearLayout>
+     
+</LinearLayout>

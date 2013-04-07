@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.joseluisnn.byr"
+    android:versionCode="1"
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+	
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+         >
+         <!-- android:label="@string/title_activity_principal_screen"  -->
+        <activity            
+            
+            android:name="PrincipalScreenActivity" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>            
+        </activity>
+        <activity 
+            android:name="com.joseluisnn.byr.DatasActivityScreen" 
+            android:screenOrientation="portrait" 
+            android:label="@string/title_activity_datas"></activity>
+        <activity 
+            android:name="PreferenciasConfiguration" 
+            android:label="@string/title_preferenceScreenConfiguration"
+            android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="com.joseluisnn.byr.ConfigurationActivity" 
+            android:label="@string/title_ConfigurationActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="ConceptosIngresosActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="ConceptosGastosActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="DatasActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity 
+            android:screenOrientation="portrait" 
+            android:name="InformesScreenActivity" 
+            android:label="@string/title_InformesScreenActivity"></activity>
+        <activity android:name="PestanyaSemanalActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="PestanyaMensualActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="PestanyaTrimestralActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="PestanyaSemestralActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="PestanyaAnualActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="PestanyaLibreActivity" android:screenOrientation="portrait"></activity>
+        
+    </application>
+
+</manifest>

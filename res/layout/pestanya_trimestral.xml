@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/listados_pestanya_background"
+    android:padding="5dip"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dip"        
+        >
+    	
+        <Spinner
+        android:id="@+id/spinnerPestanyaITrimestralAnyos"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:gravity="center"
+    	android:layout_weight="1"
+        />
+        
+        <Spinner
+        android:id="@+id/spinnerPestanyaITrimestralTrimestres"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:gravity="center"
+    	android:layout_weight="1"
+        />
+        <!--  
+        <ImageButton
+           	android:id="@+id/imageButtonSearchTrimestre"
+           	android:layout_width="wrap_content"
+           	android:layout_height="wrap_content"
+           	android:contentDescription="@string/ibContentDescriptionSearchTrimestre"
+           	android:src="@android:drawable/ic_menu_search" />
+        -->
+        <ImageView 
+            android:id="@+id/imageViewSearchTrimestre"
+           	android:layout_width="wrap_content"
+           	android:layout_height="wrap_content"
+           	android:layout_gravity="center"
+           	android:contentDescription="@string/ivContentDescriptionSearchTrimestre"
+           	android:src="@android:drawable/ic_menu_search"
+            />
+        
+    </LinearLayout>    
+    
+    <ScrollView
+        android:id="@+id/scrollViewPestanyaITrimestral"
+        android:layout_width="fill_parent"
+    	android:layout_height="0dip"
+    	android:layout_weight="1" 
+        >
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="vertical" >
+        	
+            <RelativeLayout
+                android:id="@+id/relativeLayoutBarraListadoIngresosTrimestral" 
+                android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:orientation="horizontal"
+    			android:background="@drawable/listados_barra_ingresos" >
+    			
+                <ImageView
+                    android:id="@+id/imageViewListadoIngresosTrimestral"
+            		android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:padding="10dip"
+        			android:layout_centerInParent="true"
+        			android:layout_centerHorizontal="true"
+        			android:layout_alignParentLeft="true"
+            		android:contentDescription="@string/ivContentDescriptionListadoIngresos"
+            		android:src="@android:drawable/arrow_down_float"
+            	/>
+                
+            	<TextView 
+	    			android:layout_width="wrap_content"
+    				android:layout_height="wrap_content"
+    				android:layout_toRightOf="@id/imageViewListadoIngresosTrimestral"
+    				android:layout_centerInParent="true"
+    				android:text="@string/textViewListadoIngresos"
+    				android:textColor="@color/ListadosNegro"
+    				android:textSize="@dimen/text_medium" />
+                
+            </RelativeLayout>
+            
+            <!-- LinearLayout de CONTENIDO de INGRESOS -->
+            <LinearLayout
+                android:id="@+id/linearLayoutListadoIngresosTrimestral"
+                android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:background="@drawable/listados_contenido_ingresos"
+    			android:orientation="vertical" >
+                
+            </LinearLayout>
+            
+            <RelativeLayout 
+                android:id="@+id/relativeLayoutBarraListadoGastosTrimestral"
+                android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:orientation="horizontal"
+    			android:background="@drawable/listados_barra_gastos" >
+            	
+                <ImageView
+                    android:id="@+id/imageViewListadoGastosTrimestral"
+            		android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:padding="10dip"
+        			android:layout_centerInParent="true"
+        			android:layout_alignParentLeft="true"
+            		android:contentDescription="@string/ivContentDescriptionListadoGastos"
+            		android:src="@android:drawable/arrow_down_float"
+            	/>        		
+        		
+        		<TextView 
+	    			android:layout_width="wrap_content"
+    				android:layout_height="wrap_content"
+    				android:layout_toRightOf="@id/imageViewListadoGastosTrimestral"
+    				android:layout_centerInParent="true"
+    				android:text="@string/textViewListadoGastos"
+    				android:textColor="@color/ListadosNegro"
+    				android:textSize="@dimen/text_medium" />
+            
+        	</RelativeLayout>
+        	
+            <!-- LinearLayout de CONTENIDO de GASTOS -->
+            <LinearLayout
+                android:id="@+id/linearLayoutListadoGastosTrimestral"
+                android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:background="@drawable/listados_contenido_gastos"
+    			android:orientation="vertical" >
+                
+            </LinearLayout>
+        	
+        </LinearLayout>
+        
+    </ScrollView>
+    
+    <!-- LinearLayout para los Totales y el Balance -->
+	<LinearLayout
+	    android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="@dimen/pestanyaInformesTotalesPadding"
+    	android:paddingTop="@dimen/pestanyaInformesTotalesPadding"
+    	android:paddingBottom="@dimen/pestanyaInformesTotalesPadding"
+    	android:orientation="vertical" >
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="horizontal" >
+	        
+	        <TextView 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text="@string/total_ingresos"
+    			android:textColor="@color/ListadosNegro"
+    			android:textSize="@dimen/text_medium" />
+	        
+	        <TextView
+	            android:id="@+id/textViewTotalIngresosTrimestral" 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text=""
+    			android:textStyle="bold"
+    			android:textSize="@dimen/text_medium" />
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="horizontal" >
+	        
+	        <TextView 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text="@string/total_gastos"
+    			android:textColor="@color/ListadosNegro"
+    			android:textSize="@dimen/text_medium" />
+	        
+	        <TextView
+	            android:id="@+id/textViewTotalGastosTrimestral" 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text=""
+    			android:textStyle="bold"
+    			android:textSize="@dimen/text_medium" />
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="horizontal" >
+	        
+	        <TextView 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text="@string/total_balance"
+    			android:textColor="@color/ListadosNegro"
+    			android:textSize="@dimen/text_medium" />
+	        
+	        <TextView
+	            android:id="@+id/textViewTotalBalanceTrimestral" 
+	            android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text=""
+    			android:textStyle="bold"
+    			android:textSize="@dimen/text_medium" />
+	        
+	    </LinearLayout>
+	    
+	</LinearLayout>
+
+</LinearLayout>

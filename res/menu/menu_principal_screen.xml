@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/help" 
+        android:title="Ayuda"
+        android:icon="@android:drawable/ic_menu_help"
+        >        
+    </item>
+    <item 
+        android:id="@+id/acerca_de" 
+        android:title="Acerca de..."
+        android:icon="@android:drawable/ic_menu_info_details"
+        >        
+    </item>
+</menu>
