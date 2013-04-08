@@ -39,13 +39,13 @@ public class PrincipalScreenActivity extends Activity{
 	private ImageView b_config;
 	private ImageView b_inform;
 	private ImageView b_graphic;
-	private ImageView b_prevision;
+	//private ImageView b_prevision;
 	// Variables para los textView de los botones
 	private TextView tvData;
 	private TextView tvConfig;
 	private TextView tvInform;
 	private TextView tvGraphic;
-	private TextView tvPrevision;
+	//private TextView tvPrevision;
 	private TextView tvDeveloper;
 	
 	private long tiempoDePulsacionInicial;	
@@ -67,12 +67,12 @@ public class PrincipalScreenActivity extends Activity{
 		b_config = (ImageView)findViewById(R.id.imageButtonConfiguration);
 		b_inform = (ImageView)findViewById(R.id.imageButtonInforms);
 		b_graphic = (ImageView)findViewById(R.id.imageButtonGraphics);
-		b_prevision = (ImageView)findViewById(R.id.imageButtonPrevision);
+		//b_prevision = (ImageView)findViewById(R.id.imageButtonPrevision);
 		tvData = (TextView)findViewById(R.id.textViewData);
 		tvConfig = (TextView)findViewById(R.id.textViewConfiguration);
 		tvInform = (TextView)findViewById(R.id.textViewInforms);
 		tvGraphic = (TextView)findViewById(R.id.textViewGraphics);
-		tvPrevision = (TextView)findViewById(R.id.textViewPrevision);
+		//tvPrevision = (TextView)findViewById(R.id.textViewPrevision);
 		tvDeveloper = (TextView)findViewById(R.id.textViewDeveloper);
 		
 		// Modifico el tipo de fuente de los TextView
@@ -82,7 +82,7 @@ public class PrincipalScreenActivity extends Activity{
 		tvConfig.setTypeface(fuente);
 		tvInform.setTypeface(fuente);
 		tvGraphic.setTypeface(fuente);
-		tvPrevision.setTypeface(fuente);
+		//tvPrevision.setTypeface(fuente);
 		tvDeveloper.setTypeface(fuente);
 		
 		// Inicio la clase donde están las constantes de BroadcastReceiver
@@ -212,7 +212,7 @@ public class PrincipalScreenActivity extends Activity{
 		});
 		
 		/* Modifico las características al ser pulsado*/
-		b_prevision.setOnTouchListener(new OnTouchListener() {
+		/*b_prevision.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -239,7 +239,7 @@ public class PrincipalScreenActivity extends Activity{
 				
 				return true;
 			}
-		});
+		});*/
 		
 		/*
 		 * Según el tipo de configuración habilito los botones adecuados
@@ -293,10 +293,10 @@ public class PrincipalScreenActivity extends Activity{
 		 * @tipoconfig = 1 : configuración avanzada y habilito las gráficas y la previsión
 		 */
 		if (tipoConfig == 0){
-			b_prevision.setEnabled(false);
+			//b_prevision.setEnabled(false);
 			b_graphic.setEnabled(false);
 		}else{			
-			b_prevision.setEnabled(true);
+			//b_prevision.setEnabled(true);
 			b_graphic.setEnabled(true);
 		}
 		
@@ -364,10 +364,10 @@ public class PrincipalScreenActivity extends Activity{
 				
 					// Según el tipo de configuración que se le pase por parámetro se ocultan las opciones
 					if(tipo_config == 0){// el usuario ha modificado el tipo de configuración
-						b_prevision.setEnabled(false);
+						//b_prevision.setEnabled(false);
 						b_graphic.setEnabled(false);
 					}else{
-						b_prevision.setEnabled(true);
+						//b_prevision.setEnabled(true);
 						b_graphic.setEnabled(true);
 					}
 					
