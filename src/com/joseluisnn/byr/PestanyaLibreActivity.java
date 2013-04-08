@@ -710,12 +710,12 @@ public class PestanyaLibreActivity extends Activity {
 								null);
 				TextView tvMes = (TextView) rowViewFechaMes
 						.findViewById(R.id.textViewEncabezadoMesListadoInformes);
-				tvMes.setText(obtenerCadenaFechaMes(listadoValoresIngresos
+				tvMes.setText(obtenerCadenaFechaMes(listadoValoresGastos
 						.get(i).getIdFecha()));
 
 				TextView tvFecha = (TextView) rowViewFechaDia
 						.findViewById(R.id.textViewEncabezadoFechaListadoInformes);
-				tvFecha.setText(obtenerCadenaFechaParcial(listadoValoresIngresos
+				tvFecha.setText(obtenerCadenaFechaParcial(listadoValoresGastos
 						.get(i).getIdFecha()));
 
 				// Inserto el layout del mes y fecha completa como cabeceras

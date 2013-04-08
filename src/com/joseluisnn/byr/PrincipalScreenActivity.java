@@ -370,7 +370,6 @@ public class PrincipalScreenActivity extends Activity{
 						//b_prevision.setEnabled(true);
 						b_graphic.setEnabled(true);
 					}
-					
 				}
 			}			
 		};
