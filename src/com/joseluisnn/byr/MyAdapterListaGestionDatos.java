@@ -3,10 +3,12 @@ package com.joseluisnn.byr;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
@@ -129,6 +131,17 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 				
 				lanzarObservador(BORRAR,position);
 				
+			}
+		});
+		
+		rowView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				lanzarMensaje("RelayiveLayout long push !!! ");
+				
+				return false;
 			}
 		});
 		
