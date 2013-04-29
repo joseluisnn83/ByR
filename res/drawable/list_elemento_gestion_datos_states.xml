@@ -2,16 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Casilla del día del mes presionada -->
     <item
-     	android:drawable="@drawable/calendar_item_background_focused"
+     	android:drawable="@color/PressedItemGD"
      	android:state_pressed="true"
     />
     <!-- Casilla del día del mes con el foco -->
     <item
-     	android:drawable="@drawable/calendar_item_background_focused"
+     	android:drawable="@color/PressedItemGD"
         android:state_focused="true" 
     />
     <!-- Casilla del día del mes en estado normal -->
     <item
-      	android:drawable="@drawable/calendar_item_background" 
+      	android:drawable="@color/NormalItemGD" 
     />
 </selector>

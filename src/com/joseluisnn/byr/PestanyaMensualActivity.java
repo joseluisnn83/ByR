@@ -118,7 +118,6 @@ public class PestanyaMensualActivity extends Activity {
 		 * accedo a la BD para que me devuelva los ingresos y gastos en sus
 		 * respectivas Listas
 		 */
-
 		listadoValoresIngresos = dba.listadoValoresIngresosPorFecha(
 				obtenerInicioEnteroFechaMesAnterior(),
 				obtenerFinEnteroFechaMesAnterior());
@@ -323,6 +322,8 @@ public class PestanyaMensualActivity extends Activity {
 
 	/*
 	 * Método que me devuelve en un entero el último dia de la semana actual
+	 * En mi caso me interesa que el útimo día sea el de hoy para que no me muestre
+	 * valores futuros
 	 */
 	private int obtenerFinEnteroFechaMesActual() {
 
@@ -331,12 +332,13 @@ public class PestanyaMensualActivity extends Activity {
 		String day;
 		int entero_fecha;
 
-		// Obtengo de la variable Calendar la fecha del último dia del mes
-		// actual
+		// Obtengo de la variable Calendar la fecha del día actual
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.MONTH, 1);
-		c.set(Calendar.DATE, 1);
-		c.add(Calendar.DATE, -1);
+		
+		// Aquí se obtendría el último dia del mes actual
+		//c.add(Calendar.MONTH, 1);
+		//c.set(Calendar.DATE, 1);
+		//c.add(Calendar.DATE, -1);
 
 		/*
 		 * Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0
@@ -607,7 +609,9 @@ public class PestanyaMensualActivity extends Activity {
 		// Inicio la variable Calendar con la fecha que tengo actualmente
 		c.set(y, m - 1, d);
 
-		cadenaFecha = "" + c.get(Calendar.DAY_OF_MONTH) + " de "
+		cadenaFecha = obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK))
+				+ ", " 
+				+ c.get(Calendar.DAY_OF_MONTH) + " de "
 				+ obtenerMes(c.get(Calendar.MONTH)) + " de "
 				+ c.get(Calendar.YEAR);
 
@@ -666,6 +670,42 @@ public class PestanyaMensualActivity extends Activity {
 
 		return m;
 
+	}
+	
+	/*
+	 * Método que me devuelve el día de la semana según el entero pasado por parámetro
+	 */
+	private String obtenerDiaSemana(int day){
+		
+		String d = new String();		
+		
+		switch (day) {
+		case 1:
+			d = "Dom";
+			break;
+		case 2:
+			d = "Lun";
+			break;
+		case 3:
+			d = "Mar";
+			break;
+		case 4:
+			d = "Mié";
+			break;
+		case 5:
+			d = "Jue";
+			break;
+		case 6:
+			d = "Vie";
+			break;
+		case 7:
+			d = "Sáb";
+			break;
+		default:
+			break;
+		}
+		
+		return d;
 	}
 
 	/*

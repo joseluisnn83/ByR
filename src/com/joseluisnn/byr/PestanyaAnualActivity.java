@@ -58,7 +58,7 @@ public class PestanyaAnualActivity extends Activity {
 	// Variables para tener el total de ingresos y gastos
 	private double totalIngresos;
 	private double totalGastos;
-	
+
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
@@ -101,14 +101,14 @@ public class PestanyaAnualActivity extends Activity {
 		c.add(Calendar.YEAR, 1);
 		listaAnyos.add("" + c.get(Calendar.YEAR));
 		// Instancio y creo el Adaptador para el spinner
-		adapterAnyos = new ArrayAdapter<String>(this,
-				R.layout.own_spinner, listaAnyos);
+		adapterAnyos = new ArrayAdapter<String>(this, R.layout.own_spinner,
+				listaAnyos);
 		adapterAnyos
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// le añado el adapter al spinner
 		anyos.setAdapter(adapterAnyos);
-		
+
 		// Instancio los formateadores de números
 		separadores = new DecimalFormatSymbols();
 		separadores.setDecimalSeparator(',');
@@ -429,14 +429,14 @@ public class PestanyaAnualActivity extends Activity {
 		String day;
 		int entero_fecha;
 
-		// Obtengo de la variable Calendar la fecha del último dia del año
-		// actual
-		// actual
+		// Obtengo de la variable Calendar el día de hoy
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.YEAR, 1);
-		c.set(Calendar.MONTH, 0);
-		c.set(Calendar.DATE, 1);
-		c.add(Calendar.DATE, -1);
+
+		/*
+		 * fecha del último dia del año actual c.add(Calendar.YEAR, 1);
+		 * c.set(Calendar.MONTH, 0); c.set(Calendar.DATE, 1);
+		 * c.add(Calendar.DATE, -1);
+		 */
 
 		/*
 		 * Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0
@@ -475,6 +475,9 @@ public class PestanyaAnualActivity extends Activity {
 		String fechaAnterior = new String("000000");
 		// Variable para la fecha devuelta por la base de datos
 		String fechaBD;
+		// Variable que me servirá para sumar valores de un mismo concepto el
+		// mismo mes
+		String fechaParaCombinarValores;
 		// double totalPorMeses = 0;
 		int indiceListaPrincipal = 0;
 		int iAux = 0;
@@ -506,34 +509,42 @@ public class PestanyaAnualActivity extends Activity {
 					if (listadoValoresIngresos.get(iAux).getIdConcepto() == listadoValoresIngresosAux
 							.get(i).getIdConcepto()) {
 
-						// Actualizo el total mensual del Concepto
-						listadoValoresIngresos.get(iAux).setCantidad(
-								listadoValoresIngresos.get(iAux).getCantidad()
-										+ listadoValoresIngresosAux.get(i)
-												.getCantidad());
-						encontrado = true;
+						fechaParaCombinarValores = ("" + listadoValoresIngresos
+								.get(iAux).getIdFecha()).substring(0, 6);
 
+						if (fechaParaCombinarValores.equals(fechaBD.substring(
+								0, 6))) {
+
+							// Actualizo el total mensual del Concepto
+							listadoValoresIngresos.get(iAux).setCantidad(
+									listadoValoresIngresos.get(iAux)
+											.getCantidad()
+											+ listadoValoresIngresosAux.get(i)
+													.getCantidad());
+							encontrado = true;
+						}
 					}
 
 					iAux++;
 
 				}
-				
+
 				/*
-				 * Entra en esta condición si el nuevo concepto leido tiene la misma fecha
-				 * que el concepto anterior pero son difierntes conceptos por lo que me
-				 * lo debe poner en otro registro de la Lista
+				 * Entra en esta condición si el nuevo concepto leido tiene la
+				 * misma fecha que el concepto anterior pero son difierntes
+				 * conceptos por lo que me lo debe poner en otro registro de la
+				 * Lista
 				 */
-				if (encontrado == false){
-					
+				if (encontrado == false) {
+
 					indiceListaPrincipal++;
-					
+
 					listadoValoresIngresos.add(new ValoresElementoListaGD(
 							listadoValoresIngresosAux.get(i).getIdConcepto(),
 							Integer.valueOf(fechaAnterior + "01").intValue(),
 							listadoValoresIngresosAux.get(i).getConcepto(),
 							listadoValoresIngresosAux.get(i).getCantidad()));
-					
+
 				}
 
 				iAux = 0;
@@ -566,6 +577,9 @@ public class PestanyaAnualActivity extends Activity {
 		String fechaAnterior = new String("000000");
 		// Variable para la fecha devuelta por la base de datos
 		String fechaBD;
+		// Variable que me servirá para sumar valores de un mismo concepto el
+		// mismo mes
+		String fechaParaCombinarValores;
 		// double totalPorMeses = 0;
 		int indiceListaPrincipal = 0;
 		int iAux = 0;
@@ -595,34 +609,42 @@ public class PestanyaAnualActivity extends Activity {
 					if (listadoValoresGastos.get(iAux).getIdConcepto() == listadoValoresGastosAux
 							.get(i).getIdConcepto()) {
 
-						// Actualizo el total mensual del Concepto
-						listadoValoresGastos.get(iAux).setCantidad(
-								listadoValoresGastos.get(iAux).getCantidad()
-										+ listadoValoresGastosAux.get(i)
-												.getCantidad());
-						encontrado = true;
+						fechaParaCombinarValores = ("" + listadoValoresGastos
+								.get(iAux).getIdFecha()).substring(0, 6);
 
+						if (fechaParaCombinarValores.equals(fechaBD.substring(
+								0, 6))) {
+
+							// Actualizo el total mensual del Concepto
+							listadoValoresGastos.get(iAux).setCantidad(
+									listadoValoresGastos.get(iAux)
+											.getCantidad()
+											+ listadoValoresGastosAux.get(i)
+													.getCantidad());
+							encontrado = true;
+						}
 					}
 
 					iAux++;
 
 				}
-				
+
 				/*
-				 * Entra en esta condición si el nuevo concepto leido tiene la misma fecha
-				 * que el concepto anterior pero son difierntes conceptos por lo que me
-				 * lo debe poner en otro registro de la Lista
+				 * Entra en esta condición si el nuevo concepto leido tiene la
+				 * misma fecha que el concepto anterior pero son difierntes
+				 * conceptos por lo que me lo debe poner en otro registro de la
+				 * Lista
 				 */
-				if (encontrado == false){
-					
+				if (encontrado == false) {
+
 					indiceListaPrincipal++;
-					
+
 					listadoValoresGastos.add(new ValoresElementoListaGD(
 							listadoValoresGastosAux.get(i).getIdConcepto(),
 							Integer.valueOf(fechaAnterior + "01").intValue(),
 							listadoValoresGastosAux.get(i).getConcepto(),
 							listadoValoresGastosAux.get(i).getCantidad()));
-					
+
 				}
 
 				iAux = 0;
@@ -644,7 +666,6 @@ public class PestanyaAnualActivity extends Activity {
 
 			}
 		}
-
 	}
 
 	/*
@@ -681,8 +702,9 @@ public class PestanyaAnualActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresIngresos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
+							.getCantidad()) + "€");
 
 			if (fechaAnterior != listadoValoresIngresos.get(i).getIdFecha()) {
 
@@ -751,8 +773,9 @@ public class PestanyaAnualActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresGastos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresGastos.get(i)
+							.getCantidad()) + "€");
 
 			if (fechaAnterior != listadoValoresGastos.get(i).getIdFecha()) {
 
@@ -938,12 +961,15 @@ public class PestanyaAnualActivity extends Activity {
 
 		double balance = getTotalIngresos() - getTotalGastos();
 
-		tvTotalIngresos.setText(" " + numeroAFormatear.format(getTotalIngresos()) + " €");
+		tvTotalIngresos.setText(" "
+				+ numeroAFormatear.format(getTotalIngresos()) + " €");
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
-		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos()) + " €");
-		tvTotalGastos.setTextColor(this.getResources().getColor(R.color.ListadosRojo));
+		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
+				+ " €");
+		tvTotalGastos.setTextColor(this.getResources().getColor(
+				R.color.ListadosRojo));
 
 		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
 		if (balance >= 0) {

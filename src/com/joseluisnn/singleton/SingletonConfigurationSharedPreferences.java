@@ -9,15 +9,29 @@ public class SingletonConfigurationSharedPreferences {
 	private static SingletonConfigurationSharedPreferences INSTANCE = new SingletonConfigurationSharedPreferences();
 	
 	/*
-	 * Me creo el valor constante para el nombre del archivo de preferencias de la configuración
+	 * Me creo el valor constante para los nombres de los archivos de preferencias de la configuración
 	 */
 	public final String NOMBRE_ARCHIVO_CONFIGURACION = "preferences_configuration";
+	public final String NOMBRE_ARCHIVO_CONFIGURACION_GRAFICAS = "preferences_configuration_graphics";
 	/*
-	 *  nombre de los campos claves de los datos personales
+	 *  nombre de los campos claves de los datos de configuración de la aplicación
 	 */
 	public final String KEY_CUENTA = "key_cuenta_creada";
 	public final String KEY_TIPO_CONFIGURACION = "key_tipo_config";
 	public final String KEY_INFORME_POR_DEFECTO = "key_informe_por_defecto";
+	/*
+	 *  nombre de los campos claves de los datos de configuración de las gráficas
+	 */
+	 public final String KEY_LPTIPOGRAFICA = "lpTipoGrafica";
+	 public final String KEY_LPVALORESGRAFICA = "lpValoresGrafica";
+	 public final String KEY_LPYEARS = "lpYears";
+	 public final String KEY_LPMONTHS = "lpMonths";
+	 public final String KEY_CBPLINEINGRESOS = "cbpLineIngresos";
+	 public final String KEY_CBPLINEGASTOS = "cbpLineGastos";
+	 public final String KEY_CBPLINEBALANCE = "cbpLineBalance";
+	 public final String KEY_CBPVALUESINGRESOS = "cbpValuesIngresos";
+	 public final String KEY_CBPVALUESGASTOS = "cbpValuesGastos";
+	 public final String KEY_CBPVALUESBALANCE = "cbpValuesBalance";
 	
 	public SingletonConfigurationSharedPreferences(){}
 	

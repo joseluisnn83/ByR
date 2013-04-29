@@ -8,13 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.joseluisnn.singleton.SingletonBroadcastReceiver;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
@@ -39,7 +36,7 @@ public class ConfigurationActivity extends Activity{
 	private LinearLayout llConceptosIngresos;
 	private LinearLayout llConceptosGastos;
 	private LinearLayout llInformes;
-	private TextView tvMTTipoConfiguracion;
+	/*private TextView tvMTTipoConfiguracion;
 	private TextView tvSTTipoConfiguracion;
 	private TextView tvGestionConceptos;
 	private TextView tvMTConceptosIngresos;
@@ -48,7 +45,7 @@ public class ConfigurationActivity extends Activity{
 	private TextView tvSTConceptosGastos;
 	private TextView tvOtrasOpciones;
 	private TextView tvMTOtrasOpciones;
-	private TextView tvSTOtrasOpciones;
+	private TextView tvSTOtrasOpciones;*/
 	
 	// Variable que contiene la constante para saber qué Broadcast se ha enviado
 	private SingletonBroadcastReceiver sbr;
@@ -70,7 +67,7 @@ public class ConfigurationActivity extends Activity{
 		llConceptosIngresos = (LinearLayout)findViewById(R.id.llConceptosIngresos);
 		llConceptosGastos = (LinearLayout)findViewById(R.id.llConceptosGastos);
 		llInformes = (LinearLayout)findViewById(R.id.llInformes);
-		tvMTTipoConfiguracion = (TextView)findViewById(R.id.textViewMTTipoConfiguracion);
+		/*tvMTTipoConfiguracion = (TextView)findViewById(R.id.textViewMTTipoConfiguracion);
 		tvSTTipoConfiguracion = (TextView)findViewById(R.id.textViewSTTipoConfiguracion);
 		tvGestionConceptos = (TextView)findViewById(R.id.textViewGestionConceptos);
 		tvMTConceptosIngresos = (TextView)findViewById(R.id.textViewMTConceptosIngresos);		
@@ -79,11 +76,11 @@ public class ConfigurationActivity extends Activity{
 		tvSTConceptosGastos = (TextView)findViewById(R.id.textViewSTConceptosGastos);
 		tvOtrasOpciones = (TextView)findViewById(R.id.textViewOtrasOpciones);
 		tvMTOtrasOpciones = (TextView)findViewById(R.id.textViewMTOtrasOpciones);
-		tvSTOtrasOpciones = (TextView)findViewById(R.id.textViewSTOtrasOpciones);
+		tvSTOtrasOpciones = (TextView)findViewById(R.id.textViewSTOtrasOpciones);*/
 		
 		// Cambio los tipos de fuentes
-		Typeface fuente = Typeface.createFromAsset(getAssets(), "fonts/go_boom.ttf");
-		tvMTTipoConfiguracion.setTypeface(fuente);
+		//Typeface fuente = Typeface.createFromAsset(getAssets(), "fonts/go_boom.ttf");
+		/*tvMTTipoConfiguracion.setTypeface(fuente);
 		tvSTTipoConfiguracion.setTypeface(fuente);
 		tvGestionConceptos.setTypeface(fuente);
 		tvMTConceptosIngresos.setTypeface(fuente);
@@ -93,7 +90,7 @@ public class ConfigurationActivity extends Activity{
 		tvOtrasOpciones.setTypeface(fuente);
 		tvMTOtrasOpciones.setTypeface(fuente);
 		tvSTOtrasOpciones.setTypeface(fuente);
-		
+		*/
 		// Evento OnClick del Layout del tipo de configuración
 		llTipoConfiguracion.setOnClickListener(new OnClickListener() {
 			

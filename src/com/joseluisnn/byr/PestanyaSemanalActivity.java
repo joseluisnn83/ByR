@@ -431,6 +431,8 @@ public class PestanyaSemanalActivity extends Activity{
 	
 	/*
 	 * Método que me devuelve en un entero el último dia de la semana actual
+	 * En mi caso me interesa obtener el día de hoy para visualizar exclusivamente
+	 * los valores pasados y elde hoy, no valores de futuro.
 	 */
 	private int obtenerFinEnteroFechaSemanaActual(){
 		
@@ -439,9 +441,10 @@ public class PestanyaSemanalActivity extends Activity{
 		String day;
 		int entero_fecha;
 		
-		// Obtengo de la variable Calendar la fecha actual en el domingo
+		// Obtengo de la variable Calendar la fecha actual 
 		Calendar c = Calendar.getInstance();
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		// Aquí me sitúa la fecha actual en el domingo, el último día
+		//c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 				
 		/*	
 		 *  Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0

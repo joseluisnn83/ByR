@@ -41,6 +41,9 @@
 	<color name="CalendarioDomingos">#FF7F66</color>
 	<color name="CalendarioDiaPulsado">#FFF6E5</color>
 	<color name="CalendarioHoy">#7ECEFD</color>
+	<color name="NormalItemGD">#EAEAEA</color>
+	<color name="PressedItemGD">#d5dce7</color>
+	
 	<!-- Colores para los Listados -->
 	<color name="ListadosNegro">#232621</color>
 	<color name="ListadosRojo">#C74223</color>

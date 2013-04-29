@@ -54,6 +54,10 @@
         <activity android:name="PestanyaSemestralActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaAnualActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaLibreActivity" android:screenOrientation="portrait"></activity>
+        <activity 
+            android:name="GraphicsActivity"></activity>
+        <activity 
+            android:name="PreferencesGraphicsActivity"></activity>
         
     </application>
 

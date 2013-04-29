@@ -24,6 +24,7 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 	
 	private final int EDITAR = 0;
 	private final int BORRAR = 1;
+	private final int PULSACION_LARGA = 2;
 	
 	private final Context context;
 	private final String tipoConcepto;
@@ -39,6 +40,7 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 		
 		void editar(int position);
 		void borrar(int position);
+		void pulsacionLarga(int position);
 		
 	}
  	
@@ -138,8 +140,11 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 			
 			@Override
 			public boolean onLongClick(View v) {
-				// TODO Auto-generated method stub
-				lanzarMensaje("RelayiveLayout long push !!! ");
+				// TODO Informo que se ha pulsado de manera prolongada un item del ListView
+				// 		y despliego el menú de previsión si es un día futuro
+				//lanzarMensaje("RelayiveLayout long push !!! ");
+				
+				lanzarObservador(PULSACION_LARGA,position);
 				
 				return false;
 			}
@@ -160,6 +165,9 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 			break;
 		case BORRAR:
 			observador.borrar(position);
+			break;
+		case PULSACION_LARGA:
+			observador.pulsacionLarga(position);
 			break;
 		default:
 			break;

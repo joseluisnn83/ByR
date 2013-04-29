@@ -4,9 +4,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
-import com.joseluisnn.databases.DBAdapter;
-import com.joseluisnn.objetos.ValoresElementoListaGD;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.joseluisnn.databases.DBAdapter;
+import com.joseluisnn.objetos.ValoresElementoListaGD;
 
 public class PestanyaTrimestralActivity extends Activity {
 
@@ -70,7 +75,7 @@ public class PestanyaTrimestralActivity extends Activity {
 	// Variables para tener el total de ingresos y gastos
 	private double totalIngresos;
 	private double totalGastos;
-	
+
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
@@ -79,8 +84,8 @@ public class PestanyaTrimestralActivity extends Activity {
 	 * Variable para captar cuando es la primera ejecución del programa y
 	 * controlar los cambios en el Spinner de las semanas
 	 */
-	//private int posicionSpinnerAnyosAnterior;
-	//private int posicionSpinnerTrimestresAnterior;
+	// private int posicionSpinnerAnyosAnterior;
+	// private int posicionSpinnerTrimestresAnterior;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +108,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		rlBarraListadoGastos = (RelativeLayout) findViewById(R.id.relativeLayoutBarraListadoGastosTrimestral);
 		ivFlechaListadoIngresos = (ImageView) findViewById(R.id.imageViewListadoIngresosTrimestral);
 		ivFlechaListadoGastos = (ImageView) findViewById(R.id.imageViewListadoGastosTrimestral);
-		ivSearchTrimestre = (ImageView)findViewById(R.id.imageViewSearchTrimestre);
+		ivSearchTrimestre = (ImageView) findViewById(R.id.imageViewSearchTrimestre);
 
 		// Instancio y creo los anyos en la lista
 		listaAnyos = new ArrayList<String>();
@@ -113,8 +118,8 @@ public class PestanyaTrimestralActivity extends Activity {
 		c.add(Calendar.YEAR, 1);
 		listaAnyos.add("" + c.get(Calendar.YEAR));
 		// Instancio y creo el Adaptador para el spinner
-		adapterAnyos = new ArrayAdapter<String>(this,
-				R.layout.own_spinner, listaAnyos);
+		adapterAnyos = new ArrayAdapter<String>(this, R.layout.own_spinner,
+				listaAnyos);
 		adapterAnyos
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -135,7 +140,7 @@ public class PestanyaTrimestralActivity extends Activity {
 
 		// le añado el adapter al spinner
 		trimestres.setAdapter(adapterTrimestres);
-		
+
 		// Instancio los formateadores de números
 		separadores = new DecimalFormatSymbols();
 		separadores.setDecimalSeparator(',');
@@ -150,25 +155,27 @@ public class PestanyaTrimestralActivity extends Activity {
 
 		/*
 		 * accedo a la BD para que me devuelva los ingresos y gastos en sus
-		 * respectivas Listas según el Trimestre en que me encuentre
-		 * Siempre iniciaré el Informe con el Tirmestre anterior al que me encuentro
+		 * respectivas Listas según el Trimestre en que me encuentre Siempre
+		 * iniciaré el Informe con el Tirmestre anterior al que me encuentro
 		 */
 		Calendar cal = Calendar.getInstance();
-		
-		int mesActual=cal.get(Calendar.MONTH);
-		
-		if(mesActual>=0 && mesActual<=2){
-			listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-					obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
-					obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
-			listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-					obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
-					obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
+
+		int mesActual = cal.get(Calendar.MONTH);
+
+		if (mesActual >= 0 && mesActual <= 2) {
+			listadoValoresIngresosAux = dba
+					.listadoValoresIngresosPorFecha(
+							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
+							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
+			listadoValoresGastosAux = dba
+					.listadoValoresGastosPorFecha(
+							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
+							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
 			// Situo los Combo correctamente
 			anyos.setSelection(0);
 			trimestres.setSelection(3);
-			
-		}else if (mesActual>=3 && mesActual<=5) {
+
+		} else if (mesActual >= 3 && mesActual <= 5) {
 			listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
 					obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL),
 					obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL));
@@ -178,8 +185,8 @@ public class PestanyaTrimestralActivity extends Activity {
 			// Situo los Combo correctamente
 			anyos.setSelection(1);
 			trimestres.setSelection(0);
-			
-		}else if (mesActual>=6 && mesActual<=8) {
+
+		} else if (mesActual >= 6 && mesActual <= 8) {
 			listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
 					obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL),
 					obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL));
@@ -189,8 +196,8 @@ public class PestanyaTrimestralActivity extends Activity {
 			// Situo los Combo correctamente
 			anyos.setSelection(1);
 			trimestres.setSelection(1);
-			
-		}else if (mesActual>=9 && mesActual<=11) {
+
+		} else if (mesActual >= 9 && mesActual <= 11) {
 			listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
 					obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL),
 					obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL));
@@ -201,7 +208,7 @@ public class PestanyaTrimestralActivity extends Activity {
 			anyos.setSelection(1);
 			trimestres.setSelection(2);
 		}
-		
+
 		/*
 		 * Agrupo las Lista por TRIMESTRES y luego cargo los layouts
 		 */
@@ -209,7 +216,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		cargarLayoutListadoIngresos();
 		agruparListaGastosPorMeses();
 		cargarLayoutListadoGastos();
-		
+
 		/*
 		 * Calculo los totales y la diferencia y los actualizo en sus variables
 		 */
@@ -224,7 +231,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		// Pongo los listados plegados
 		llListadoIngresos.setVisibility(View.GONE);
 		llListadoGastos.setVisibility(View.GONE);
-		
+
 		/*
 		 * Método onClick para plegar/desplegar el listado de Ingresos
 		 */
@@ -267,115 +274,181 @@ public class PestanyaTrimestralActivity extends Activity {
 				}
 			}
 		});
-		
+
 		ivSearchTrimestre.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				// TODO Coge el click del botón y genera el informe según la selección en los Spinner
-				
-				if(anyos.getSelectedItemPosition() == 0 && trimestres.getSelectedItemPosition() == 0){
-					
-					// Cargo las listas con los valores recuperados de la BD del 1º Trimestre del Año Anterior
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR));
-					
-				}else if (anyos.getSelectedItemPosition() == 0 && trimestres.getSelectedItemPosition() == 1) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 2º Trimestre del Año Anterior
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR));
-					
-				}else if (anyos.getSelectedItemPosition() == 0 && trimestres.getSelectedItemPosition() == 2) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 3º Trimestre del Año Anterior
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR));
-					
-				}else if (anyos.getSelectedItemPosition() == 0 && trimestres.getSelectedItemPosition() == 3) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 4º Trimestre del Año Anterior
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
-					
-				}else if (anyos.getSelectedItemPosition() == 1 && trimestres.getSelectedItemPosition() == 0) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 1º Trimestre del Año Actual
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL));
-					
-				}else if (anyos.getSelectedItemPosition() == 1 && trimestres.getSelectedItemPosition() == 1) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 2º Trimestre del Año Actual
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL));
-					
-				}else if (anyos.getSelectedItemPosition() == 1 && trimestres.getSelectedItemPosition() == 2) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 3º Trimestre del Año Actual
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL));
-					
-				}else if (anyos.getSelectedItemPosition() == 1 && trimestres.getSelectedItemPosition() == 3) {
-					
-					// Cargo las listas con los valores recuperados de la BD del 4º Trimestre del Año Actual
-					listadoValoresIngresosAux = dba.listadoValoresIngresosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
-					listadoValoresGastosAux = dba.listadoValoresGastosPorFecha(
-							obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
-							obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
-					
+				// TODO Coge el click del botón y genera el informe según la
+				// selección en los Spinner
+
+				// Obtengo el mes actual
+				Calendar cal = Calendar.getInstance();
+				int mesActual = cal.get(Calendar.MONTH);
+				boolean cargarPantalla = true;
+
+				if (anyos.getSelectedItemPosition() == 0
+						&& trimestres.getSelectedItemPosition() == 0) {
+
+					// Cargo las listas con los valores recuperados de la BD del
+					// 1º Trimestre del Año Anterior
+					listadoValoresIngresosAux = dba
+							.listadoValoresIngresosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR));
+					listadoValoresGastosAux = dba
+							.listadoValoresGastosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ANTERIOR));
+
+				} else if (anyos.getSelectedItemPosition() == 0
+						&& trimestres.getSelectedItemPosition() == 1) {
+
+					// Cargo las listas con los valores recuperados de la BD del
+					// 2º Trimestre del Año Anterior
+					listadoValoresIngresosAux = dba
+							.listadoValoresIngresosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR));
+					listadoValoresGastosAux = dba
+							.listadoValoresGastosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ANTERIOR));
+
+				} else if (anyos.getSelectedItemPosition() == 0
+						&& trimestres.getSelectedItemPosition() == 2) {
+
+					// Cargo las listas con los valores recuperados de la BD del
+					// 3º Trimestre del Año Anterior
+					listadoValoresIngresosAux = dba
+							.listadoValoresIngresosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR));
+					listadoValoresGastosAux = dba
+							.listadoValoresGastosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ANTERIOR));
+
+				} else if (anyos.getSelectedItemPosition() == 0
+						&& trimestres.getSelectedItemPosition() == 3) {
+
+					// Cargo las listas con los valores recuperados de la BD del
+					// 4º Trimestre del Año Anterior
+					listadoValoresIngresosAux = dba
+							.listadoValoresIngresosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
+					listadoValoresGastosAux = dba
+							.listadoValoresGastosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ANTERIOR));
+
+				} else if (anyos.getSelectedItemPosition() == 1
+						&& trimestres.getSelectedItemPosition() == 0) {
+
+					// Cargo las listas con los valores recuperados de la BD del
+					// 1º Trimestre del Año Actual
+					listadoValoresIngresosAux = dba
+							.listadoValoresIngresosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL));
+					listadoValoresGastosAux = dba
+							.listadoValoresGastosPorFecha(
+									obtenerInicioEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL),
+									obtenerFinEnteroFechaTrimestre(TRIMESTRE1_ANYO_ACTUAL));
+
+				} else if (anyos.getSelectedItemPosition() == 1
+						&& trimestres.getSelectedItemPosition() == 1) {
+
+					if (mesActual <= 2) {
+						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
+								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						cargarPantalla = false;
+					} else {
+
+						// Cargo las listas con los valores recuperados de la BD
+						// del 2º Trimestre del Año Actual
+						listadoValoresIngresosAux = dba
+								.listadoValoresIngresosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL));
+						listadoValoresGastosAux = dba
+								.listadoValoresGastosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE2_ANYO_ACTUAL));
+					}
+				} else if (anyos.getSelectedItemPosition() == 1
+						&& trimestres.getSelectedItemPosition() == 2) {
+
+					if (mesActual <= 5) {
+						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
+								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						cargarPantalla = false;
+					} else {
+						// Cargo las listas con los valores recuperados de la BD
+						// del 3º Trimestre del Año Actual
+						listadoValoresIngresosAux = dba
+								.listadoValoresIngresosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL));
+						listadoValoresGastosAux = dba
+								.listadoValoresGastosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE3_ANYO_ACTUAL));
+					}
+				} else if (anyos.getSelectedItemPosition() == 1
+						&& trimestres.getSelectedItemPosition() == 3) {
+					if (mesActual <= 8) {
+						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
+								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						cargarPantalla = false;
+					} else {
+						// Cargo las listas con los valores recuperados de la BD
+						// del 4º Trimestre del Año Actual
+						listadoValoresIngresosAux = dba
+								.listadoValoresIngresosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
+						listadoValoresGastosAux = dba
+								.listadoValoresGastosPorFecha(
+										obtenerInicioEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL),
+										obtenerFinEnteroFechaTrimestre(TRIMESTRE4_ANYO_ACTUAL));
+					}
 				}
-				
-				/*
-				 * Agrupo las Lista por TRIMESTRES y luego cargo los layouts
-				 */
-				agruparListaIngresosPorMeses();
-				cargarLayoutListadoIngresos();
-				agruparListaGastosPorMeses();
-				cargarLayoutListadoGastos();
-				/*
-				 * Calculo los totales y la diferencia y los actualizo en sus variables
-				 */
-				setTotalIngresos(calcularTotalIngresos());
-				setTotalGastos(calcularTotalGastos());
-				/*
-				 * Actualizo los TextView que contienen los totales
-				 */
-				actualizarTotales();
-				
+
+				// Entro en el if si se han cargado las listas con los valores
+				if (cargarPantalla) {
+					/*
+					 * Agrupo las Lista por TRIMESTRES y luego cargo los layouts
+					 */
+					agruparListaIngresosPorMeses();
+					cargarLayoutListadoIngresos();
+					agruparListaGastosPorMeses();
+					cargarLayoutListadoGastos();
+					/*
+					 * Calculo los totales y la diferencia y los actualizo en
+					 * sus variables
+					 */
+					setTotalIngresos(calcularTotalIngresos());
+					setTotalGastos(calcularTotalGastos());
+					/*
+					 * Actualizo los TextView que contienen los totales
+					 */
+					actualizarTotales();
+
+				} else {
+					// borro el contenido de los Layouts
+					llListadoIngresos.removeAllViews();
+					llListadoGastos.removeAllViews();
+					// Pongo a vacía los totales
+					tvTotalIngresos.setText("");
+					tvTotalGastos.setText("");
+					tvTotalBalance.setText("");
+				}
+
 			}
 		});
-		
+
 		// Cierro la Base de datos
 		dba.close();
 
@@ -513,6 +586,8 @@ public class PestanyaTrimestralActivity extends Activity {
 
 		Calendar c = Calendar.getInstance();
 
+		int mesActual = c.get(Calendar.MONTH);
+
 		switch (trimestre) {
 
 		case TRIMESTRE1_ANYO_ANTERIOR:
@@ -559,42 +634,48 @@ public class PestanyaTrimestralActivity extends Activity {
 			break;
 		case TRIMESTRE1_ANYO_ACTUAL:
 
-			// Situo la variable Calendar en el final del 1º Trimestre del año
-			// actual
-			c.set(Calendar.MONTH, 0);
-			c.add(Calendar.MONTH, 3);
-			c.set(Calendar.DATE, 1);
-			c.add(Calendar.DATE, -1);
-
+			if (mesActual > 2) {
+				// Situo la variable Calendar en el final del 1º Trimestre del
+				// año
+				// actual
+				c.set(Calendar.MONTH, 0);
+				c.add(Calendar.MONTH, 3);
+				c.set(Calendar.DATE, 1);
+				c.add(Calendar.DATE, -1);
+			}
 			break;
 		case TRIMESTRE2_ANYO_ACTUAL:
 
-			// Situo la variable Calendar en el inicio del 2º Trimestre del año
-			// actual
-			c.set(Calendar.MONTH, 0);
-			c.add(Calendar.MONTH, 6);
-			c.set(Calendar.DATE, 1);
-			c.add(Calendar.DATE, -1);
-
+			if (mesActual > 5) {
+				// Situo la variable Calendar en el inicio del 2º Trimestre del
+				// año
+				// actual
+				c.set(Calendar.MONTH, 0);
+				c.add(Calendar.MONTH, 6);
+				c.set(Calendar.DATE, 1);
+				c.add(Calendar.DATE, -1);
+			}
 			break;
 		case TRIMESTRE3_ANYO_ACTUAL:
 
-			// Situo la variable Calendar en el inicio del 3º Trimestre del año
-			// actual
-			c.set(Calendar.MONTH, 0);
-			c.add(Calendar.MONTH, 9);
-			c.set(Calendar.DATE, 1);
-			c.add(Calendar.DATE, -1);
-
+			if (mesActual > 8) {
+				// Situo la variable Calendar en el inicio del 3º Trimestre del
+				// año
+				// actual
+				c.set(Calendar.MONTH, 0);
+				c.add(Calendar.MONTH, 9);
+				c.set(Calendar.DATE, 1);
+				c.add(Calendar.DATE, -1);
+			}
 			break;
 		case TRIMESTRE4_ANYO_ACTUAL:
 
 			// Situo la variable Calendar en el inicio del 3º Trimestre del año
 			// actual
-			c.add(Calendar.YEAR, 1);
-			c.set(Calendar.MONTH, 0);
-			c.set(Calendar.DATE, 1);
-			c.add(Calendar.DATE, -1);
+			// c.add(Calendar.YEAR, 1);
+			// c.set(Calendar.MONTH, 0);
+			// c.set(Calendar.DATE, 1);
+			// c.add(Calendar.DATE, -1);
 
 			break;
 
@@ -626,7 +707,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		return entero_fecha;
 
 	}
-	
+
 	/*
 	 * Método que me agrupa por meses los valores de la lista auxiliar en la
 	 * lista de ingresos
@@ -636,6 +717,9 @@ public class PestanyaTrimestralActivity extends Activity {
 		String fechaAnterior = new String("000000");
 		// Variable para la fecha devuelta por la base de datos
 		String fechaBD;
+		// Variable que me servirá para sumar valores de un mismo concepto el
+		// mismo mes
+		String fechaParaCombinarValores;
 		// double totalPorMeses = 0;
 		int indiceListaPrincipal = 0;
 		int iAux = 0;
@@ -667,34 +751,42 @@ public class PestanyaTrimestralActivity extends Activity {
 					if (listadoValoresIngresos.get(iAux).getIdConcepto() == listadoValoresIngresosAux
 							.get(i).getIdConcepto()) {
 
-						// Actualizo el total mensual del Concepto
-						listadoValoresIngresos.get(iAux).setCantidad(
-								listadoValoresIngresos.get(iAux).getCantidad()
-										+ listadoValoresIngresosAux.get(i)
-												.getCantidad());
-						encontrado = true;
+						fechaParaCombinarValores = ("" + listadoValoresIngresos
+								.get(iAux).getIdFecha()).substring(0, 6);
 
+						if (fechaParaCombinarValores.equals(fechaBD.substring(
+								0, 6))) {
+
+							// Actualizo el total mensual del Concepto
+							listadoValoresIngresos.get(iAux).setCantidad(
+									listadoValoresIngresos.get(iAux)
+											.getCantidad()
+											+ listadoValoresIngresosAux.get(i)
+													.getCantidad());
+							encontrado = true;
+						}
 					}
 
 					iAux++;
 
 				}
-				
+
 				/*
-				 * Entra en esta condición si el nuevo concepto leido tiene la misma fecha
-				 * que el concepto anterior pero son difierntes conceptos por lo que me
-				 * lo debe poner en otro registro de la Lista
+				 * Entra en esta condición si el nuevo concepto leido tiene la
+				 * misma fecha que el concepto anterior pero son diferentes
+				 * conceptos por lo que me lo debe poner en otro registro de la
+				 * Lista
 				 */
-				if (encontrado == false){
-					
+				if (encontrado == false) {
+
 					indiceListaPrincipal++;
-					
+
 					listadoValoresIngresos.add(new ValoresElementoListaGD(
 							listadoValoresIngresosAux.get(i).getIdConcepto(),
 							Integer.valueOf(fechaAnterior + "01").intValue(),
 							listadoValoresIngresosAux.get(i).getConcepto(),
 							listadoValoresIngresosAux.get(i).getCantidad()));
-					
+
 				}
 
 				iAux = 0;
@@ -717,7 +809,7 @@ public class PestanyaTrimestralActivity extends Activity {
 			}
 		}
 	}
-	
+
 	/*
 	 * Método que me agrupa por meses los valores de la lista auxiliar en la
 	 * lista de GASTOS
@@ -727,6 +819,9 @@ public class PestanyaTrimestralActivity extends Activity {
 		String fechaAnterior = new String("000000");
 		// Variable para la fecha devuelta por la base de datos
 		String fechaBD;
+		// Variable que me servirá para sumar valores de un mismo concepto el
+		// mismo mes
+		String fechaParaCombinarValores;
 		// double totalPorMeses = 0;
 		int indiceListaPrincipal = 0;
 		int iAux = 0;
@@ -756,34 +851,42 @@ public class PestanyaTrimestralActivity extends Activity {
 					if (listadoValoresGastos.get(iAux).getIdConcepto() == listadoValoresGastosAux
 							.get(i).getIdConcepto()) {
 
-						// Actualizo el total mensual del Concepto
-						listadoValoresGastos.get(iAux).setCantidad(
-								listadoValoresGastos.get(iAux).getCantidad()
-										+ listadoValoresGastosAux.get(i)
-												.getCantidad());
-						encontrado = true;
+						fechaParaCombinarValores = ("" + listadoValoresGastos
+								.get(iAux).getIdFecha()).substring(0, 6);
+
+						if (fechaParaCombinarValores.equals(fechaBD.substring(
+								0, 6))) {
+							// Actualizo el total mensual del Concepto
+							listadoValoresGastos.get(iAux).setCantidad(
+									listadoValoresGastos.get(iAux)
+											.getCantidad()
+											+ listadoValoresGastosAux.get(i)
+													.getCantidad());
+							encontrado = true;
+						}
 
 					}
 
 					iAux++;
 
 				}
-				
+
 				/*
-				 * Entra en esta condición si el nuevo concepto leido tiene la misma fecha
-				 * que el concepto anterior pero son difierntes conceptos por lo que me
-				 * lo debe poner en otro registro de la Lista
+				 * Entra en esta condición si el nuevo concepto leido tiene la
+				 * misma fecha que el concepto anterior pero son difierntes
+				 * conceptos por lo que me lo debe poner en otro registro de la
+				 * Lista
 				 */
-				if (encontrado == false){
-					
+				if (encontrado == false) {
+
 					indiceListaPrincipal++;
-					
+
 					listadoValoresGastos.add(new ValoresElementoListaGD(
 							listadoValoresGastosAux.get(i).getIdConcepto(),
 							Integer.valueOf(fechaAnterior + "01").intValue(),
 							listadoValoresGastosAux.get(i).getConcepto(),
 							listadoValoresGastosAux.get(i).getCantidad()));
-					
+
 				}
 
 				iAux = 0;
@@ -807,7 +910,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		}
 
 	}
-	
+
 	/*
 	 * Método que me carga en el Layout de listado de Ingresos las fechas,
 	 * conceptos y valores asociados a partir de la consulta realizada a la Base
@@ -842,8 +945,9 @@ public class PestanyaTrimestralActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresIngresos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
+							.getCantidad()) + "€");
 
 			if (fechaAnterior != listadoValoresIngresos.get(i).getIdFecha()) {
 
@@ -877,7 +981,7 @@ public class PestanyaTrimestralActivity extends Activity {
 		}
 
 	}
-	
+
 	/*
 	 * Método que me carga en el Layout de listado de Gastos las fechas,
 	 * conceptos y valores asociados a partir de la consulta realizada a la Base
@@ -912,8 +1016,9 @@ public class PestanyaTrimestralActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresGastos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresGastos.get(i)
+							.getCantidad()) + "€");
 
 			if (fechaAnterior != listadoValoresGastos.get(i).getIdFecha()) {
 
@@ -946,7 +1051,7 @@ public class PestanyaTrimestralActivity extends Activity {
 			}
 		}
 	}
-	
+
 	/*
 	 * Método para obtener la fecha en una Cadena Formateada para los Meses y
 	 * Años
@@ -1099,12 +1204,15 @@ public class PestanyaTrimestralActivity extends Activity {
 
 		double balance = getTotalIngresos() - getTotalGastos();
 
-		tvTotalIngresos.setText(" " + numeroAFormatear.format(getTotalIngresos()) + " €");
+		tvTotalIngresos.setText(" "
+				+ numeroAFormatear.format(getTotalIngresos()) + " €");
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
-		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos()) + " €");
-		tvTotalGastos.setTextColor(this.getResources().getColor(R.color.ListadosRojo));
+		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
+				+ " €");
+		tvTotalGastos.setTextColor(this.getResources().getColor(
+				R.color.ListadosRojo));
 
 		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
 		if (balance >= 0) {
@@ -1115,6 +1223,40 @@ public class PestanyaTrimestralActivity extends Activity {
 					R.color.ListadosRojo));
 		}
 
+	}
+
+	/*
+	 * Método que lanza un Dialog de una advertencia producida
+	 */
+	private void lanzarAdvertencia(String advice) {
+
+		Dialog d = crearDialogAdvertencia(advice);
+
+		d.show();
+
+	}
+
+	/*
+	 * Dialog para avisar de un movimiento no permitido
+	 */
+	private Dialog crearDialogAdvertencia(String advice) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("ADVERTENCIA");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setMessage(advice);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Cierro el dialog
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
 	}
 
 	@Override

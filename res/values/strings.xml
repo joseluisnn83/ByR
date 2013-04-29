@@ -62,6 +62,7 @@
 	<string name="titleDialogEmail">e-mail</string>
 	<string name="botonAceptar">Aceptar</string>
 	<string name="botonCancelar">Cancelar</string>
+	<string name="botonOmitir">Omitir</string>
 	
 	<!-- Elementos de las Activities de configuracion de Conceptos -->
 	<string name="descriptionIngresos">Crear concepto de ingresos</string>
@@ -134,5 +135,31 @@
     <string name="textViewPestanyaInformesLibreFechaFin">Hasta: </string>
     <string name="ivContentDescriptionSearchTrimestre">Genera el informe del Trimestre</string>
     <string name="ivContentDescriptionSearchLibre">Genera el informe del Rango a elegir</string>
+    
+    <!-- Elementos de la Actividad de configuración de Gráficas (PreferencesGraphicsActivity)  -->
+    <string name="preferencesContentTipoGrafica">Elegir el tipo de gráfica a mostrar</string>
+    <string name="preferencesTitleTipoGrafica">Tipo de Gráfica</string>
+    <string name="preferencesContentValoresGrafica">Elegir el tipo de valores a mostrar</string>
+    <string name="preferencesTitleValoresGrafica">Tipo de Valores</string>
+    <string name="preferencesCategoryValues">Valores Líneas Gráficas</string>
+    <string name="preferencesCategoryLines">Líneas Gráficas</string>
+    <string name="preferencesContentValuesIngresos">Mostrar los valores de los Ingresos</string>
+    <string name="preferencesTitleValuesIngresos">Ingresos</string>
+    <string name="preferencesContentValuesGastos">Mostrar los valores de los Gastos</string>
+    <string name="preferencesTitleValuesGastos">Gastos</string>
+    <string name="preferencesContentValuesBalance">Mostrar los valores del Balance</string>
+    <string name="preferencesTitleValuesBalance">Balance</string>    
+    <string name="preferencesContentLinesIngresos">Mostrar la línea de Ingresos</string>
+    <string name="preferencesTitleLinesIngresos">Línea Ingresos</string>
+    <string name="preferencesContentLinesGastos">Mostrar la línea de Gastos</string>
+    <string name="preferencesTitleLinesGastos">Línea Gastos</string>
+    <string name="preferencesContentLinesBalance">Mostrar la línea del Balance</string>
+    <string name="preferencesTitleLinesBalance">Línea Balance</string>
+    <string name="preferencesCategoryYear">Fecha para valores históricos</string>
+    <string name="preferencesContentYearsGrafica">Elegir el año central a mostrar</string>
+    <string name="preferencesTitleYearsGrafica">Año</string>
+    <string name="preferencesContentMonthsGrafica">Elegir el mes central a mostrar</string>
+    <string name="preferencesTitleMonthsGrafica">Mes</string>
+    <string name="menu_settings_graphics">Configurar Gráfica</string>
 	
 </resources>
