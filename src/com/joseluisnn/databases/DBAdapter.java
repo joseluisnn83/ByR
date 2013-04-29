@@ -835,6 +835,85 @@ public class DBAdapter {
 		return listaVEG;
 	}
 
+	/*
+	 * Método que me va a mostrar la (suma de valores) de los INGRESOS ó GASTOS
+	 * agrupadas DIARIAMENTE para la representación de la gráfica
+	 */
+	public ArrayList<ValoresElementosGraficas> listadoValoresDiariosGraficas(
+			int fechaini, int fechafin, String tipoDato) {
+
+		ArrayList<ValoresElementosGraficas> listaVEG = new ArrayList<ValoresElementosGraficas>();
+		String consulta;
+
+		if (tipoDato.equals("ingreso")) {
+
+			consulta = "select a.id_fecha as fecha,sum(a.valor) as valor "
+					+ "from datos a, conceptos b "
+					+ "where a.id_concepto = b.id_concepto "
+					+ "and b.tipo_concepto like 'ingreso' "
+					+ "and a.id_fecha between " + fechaini + " and " + fechafin
+					+ " group by fecha " + "order by fecha";
+		} else {
+
+			consulta = "select a.id_fecha as fecha,sum(a.valor) as valor "
+					+ "from datos a, conceptos b "
+					+ "where a.id_concepto = b.id_concepto "
+					+ "and b.tipo_concepto like 'gasto' "
+					+ "and a.id_fecha between " + fechaini + " and " + fechafin
+					+ " group by fecha " + "order by fecha";
+
+		}
+
+		Cursor cursor = database.rawQuery(consulta, null);
+
+		while (cursor.moveToNext()) {
+
+			listaVEG.add(new ValoresElementosGraficas(cursor.getString(cursor
+					.getColumnIndex("fecha")), cursor.getDouble(cursor
+					.getColumnIndex("valor"))));
+
+		}
+
+		return listaVEG;
+	}
+	
+	/*
+	 * Método que me devuelve el total de ingresos o gastos
+	 * desde la fecha pasada por parámetro hacia atrás
+	 */
+	public int obtenerAcumulados(int fechaini, String tipoDato){
+		
+		int acum = 0;
+		
+		String consulta;
+
+		if (tipoDato.equals("ingreso")) {
+
+			consulta = "select sum(a.valor) as valor " +
+					"from datos a, conceptos b " +
+					"where a.id_concepto = b.id_concepto " +
+					"and b.tipo_concepto like 'ingreso' " +
+					"and a.id_fecha <= " + fechaini;
+		} else {
+
+			consulta = "select sum(a.valor) as valor " +
+					"from datos a, conceptos b " +
+					"where a.id_concepto = b.id_concepto " +
+					"and b.tipo_concepto like 'gasto' " +
+					"and a.id_fecha <= " + fechaini;
+
+		}
+		
+		Cursor cursor = database.rawQuery(consulta, null);
+
+		while (cursor.moveToNext()) {
+			acum = cursor.getInt(cursor.getColumnIndex("valor"));		
+		}
+		
+		return acum;
+		
+	}
+
 	public void lanzarMensaje(String e) {
 		Toast t = Toast.makeText(this.context, e, Toast.LENGTH_LONG);
 		t.show();

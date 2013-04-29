@@ -33,6 +33,7 @@ public class GraphXLabelFormat extends Format {
 		//return buffer;
 		
 		return new StringBuffer(label.get(((Number)object).intValue()).toString());
+		
 	}
 
 	@Override
