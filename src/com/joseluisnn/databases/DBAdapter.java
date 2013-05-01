@@ -881,9 +881,9 @@ public class DBAdapter {
 	 * Método que me devuelve el total de ingresos o gastos
 	 * desde la fecha pasada por parámetro hacia atrás
 	 */
-	public int obtenerAcumulados(int fechaini, String tipoDato){
+	public Double obtenerAcumulados(int fechaini, String tipoDato){
 		
-		int acum = 0;
+		Double acum = 0.0;
 		
 		String consulta;
 
@@ -907,7 +907,7 @@ public class DBAdapter {
 		Cursor cursor = database.rawQuery(consulta, null);
 
 		while (cursor.moveToNext()) {
-			acum = cursor.getInt(cursor.getColumnIndex("valor"));		
+			acum = cursor.getDouble(cursor.getColumnIndex("valor"));		
 		}
 		
 		return acum;

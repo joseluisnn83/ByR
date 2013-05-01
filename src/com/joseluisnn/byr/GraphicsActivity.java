@@ -48,6 +48,7 @@ public class GraphicsActivity extends Activity {
 	private static final int ENTERO_FECHA_31_DIAS_ANTES = 3;
 	private static final int ENTERO_FECHA_1_ANYO_DESPUES = 4;
 	private static final int ENTERO_FECHA_3_ANYOS_ANTES = 5;
+	private static final int ENTERO_FECHA_DIA_DE_AYER = 6;
 
 	/*
 	 * Variable para saber que se devuelven valores de la actividad a la que
@@ -82,15 +83,19 @@ public class GraphicsActivity extends Activity {
 	private SharedPreferences preferenceConfiguracionPrivate;
 	private SingletonConfigurationSharedPreferences singleton_csp;
 	/*
-	 * Listas para los Ingresos y los Gastos
+	 * Variables para obtener los valores Listas para los Ingresos y los Gastos
 	 */
 	ArrayList<ValoresElementosGraficas> listadoValoresIngresos;
 	ArrayList<ValoresElementosGraficas> listadoValoresGastos;
-	ArrayList<Double> ingresosHistoricos;
-	ArrayList<Double> gastosHistoricos;
-	ArrayList<Double> balanceHistoricos;
-	ArrayList<Double> balancePrevision;
+	ArrayList<ValoresElementosGraficas> listadoValoresIngresosPrevision;
+	ArrayList<ValoresElementosGraficas> listadoValoresGastosPrevision;
+	ArrayList<Double> ingresos;
+	ArrayList<Double> gastos;
+	ArrayList<Double> balance;
 	ArrayList<String> leyendaEjeX;
+	Double acumIngresosPrevision;
+	Double acumGastosPrevision;
+	Double acumBalancePrevision;
 	/*
 	 * Variables para saber el Mínimo y Máximo valor de la gráfica
 	 */
@@ -133,10 +138,11 @@ public class GraphicsActivity extends Activity {
 		// Creo por primera vez los ArrayList de valores
 		listadoValoresIngresos = new ArrayList<ValoresElementosGraficas>();
 		listadoValoresGastos = new ArrayList<ValoresElementosGraficas>();
-		ingresosHistoricos = new ArrayList<Double>();
-		gastosHistoricos = new ArrayList<Double>();
-		balanceHistoricos = new ArrayList<Double>();
-		balancePrevision = new ArrayList<Double>();
+		listadoValoresIngresosPrevision = new ArrayList<ValoresElementosGraficas>();
+		listadoValoresGastosPrevision = new ArrayList<ValoresElementosGraficas>();
+		ingresos = new ArrayList<Double>();
+		gastos = new ArrayList<Double>();
+		balance = new ArrayList<Double>();
 
 		/*
 		 * Pasos para dibujar la gráfica: 1) Leo del fichero de configuración
@@ -219,14 +225,14 @@ public class GraphicsActivity extends Activity {
 		if (!listadoValoresGastos.isEmpty()) {
 			listadoValoresGastos.clear();
 		}
-		if (!ingresosHistoricos.isEmpty()) {
-			ingresosHistoricos.clear();
+		if (!ingresos.isEmpty()) {
+			ingresos.clear();
 		}
-		if (!gastosHistoricos.isEmpty()) {
-			gastosHistoricos.clear();
+		if (!gastos.isEmpty()) {
+			gastos.clear();
 		}
-		if (!balanceHistoricos.isEmpty()) {
-			balanceHistoricos.clear();
+		if (!balance.isEmpty()) {
+			balance.clear();
 		}
 
 		/*
@@ -254,27 +260,33 @@ public class GraphicsActivity extends Activity {
 				for (int i = integerFechaInicial.intValue(); i <= integerFechaFinal
 						.intValue(); i++) {
 
-					if (Integer.valueOf(
-							listadoValoresIngresos.get(indiceAux).getFecha())
-							.intValue() == i
-							&& indiceAux < listadoValoresIngresos.size()) {
+					if (indiceAux < listadoValoresIngresos.size()) {
 
-						ingresosHistoricos.add(listadoValoresIngresos.get(
-								indiceAux).getCantidad());
+						if (Integer.valueOf(
+								listadoValoresIngresos.get(indiceAux)
+										.getFecha()).intValue() == i) {
 
-						if (listadoValoresIngresos.get(indiceAux).getCantidad() >= max) {
-							max = listadoValoresIngresos.get(indiceAux)
-									.getCantidad();
+							ingresos.add(listadoValoresIngresos.get(indiceAux)
+									.getCantidad());
+
+							if (listadoValoresIngresos.get(indiceAux)
+									.getCantidad() >= max) {
+								max = listadoValoresIngresos.get(indiceAux)
+										.getCantidad();
+							}
+
+							if (listadoValoresIngresos.get(indiceAux)
+									.getCantidad() <= min) {
+								min = listadoValoresIngresos.get(indiceAux)
+										.getCantidad();
+							}
+
+							indiceAux++;
+						} else {
+							ingresos.add(0.0);
 						}
-
-						if (listadoValoresIngresos.get(indiceAux).getCantidad() <= min) {
-							min = listadoValoresIngresos.get(indiceAux)
-									.getCantidad();
-						}
-
-						indiceAux++;
 					} else {
-						ingresosHistoricos.add(0.0);
+						ingresos.add(0.0);
 					}
 				}
 			}
@@ -288,27 +300,33 @@ public class GraphicsActivity extends Activity {
 				for (int i = integerFechaInicial.intValue(); i <= integerFechaFinal
 						.intValue(); i++) {
 
-					if (Integer.valueOf(
-							listadoValoresGastos.get(indiceAux).getFecha())
-							.intValue() == i
-							&& indiceAux < listadoValoresGastos.size()) {
+					if (indiceAux < listadoValoresGastos.size()) {
 
-						gastosHistoricos.add(listadoValoresGastos
-								.get(indiceAux).getCantidad());
+						if (Integer.valueOf(
+								listadoValoresGastos.get(indiceAux).getFecha())
+								.intValue() == i) {
 
-						if (listadoValoresGastos.get(indiceAux).getCantidad() >= max) {
-							max = listadoValoresGastos.get(indiceAux)
-									.getCantidad();
+							gastos.add(listadoValoresGastos.get(indiceAux)
+									.getCantidad());
+
+							if (listadoValoresGastos.get(indiceAux)
+									.getCantidad() >= max) {
+								max = listadoValoresGastos.get(indiceAux)
+										.getCantidad();
+							}
+
+							if (listadoValoresGastos.get(indiceAux)
+									.getCantidad() <= min) {
+								min = listadoValoresGastos.get(indiceAux)
+										.getCantidad();
+							}
+
+							indiceAux++;
+						} else {
+							gastos.add(0.0);
 						}
-
-						if (listadoValoresGastos.get(indiceAux).getCantidad() <= min) {
-							min = listadoValoresGastos.get(indiceAux)
-									.getCantidad();
-						}
-
-						indiceAux++;
 					} else {
-						gastosHistoricos.add(0.0);
+						gastos.add(0.0);
 					}
 				}
 			}
@@ -319,34 +337,28 @@ public class GraphicsActivity extends Activity {
 				leyendaEjeX.clear();
 			}
 
-			if (!listadoValoresIngresos.isEmpty()
-					&& !listadoValoresGastos.isEmpty()) {
-				// Me creo el ArrayList para la leyenda del ejeX
-				for (int i = integerFechaInicial.intValue(); i <= integerFechaFinal
-						.intValue(); i++) {
-					leyendaEjeX.add("" + i);
+			// Me creo el ArrayList para la leyenda del ejeX
+			for (int i = integerFechaInicial.intValue(); i <= integerFechaFinal
+					.intValue(); i++) {
+				leyendaEjeX.add("" + i);
+			}
+
+			// Relleno el balance a partir de los ingresos y gastos y la
+			// serie auxiliar
+			for (int i = 0; i < ingresos.size(); i++) {
+				balance.add(ingresos.get(i) - gastos.get(i));
+			}
+
+			// Veo si hay minimo y maximo en el balance
+			for (int i = 0; i < balance.size(); i++) {
+
+				if (balance.get(i) >= max) {
+					max = balance.get(i);
 				}
 
-				// Relleno el balance a partir de los ingresos y gastos y la
-				// serie auxiliar
-				for (int i = 0; i < ingresosHistoricos.size(); i++) {
-					balanceHistoricos.add(ingresosHistoricos.get(i)
-							- gastosHistoricos.get(i));
+				if (balance.get(i) <= min) {
+					min = balance.get(i);
 				}
-
-				// Veo si hay minimo y maximo en el balance
-				for (int i = 0; i < balanceHistoricos.size(); i++) {
-
-					if (balanceHistoricos.get(i) >= max) {
-						max = balanceHistoricos.get(i);
-					}
-
-					if (balanceHistoricos.get(i) <= min) {
-						min = balanceHistoricos.get(i);
-					}
-
-				}
-
 			}
 
 			break;
@@ -378,8 +390,8 @@ public class GraphicsActivity extends Activity {
 										.getFecha()).intValue() == rangoFechas
 								.get(i).intValue()) {
 
-							ingresosHistoricos.add(listadoValoresIngresos.get(
-									indiceAux).getCantidad());
+							ingresos.add(listadoValoresIngresos.get(indiceAux)
+									.getCantidad());
 
 							if (listadoValoresIngresos.get(indiceAux)
 									.getCantidad() >= max) {
@@ -395,8 +407,10 @@ public class GraphicsActivity extends Activity {
 
 							indiceAux++;
 						} else {
-							ingresosHistoricos.add(0.0);
+							ingresos.add(0.0);
 						}
+					} else {
+						ingresos.add(0.0);
 					}
 				}
 			}
@@ -414,8 +428,8 @@ public class GraphicsActivity extends Activity {
 								listadoValoresGastos.get(indiceAux).getFecha())
 								.intValue() == rangoFechas.get(i).intValue()) {
 
-							gastosHistoricos.add(listadoValoresGastos.get(
-									indiceAux).getCantidad());
+							gastos.add(listadoValoresGastos.get(indiceAux)
+									.getCantidad());
 
 							if (listadoValoresGastos.get(indiceAux)
 									.getCantidad() >= max) {
@@ -431,10 +445,10 @@ public class GraphicsActivity extends Activity {
 
 							indiceAux++;
 						} else {
-							gastosHistoricos.add(0.0);
+							gastos.add(0.0);
 						}
 					} else {
-						gastosHistoricos.add(0.0);
+						gastos.add(0.0);
 					}
 				}
 			}
@@ -445,34 +459,27 @@ public class GraphicsActivity extends Activity {
 				leyendaEjeX.clear();
 			}
 
-			if (!listadoValoresIngresos.isEmpty()
-					&& !listadoValoresGastos.isEmpty()) {
-				// Me creo el ArrayList para la leyenda del ejeX
-				for (int i = 0; i < rangoFechas.size(); i++) {
-					// leyendaEjeX.add("" + i);
-					leyendaEjeX.add(obtenerLeyendaMensualEjeX(rangoFechas
-							.get(i)));
+			// Me creo el ArrayList para la leyenda del ejeX
+			for (int i = 0; i < rangoFechas.size(); i++) {
+				// leyendaEjeX.add("" + i);
+				leyendaEjeX.add(obtenerLeyendaMensualEjeX(rangoFechas.get(i)));
+			}
+
+			// Relleno el balance a partir de los ingresos y gastos
+			for (int i = 0; i < ingresos.size(); i++) {
+				balance.add(ingresos.get(i) - gastos.get(i));
+			}
+
+			// Veo si hay minimo y maximo en el balance
+			for (int i = 0; i < balance.size(); i++) {
+
+				if (balance.get(i) >= max) {
+					max = balance.get(i);
 				}
 
-				// Relleno el balance a partir de los ingresos y gastos
-				for (int i = 0; i < ingresosHistoricos.size(); i++) {
-					balanceHistoricos.add(ingresosHistoricos.get(i)
-							- gastosHistoricos.get(i));
+				if (balance.get(i) <= min) {
+					min = balance.get(i);
 				}
-
-				// Veo si hay minimo y maximo en el balance
-				for (int i = 0; i < balanceHistoricos.size(); i++) {
-
-					if (balanceHistoricos.get(i) >= max) {
-						max = balanceHistoricos.get(i);
-					}
-
-					if (balanceHistoricos.get(i) <= min) {
-						min = balanceHistoricos.get(i);
-					}
-
-				}
-
 			}
 
 			break;
@@ -501,8 +508,8 @@ public class GraphicsActivity extends Activity {
 								listadoValoresIngresos.get(indiceAux)
 										.getFecha()).intValue() == dia) {
 
-							ingresosHistoricos.add(listadoValoresIngresos.get(
-									indiceAux).getCantidad());
+							ingresos.add(listadoValoresIngresos.get(indiceAux)
+									.getCantidad());
 
 							if (listadoValoresIngresos.get(indiceAux)
 									.getCantidad() >= max) {
@@ -518,10 +525,10 @@ public class GraphicsActivity extends Activity {
 
 							indiceAux++;
 						} else {
-							ingresosHistoricos.add(0.0);
+							ingresos.add(0.0);
 						}
 					} else {
-						ingresosHistoricos.add(0.0);
+						ingresos.add(0.0);
 					}
 					dia = obtenerDiaSiguiente(dia);
 				}
@@ -541,8 +548,8 @@ public class GraphicsActivity extends Activity {
 								listadoValoresGastos.get(indiceAux).getFecha())
 								.intValue() == dia) {
 
-							gastosHistoricos.add(listadoValoresGastos.get(
-									indiceAux).getCantidad());
+							gastos.add(listadoValoresGastos.get(indiceAux)
+									.getCantidad());
 
 							if (listadoValoresGastos.get(indiceAux)
 									.getCantidad() >= max) {
@@ -558,10 +565,10 @@ public class GraphicsActivity extends Activity {
 
 							indiceAux++;
 						} else {
-							gastosHistoricos.add(0.0);
+							gastos.add(0.0);
 						}
 					} else {
-						gastosHistoricos.add(0.0);
+						gastos.add(0.0);
 					}
 					dia = obtenerDiaSiguiente(dia);
 				}
@@ -576,30 +583,26 @@ public class GraphicsActivity extends Activity {
 			// Inicializo dia para utilizarla de nuevo
 			dia = enteroFechaInicial;
 
-			if (!listadoValoresIngresos.isEmpty()
-					&& !listadoValoresGastos.isEmpty()) {
-				// Me creo el ArrayList para la leyenda del ejeX
-				for (int i = 0; i <= 31; i++) {
-					leyendaEjeX.add(obtenerLeyendaDiariaEjeX(dia));
-					dia = obtenerDiaSiguiente(dia);
+			// Me creo el ArrayList para la leyenda del ejeX
+			for (int i = 0; i <= 31; i++) {
+				leyendaEjeX.add(obtenerLeyendaDiariaEjeX(dia));
+				dia = obtenerDiaSiguiente(dia);
+			}
+
+			// Relleno el balance a partir de los ingresos y gastos
+			for (int i = 0; i < ingresos.size(); i++) {
+				balance.add(ingresos.get(i) - gastos.get(i));
+			}
+
+			// Veo si hay minimo y maximo en el balance
+			for (int i = 0; i < balance.size(); i++) {
+
+				if (balance.get(i) >= max) {
+					max = balance.get(i);
 				}
 
-				// Relleno el balance a partir de los ingresos y gastos
-				for (int i = 0; i < ingresosHistoricos.size(); i++) {
-					balanceHistoricos.add(ingresosHistoricos.get(i)
-							- gastosHistoricos.get(i));
-				}
-
-				// Veo si hay minimo y maximo en el balance
-				for (int i = 0; i < balanceHistoricos.size(); i++) {
-
-					if (balanceHistoricos.get(i) >= max) {
-						max = balanceHistoricos.get(i);
-					}
-
-					if (balanceHistoricos.get(i) <= min) {
-						min = balanceHistoricos.get(i);
-					}
+				if (balance.get(i) <= min) {
+					min = balance.get(i);
 				}
 			}
 
@@ -616,33 +619,20 @@ public class GraphicsActivity extends Activity {
 	 */
 	private void cargarValoresPrevision() {
 
-		int enteroFechaInicial;
-		int enteroFechaFinal;
-		Integer integerFechaInicial;
-		Integer integerFechaFinal;
-		// Indice que va a recorrer las listas de ingresos y gastos
-		int indiceAux = 0;
-		// Variables para los valores mínimos y máximos
-		Double max = Double.MIN_VALUE;
-		Double min = Double.MAX_VALUE;
-
 		if (!listadoValoresIngresos.isEmpty()) {
 			listadoValoresIngresos.clear();
 		}
 		if (!listadoValoresGastos.isEmpty()) {
 			listadoValoresGastos.clear();
 		}
-		if (!ingresosHistoricos.isEmpty()) {
-			ingresosHistoricos.clear();
+		if (!ingresos.isEmpty()) {
+			ingresos.clear();
 		}
-		if (!gastosHistoricos.isEmpty()) {
-			gastosHistoricos.clear();
+		if (!gastos.isEmpty()) {
+			gastos.clear();
 		}
-		if (!balanceHistoricos.isEmpty()) {
-			balanceHistoricos.clear();
-		}
-		if (!balancePrevision.isEmpty()) {
-			balancePrevision.clear();
+		if (!balance.isEmpty()) {
+			balance.clear();
 		}
 
 		/*
@@ -653,26 +643,286 @@ public class GraphicsActivity extends Activity {
 				singleton_csp.KEY_LPTIPOGRAFICA, 0)) {
 		case 0: // ANUAL
 
-			enteroFechaInicial = obtenerEnteroFecha(ENTERO_FECHA_3_ANYOS_ANTES);
-			integerFechaInicial = Integer.valueOf(("" + enteroFechaInicial)
-					.substring(0, 4));
-			enteroFechaFinal = obtenerEnteroFecha(ENTERO_FECHA_1_ANYO_DESPUES);
-			integerFechaFinal = Integer.valueOf(("" + enteroFechaFinal)
-					.substring(0, 4));
-
-			listadoValoresIngresos = dba.listadoValoresAnualesGraficas(
-					enteroFechaInicial, enteroFechaFinal, "ingreso");
-			listadoValoresGastos = dba.listadoValoresAnualesGraficas(
-					enteroFechaInicial, enteroFechaFinal, "gasto");
-
-
-
+			cargarValoresAnualesPrevision();
 			break;
+
 		case 1: // MENSUAL
 			break;
 		case 2: // DIARIO
 			break;
 		}
+
+	}
+
+	/*
+	 * Método que me cargar los Arrays de valores de prevision para mostrar la
+	 * grafica
+	 */
+	private void cargarValoresAnualesPrevision() {
+
+		int enteroFechaInicial;
+		int enteroFechaUmbralHistorico; // en el histórico sera el día de ayer
+		int enteroFechaUmbralPrevision; // en el histórico sera el día de hoy
+		int enteroFechaFinal;
+		Integer integerFechaInicial;
+		Integer integerFechaUmbralHistorico;
+		Integer integerFechaUmbralPrevision;
+		Integer integerFechaFinal;
+		// Indice que va a recorrer las listas de ingresos y gastos
+		int indiceAux = 0;
+		// Variables para los valores mínimos y máximos
+		Double max = Double.MIN_VALUE;
+		Double min = Double.MAX_VALUE;
+
+		enteroFechaInicial = obtenerEnteroFecha(ENTERO_FECHA_3_ANYOS_ANTES);
+		integerFechaInicial = Integer.valueOf(("" + enteroFechaInicial)
+				.substring(0, 4));
+		enteroFechaUmbralHistorico = obtenerEnteroFecha(ENTERO_FECHA_DIA_DE_AYER);
+		integerFechaUmbralHistorico = Integer
+				.valueOf(("" + enteroFechaUmbralHistorico).substring(0, 4));
+		enteroFechaUmbralPrevision = obtenerEnteroFecha(ENTERO_FECHA_DIA_DE_HOY);
+		integerFechaUmbralPrevision = Integer
+				.valueOf(("" + enteroFechaUmbralHistorico).substring(0, 4));
+		enteroFechaFinal = obtenerEnteroFecha(ENTERO_FECHA_1_ANYO_DESPUES);
+		integerFechaFinal = Integer.valueOf(("" + enteroFechaFinal).substring(
+				0, 4));
+
+		// primero obtengo los valores históricos a mostrar
+		// el último valor es el historico del año actual
+		listadoValoresIngresos = dba.listadoValoresAnualesGraficas(
+				enteroFechaInicial, enteroFechaUmbralHistorico, "ingreso");
+		listadoValoresGastos = dba.listadoValoresAnualesGraficas(
+				enteroFechaInicial, enteroFechaUmbralHistorico, "gasto");
+		// ahora obtengo las valores de previsión a mostrar
+		// el primer valor es la previsión del año actual
+		listadoValoresIngresosPrevision = dba.listadoValoresAnualesGraficas(
+				enteroFechaUmbralPrevision, enteroFechaFinal, "ingreso");
+		listadoValoresGastosPrevision = dba.listadoValoresAnualesGraficas(
+				enteroFechaUmbralPrevision, enteroFechaFinal, "gasto");
+
+		// Obtengo los acumulados históricos para calcular el balance
+		acumIngresosPrevision = dba.obtenerAcumulados(
+				enteroFechaUmbralHistorico, "ingreso");
+		acumGastosPrevision = dba.obtenerAcumulados(enteroFechaUmbralHistorico,
+				"gasto");
+		acumBalancePrevision = acumIngresosPrevision - acumGastosPrevision;
+
+		/**
+		 * Seguir por aquí con el código
+		 */
+		// INGRESOS
+		// inserto en el Arrays ingresos los valores historicos
+		if (!listadoValoresIngresos.isEmpty()) {
+			// Relleno los valores de los ingresos historicos para mostrarlo en
+			// la
+			// grafica
+			for (int i = integerFechaInicial.intValue(); i <= integerFechaUmbralHistorico
+					.intValue(); i++) {
+
+				if (indiceAux < listadoValoresIngresos.size()) {
+
+					if (Integer.valueOf(
+							listadoValoresIngresos.get(indiceAux).getFecha())
+							.intValue() == i) {
+
+						ingresos.add(listadoValoresIngresos.get(indiceAux)
+								.getCantidad());
+
+						if (listadoValoresIngresos.get(indiceAux).getCantidad() >= max) {
+							max = listadoValoresIngresos.get(indiceAux)
+									.getCantidad();
+						}
+
+						if (listadoValoresIngresos.get(indiceAux).getCantidad() <= min) {
+							min = listadoValoresIngresos.get(indiceAux)
+									.getCantidad();
+						}
+
+						indiceAux++;
+					} else {
+						ingresos.add(0.0);
+					}
+				} else {
+					ingresos.add(0.0);
+				}
+			}
+
+			indiceAux = 0;
+			// inserto en el Arrays ingresos los valores de prevision
+			if (!listadoValoresIngresosPrevision.isEmpty()) {
+				// Relleno los valores de los ingresos para mostrarlo en la
+				// grafica
+				for (int i = integerFechaUmbralPrevision.intValue(); i <= integerFechaFinal
+						.intValue(); i++) {
+
+					if (indiceAux < listadoValoresIngresosPrevision.size()) {
+						if (Integer.valueOf(
+								listadoValoresIngresosPrevision.get(indiceAux)
+										.getFecha()).intValue() == i) {
+
+							ingresos.add(listadoValoresIngresosPrevision.get(
+									indiceAux).getCantidad());
+
+							if (listadoValoresIngresosPrevision.get(indiceAux)
+									.getCantidad() >= max) {
+								max = listadoValoresIngresosPrevision.get(
+										indiceAux).getCantidad();
+							}
+
+							if (listadoValoresIngresosPrevision.get(indiceAux)
+									.getCantidad() <= min) {
+								min = listadoValoresIngresosPrevision.get(
+										indiceAux).getCantidad();
+							}
+
+							indiceAux++;
+						} else {
+							ingresos.add(0.0);
+						}
+					} else {
+						ingresos.add(0.0);
+					}
+				}
+			} else {
+				// Al no haber valores de prevision le inserto 0 en la prevision
+				// del año actual y el siguiente
+				ingresos.add(0.0);
+				ingresos.add(0.0);
+			}
+		}
+
+		// GASTOS
+		// Inicializo indiceAux a 0 para utilizarlo de nuevo
+		indiceAux = 0;
+
+		if (!listadoValoresGastos.isEmpty()) {
+			// Relleno los valores de los gastos para mostrarlos en la
+			// grafica
+			for (int i = integerFechaInicial.intValue(); i <= integerFechaUmbralHistorico
+					.intValue(); i++) {
+
+				if (indiceAux < listadoValoresGastos.size()) {
+
+					if (Integer.valueOf(
+							listadoValoresGastos.get(indiceAux).getFecha())
+							.intValue() == i) {
+
+						gastos.add(listadoValoresGastos.get(indiceAux)
+								.getCantidad());
+
+						if (listadoValoresGastos.get(indiceAux).getCantidad() >= max) {
+							max = listadoValoresGastos.get(indiceAux)
+									.getCantidad();
+						}
+
+						if (listadoValoresGastos.get(indiceAux).getCantidad() <= min) {
+							min = listadoValoresGastos.get(indiceAux)
+									.getCantidad();
+						}
+
+						indiceAux++;
+					} else {
+						gastos.add(0.0);
+					}
+				} else {
+					gastos.add(0.0);
+				}
+			}
+
+			indiceAux = 0;
+			// inserto en el Arrays gastos los valores de prevision
+			if (!listadoValoresGastosPrevision.isEmpty()) {
+				// Relleno los valores de los gastos para mostrarlo en la
+				// grafica
+				for (int i = integerFechaUmbralPrevision.intValue(); i <= integerFechaFinal
+						.intValue(); i++) {
+
+					if (indiceAux < listadoValoresGastosPrevision.size()) {
+
+						if (Integer.valueOf(
+								listadoValoresGastosPrevision.get(indiceAux)
+										.getFecha()).intValue() == i) {
+
+							gastos.add(listadoValoresGastosPrevision.get(
+									indiceAux).getCantidad());
+
+							if (listadoValoresGastosPrevision.get(indiceAux)
+									.getCantidad() >= max) {
+								max = listadoValoresGastosPrevision.get(
+										indiceAux).getCantidad();
+							}
+
+							if (listadoValoresGastosPrevision.get(indiceAux)
+									.getCantidad() <= min) {
+								min = listadoValoresGastosPrevision.get(
+										indiceAux).getCantidad();
+							}
+
+							indiceAux++;
+						} else {
+							gastos.add(0.0);
+						}
+					} else {
+						gastos.add(0.0);
+					}
+				}
+			} else {
+				// Al no haber valores de prevision le inserto 0 en la prevision
+				// del año actual y el siguiente
+				gastos.add(0.0);
+				gastos.add(0.0);
+			}
+		}
+
+		if (leyendaEjeX == null) {
+			leyendaEjeX = new ArrayList<String>();
+		} else {
+			leyendaEjeX.clear();
+		}
+
+		// LEYENDA EJEX
+		// Me creo el ArrayList para la leyenda del ejeX
+		for (int i = integerFechaInicial.intValue(); i < integerFechaUmbralHistorico
+				.intValue(); i++) {
+			leyendaEjeX.add("" + i);
+		}
+		// Dibujo los datos umbrales que parten el año en dos
+		// Historico Año actual : Previsión Año Actual
+		leyendaEjeX.add(integerFechaUmbralHistorico.intValue() + "-Hist.");
+		leyendaEjeX.add(integerFechaUmbralPrevision.intValue() + "-Prev.");
+		leyendaEjeX.add("" + integerFechaFinal.intValue());
+
+		// BALANCE
+		// Relleno el balance historico a partir de los ingresos y gastos
+		// historicos
+		for (int i = 0; i <= 3; i++) {
+			balance.add(ingresos.get(i) - gastos.get(i));
+		}
+
+		// Relleno el balance de prevision a partir de los ingresos y gastos
+		// acumulados historicos y los valores futuros
+		for (int i = 4; i <= 5; i++) {
+			acumBalancePrevision = acumBalancePrevision
+					+ (ingresos.get(i) - gastos.get(i));
+			balance.add(acumBalancePrevision);
+		}
+
+		// Veo si hay minimo y maximo en el balance
+		for (int i = 0; i < balance.size(); i++) {
+
+			if (balance.get(i) >= max) {
+				max = balance.get(i);
+			}
+
+			if (balance.get(i) <= min) {
+				min = balance.get(i);
+			}
+
+		}
+
+		// Actualizo los mínimos y máximos de la gráfica
+		maxCantidad = max;
+		minCantidad = min;
 
 	}
 
@@ -694,7 +944,7 @@ public class GraphicsActivity extends Activity {
 			 * un array de integer de 6 items, los cinco meses anteriores al
 			 * actual y el actual
 			 */
-			rango.add(Integer.valueOf(enteroFechaInicial));
+			rango.add(Integer.valueOf(("" + enteroFechaInicial).substring(0, 6)));
 
 			for (int i = 0; i <= 4; i++) {
 
@@ -863,7 +1113,7 @@ public class GraphicsActivity extends Activity {
 		LineAndPointFormatter lapfBalance;
 
 		// Serie de INGRESOS
-		XYSeries seriesIngresos = new SimpleXYSeries(ingresosHistoricos,
+		XYSeries seriesIngresos = new SimpleXYSeries(ingresos,
 				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "INGRESOS");
 
 		if (preferenceConfiguracionPrivate.getBoolean(
@@ -898,7 +1148,7 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Serie de GASTOS
-		XYSeries seriesGastos = new SimpleXYSeries(gastosHistoricos,
+		XYSeries seriesGastos = new SimpleXYSeries(gastos,
 				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "GASTOS");
 
 		if (preferenceConfiguracionPrivate.getBoolean(
@@ -933,7 +1183,7 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Serie de BALANCE
-		XYSeries seriesBalance = new SimpleXYSeries(balanceHistoricos,
+		XYSeries seriesBalance = new SimpleXYSeries(balance,
 				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "BALANCE");
 
 		if (preferenceConfiguracionPrivate.getBoolean(
@@ -1040,6 +1290,8 @@ public class GraphicsActivity extends Activity {
 			c.set(Calendar.MONTH, 0);
 			c.set(Calendar.DATE, 1);
 			break;
+		case ENTERO_FECHA_DIA_DE_AYER:
+			c.add(Calendar.DATE, -1);
 		default:
 			break;
 		}
@@ -1201,6 +1453,11 @@ public class GraphicsActivity extends Activity {
 				&& preferenceConfiguracionPrivate.getInt(
 						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 1) {
 			// Entra aquí si es Con Prevision y Anual
+			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+
+			// Le pongo el formato al ejeX (meses)
+			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
+					leyendaEjeX));
 
 		} else if (preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 1
@@ -1225,6 +1482,10 @@ public class GraphicsActivity extends Activity {
 
 	}
 
+	/*
+	 * Método que me devuelve el salto entre valores del ejeY a partir de los
+	 * valores mínimos y máximos pasados por parámetro
+	 */
 	private double obtenerRangoEjeY(Double minCantidad2, Double maxCantidad2) {
 
 		Double dif = maxCantidad2 - minCantidad2;
