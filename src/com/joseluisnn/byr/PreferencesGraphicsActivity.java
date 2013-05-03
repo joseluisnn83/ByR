@@ -1,7 +1,5 @@
 package com.joseluisnn.byr;
 
-import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +12,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
+import com.bugsense.trace.BugSenseHandler;
+import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 public class PreferencesGraphicsActivity extends PreferenceActivity {
 
@@ -75,6 +75,8 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		BugSenseHandler.initAndStartSession(PreferencesGraphicsActivity.this, "c815f559");
+		
 		addPreferencesFromResource(R.xml.preferences_configuration_graphics);
 
 		// Instancio los objetos del SharedPreferences de la configuración de la
@@ -196,7 +198,11 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 							
 							anyoCentralGrafica = newAnyo;
 							modificado = true;
-
+							
+							/*Lo hago Fallar al programa*/
+							//String c = null;
+							//System.out.println(c);
+							// 
 						}
 
 						return true;
@@ -367,6 +373,14 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		habilitarFecha();
 		
 		modificado = false;
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		BugSenseHandler.closeSession(PreferencesGraphicsActivity.this);
 	}
 
 	/*

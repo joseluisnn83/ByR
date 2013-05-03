@@ -6,6 +6,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    
+    <!-- Permisos que se exigen -->
+	<uses-permission android:name="android.permission.INTERNET" />
 	
     <application
         android:allowBackup="true"
@@ -55,7 +58,7 @@
         <activity android:name="PestanyaAnualActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaLibreActivity" android:screenOrientation="portrait"></activity>
         <activity 
-            android:name="GraphicsActivity"></activity>
+            android:name="GraphicsActivity" android:label="@string/title_GraphicsActivity"></activity>
         <activity 
             android:name="PreferencesGraphicsActivity"></activity>
         
