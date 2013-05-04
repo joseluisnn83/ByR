@@ -40,32 +40,32 @@ public class InformesScreenActivity extends TabActivity{
 		
 		intent = new Intent().setClass(this, PestanyaSemanalActivity.class);
 		spec = tabHost.newTabSpec("Semanal").setIndicator(
-				"Semanal",
+				"",
 				res.getDrawable(android.R.drawable.ic_menu_week)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		
 		intent = new Intent().setClass(this, PestanyaMensualActivity.class);
 		spec = tabHost.newTabSpec("Mensual").setIndicator(
-				"Mensual",
+				"",
 				res.getDrawable(android.R.drawable.ic_menu_month)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent().setClass(this, PestanyaTrimestralActivity.class);
 		spec = tabHost.newTabSpec("Trimestral").setIndicator(
-				"Trimestral",
+				"",
 				res.getDrawable(android.R.drawable.ic_menu_my_calendar)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent().setClass(this, PestanyaAnualActivity.class);
 		spec = tabHost.newTabSpec("Anual").setIndicator(
-				"Anual",
+				"",
 				res.getDrawable(android.R.drawable.ic_menu_agenda)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent().setClass(this, PestanyaLibreActivity.class);
 		spec = tabHost.newTabSpec("Libre").setIndicator(
-				"Libre",
+				"",
 				res.getDrawable(android.R.drawable.ic_menu_today)).setContent(intent);
 		tabHost.addTab(spec);
 		
