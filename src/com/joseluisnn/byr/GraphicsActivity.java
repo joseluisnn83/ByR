@@ -181,7 +181,7 @@ public class GraphicsActivity extends Activity {
 
 		} else {
 			prepararLineasGraficas();
-			configurarGrafica2();
+			configurarGrafica();
 			dibujarGrafica();
 
 		}
@@ -1486,44 +1486,44 @@ public class GraphicsActivity extends Activity {
 
 		switch (Integer.valueOf(fechaComprobacion.substring(4, 6)).intValue()) {
 		case 1:
-			fecha = "Ene. ";
+			fecha = "Ene.";
 			break;
 		case 2:
-			fecha = "Feb. ";
+			fecha = "Feb.";
 			break;
 		case 3:
-			fecha = "Mar. ";
+			fecha = "Mar.";
 			break;
 		case 4:
-			fecha = "Abr. ";
+			fecha = "Abr.";
 			break;
 		case 5:
-			fecha = "May. ";
+			fecha = "May.";
 			break;
 		case 6:
-			fecha = "Jun. ";
+			fecha = "Jun.";
 			break;
 		case 7:
-			fecha = "Jul. ";
+			fecha = "Jul.";
 			break;
 		case 8:
-			fecha = "Ago. ";
+			fecha = "Ago.";
 			break;
 		case 9:
-			fecha = "Sep. ";
+			fecha = "Sep.";
 			break;
 		case 10:
-			fecha = "Oct. ";
+			fecha = "Oct.";
 			break;
 		case 11:
-			fecha = "Nov. ";
+			fecha = "Nov.";
 			break;
 		case 12:
-			fecha = "Dic. ";
+			fecha = "Dic.";
 			break;
 		}
 
-		fecha += Integer.valueOf(fechaComprobacion.substring(0, 4)).intValue();
+		fecha += Integer.valueOf(fechaComprobacion.substring(2, 4)).intValue();
 
 		return fecha;
 	}
@@ -1839,145 +1839,54 @@ public class GraphicsActivity extends Activity {
 	 * event.getX(1); float y = event.getY(0) - event.getY(1); return
 	 * FloatMath.sqrt(x * x + y * y); }
 	 */
-
+	
 	/*
 	 * Método para configurar el diseño de la Gráfica
 	 */
 	private void configurarGrafica() {
 
 		// Título de la Gráfica
-		mySimpleXYPlot.setTitle("BALANCE Económico");
+		mySimpleXYPlot.setTitle("Balance Económico");		
 		// Título ejeY
 		mySimpleXYPlot.setRangeLabel("Catindad (€)");
 		// Título ejeX
 		mySimpleXYPlot.setDomainLabel("");
-
-		mySimpleXYPlot.getGraphWidget().setMarginTop(10);
-		mySimpleXYPlot.getGraphWidget().setMarginRight(10);
-		mySimpleXYPlot.getGraphWidget().setPaddingLeft(10);
-
-		// Pongo el Plot como un rectangulo con bordes con esquinas
-		mySimpleXYPlot.setBorderStyle(Plot.BorderStyle.SQUARE, null, null);
-
-		// Me modifica el margin y padding del Cuadro general
-		// mySimpleXYPlot.setPlotMargins(10, 10, 10, 10);
-		// mySimpleXYPlot.setPlotPadding(10, 10, 10, 10);
-
-		// Configuro la leyenda
-		// configurarLeyenda();
-
-		// Rango de valores ejeX a mostrar
-		if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 0
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 0) {
-			// Entra aquí si es Historico y Anual
-			// mySimpleXYPlot.setDomainStep(XYStepMode.SUBDIVIDE,leyendaEjeX.size());
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		} else if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 1
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 0) {
-			// Entra aquí si es Historico y Mensual
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		} else if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 2
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 0) {
-			// Entra aquí si es Historico y Diario
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 5);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		} else if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 0
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 1) {
-			// Entra aquí si es Con Prevision y Anual
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		} else if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 1
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 1) {
-			// Entra aquí si es Con Prevision y Mensual
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		} else if (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 2
-				&& preferenceConfiguracionPrivate.getInt(
-						singleton_csp.KEY_LPVALORESGRAFICA, 0) == 1) {
-			// Entra aquí si es Con Prevision y Diario
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 5);
-
-			// Le pongo el formato al ejeX (meses)
-			mySimpleXYPlot.setDomainValueFormat(new GraphXLabelFormat(
-					leyendaEjeX));
-
-		}
-
-		// Pongo los límites del ejeY (Cantidad en €)
-		mySimpleXYPlot.setUserRangeOrigin(0);
-		mySimpleXYPlot.setRangeBoundaries(minCantidad - 100, maxCantidad + 100,
-				BoundaryMode.FIXED);
-		mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL,
-				obtenerRangoEjeY(minCantidad, maxCantidad));
-
-	}
-
-	private void configurarGrafica2() {
-
-		// Título de la Gráfica
-		mySimpleXYPlot.setTitle("BALANCE Económico");
-		// Título ejeY
-		mySimpleXYPlot.setRangeLabel("Catindad (€)");
-		// Título ejeX
-		mySimpleXYPlot.setDomainLabel("");
+		
+		//Remove legend
+	    //mySimpleXYPlot.getLayoutManager().remove(mySimpleXYPlot.getLegendWidget());
+	    mySimpleXYPlot.getLayoutManager().remove(mySimpleXYPlot.getDomainLabelWidget());
+	    mySimpleXYPlot.getLayoutManager().remove(mySimpleXYPlot.getRangeLabelWidget());
+	    //mySimpleXYPlot.getLayoutManager().remove(mySimpleXYPlot.getTitleWidget());
 		
 		
 		
 		mySimpleXYPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 	    mySimpleXYPlot.setPlotMargins(0, 0, 0, 0);
-	    mySimpleXYPlot.setPlotPadding(15, 15, 15, 15);
+	    mySimpleXYPlot.setPlotPadding(0, 0, 0, 0);
 	    mySimpleXYPlot.setGridPadding(20, 10, 20, 0); // left,top,right,bottom
- 
-	    	    
-	    mySimpleXYPlot.setBackgroundColor(Color.WHITE);
+	    
+	    //mySimpleXYPlot.setBackgroundColor(Color.WHITE);
 /*
 	    mySimpleXYPlot.position(
 	            mySimpleXYPlot.getGraphWidget(),
 	            0,
-	            XLayoutStyle.ABSOLUTE_FROM_LEFT,
+	            XLayoutStyle.RELATIVE_TO_LEFT,
 	            0,
 	            YLayoutStyle.RELATIVE_TO_CENTER,
 	            AnchorPosition.LEFT_MIDDLE);
 */	    
-	    mySimpleXYPlot.getLegendWidget().setMargins(5, 5, 5, 5);
-	    mySimpleXYPlot.getLegendWidget().setPadding(10, 10, 10, 10);
+	    
+	    
+	    //mySimpleXYPlot.getLegendWidget().setMargins(5, 5, 5, 5);
+	    //mySimpleXYPlot.getLegendWidget().setPadding(10, 10, 10, 10);
+	    Paint p = new Paint();
+	    p.setColor(Color.BLACK);
+	    mySimpleXYPlot.getLegendWidget().setTextPaint(p);
 	    
 	    mySimpleXYPlot.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE);
 	    mySimpleXYPlot.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE);
 	    
+	    // Me dibuja los valores del ejeX y ejeY
 	    mySimpleXYPlot.getGraphWidget().getDomainLabelPaint().setColor(Color.BLACK);
 	    mySimpleXYPlot.getGraphWidget().getRangeLabelPaint().setColor(Color.BLACK);
 
@@ -1987,9 +1896,7 @@ public class GraphicsActivity extends Activity {
 	    mySimpleXYPlot.getGraphWidget().getRangeOriginLinePaint().setColor(Color.BLACK);
 	    // Líneas centrales del gráfico
 	    mySimpleXYPlot.getGraphWidget().getGridDomainLinePaint().setColor(getResources().getColor(R.color.gris_claro));
-	    mySimpleXYPlot.getGraphWidget().getGridRangeLinePaint().setColor(getResources().getColor(R.color.gris_claro));
-		
-		
+	    mySimpleXYPlot.getGraphWidget().getGridRangeLinePaint().setColor(getResources().getColor(R.color.gris_claro));		
 
 		// Rango de valores ejeX a mostrar
 		if (preferenceConfiguracionPrivate.getInt(
@@ -2058,7 +1965,7 @@ public class GraphicsActivity extends Activity {
 	private double obtenerRangoEjeY(Double minCantidad2, Double maxCantidad2) {
 
 		Double dif = maxCantidad2 - minCantidad2;
-		double salto = Math.round(dif / 25);
+		double salto = Math.round(dif / 15);
 
 		return salto;
 	}
@@ -2147,7 +2054,7 @@ public class GraphicsActivity extends Activity {
 
 			} else {
 				prepararLineasGraficas();
-				configurarGrafica2();
+				configurarGrafica();
 				dibujarGrafica();
 
 				// mySimpleXYPlot.setVisibility(Plot.VISIBLE);

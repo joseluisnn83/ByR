@@ -1,7 +1,12 @@
 package com.joseluisnn.byr;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -30,8 +35,8 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	 */
 	private int tipoGrafica;
 	private int valoresGrafica;
-	private int anyoCentralGrafica;
-	private int mesCentralGrafica;
+	private int anyoLimiteGrafica;
+	private int mesLimiteGrafica;
 	private boolean mostrarValoresIngresos;
 	private boolean mostrarValoresGastos;
 	private boolean mostrarValoresBalance;
@@ -68,15 +73,16 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	 */
 	private SharedPreferences preferenceConfiguracionPrivate;
 	private SingletonConfigurationSharedPreferences singleton_csp;
-	private Editor editorPreference;	
+	private Editor editorPreference;
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		BugSenseHandler.initAndStartSession(PreferencesGraphicsActivity.this, "c815f559");
-		
+		// BugSenseHandler.initAndStartSession(PreferencesGraphicsActivity.this,
+		// "c815f559");
+
 		addPreferencesFromResource(R.xml.preferences_configuration_graphics);
 
 		// Instancio los objetos del SharedPreferences de la configuración de la
@@ -183,29 +189,38 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 					public boolean onPreferenceChange(Preference preference,
 							Object newValue) {
 						/*
-						 *  TODO // Si se ha modificado el valor entra en el if a
-						 *  modificar el archivo de configuracion
+						 * TODO // Si se ha modificado el valor entra en el if a
+						 * modificar el archivo de configuracion
 						 */
 						int newAnyo = Integer.valueOf(newValue.toString());
+						boolean correcto = false;
 
-						if (newAnyo != anyoCentralGrafica) {
+						if (newAnyo != anyoLimiteGrafica) {
 
-							// Actualizo el valor anyo del archivo de
-							// configuración de la gráfica
-							editorPreference.putInt(singleton_csp.KEY_LPYEARS,
-									newAnyo);
-							editorPreference.commit();
-							
-							anyoCentralGrafica = newAnyo;
-							modificado = true;
-							
-							/*Lo hago Fallar al programa*/
-							//String c = null;
-							//System.out.println(c);
-							// 
+							Calendar c = Calendar.getInstance();
+
+							if ((newAnyo == c.get(Calendar.YEAR) &&
+									mesLimiteGrafica <= (c.get(Calendar.MONTH) + 1)) || 
+									newAnyo < c.get(Calendar.YEAR)) {
+
+								// Actualizo el valor anyo del archivo de
+								// configuración de la gráfica
+								editorPreference.putInt(
+										singleton_csp.KEY_LPYEARS, newAnyo);
+								editorPreference.commit();
+
+								anyoLimiteGrafica = newAnyo;
+								modificado = true;
+
+								correcto = true;
+
+							} else {
+								lanzarAdvertencia("No está permitido seleccionar fechas "
+										+ "futuras para mostrar valores Históricos.");
+							}
 						}
 
-						return true;
+						return correcto;
 					}
 				});
 
@@ -216,25 +231,38 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 					public boolean onPreferenceChange(Preference preference,
 							Object newValue) {
 						/*
-						 *  TODO Si se ha modificado el valor entra en el if a
-						 *  modificar el archivo de configuracion
+						 * TODO Si se ha modificado el valor entra en el if a
+						 * modificar el archivo de configuracion
 						 */
 						int newMes = Integer.valueOf(newValue.toString());
+						boolean correcto = false;
 
-						if (newMes != mesCentralGrafica) {
+						if (newMes != mesLimiteGrafica) {
 
-							// Actualizo el valor mes del archivo de
-							// configuración de la gráfica
-							editorPreference.putInt(singleton_csp.KEY_LPMONTHS,
-									newMes);
-							editorPreference.commit();
-							
-							mesCentralGrafica = newMes;
-							modificado = true;
+							Calendar c = Calendar.getInstance();
 
+							if ( (anyoLimiteGrafica == c.get(Calendar.YEAR) &&
+									newMes <= (c.get(Calendar.MONTH) + 1)) || 
+									anyoLimiteGrafica < c.get(Calendar.YEAR)) {
+
+								// Actualizo el valor mes del archivo de
+								// configuración de la gráfica
+								editorPreference.putInt(
+										singleton_csp.KEY_LPMONTHS, newMes);
+								editorPreference.commit();
+
+								mesLimiteGrafica = newMes;
+								modificado = true;
+
+								correcto = true;
+
+							} else {
+								lanzarAdvertencia("No está permitido seleccionar fechas "
+										+ "futuras para mostrar valores Históricos.");
+							}
 						}
 
-						return true;
+						return correcto;
 					}
 				});
 
@@ -366,12 +394,16 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 
 		/**
 		 * Inicio el proceso de lectura del archivo de configuración
-		 * (SharedPreference) y habilito o deshabilito la fecha según
-		 * las opciones guardadas
+		 * (SharedPreference) y habilito o deshabilito la fecha según las
+		 * opciones guardadas
 		 */
 		leerArchivoConfiguracion();
 		habilitarFecha();
-		
+
+		/*
+		 * Inicializo los valores del preferencesactivity
+		 */
+
 		modificado = false;
 	}
 
@@ -379,8 +411,8 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		
-		BugSenseHandler.closeSession(PreferencesGraphicsActivity.this);
+
+		// BugSenseHandler.closeSession(PreferencesGraphicsActivity.this);
 	}
 
 	/*
@@ -393,9 +425,9 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 				singleton_csp.KEY_LPTIPOGRAFICA, 0);
 		valoresGrafica = preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPVALORESGRAFICA, 0);
-		anyoCentralGrafica = preferenceConfiguracionPrivate.getInt(
+		anyoLimiteGrafica = preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPYEARS, 0);
-		mesCentralGrafica = preferenceConfiguracionPrivate.getInt(
+		mesLimiteGrafica = preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPMONTHS, 0);
 		mostrarLineaIngresos = preferenceConfiguracionPrivate.getBoolean(
 				singleton_csp.KEY_CBPLINEINGRESOS, false);
@@ -429,19 +461,53 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 
 	}
 
+	/*
+	 * Método que lanza un Dialog de una advertencia producida
+	 */
+	private void lanzarAdvertencia(String advice) {
+
+		Dialog d = crearDialogAdvertencia(advice);
+
+		d.show();
+
+	}
+
+	/*
+	 * Dialog para avisar de un movimiento no permitido
+	 */
+	private Dialog crearDialogAdvertencia(String advice) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("ADVERTENCIA");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setMessage(advice);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Cierro el dialog
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
+	}
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// TODO Evento de levantar la pulsación de una tecla del móvil
 
 		Intent resultData = getIntent();
-		
+
 		// Entra en el IF si la tecla pulsada es la de salir o retorno
-		if (keyCode == KeyEvent.KEYCODE_BACK && modificado) {			
+		if (keyCode == KeyEvent.KEYCODE_BACK && modificado) {
 
 			resultData.putExtra("tipoGrafica", this.tipoGrafica);
 			resultData.putExtra("valoresGrafica", this.valoresGrafica);
-			resultData.putExtra("anyo", this.anyoCentralGrafica);
-			resultData.putExtra("mes", this.mesCentralGrafica);
+			resultData.putExtra("anyo", this.anyoLimiteGrafica);
+			resultData.putExtra("mes", this.mesLimiteGrafica);
 			resultData.putExtra("lineaIngresos", this.mostrarLineaIngresos);
 			resultData.putExtra("lineaGastos", this.mostrarLineaGastos);
 			resultData.putExtra("lineaBalance", this.mostrarLineaBalance);
@@ -453,7 +519,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 
 			finish();
 
-		}else{
+		} else {
 			setResult(Activity.RESULT_CANCELED, resultData);
 
 			finish();

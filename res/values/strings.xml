@@ -156,9 +156,9 @@
     <string name="preferencesContentLinesBalance">Mostrar la línea del Balance</string>
     <string name="preferencesTitleLinesBalance">Línea Balance</string>
     <string name="preferencesCategoryYear">Fecha para valores históricos</string>
-    <string name="preferencesContentYearsGrafica">Elegir el año central a mostrar</string>
+    <string name="preferencesContentYearsGrafica">Elegir el año límite a visualizar</string>
     <string name="preferencesTitleYearsGrafica">Año</string>
-    <string name="preferencesContentMonthsGrafica">Elegir el mes central a mostrar</string>
+    <string name="preferencesContentMonthsGrafica">Elegir el mes límite a visualizar</string>
     <string name="preferencesTitleMonthsGrafica">Mes</string>
     <string name="menu_settings_graphics">Configurar Gráfica</string>
     <string name="title_GraphicsActivity">Gráficas</string>

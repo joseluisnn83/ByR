@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.joseluisnn.byr.MyAdapterListaGestionDatos.ObservadorMyAdapterListViewGD;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.Concepto;
@@ -42,6 +41,7 @@ public class DatasActivity extends Activity {
 	private static final int DIALOGO_BORRAR_GASTO = 5;
 	private static final int DIALOGO_REPETIR_VALORES_INGRESOS = 6;
 	private static final int DIALOGO_REPETIR_VALORES_GASTOS = 7;
+	private static final double NUMERO_MAXIMO_A_INTRODUCIR = 9999999999.0;
 
 	/*
 	 * Variables para el SPINNER de los Dialogs
@@ -557,48 +557,56 @@ public class DatasActivity extends Activity {
 							double valor = Double.valueOf(valorIngreso
 									.getText().toString());
 
-							int cod_error = dba.insertarValor(
-									valor,
-									listaConceptosIngresos.get(
-											spinnerConceptosIngresos
-													.getSelectedItemPosition())
-											.getId(), entero_fecha);
+							if (!(valor > NUMERO_MAXIMO_A_INTRODUCIR)) {
 
-							// lo inserto en la BD
-							if (cod_error == 1) {
-								// Si es 1 es que todo ha ido correctamente
-								ValoresElementoListaGD v = new ValoresElementoListaGD(
-										listaConceptosIngresos
-												.get(spinnerConceptosIngresos
-														.getSelectedItemPosition())
-												.getId(),
-										entero_fecha,
-										listaConceptosIngresos
-												.get(spinnerConceptosIngresos
-														.getSelectedItemPosition())
-												.getNombre(), valor);
+								int cod_error = dba
+										.insertarValor(
+												valor,
+												listaConceptosIngresos
+														.get(spinnerConceptosIngresos
+																.getSelectedItemPosition())
+														.getId(), entero_fecha);
 
-								// Lo inserto en la lista de Ingresos
-								listaIngresos.add(v);
+								// lo inserto en la BD
+								if (cod_error == 1) {
+									// Si es 1 es que todo ha ido correctamente
+									ValoresElementoListaGD v = new ValoresElementoListaGD(
+											listaConceptosIngresos
+													.get(spinnerConceptosIngresos
+															.getSelectedItemPosition())
+													.getId(),
+											entero_fecha,
+											listaConceptosIngresos
+													.get(spinnerConceptosIngresos
+															.getSelectedItemPosition())
+													.getNombre(), valor);
 
-								// Notifico al ArrayAdapter que mi ArrayList ha
-								// sido modificado
-								adapterIngresos.notifyDataSetChanged();
+									// Lo inserto en la lista de Ingresos
+									listaIngresos.add(v);
 
-							} else {
+									// Notifico al ArrayAdapter que mi ArrayList
+									// ha
+									// sido modificado
+									adapterIngresos.notifyDataSetChanged();
 
-								if (cod_error == -1) {
-									// error al insertar el valor porque ya
-									// existe un concepto igual
-									lanzarAdvertencia("No se puede insertar el INGRESO de un concepto "
-											+ "que ya se encuentra con la misma fecha en la base de datos."
-											+ " Por favor, modifíquelo actualizándolo.");
-								} else if (cod_error == -2) {
-									// error al insertar la fecha, inserción del
-									// valor anulada
-									lanzarError("Error al insertar la fecha, inserción del INGRESO anulado.");
+								} else {
+
+									if (cod_error == -1) {
+										// error al insertar el valor porque ya
+										// existe un concepto igual
+										lanzarAdvertencia("No se puede insertar el INGRESO de un concepto "
+												+ "que ya se encuentra con la misma fecha en la base de datos."
+												+ " Por favor, modifíquelo actualizándolo.");
+									} else if (cod_error == -2) {
+										// error al insertar la fecha, inserción
+										// del
+										// valor anulada
+										lanzarError("Error al insertar la fecha, inserción del INGRESO anulado.");
+									}
+
 								}
-
+							} else {
+								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
 					}
@@ -664,41 +672,54 @@ public class DatasActivity extends Activity {
 							// Doy formato double al valor introducido
 							double valor = Double.valueOf(valorIngreso
 									.getText().toString());
-							// Posicion del Item seleccionado del Spinner
-							int posicionSpinner = spinnerConceptosIngresos
-									.getSelectedItemPosition();
 
-							int cod_error = dba.actualizarRegistroTablaDatos(
-									valor, listaIngresos.get(posicioAEditar)
-											.getIdConcepto(),
-									listaConceptosIngresos.get(posicionSpinner)
-											.getId(), entero_fecha);
+							if (!(valor > NUMERO_MAXIMO_A_INTRODUCIR)) {
 
-							// lo actualizo en la BD si todo va bien,
-							// cod_error=1
-							if (cod_error == 1) {
+								// Posicion del Item seleccionado del Spinner
+								int posicionSpinner = spinnerConceptosIngresos
+										.getSelectedItemPosition();
 
-								// Lo actualizo en la lista de Ingresos
-								listaIngresos.get(posicioAEditar)
-										.setIdConcepto(
+								int cod_error = dba
+										.actualizarRegistroTablaDatos(
+												valor,
+												listaIngresos.get(
+														posicioAEditar)
+														.getIdConcepto(),
 												listaConceptosIngresos.get(
 														posicionSpinner)
-														.getId());
-								listaIngresos.get(posicioAEditar).setConcepto(
-										listaConceptosIngresos.get(
-												posicionSpinner).getNombre());
-								listaIngresos.get(posicioAEditar).setCantidad(
-										valor);
+														.getId(), entero_fecha);
 
-								// Notifico al ArrayAdapter que mi ArrayList ha
-								// sido modificado
-								adapterIngresos.notifyDataSetChanged();
+								// lo actualizo en la BD si todo va bien,
+								// cod_error=1
+								if (cod_error == 1) {
 
+									// Lo actualizo en la lista de Ingresos
+									listaIngresos.get(posicioAEditar)
+											.setIdConcepto(
+													listaConceptosIngresos.get(
+															posicionSpinner)
+															.getId());
+									listaIngresos.get(posicioAEditar)
+											.setConcepto(
+													listaConceptosIngresos.get(
+															posicionSpinner)
+															.getNombre());
+									listaIngresos.get(posicioAEditar)
+											.setCantidad(valor);
+
+									// Notifico al ArrayAdapter que mi ArrayList
+									// ha
+									// sido modificado
+									adapterIngresos.notifyDataSetChanged();
+
+								} else {
+
+									// error al actualizar el valor
+									lanzarError("Error en la actualización del INGRESO.");
+
+								}
 							} else {
-
-								// error al actualizar el valor
-								lanzarError("Error en la actualización del INGRESO.");
-
+								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
 					}
@@ -759,48 +780,57 @@ public class DatasActivity extends Activity {
 							double valor = Double.valueOf(valorGasto.getText()
 									.toString());
 
-							int cod_error = dba.insertarValor(
-									valor,
-									listaConceptosGastos.get(
-											spinnerConceptosGastos
-													.getSelectedItemPosition())
-											.getId(), entero_fecha);
+							if (!(valor > NUMERO_MAXIMO_A_INTRODUCIR)) {
 
-							// lo inserto en la BD si todo va bien, cod_error=1
-							if (cod_error == 1) {
+								int cod_error = dba
+										.insertarValor(
+												valor,
+												listaConceptosGastos
+														.get(spinnerConceptosGastos
+																.getSelectedItemPosition())
+														.getId(), entero_fecha);
 
-								ValoresElementoListaGD v = new ValoresElementoListaGD(
-										listaConceptosGastos
-												.get(spinnerConceptosGastos
-														.getSelectedItemPosition())
-												.getId(),
-										entero_fecha,
-										listaConceptosGastos
-												.get(spinnerConceptosGastos
-														.getSelectedItemPosition())
-												.getNombre(), valor);
+								// lo inserto en la BD si todo va bien,
+								// cod_error=1
+								if (cod_error == 1) {
 
-								// Lo inserto en la lista de Gastos
-								listaGastos.add(v);
+									ValoresElementoListaGD v = new ValoresElementoListaGD(
+											listaConceptosGastos
+													.get(spinnerConceptosGastos
+															.getSelectedItemPosition())
+													.getId(),
+											entero_fecha,
+											listaConceptosGastos
+													.get(spinnerConceptosGastos
+															.getSelectedItemPosition())
+													.getNombre(), valor);
 
-								// Notifico al ArrayAdapter que mi ArrayList ha
-								// sido modificado
-								adapterGastos.notifyDataSetChanged();
+									// Lo inserto en la lista de Gastos
+									listaGastos.add(v);
 
-							} else {
+									// Notifico al ArrayAdapter que mi ArrayList
+									// ha
+									// sido modificado
+									adapterGastos.notifyDataSetChanged();
 
-								if (cod_error == -1) {
-									// error al insertar el valor porque ya
-									// existe un concepto igual
-									lanzarAdvertencia("No se puede insertar el GASTO de un concepto "
-											+ "que ya se encuentra con la misma fecha en la base de datos."
-											+ " Por favor, modifíquelo actualizándolo.");
-								} else if (cod_error == -2) {
-									// error al insertar la fecha, inserción del
-									// valor anulada
-									lanzarError("Error al insertar la fecha, inserción del GASTO anulado.");
+								} else {
+
+									if (cod_error == -1) {
+										// error al insertar el valor porque ya
+										// existe un concepto igual
+										lanzarAdvertencia("No se puede insertar el GASTO de un concepto "
+												+ "que ya se encuentra con la misma fecha en la base de datos."
+												+ " Por favor, modifíquelo actualizándolo.");
+									} else if (cod_error == -2) {
+										// error al insertar la fecha, inserción
+										// del
+										// valor anulada
+										lanzarError("Error al insertar la fecha, inserción del GASTO anulado.");
+									}
+
 								}
-
+							}else{
+								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
 					}
@@ -865,38 +895,52 @@ public class DatasActivity extends Activity {
 							// Doy formato double al valor introducido
 							double valor = Double.valueOf(valorGasto.getText()
 									.toString());
-							// Posicion del Item seleccionado del Spinner
-							int posicionSpinner = spinnerConceptosGastos
-									.getSelectedItemPosition();
 
-							int cod_error = dba.actualizarRegistroTablaDatos(
-									valor, listaGastos.get(posicioAEditar)
-											.getIdConcepto(),
-									listaConceptosGastos.get(posicionSpinner)
-											.getId(), entero_fecha);
+							if (!(valor > NUMERO_MAXIMO_A_INTRODUCIR)) {
 
-							// lo actualizo en la BD
-							if (cod_error == 1) {
+								// Posicion del Item seleccionado del Spinner
+								int posicionSpinner = spinnerConceptosGastos
+										.getSelectedItemPosition();
 
-								// Lo actualizo en la lista de Gastos
-								listaGastos.get(posicioAEditar).setIdConcepto(
-										listaConceptosGastos.get(
-												posicionSpinner).getId());
-								listaGastos.get(posicioAEditar).setConcepto(
-										listaConceptosGastos.get(
-												posicionSpinner).getNombre());
-								listaGastos.get(posicioAEditar).setCantidad(
-										valor);
+								int cod_error = dba
+										.actualizarRegistroTablaDatos(
+												valor,
+												listaGastos.get(posicioAEditar)
+														.getIdConcepto(),
+												listaConceptosGastos.get(
+														posicionSpinner)
+														.getId(), entero_fecha);
 
-								// Notifico al ArrayAdapter que mi ArrayList ha
-								// sido modificado
-								adapterGastos.notifyDataSetChanged();
+								// lo actualizo en la BD
+								if (cod_error == 1) {
 
-							} else {
+									// Lo actualizo en la lista de Gastos
+									listaGastos.get(posicioAEditar)
+											.setIdConcepto(
+													listaConceptosGastos.get(
+															posicionSpinner)
+															.getId());
+									listaGastos.get(posicioAEditar)
+											.setConcepto(
+													listaConceptosGastos.get(
+															posicionSpinner)
+															.getNombre());
+									listaGastos.get(posicioAEditar)
+											.setCantidad(valor);
 
-								// error al actualizar el valor
-								lanzarError("Error en la actualización del GASTO.");
+									// Notifico al ArrayAdapter que mi ArrayList
+									// ha
+									// sido modificado
+									adapterGastos.notifyDataSetChanged();
 
+								} else {
+
+									// error al actualizar el valor
+									lanzarError("Error en la actualización del GASTO.");
+
+								}
+							}else{
+								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
 					}
@@ -1093,7 +1137,7 @@ public class DatasActivity extends Activity {
 										listaIngresos.get(posicionARepetir)
 												.getIdConcepto(),
 										fechaMesSiguiente);
-								
+
 							} else if (cod_error == -2) {
 								lanzarError("Error al insertar la fecha en la Base de Datos.");
 							}
@@ -1140,35 +1184,36 @@ public class DatasActivity extends Activity {
 
 						int fechaMesSiguiente;
 						int cod_error;
-						
+
 						for (int i = obtenerMesAPartirDeFecha(listaGastos.get(
 								posicionARepetir).getIdFecha()) + 1; i <= 12; i++) {
 
 							fechaMesSiguiente = obtenerFechaMesSiguiente(
 									listaGastos.get(posicionARepetir)
 											.getIdFecha(), i);
-							
+
 							cod_error = dba.insertarValor(
 									listaGastos.get(posicionARepetir)
-									.getCantidad(),
-							listaGastos.get(posicionARepetir)
-									.getIdConcepto(),
-							obtenerFechaMesSiguiente(
+											.getCantidad(),
 									listaGastos.get(posicionARepetir)
-											.getIdFecha(), i)); 
-							
+											.getIdConcepto(),
+									obtenerFechaMesSiguiente(
+											listaGastos.get(posicionARepetir)
+													.getIdFecha(), i));
+
 							// Si cod_error == -1 quiere decier que existe un
 							// valor con el mismo concepto y la misma fecha
 							if (cod_error == -1) {
 								// se le preguntará al usuario si se actualiza o
 								// se omite
 								// el cambio
-								lanzarAdvertenciaModificacion(listaGastos
-										.get(posicionARepetir).getCantidad(),
+								lanzarAdvertenciaModificacion(
 										listaGastos.get(posicionARepetir)
+												.getCantidad(), listaGastos
+												.get(posicionARepetir)
 												.getIdConcepto(),
 										fechaMesSiguiente);
-								
+
 							} else if (cod_error == -2) {
 								lanzarError("Error al insertar la fecha en la Base de Datos.");
 							}
@@ -1234,21 +1279,22 @@ public class DatasActivity extends Activity {
 
 		return builder.create();
 	}
-	
+
 	/*
 	 * Dialog para actualizar un registro o no de la tabla de Datos
 	 */
-	private Dialog crearDialogAdvertenciaModificacion(final double valor, final int idConcepto, final int fecha) {
-				
+	private Dialog crearDialogAdvertenciaModificacion(final double valor,
+			final int idConcepto, final int fecha) {
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		String fecha_aux = "" + fecha;
-		
+
 		builder.setTitle("SOBREESCRIBIR");
 		builder.setIcon(android.R.drawable.ic_menu_upload);
-		builder.setMessage("¿Desea modificar un valor existente a fecha de " 
-				+ fecha_aux.substring(6) + "-" 
-				+ fecha_aux.substring(4, 6) + "-" 
-				+ fecha_aux.substring(0, 4) + " por el valor de " +valor+ "€?");
+		builder.setMessage("¿Desea modificar un valor existente a fecha de "
+				+ fecha_aux.substring(6) + "-" + fecha_aux.substring(4, 6)
+				+ "-" + fecha_aux.substring(0, 4) + " por el valor de " + valor
+				+ "€?");
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1256,16 +1302,17 @@ public class DatasActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO modifico el valor
-						int cod_error = dba.actualizarValor(valor, idConcepto, fecha);
+						int cod_error = dba.actualizarValor(valor, idConcepto,
+								fecha);
 
 						// lo actualizo en la BD
-						if (cod_error == -1) {							
+						if (cod_error == -1) {
 							// error al actualizar el valor
 							lanzarError("Error en la Inserción del VALOR.");
 						}
 					}
 				});
-		
+
 		builder.setNegativeButton(R.string.botonOmitir,
 				new DialogInterface.OnClickListener() {
 
@@ -1648,17 +1695,18 @@ public class DatasActivity extends Activity {
 		d.show();
 
 	}
-	
+
 	/*
-	 * Método que lanza un Dialog para preguntar si se quiere sobreescribir un valor
-	 * insertado en la base de datos
+	 * Método que lanza un Dialog para preguntar si se quiere sobreescribir un
+	 * valor insertado en la base de datos
 	 */
-	private void lanzarAdvertenciaModificacion(double valor, int idConcepto, int fecha){
-		
-		Dialog d = crearDialogAdvertenciaModificacion(valor,idConcepto,fecha);
+	private void lanzarAdvertenciaModificacion(double valor, int idConcepto,
+			int fecha) {
+
+		Dialog d = crearDialogAdvertenciaModificacion(valor, idConcepto, fecha);
 
 		d.show();
-		
+
 	}
 
 	@Override
