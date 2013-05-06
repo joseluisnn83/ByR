@@ -441,7 +441,35 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 				singleton_csp.KEY_CBPVALUESGASTOS, false);
 		mostrarValoresBalance = preferenceConfiguracionPrivate.getBoolean(
 				singleton_csp.KEY_CBPVALUESBALANCE, false);
-
+		
+		/*
+		 * Entra en el if si es la primera ejecución de esta
+		 * Activity, de esta manera inicio los valores por defecto
+		 * para la configuración de la gráfica.
+		 * En sucesivas ejecuciones no entrará ya que los valores 
+		 * quedarán guardados.
+		 *
+		 */
+		if (preferenceConfiguracionPrivate.getBoolean(
+				singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false) == true){
+			
+			editorPreference.putBoolean(singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false);
+			editorPreference.commit();
+			
+			cbLineaIngresos.setChecked(mostrarLineaIngresos);
+			cbLineaGastos.setChecked(mostrarLineaGastos);
+			cbLineaBalance.setChecked(mostrarLineaBalance);
+			cbValoresIngresos.setChecked(mostrarValoresIngresos);
+			cbValoresGastos.setChecked(mostrarValoresGastos);
+			cbValoresBalance.setChecked(mostrarValoresBalance);
+			
+			listPreferenceTipoGrafica.setValue(new String("" + tipoGrafica));
+			listPreferenceValoresGrafica.setValue(new String("" + valoresGrafica));
+			listPreferenceYears.setValue(new String("" + anyoLimiteGrafica));
+			listPreferenceMonths.setValueIndex(mesLimiteGrafica - 1);
+			
+			
+		}
 	}
 
 	/*
