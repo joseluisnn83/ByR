@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.joseluisnn.byr.MyAdapterListaGestionDatos.ObservadorMyAdapterListViewGD;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.Concepto;
@@ -299,8 +298,10 @@ public class DatasActivity extends Activity {
 
 					d.show();
 				} else {
-					lanzarMensaje("Para insertar valores debe\n crear los conceptos de INGRESOS\n "
-							+ "en la configuración del programa !!!");
+
+					lanzarAdvertencia("Para insertar valores debe crear al menos un concepto de INGRESOS. "
+							+ "Diríjase a la configuración del programa y añada un concepto en la sección 'Gestión de Conceptos'.");
+
 				}
 			}
 		});
@@ -321,8 +322,8 @@ public class DatasActivity extends Activity {
 					d.show();
 
 				} else {
-					lanzarMensaje("Para insertar valores debe\n crear los conceptos de GASTOS\n"
-							+ " en la configuración del programa !!!");
+					lanzarAdvertencia("Para insertar valores debe crear al menos un concepto de GASTOS. "
+							+ "Diríjase a la configuración del programa y añada un concepto en la sección 'Gestión de Conceptos'.");
 				}
 
 			}
@@ -829,7 +830,7 @@ public class DatasActivity extends Activity {
 									}
 
 								}
-							}else{
+							} else {
 								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
@@ -939,7 +940,7 @@ public class DatasActivity extends Activity {
 									lanzarError("Error en la actualización del GASTO.");
 
 								}
-							}else{
+							} else {
 								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
 							}
 						}
@@ -1666,12 +1667,6 @@ public class DatasActivity extends Activity {
 		}
 
 		return d;
-	}
-
-	private void lanzarMensaje(String e) {
-		Toast t = Toast.makeText(this, e, Toast.LENGTH_LONG);
-		t.show();
-
 	}
 
 	/*
