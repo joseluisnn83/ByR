@@ -22,6 +22,7 @@ public class SingletonConfigurationSharedPreferences {
 	/*
 	 *  nombre de los campos claves de los datos de configuración de las gráficas
 	 */
+	 public final String KEY_PRIMER_ACCESO_CONFIG_GRAFICA = "primeracceso";
 	 public final String KEY_LPTIPOGRAFICA = "lpTipoGrafica";
 	 public final String KEY_LPVALORESGRAFICA = "lpValoresGrafica";
 	 public final String KEY_LPYEARS = "lpYears";

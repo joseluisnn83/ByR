@@ -3,8 +3,11 @@ package com.joseluisnn.byr;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -20,7 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.bugsense.trace.BugSenseHandler;
 import com.joseluisnn.singleton.SingletonBroadcastReceiver;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
@@ -60,6 +63,9 @@ public class PrincipalScreenActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		BugSenseHandler.initAndStartSession(PrincipalScreenActivity.this,"c815f559");
+		
 		setContentView(R.layout.activity_principal_screen);
 
 		animacionBotonPulsado = AnimationUtils.loadAnimation(this,
@@ -200,21 +206,30 @@ public class PrincipalScreenActivity extends Activity {
 				switch (event.getAction()) {
 
 				case MotionEvent.ACTION_DOWN:
+					/*
+					Toast.makeText(getApplicationContext(),
+							".",
+							Toast.LENGTH_SHORT).show();*/
 					tiempoDePulsacionInicial = event.getEventTime();
 					b_graphic.startAnimation(animacionBotonPulsado);
 					break;
 				case MotionEvent.ACTION_UP:
 
 					if (event.getEventTime() - tiempoDePulsacionInicial <= 2000) {
-						// Lanzo la Actividad CreateAccountActivity
-						b_graphic.startAnimation(animacionBotonLevantado);
-						lanzarGraficas();
+						
+						if (getTipoConfiguracion() == 0){
+							lanzarAdvertencia("Para habilitar las Gráficas debe dirigirse a Configuración " +
+									"y cambiar el tipo de configuración a Avanzada.");
+						}else{
+							// Lanzo la Actividad CreateAccountActivity
+							b_graphic.startAnimation(animacionBotonLevantado);
+							lanzarGraficas();
+						}
 					}
 					// Si he mantenido el botón pulsado más de dos segundos
 					// cancelo la operación
 					b_graphic.startAnimation(animacionBotonLevantado);
 					break;
-
 				}
 
 				return true;
@@ -262,8 +277,8 @@ public class PrincipalScreenActivity extends Activity {
 		// compruebo si ya hay una cuenta creada
 		if (preferenceConfiguracionPrivate.contains(singleton_csp.KEY_CUENTA)) {
 
-			tipoConfig = preferenceConfiguracionPrivate.getInt(
-					singleton_csp.KEY_TIPO_CONFIGURACION, 0);
+			setTipoConfiguracion(preferenceConfiguracionPrivate.getInt(
+					singleton_csp.KEY_TIPO_CONFIGURACION, 0));
 
 		} else {
 
@@ -284,7 +299,7 @@ public class PrincipalScreenActivity extends Activity {
 			 */
 			prefEditorConfiguracion.putInt(
 					singleton_csp.KEY_TIPO_CONFIGURACION, 0);
-			tipoConfig = 0;
+			setTipoConfiguracion(0);
 			/*
 			 * El informe seleccionado por defecto será el semanal hasta que el
 			 * usuario lo modifique en la configuración 0: semanal 1: mensual 2:
@@ -301,6 +316,8 @@ public class PrincipalScreenActivity extends Activity {
 					Context.MODE_PRIVATE);			
 			Editor prefEditorConfiguracionGraficas = preferenceConfiguracionPrivateGraficas
 					.edit();
+			prefEditorConfiguracionGraficas.putBoolean(
+					singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, true);
 			prefEditorConfiguracionGraficas.putInt(
 					singleton_csp.KEY_LPTIPOGRAFICA, 0);
 			prefEditorConfiguracionGraficas.putInt(
@@ -309,19 +326,19 @@ public class PrincipalScreenActivity extends Activity {
 			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_LPYEARS,
 					c.get(Calendar.YEAR));
 			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_LPMONTHS,
-					c.get(Calendar.MONTH + 1));
+					c.get(Calendar.MONTH) + 1);
 			prefEditorConfiguracionGraficas.putBoolean(
 					singleton_csp.KEY_CBPLINEINGRESOS, true);
 			prefEditorConfiguracionGraficas.putBoolean(
-					singleton_csp.KEY_CBPLINEGASTOS, false);
+					singleton_csp.KEY_CBPLINEGASTOS, true);
 			prefEditorConfiguracionGraficas.putBoolean(
 					singleton_csp.KEY_CBPLINEBALANCE, false);
 			prefEditorConfiguracionGraficas.putBoolean(
-					singleton_csp.KEY_CBPVALUESINGRESOS, true);
+					singleton_csp.KEY_CBPVALUESINGRESOS, false);
 			prefEditorConfiguracionGraficas.putBoolean(
 					singleton_csp.KEY_CBPVALUESGASTOS, false);
 			prefEditorConfiguracionGraficas.putBoolean(
-					singleton_csp.KEY_CBPVALUESBALANCE, false);
+					singleton_csp.KEY_CBPVALUESBALANCE, true);
 			prefEditorConfiguracionGraficas.commit();
 
 		}
@@ -333,12 +350,12 @@ public class PrincipalScreenActivity extends Activity {
 		 * @tipoconfig = 1 : configuración avanzada y habilito las gráficas y la
 		 * previsión
 		 */
-		if (tipoConfig == 0) {
-			// b_prevision.setEnabled(false);
-			b_graphic.setEnabled(false);
+		if (getTipoConfiguracion() == 0) {
+			// cambio el icono a deshabilitado
+			b_graphic.setImageDrawable(getResources().getDrawable(R.drawable.chart_disabled));
 		} else {
-			// b_prevision.setEnabled(true);
-			b_graphic.setEnabled(true);
+			// cambio el icono a habilitado
+			b_graphic.setImageDrawable(getResources().getDrawable(R.drawable.chart));
 		}
 
 	}
@@ -393,6 +410,40 @@ public class PrincipalScreenActivity extends Activity {
 
 		startActivity(intent);
 	}
+	
+	/*
+	 * Método que lanza un Dialog de una advertencia producida
+	 */
+	private void lanzarAdvertencia(String advice) {
+
+		Dialog d = crearDialogAdvertencia(advice);
+
+		d.show();
+
+	}
+	
+	/*
+	 * Dialog para avisar de un movimiento no permitido
+	 */
+	private Dialog crearDialogAdvertencia(String advice) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("ADVERTENCIA");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setMessage(advice);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Cierro el dialog
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
+	}
 
 	@Override
 	protected void onStop() {
@@ -419,19 +470,33 @@ public class PrincipalScreenActivity extends Activity {
 					// Según el tipo de configuración que se le pase por
 					// parámetro se ocultan las opciones
 					if (tipo_config == 0) {// el usuario ha modificado el tipo
-											// de configuración
-						// b_prevision.setEnabled(false);
-						b_graphic.setEnabled(false);
+											// de configuración						
+						b_graphic.setImageDrawable(getResources().getDrawable(R.drawable.chart_disabled));						
 					} else {
-						// b_prevision.setEnabled(true);
-						b_graphic.setEnabled(true);
+						b_graphic.setImageDrawable(getResources().getDrawable(R.drawable.chart));						
 					}
+					
+					setTipoConfiguracion(tipo_config);
 				}
 			}
 		};
 
 		// Registro mi BroadcastReceiver
 		this.registerReceiver(myReceiver, ifilter);
+	}
+	
+	/*
+	 * Método que actualiza el tipo de configuración
+	 */
+	private void setTipoConfiguracion(int tc){
+		this.tipoConfig = tc;
+	}
+	
+	/*
+	 * Método que me devuelve el tipo de configuración
+	 */
+	private int getTipoConfiguracion(){
+		return this.tipoConfig;
 	}
 
 	@Override
@@ -456,6 +521,11 @@ public class PrincipalScreenActivity extends Activity {
 		 * estado Parada a Destruida
 		 */
 		this.unregisterReceiver(myReceiver);
+		
+		/*
+		 * Cierro sesión del Bugsense
+		 */
+		BugSenseHandler.closeSession(PrincipalScreenActivity.this);
 
 		super.onDestroy();
 
