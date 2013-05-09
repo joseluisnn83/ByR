@@ -117,7 +117,6 @@ public class GraphicsActivity extends Activity {
 		 * Quitamos barra de titulo de la Actividad Debe ser ejecutada esta
 		 * instruccion antes del setContentView para que no cargue las imágenes
 		 */
-		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_graphics);
 
 		/*

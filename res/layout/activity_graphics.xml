@@ -4,14 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/blanco"
-    android:gravity="center"
-     >
+    android:gravity="center" >
     
     <com.androidplot.xy.XYPlot
     android:id="@+id/mySimpleXYPlot"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"        
-     />
-   
+    android:layout_height="fill_parent" />
 
 </LinearLayout>
