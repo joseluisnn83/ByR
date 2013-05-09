@@ -10,139 +10,59 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/pestanyaInformesTotalesPadding"        
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:gravity="right" >
 
             <TextView
                 android:id="@+id/textViewPestanyaILibreDe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:text="@string/textViewPestanyaInformesLibreFechaInicio"
                 android:textColor="@color/ListadosNegro"
                 android:textSize="@dimen/text_medium" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreForwardMonthsInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:contentDescription="@string/ivContentDescriptionForwardSearch"
-                android:src="@android:drawable/ic_media_ff" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreForwardDaysInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreForwardMonthsInicio"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:contentDescription="@string/ivContentDescriptionForwardSearch"
-                android:src="@android:drawable/ic_media_next" />
-                        
+
             <TextView
-                android:id="@+id/textViewPestanyaILibreFechaInicio"
+                android:id="@+id/textViewPestanyaILibreFechaDe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreForwardDaysInicio"
-                android:paddingRight="@dimen/pestanyaInformesTextViewDataPadding"
-                android:paddingLeft="@dimen/pestanyaInformesTextViewDataPadding"
+                android:layout_marginLeft="5dip"
                 android:text=""
-                android:textSize="@dimen/text_medium"
-                android:textColor="@color/ListadosNegro" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreBackDaysInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/textViewPestanyaILibreFechaInicio"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:contentDescription="@string/ivContentDescriptionBackSearch"
-                android:src="@android:drawable/ic_media_previous" />
+                android:textStyle="bold|italic"
+                android:textColor="@color/ListadosNegro"
+                android:textSize="@dimen/text_medium" />
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreBackMonthsInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreBackDaysInicio"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:contentDescription="@string/ivContentDescriptionBackSearch"
-                android:src="@android:drawable/ic_media_rew" />
-            
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:gravity="right" >
 
             <TextView
                 android:id="@+id/textViewPestanyaILibreHasta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:text="@string/textViewPestanyaInformesLibreFechaFin"
                 android:textColor="@color/ListadosNegro"
                 android:textSize="@dimen/text_medium" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreForwardMonthsFin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:layout_alignParentRight="true"
-                android:contentDescription="@string/ivContentDescriptionForwardSearch"
-                android:src="@android:drawable/ic_media_ff" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreForwardDaysFin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreForwardMonthsFin"
-                android:contentDescription="@string/ivContentDescriptionForwardSearch"
-                android:src="@android:drawable/ic_media_next" />
-            
-            <TextView
-                android:id="@+id/textViewPestanyaILibreFechaFin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreForwardDaysFin"
-                android:paddingRight="@dimen/pestanyaInformesTextViewDataPadding"
-                android:paddingLeft="@dimen/pestanyaInformesTextViewDataPadding"
-                android:text=""
-                android:textSize="@dimen/text_medium"
-                android:textColor="@color/ListadosNegro" />
-            
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreBackDaysFin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:layout_toLeftOf="@id/textViewPestanyaILibreFechaFin"
-                android:contentDescription="@string/ivContentDescriptionBackSearch"
-                android:src="@android:drawable/ic_media_previous" />
 
-            <ImageView
-                android:id="@+id/imageViewPestanyaILibreBackMonthsFin"
+            <TextView
+                android:id="@+id/textViewPestanyaILibreFechaHasta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/pestanyaInformesImageViewMovingDataPadding"
-                android:layout_toLeftOf="@id/imageViewPestanyaILibreBackDaysFin"
-                android:contentDescription="@string/ivContentDescriptionBackSearch"
-                android:src="@android:drawable/ic_media_rew" />
-            
-        </RelativeLayout>
-        
+                android:layout_marginLeft="5dip"
+                android:text=""
+                android:textStyle="bold|italic"
+                android:textColor="@color/ListadosNegro"
+                android:textSize="@dimen/text_medium" />
+        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
@@ -198,7 +118,7 @@
                 android:id="@+id/relativeLayoutBarraListadoGastosLibre"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-               	android:background="@drawable/listados_barra_gastos"
+                android:background="@drawable/listados_barra_gastos"
                 android:orientation="horizontal" >
 
                 <ImageView
@@ -244,7 +164,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-           	android:orientation="vertical"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/pestanyaInformesTotalesPadding"
             android:paddingLeft="@dimen/pestanyaInformesTotalesPadding"
             android:paddingTop="@dimen/pestanyaInformesTotalesPadding" >
@@ -266,8 +186,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -287,8 +207,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -308,19 +228,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-		<!--  
+
         <ImageButton
             android:id="@+id/imageButtonSearchFechaLibre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="@string/ibContentDescriptionSearchTrimestre"
+            android:contentDescription="@string/ivContentDescriptionSearchLibre"
             android:src="@android:drawable/ic_menu_search" />
-       	-->
+        <!--
        	<ImageView 
        	    android:id="@+id/imageViewSearchFechaLibre"
             android:layout_width="wrap_content"
@@ -329,7 +249,8 @@
             android:contentDescription="@string/ivContentDescriptionSearchLibre"            
             android:src="@android:drawable/ic_menu_search"
        	    />
-       	
+        -->
+
     </LinearLayout>
 
 </LinearLayout>

@@ -4,30 +4,26 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
-import com.joseluisnn.databases.DBAdapter;
-import com.joseluisnn.objetos.ValoresElementoListaGD;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.joseluisnn.databases.DBAdapter;
+import com.joseluisnn.objetos.ValoresElementoListaGD;
 
 public class PestanyaLibreActivity extends Activity {
 
 	// Objetos View
-	private ImageView ivPreviousMonthStart;
-	private ImageView ivPreviousDayStart;
-	private ImageView ivNextMonthStart;
-	private ImageView ivNextDayStart;
-	private ImageView ivPreviousMonthEnd;
-	private ImageView ivPreviousDayEnd;
-	private ImageView ivNextMonthEnd;
-	private ImageView ivNextDayEnd;
 	private TextView tvStartDate;
 	private TextView tvEndDate;
 	private TextView tvTotalIngresos;
@@ -37,7 +33,7 @@ public class PestanyaLibreActivity extends Activity {
 	private LinearLayout llListadoGastos;
 	private ImageView ivFlechaListadoIngresos;
 	private ImageView ivFlechaListadoGastos;
-	private ImageView ivSearchFecha;
+	private ImageButton ibSearchFecha;
 	// Variables que me despliegan/pliegan los Listados de Ingresos y Gastos
 	private RelativeLayout rlBarraListadoIngresos;
 	private RelativeLayout rlBarraListadoGastos;
@@ -64,7 +60,7 @@ public class PestanyaLibreActivity extends Activity {
 	// Variables para tener el total de ingresos y gastos
 	private double totalIngresos;
 	private double totalGastos;
-	
+
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
@@ -76,17 +72,8 @@ public class PestanyaLibreActivity extends Activity {
 
 		setContentView(R.layout.pestanya_libre);
 
-		// Instancio los botones que cambian de fecha
-		ivPreviousMonthStart = (ImageView) findViewById(R.id.imageViewPestanyaILibreBackMonthsInicio);
-		ivPreviousDayStart = (ImageView) findViewById(R.id.imageViewPestanyaILibreBackDaysInicio);
-		ivNextMonthStart = (ImageView) findViewById(R.id.imageViewPestanyaILibreForwardMonthsInicio);
-		ivNextDayStart = (ImageView) findViewById(R.id.imageViewPestanyaILibreForwardDaysInicio);
-		ivPreviousMonthEnd = (ImageView) findViewById(R.id.imageViewPestanyaILibreBackMonthsFin);
-		ivPreviousDayEnd = (ImageView) findViewById(R.id.imageViewPestanyaILibreBackDaysFin);
-		ivNextMonthEnd = (ImageView) findViewById(R.id.imageViewPestanyaILibreForwardMonthsFin);
-		ivNextDayEnd = (ImageView) findViewById(R.id.imageViewPestanyaILibreForwardDaysFin);
-		rlBarraListadoIngresos = (RelativeLayout)findViewById(R.id.relativeLayoutBarraListadoIngresosLibre);
-		rlBarraListadoGastos = (RelativeLayout)findViewById(R.id.relativeLayoutBarraListadoGastosLibre);
+		rlBarraListadoIngresos = (RelativeLayout) findViewById(R.id.relativeLayoutBarraListadoIngresosLibre);
+		rlBarraListadoGastos = (RelativeLayout) findViewById(R.id.relativeLayoutBarraListadoGastosLibre);
 		llListadoIngresos = (LinearLayout) findViewById(R.id.linearLayoutListadoIngresosLibre);
 		llListadoGastos = (LinearLayout) findViewById(R.id.linearLayoutListadoGastosLibre);
 		ivFlechaListadoIngresos = (ImageView) findViewById(R.id.imageViewListadoIngresosLibre);
@@ -94,95 +81,17 @@ public class PestanyaLibreActivity extends Activity {
 		tvTotalIngresos = (TextView) findViewById(R.id.textViewTotalIngresosLibre);
 		tvTotalGastos = (TextView) findViewById(R.id.textViewTotalGastosLibre);
 		tvTotalBalance = (TextView) findViewById(R.id.textViewTotalBalanceLibre);
-		ivSearchFecha = (ImageView)findViewById(R.id.imageViewSearchFechaLibre);
-		
+		ibSearchFecha = (ImageButton) findViewById(R.id.imageButtonSearchFechaLibre);
+
 		// Instancio las fechas
-		tvStartDate = (TextView) findViewById(R.id.textViewPestanyaILibreFechaInicio);
-		tvEndDate = (TextView) findViewById(R.id.textViewPestanyaILibreFechaFin);
+		tvStartDate = (TextView) findViewById(R.id.textViewPestanyaILibreFechaDe);
+		tvEndDate = (TextView) findViewById(R.id.textViewPestanyaILibreFechaHasta);
 		// Instancio las variables Calendar al día de hoy
 		cInicio = Calendar.getInstance();
 		cFin = Calendar.getInstance();
 
 		tvStartDate.setText(obtenerFechaInicio());
 		tvEndDate.setText(obtenerFechaFin());
-
-		/*
-		 * Eventos OnClick de la Fecha de INICIO
-		 */
-		ivPreviousMonthStart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que decrementa en un año la fecha de Inicio
-				decrementarMesFechaInicio();
-			}
-		});
-
-		ivPreviousDayStart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que decrementa en un dia la fecha de Inicio
-				decrementarDiaFechaInicio();
-			}
-		});
-
-		ivNextMonthStart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que incrementa en un mes la fecha de Inicio
-				incrementarMesFechaInicio();
-			}
-		});
-
-		ivNextDayStart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que incrementa en un dia la fecha de Inicio
-				incrementarDiaFechaInicio();
-			}
-		});
-
-		/*
-		 * Eventos OnClick de la Fecha de FIN
-		 */
-		ivPreviousMonthEnd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que decrementa en un mes la fecha de Fin
-				decrementarMesFechaFin();
-			}
-		});
-
-		ivPreviousDayEnd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que decrementa en un dia la fecha de Fin
-				decrementarDiaFechaFin();
-			}
-		});
-
-		ivNextMonthEnd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que incrementa en un mes la fecha de Fin
-				incrementarMesFechaFin();
-			}
-		});
-
-		ivNextDayEnd.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Método que incrementa en un dia la fecha de Fin
-				incrementarDiaFechaFin();
-			}
-		});
 
 		/*
 		 * Método onClick para plegar/desplegar el listado de Ingresos
@@ -226,46 +135,19 @@ public class PestanyaLibreActivity extends Activity {
 				}
 			}
 		});
-		
-		ivSearchFecha.setOnClickListener(new OnClickListener() {
-			
+
+		ibSearchFecha.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				// TODO Método onClick del botón de buscar en un Rango de Fechas
-				
-				if (obtenerEnteroFechaInicio() > obtenerEnteroFechaFin()){
-					// Entra en el IF si la fecha de inicio es mayor que la de fin
-					lanzarMensajeError("ERROR: La fecha de inicio no puede ser mayor que la de fin.");
-					
-				}else{
-					
-					// Obtengo los valores de los datos de las Listas de Ingresos y Gastos
-					listadoValoresIngresos = dba.listadoValoresIngresosPorFecha(
-							obtenerEnteroFechaInicio(), obtenerEnteroFechaFin());
-					listadoValoresGastos = dba.listadoValoresGastosPorFecha(
-							obtenerEnteroFechaInicio(), obtenerEnteroFechaFin());
+				Dialog dialogo;
+				dialogo = crearDialogoBuscarFecha();
+				dialogo.show();
 
-					/*
-					 * Agrupo las Lista por TRIMESTRES y luego cargo los layouts
-					 */
-					// agruparListaIngresosPorMeses();
-					cargarLayoutListadoIngresos();
-					// agruparListaGastosPorMeses();
-					cargarLayoutListadoGastos();
-					/*
-					 * Calculo los totales y la diferencia y los actualizo en sus variables
-					 */
-					setTotalIngresos(calcularTotalIngresos());
-					setTotalGastos(calcularTotalGastos());
-					/*
-					 * Actualizo los TextView que contienen los totales
-					 */
-					actualizarTotales();
-					
-				}
 			}
 		});
-		
+
 		// Instancio los formateadores de números
 		separadores = new DecimalFormatSymbols();
 		separadores.setDecimalSeparator(',');
@@ -286,7 +168,7 @@ public class PestanyaLibreActivity extends Activity {
 
 		/*
 		 * Agrupo las Lista por TRIMESTRES y luego cargo los layouts
-		 */		
+		 */
 		cargarLayoutListadoIngresos();
 		cargarLayoutListadoGastos();
 		/*
@@ -298,7 +180,7 @@ public class PestanyaLibreActivity extends Activity {
 		 * Actualizo los TextView que contienen los totales
 		 */
 		actualizarTotales();
-		
+
 		// Pongo los listados plegados
 		llListadoIngresos.setVisibility(View.GONE);
 		llListadoGastos.setVisibility(View.GONE);
@@ -309,154 +191,36 @@ public class PestanyaLibreActivity extends Activity {
 	}
 
 	/*
-	 * Método que me devuelve en un String la fecha de inicio en el formato
-	 * DD-MM-AAAA
+	 * Método que me devuelve en un String la fecha de inicio en el formato Día
+	 * de Mes de Año
 	 */
 	private String obtenerFechaInicio() {
 
 		String fecha;
-		String month;
-		String day;
 
-		/*
-		 * Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0
-		 * Si el mes solo tiene un dígito le pongo un cero delante
-		 */
-		month = "" + (cInicio.get(Calendar.MONTH) + 1);
-		if (month.length() == 1) {
-			month = "0" + month;
-		}
-
-		// Si el día solo tiene un dígito le pongo un cero delante
-		day = "" + cInicio.get(Calendar.DAY_OF_MONTH);
-		if (day.length() == 1) {
-			day = "0" + day;
-		}
-
-		// Obtengo la fecha en el formato AAAAMMDD
-		fecha = "" + day + "-" + month + "-" + cInicio.get(Calendar.YEAR);
+		// Obtengo la fecha en el formato Día de Mes de Año
+		fecha = "" + cInicio.get(Calendar.DAY_OF_MONTH) + " de "
+				+ obtenerMes(cInicio.get(Calendar.MONTH)) + " de "
+				+ cInicio.get(Calendar.YEAR);
 
 		return fecha;
 
 	}
 
 	/*
-	 * Método que me devuelve en un String la fecha de fin en el formato
-	 * DD-MM-AAAA
+	 * Método que me devuelve en un String la fecha de fin en el formato Día de
+	 * Mes de Año
 	 */
 	private String obtenerFechaFin() {
 
 		String fecha;
-		String month;
-		String day;
 
-		/*
-		 * Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0
-		 * Si el mes solo tiene un dígito le pongo un cero delante
-		 */
-		month = "" + (cFin.get(Calendar.MONTH) + 1);
-		if (month.length() == 1) {
-			month = "0" + month;
-		}
-
-		// Si el día solo tiene un dígito le pongo un cero delante
-		day = "" + cFin.get(Calendar.DAY_OF_MONTH);
-		if (day.length() == 1) {
-			day = "0" + day;
-		}
-
-		// Obtengo la fecha en el formato AAAAMMDD
-		fecha = "" + day + "-" + month + "-" + cFin.get(Calendar.YEAR);
+		// Obtengo la fecha en el formato Día de Mes de Año
+		fecha = "" + cFin.get(Calendar.DAY_OF_MONTH) + " de "
+				+ obtenerMes(cFin.get(Calendar.MONTH)) + " de "
+				+ cFin.get(Calendar.YEAR);
 
 		return fecha;
-
-	}
-
-	/*
-	 * Método que me decrementa en un mes la fecha que estoy tratando
-	 */
-	private void decrementarMesFechaInicio() {
-
-		cInicio.add(Calendar.MONTH, -1);
-
-		tvStartDate.setText(obtenerFechaInicio());
-
-	}
-
-	/*
-	 * Método que me decrementa en un día la fecha que estoy tratando
-	 */
-	private void decrementarDiaFechaInicio() {
-
-		cInicio.add(Calendar.DATE, -1);
-
-		tvStartDate.setText(obtenerFechaInicio());
-
-	}
-
-	/*
-	 * Método que me incrementa en un mes la fecha que estoy tratando
-	 */
-	private void incrementarMesFechaInicio() {
-
-		cInicio.add(Calendar.MONTH, 1);
-
-		tvStartDate.setText(obtenerFechaInicio());
-
-	}
-
-	/*
-	 * Método que me incrementa en un día la fecha que estoy tratando
-	 */
-	private void incrementarDiaFechaInicio() {
-
-		cInicio.add(Calendar.DATE, 1);
-
-		tvStartDate.setText(obtenerFechaInicio());
-
-	}
-
-	/*
-	 * Método que me decrementa en un mes la fecha final que estoy tratando
-	 */
-	private void decrementarMesFechaFin() {
-
-		cFin.add(Calendar.MONTH, -1);
-
-		tvEndDate.setText(obtenerFechaFin());
-
-	}
-
-	/*
-	 * Método que me decrementa en un día la fecha final que estoy tratando
-	 */
-	private void decrementarDiaFechaFin() {
-
-		cFin.add(Calendar.DATE, -1);
-
-		tvEndDate.setText(obtenerFechaFin());
-
-	}
-
-	/*
-	 * Método que me incrementa en un mes la fecha final que estoy tratando
-	 */
-	private void incrementarMesFechaFin() {
-
-		cFin.add(Calendar.MONTH, 1);
-
-		tvEndDate.setText(obtenerFechaFin());
-
-	}
-
-	/*
-	 * Método que me incrementa en un día la fecha que estoy tratando
-	 */
-	private void incrementarDiaFechaFin() {
-
-		cFin.add(Calendar.DATE, 1);
-
-		tvEndDate.setText(obtenerFechaFin());
 
 	}
 
@@ -568,17 +332,19 @@ public class PestanyaLibreActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresIngresos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
+							.getCantidad()) + "€");
 
 			fechaBD = "" + listadoValoresIngresos.get(i).getIdFecha();
 
-			// entra en el if si cambia de Mes, por lo que escribo el mes, abajo el dia del mes y luego el contenido
+			// entra en el if si cambia de Mes, por lo que escribo el mes, abajo
+			// el dia del mes y luego el contenido
 			if (!fechaBD.substring(0, 6).equals(fechaAnteriorFormateada)) {
-				
+
 				fechaAnteriorFormateada = fechaBD.substring(0, 6);
 				fechaAnterior = listadoValoresIngresos.get(i).getIdFecha();
-				
+
 				rowViewFechaMes = (RelativeLayout) LayoutInflater
 						.from(this)
 						.inflate(
@@ -595,8 +361,8 @@ public class PestanyaLibreActivity extends Activity {
 								null);
 				TextView tvMes = (TextView) rowViewFechaMes
 						.findViewById(R.id.textViewEncabezadoMesListadoInformes);
-				tvMes.setText(obtenerCadenaFechaMes(listadoValoresIngresos
-						.get(i).getIdFecha()));
+				tvMes.setText(obtenerCadenaFechaMes(listadoValoresIngresos.get(
+						i).getIdFecha()));
 
 				TextView tvFecha = (TextView) rowViewFechaDia
 						.findViewById(R.id.textViewEncabezadoFechaListadoInformes);
@@ -644,7 +410,7 @@ public class PestanyaLibreActivity extends Activity {
 			}
 		}
 	}
-	
+
 	/*
 	 * Método que me carga en el Layout de listado de Ingresos las fechas,
 	 * conceptos y valores asociados a partir de la consulta realizada a la Base
@@ -683,17 +449,19 @@ public class PestanyaLibreActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresGastos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresGastos.get(i)
+							.getCantidad()) + "€");
 
 			fechaBD = "" + listadoValoresGastos.get(i).getIdFecha();
 
-			// entra en el if si cambia de Mes, por lo que escribo el mes, abajo el dia del mes y luego el contenido
+			// entra en el if si cambia de Mes, por lo que escribo el mes, abajo
+			// el dia del mes y luego el contenido
 			if (!fechaBD.substring(0, 6).equals(fechaAnteriorFormateada)) {
-				
+
 				fechaAnteriorFormateada = fechaBD.substring(0, 6);
 				fechaAnterior = listadoValoresGastos.get(i).getIdFecha();
-				
+
 				rowViewFechaMes = (RelativeLayout) LayoutInflater
 						.from(this)
 						.inflate(
@@ -710,8 +478,8 @@ public class PestanyaLibreActivity extends Activity {
 								null);
 				TextView tvMes = (TextView) rowViewFechaMes
 						.findViewById(R.id.textViewEncabezadoMesListadoInformes);
-				tvMes.setText(obtenerCadenaFechaMes(listadoValoresGastos
-						.get(i).getIdFecha()));
+				tvMes.setText(obtenerCadenaFechaMes(listadoValoresGastos.get(i)
+						.getIdFecha()));
 
 				TextView tvFecha = (TextView) rowViewFechaDia
 						.findViewById(R.id.textViewEncabezadoFechaListadoInformes);
@@ -760,7 +528,7 @@ public class PestanyaLibreActivity extends Activity {
 		}
 
 	}
-	
+
 	/*
 	 * Método para obtener la fecha en una Cadena Formateada para los Meses y
 	 * Años
@@ -786,11 +554,10 @@ public class PestanyaLibreActivity extends Activity {
 
 		return cadenaFecha;
 	}
-	
+
 	/*
-	 * Método para obtener la fecha en una Cadena Formateada con el día de la semana
-	 * y el día del mes; Ejemplo: Lun, 25 
-	 * 
+	 * Método para obtener la fecha en una Cadena Formateada con el día de la
+	 * semana y el día del mes; Ejemplo: Lun, 25
 	 */
 	private String obtenerCadenaFechaParcial(int enteroFecha) {
 
@@ -808,13 +575,12 @@ public class PestanyaLibreActivity extends Activity {
 		// Inicio la variable Calendar con la fecha que tengo actualmente
 		c.set(y, m - 1, d);
 
-		cadenaFecha = obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK)) + ". " + c.get(Calendar.DAY_OF_MONTH);
+		cadenaFecha = obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK)) + ". "
+				+ c.get(Calendar.DAY_OF_MONTH);
 
 		return cadenaFecha;
 	}
-	
-	
-	
+
 	/*
 	 * Método que me devuelve el mes según el entero pasado por parámetro
 	 */
@@ -868,14 +634,15 @@ public class PestanyaLibreActivity extends Activity {
 		return m;
 
 	}
-	
+
 	/*
-	 * Método que me devuelve el día de la semana según el entero pasado por parámetro
+	 * Método que me devuelve el día de la semana según el entero pasado por
+	 * parámetro
 	 */
-	private String obtenerDiaSemana(int day){
-		
-		String d = new String();		
-		
+	private String obtenerDiaSemana(int day) {
+
+		String d = new String();
+
 		switch (day) {
 		case 1:
 			d = "Dom";
@@ -901,10 +668,10 @@ public class PestanyaLibreActivity extends Activity {
 		default:
 			break;
 		}
-		
+
 		return d;
 	}
-	
+
 	/*
 	 * Método que me actualiza la variable total de ingresos
 	 */
@@ -932,7 +699,7 @@ public class PestanyaLibreActivity extends Activity {
 	private double getTotalGastos() {
 		return this.totalGastos;
 	}
-	
+
 	/*
 	 * Método que me calcula el total de los Ingresos a partir de la Lista de
 	 * Ingresos recuperada de la BD
@@ -969,7 +736,7 @@ public class PestanyaLibreActivity extends Activity {
 
 		return total;
 	}
-	
+
 	/*
 	 * Método que me actualiza los TextView con los totales
 	 */
@@ -977,12 +744,15 @@ public class PestanyaLibreActivity extends Activity {
 
 		double balance = getTotalIngresos() - getTotalGastos();
 
-		tvTotalIngresos.setText(" " + numeroAFormatear.format(getTotalIngresos()) + " €");
+		tvTotalIngresos.setText(" "
+				+ numeroAFormatear.format(getTotalIngresos()) + " €");
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
-		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos()) + " €");
-		tvTotalGastos.setTextColor(this.getResources().getColor(R.color.ListadosRojo));
+		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
+				+ " €");
+		tvTotalGastos.setTextColor(this.getResources().getColor(
+				R.color.ListadosRojo));
 
 		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
 		if (balance >= 0) {
@@ -994,13 +764,144 @@ public class PestanyaLibreActivity extends Activity {
 		}
 
 	}
+
+	/*
+	 * Dialog para INSERTAR el valor de un concepto de Gasto
+	 */
+	private Dialog crearDialogoBuscarFecha() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// Get the layout inflater
+		LayoutInflater inflater = this.getLayoutInflater();
+		View layout = inflater.inflate(R.layout.dialog_search_date, null);
+
+		final DatePicker startDate = (DatePicker) layout
+				.findViewById(R.id.datePickerStart);
+		final DatePicker endDate = (DatePicker) layout
+				.findViewById(R.id.datePickerEnd);
+
+		// inicializo las fechas en los DatePicker
+		startDate
+				.updateDate(cInicio.get(Calendar.YEAR),
+						cInicio.get(Calendar.MONTH),
+						cInicio.get(Calendar.DAY_OF_MONTH));
+		endDate.updateDate(cFin.get(Calendar.YEAR), cFin.get(Calendar.MONTH),
+				cFin.get(Calendar.DAY_OF_MONTH));
+
+		// Le inserto el layout al Dialog con LayoutInflater
+		// Pass null as the parent view because its going in the dialog layout
+		builder.setView(layout);
+
+		builder.setTitle("Elegir Fechas");
+
+		// builder.setView(valorIngreso);
+		builder.setIcon(android.R.drawable.ic_menu_my_calendar);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Si la fechaInicio es mayor que la FechaFin no se
+						// puede
+						// realizar la búsqueda
+						
+						// Actualizo las variables Calendar
+						cInicio.set(Calendar.YEAR, startDate.getYear());
+						cInicio.set(Calendar.MONTH, startDate.getMonth());
+						cInicio.set(Calendar.DAY_OF_MONTH,
+								startDate.getDayOfMonth());
+						cFin.set(Calendar.YEAR, endDate.getYear());
+						cFin.set(Calendar.MONTH, endDate.getMonth());
+						cFin.set(Calendar.DAY_OF_MONTH,
+								endDate.getDayOfMonth());
+
+						if (obtenerEnteroFechaInicio() > obtenerEnteroFechaFin()) {
+							// Entra en el IF si la fecha de inicio es mayor que
+							// la de fin
+							lanzarAdvertencia("ERROR: La fecha de inicio no puede ser mayor que la de fin.");
+
+						} else {
+
+							// Obtengo los valores de los datos de las Listas de
+							// Ingresos y Gastos
+							listadoValoresIngresos = dba
+									.listadoValoresIngresosPorFecha(
+											obtenerEnteroFechaInicio(),
+											obtenerEnteroFechaFin());
+							listadoValoresGastos = dba
+									.listadoValoresGastosPorFecha(
+											obtenerEnteroFechaInicio(),
+											obtenerEnteroFechaFin());
+
+							/*
+							 * Agrupo las Lista por TRIMESTRES y luego cargo los
+							 * layouts
+							 */
+							cargarLayoutListadoIngresos();
+							cargarLayoutListadoGastos();
+							/*
+							 * Calculo los totales y la diferencia y los
+							 * actualizo en sus variables
+							 */
+							setTotalIngresos(calcularTotalIngresos());
+							setTotalGastos(calcularTotalGastos());
+							/*
+							 * Actualizo los TextView que contienen los totales
+							 */
+							actualizarTotales();
+
+							tvStartDate.setText(obtenerFechaInicio());
+							tvEndDate.setText(obtenerFechaFin());
+						}
+					}
+				});
+
+		builder.setNegativeButton(R.string.botonCancelar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO No hago nada
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
+	}
 	
 	/*
-	 * Método para lanzar algún aviso de error
+	 * Método que lanza un Dialog de una advertencia producida
 	 */
-	public void lanzarMensajeError(String e){
-		Toast t = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-		t.show();
+	private void lanzarAdvertencia(String advice) {
+
+		Dialog d = crearDialogAdvertencia(advice);
+
+		d.show();
+
+	}
+	
+	/*
+	 * Dialog para avisar de un movimiento no permitido
+	 */
+	private Dialog crearDialogAdvertencia(String advice) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("ADVERTENCIA");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setMessage(advice);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Cierro el dialog
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
 	}
 
 	@Override

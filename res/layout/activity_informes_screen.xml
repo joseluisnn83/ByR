@@ -2,8 +2,7 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-     >
+    android:layout_height="fill_parent" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,6 +20,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
         </FrameLayout>
+        
     </LinearLayout>
 
 </TabHost>

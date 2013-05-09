@@ -50,11 +50,10 @@
         <activity 
             android:screenOrientation="portrait" 
             android:name="InformesScreenActivity" 
-            android:label="@string/title_InformesScreenActivity"></activity>
+            android:label="@string/title_InformesScreenActivity"></activity>        
         <activity android:name="PestanyaSemanalActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaMensualActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaTrimestralActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="PestanyaSemestralActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaAnualActivity" android:screenOrientation="portrait"></activity>
         <activity android:name="PestanyaLibreActivity" android:screenOrientation="portrait"></activity>
         <activity 

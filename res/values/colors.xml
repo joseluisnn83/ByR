@@ -55,5 +55,11 @@
 	<color name="ListadosLightGold">#E0D1A3</color>
 	<color name="ListadosBrown">#4F3D27</color>
 	
+	<!-- Colores para las pestañas de los informes-->	
+	<color name="Azul1">#336699</color>
+	<color name="Azul2">#6699CC</color>
+	<color name="Azul3">#D4E5ff</color>
+	<color name="Azul4">#0C2A58</color>
+	<color name="Azul5">#CCFFFF</color>
 	
 </resources>

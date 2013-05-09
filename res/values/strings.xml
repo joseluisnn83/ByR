@@ -162,5 +162,9 @@
     <string name="preferencesTitleMonthsGrafica">Mes</string>
     <string name="menu_settings_graphics">Configurar Gráfica</string>
     <string name="title_GraphicsActivity">Gráficas</string>
+    
+    <!-- Elementos del dialog -->
+    <string name="dialogSearachDate_FechaInicio">Fecha Inicio</string>
+    <string name="dialogSearchDate_FechaFin">Fecha Fin</string>
 	
 </resources>

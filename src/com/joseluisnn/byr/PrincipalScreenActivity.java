@@ -1,7 +1,6 @@
 package com.joseluisnn.byr;
 
 import java.util.Calendar;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -64,7 +63,7 @@ public class PrincipalScreenActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-		BugSenseHandler.initAndStartSession(PrincipalScreenActivity.this,"c815f559");
+		//BugSenseHandler.initAndStartSession(PrincipalScreenActivity.this,"c815f559");
 		
 		setContentView(R.layout.activity_principal_screen);
 
@@ -183,7 +182,9 @@ public class PrincipalScreenActivity extends Activity {
 					if (event.getEventTime() - tiempoDePulsacionInicial <= 2000) {
 						// Lanzo la Actividad InformesScreenActivity
 						b_inform.startAnimation(animacionBotonLevantado);
-						lanzarInformes();
+							
+						    // do something for phones running an SDK before HONEYCOMB third verison
+							lanzarInformes();
 					}
 					// Si he mantenido el botón pulsado más de dos segundos
 					// cancelo la operación
@@ -206,10 +207,6 @@ public class PrincipalScreenActivity extends Activity {
 				switch (event.getAction()) {
 
 				case MotionEvent.ACTION_DOWN:
-					/*
-					Toast.makeText(getApplicationContext(),
-							".",
-							Toast.LENGTH_SHORT).show();*/
 					tiempoDePulsacionInicial = event.getEventTime();
 					b_graphic.startAnimation(animacionBotonPulsado);
 					break;
@@ -235,33 +232,7 @@ public class PrincipalScreenActivity extends Activity {
 				return true;
 			}
 		});
-
-		/* Modifico las características al ser pulsado */
-		/*
-		 * b_prevision.setOnTouchListener(new OnTouchListener() {
-		 * 
-		 * @Override public boolean onTouch(View v, MotionEvent event) { // TODO
-		 * Auto-generated method stub
-		 * 
-		 * switch (event.getAction()) {
-		 * 
-		 * case MotionEvent.ACTION_DOWN: tiempoDePulsacionInicial =
-		 * event.getEventTime();
-		 * b_prevision.startAnimation(animacionBotonPulsado); break; case
-		 * MotionEvent.ACTION_UP:
-		 * 
-		 * if(event.getEventTime()-tiempoDePulsacionInicial<=2000){ // Lanzo la
-		 * Actividad CreateAccountActivity
-		 * b_prevision.startAnimation(animacionBotonLevantado); //lanzarPantalla
-		 * GestionDatos(); } // Si he mantenido el botón pulsado más de dos
-		 * segundos cancelo la operación
-		 * b_prevision.startAnimation(animacionBotonLevantado); break;
-		 * 
-		 * }
-		 * 
-		 * return true; } });
-		 */
-
+		
 		/*
 		 * Según el tipo de configuración habilito los botones adecuados
 		 */
@@ -525,7 +496,7 @@ public class PrincipalScreenActivity extends Activity {
 		/*
 		 * Cierro sesión del Bugsense
 		 */
-		BugSenseHandler.closeSession(PrincipalScreenActivity.this);
+		//BugSenseHandler.closeSession(PrincipalScreenActivity.this);
 
 		super.onDestroy();
 
