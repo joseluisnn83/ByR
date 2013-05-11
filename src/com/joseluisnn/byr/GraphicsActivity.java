@@ -1,5 +1,7 @@
 package com.joseluisnn.byr;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,13 +50,39 @@ public class GraphicsActivity extends Activity {
 	private static final int ENTERO_FECHA_DIA_DE_HOY = 0;
 	private static final int ENTERO_FECHA_5_ANYOS_ANTES = 1;
 	private static final int ENTERO_FECHA_5_MESES_ANTES = 2;
-	private static final int ENTERO_FECHA_31_DIAS_ANTES = 3;
-	private static final int ENTERO_FECHA_1_ANYO_DESPUES = 4;
-	private static final int ENTERO_FECHA_3_ANYOS_ANTES = 5;
+	private static final int ENTERO_FECHA_14_DIAS_ANTES = 3;
+	private static final int ENTERO_FECHA_2_ANYOS_DESPUES = 4;
+	private static final int ENTERO_FECHA_2_ANYOS_ANTES = 5;
 	private static final int ENTERO_FECHA_DIA_DE_AYER = 6;
-	private static final int ENTERO_FECHA_5_MESES_DESPUES = 7;
+	private static final int ENTERO_FECHA_7_MESES_DESPUES = 7;
 	private static final int ENTERO_FECHA_10_DIAS_ANTES = 8;
 	private static final int ENTERO_FECHA_25_DIAS_DESPUES = 9;
+	private static final int ENTERO_FECHA_3_MESES_ANTES = 10;
+	private static final int ENTERO_FECHA_3_DIAS_ANTES = 11;
+	private static final int ENTERO_FECHA_10_DIAS_DESPUES = 12;
+	/*
+	 * Variables que me indican la catidad de puntos(años) que voy a mostrar en
+	 * la gráfica anual de previsión
+	 */
+	private static final int NUMERO_ANYOS_HISTORICOS_PREVISON = 3;
+	private static final int NUMERO_ANYOS_FUTUROS_PREVISON = 3;
+	/*
+	 * Variables que me indican la catidad de puntos(meses) que voy a mostrar en
+	 * la gráfica mensual de previsión
+	 */
+	private static final int NUMERO_MESES_HISTORICOS_PREVISON = 4;
+	private static final int NUMERO_MESES_FUTUROS_PREVISON = 8;
+	/*
+	 * Variables que me indican la catidad de puntos(días) que voy a mostrar en
+	 * la gráfica diaria de previsión
+	 */
+	private static final int NUMERO_DIAS_HISTORICOS_PREVISON = 4;
+	private static final int NUMERO_DIAS_FUTUROS_PREVISON = 11;
+	/*
+	 * Variable que me indican la catidad de puntos(días) que voy a mostrar en
+	 * la gráfica diaria de Histórico
+	 */
+	private static final int NUMERO_DIAS_HISTORICO = 15;
 
 	/*
 	 * Variable para saber que se devuelven valores de la actividad a la que
@@ -122,8 +150,7 @@ public class GraphicsActivity extends Activity {
 		/*
 		 * Inicializamos el objeto XYPlot búscandolo desde el layout:
 		 */
-		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
-		// mySimpleXYPlot.setOnTouchListener(this);
+		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);		
 		/*
 		 * Instancio la Base de Datos
 		 */
@@ -158,17 +185,7 @@ public class GraphicsActivity extends Activity {
 		 * Configuro la grafica 4) La dibujo
 		 */
 		cargarListasDeValores();
-		/*
-		 * if (listadoValoresIngresos.isEmpty() &&
-		 * listadoValoresGastos.isEmpty()) { mySimpleXYPlot.clear();
-		 * Toast.makeText(getApplicationContext(),
-		 * "No hay datos para poder mostrar gráficas.",
-		 * Toast.LENGTH_SHORT).show();
-		 * 
-		 * // mySimpleXYPlot.setVisibility(Plot.INVISIBLE);
-		 * 
-		 * }
-		 */
+
 		if (preferenceConfiguracionPrivate.getBoolean(
 				singleton_csp.KEY_CBPLINEINGRESOS, false) == false
 				&& preferenceConfiguracionPrivate.getBoolean(
@@ -274,6 +291,7 @@ public class GraphicsActivity extends Activity {
 								listadoValoresIngresos.get(indiceAux)
 										.getFecha()).intValue() == i) {
 
+							
 							ingresos.add(listadoValoresIngresos.get(indiceAux)
 									.getCantidad());
 
@@ -568,7 +586,7 @@ public class GraphicsActivity extends Activity {
 			break;
 		case 2: // DIARIO
 
-			enteroFechaInicial = obtenerEnteroFechaHistorico(ENTERO_FECHA_31_DIAS_ANTES);
+			enteroFechaInicial = obtenerEnteroFechaHistorico(ENTERO_FECHA_14_DIAS_ANTES);
 			integerFechaInicial = Integer.valueOf(("" + enteroFechaInicial));
 			enteroFechaFinal = obtenerEnteroFechaHistorico(ENTERO_FECHA_DIA_DE_AYER);
 			integerFechaFinal = Integer.valueOf(("" + enteroFechaFinal));
@@ -580,10 +598,11 @@ public class GraphicsActivity extends Activity {
 
 			int dia = enteroFechaInicial;
 
+			// INGRESOS
 			if (!listadoValoresIngresos.isEmpty()) {
 				// Relleno los valores de los ingresos para mostrarlo en la
-				// grafica los 32 días que queremos mostrar de INGRESOS
-				for (int i = 0; i <= 31; i++) {
+				// grafica los 15 días que queremos mostrar de INGRESOS
+				for (int i = 0; i < NUMERO_DIAS_HISTORICO; i++) {
 
 					if (indiceAux < listadoValoresIngresos.size()) {
 
@@ -628,7 +647,7 @@ public class GraphicsActivity extends Activity {
 					dia = obtenerDiaSiguiente(dia);
 				}
 			} else {
-				for (int i = 0; i <= 31; i++) {
+				for (int i = 0; i < NUMERO_DIAS_HISTORICO; i++) {
 					ingresos.add(0.0);
 				}
 			}
@@ -637,10 +656,11 @@ public class GraphicsActivity extends Activity {
 			dia = enteroFechaInicial;
 			indiceAux = 0;
 
+			// GASTOS
 			if (!listadoValoresGastos.isEmpty()) {
 				// Relleno los valores de los ingresos para mostrarlo en la
-				// grafica los 32 días que queremos mostrar de GASTOS
-				for (int i = 0; i <= 31; i++) {
+				// grafica los 15 días que queremos mostrar de GASTOS
+				for (int i = 0; i < NUMERO_DIAS_HISTORICO; i++) {
 
 					if (indiceAux < listadoValoresGastos.size()) {
 
@@ -685,7 +705,7 @@ public class GraphicsActivity extends Activity {
 					dia = obtenerDiaSiguiente(dia);
 				}
 			} else {
-				for (int i = 0; i <= 31; i++) {
+				for (int i = 0; i < NUMERO_DIAS_HISTORICO; i++) {
 					gastos.add(0.0);
 				}
 			}
@@ -700,7 +720,7 @@ public class GraphicsActivity extends Activity {
 			dia = enteroFechaInicial;
 
 			// Me creo el ArrayList para la leyenda del ejeX
-			for (int i = 0; i <= 31; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICO; i++) {
 				leyendaEjeX.add(obtenerLeyendaDiariaEjeX(dia));
 				dia = obtenerDiaSiguiente(dia);
 			}
@@ -796,7 +816,7 @@ public class GraphicsActivity extends Activity {
 		Double max = Double.MIN_VALUE;
 		Double min = Double.MAX_VALUE;
 
-		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_3_ANYOS_ANTES);
+		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_2_ANYOS_ANTES);
 		integerFechaInicial = Integer.valueOf(("" + enteroFechaInicial)
 				.substring(0, 4));
 		enteroFechaUmbralHistorico = obtenerEnteroFechaPrevision(ENTERO_FECHA_DIA_DE_AYER);
@@ -805,7 +825,7 @@ public class GraphicsActivity extends Activity {
 		enteroFechaUmbralPrevision = obtenerEnteroFechaPrevision(ENTERO_FECHA_DIA_DE_HOY);
 		integerFechaUmbralPrevision = Integer
 				.valueOf(("" + enteroFechaUmbralHistorico).substring(0, 4));
-		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_1_ANYO_DESPUES);
+		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_2_ANYOS_DESPUES);
 		integerFechaFinal = Integer.valueOf(("" + enteroFechaFinal).substring(
 				0, 4));
 
@@ -939,8 +959,10 @@ public class GraphicsActivity extends Activity {
 		} else {
 			// Al no haber valores de prevision le inserto 0 en la prevision
 			// del año actual y el siguiente
-			ingresos.add(0.0);
-			ingresos.add(0.0);
+			for (int i = integerFechaUmbralPrevision.intValue(); i <= integerFechaFinal
+					.intValue(); i++) {
+				ingresos.add(0.0);
+			}
 		}
 
 		// GASTOS HISTORICOS
@@ -1052,8 +1074,10 @@ public class GraphicsActivity extends Activity {
 		} else {
 			// Al no haber valores de prevision le inserto 0 en la prevision
 			// del año actual y el siguiente
-			gastos.add(0.0);
-			gastos.add(0.0);
+			for (int i = integerFechaUmbralPrevision.intValue(); i <= integerFechaFinal
+					.intValue(); i++) {
+				gastos.add(0.0);
+			}
 		}
 
 		if (leyendaEjeX == null) {
@@ -1063,7 +1087,7 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// LEYENDA EJEX
-		// Me creo el ArrayList para la leyenda del ejeX
+		// Me creo el ArrayList para la leyenda del ejeX Historico
 		for (int i = integerFechaInicial.intValue(); i < integerFechaUmbralHistorico
 				.intValue(); i++) {
 			leyendaEjeX.add("" + i);
@@ -1072,18 +1096,24 @@ public class GraphicsActivity extends Activity {
 		// Historico Año actual : Previsión Año Actual
 		leyendaEjeX.add(integerFechaUmbralHistorico.intValue() + "-Hist.");
 		leyendaEjeX.add(integerFechaUmbralPrevision.intValue() + "-Prev.");
-		leyendaEjeX.add("" + integerFechaFinal.intValue());
+		// Me creo el ArrayList para la leyenda del ejeX Previsión
+		for (int i = integerFechaUmbralPrevision.intValue() + 1; i <= integerFechaFinal
+				.intValue(); i++) {
+			leyendaEjeX.add("" + i);
+		}
+
+		// leyendaEjeX.add("" + integerFechaFinal.intValue());
 
 		// BALANCE
 		// Relleno el balance historico a partir de los ingresos y gastos
 		// historicos
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i < NUMERO_ANYOS_HISTORICOS_PREVISON; i++) {
 			balance.add(ingresos.get(i) - gastos.get(i));
 		}
 
 		// Relleno el balance de prevision a partir de los ingresos y gastos
 		// acumulados historicos y los valores futuros
-		for (int i = 4; i <= 5; i++) {
+		for (int i = NUMERO_ANYOS_HISTORICOS_PREVISON; i < (NUMERO_ANYOS_HISTORICOS_PREVISON + NUMERO_ANYOS_FUTUROS_PREVISON); i++) {
 			acumBalancePrevision = acumBalancePrevision
 					+ (ingresos.get(i) - gastos.get(i));
 			balance.add(acumBalancePrevision);
@@ -1125,10 +1155,10 @@ public class GraphicsActivity extends Activity {
 		Double max = Double.MIN_VALUE;
 		Double min = Double.MAX_VALUE;
 
-		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_5_MESES_ANTES);
+		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_3_MESES_ANTES);
 		enteroFechaUmbralHistorico = obtenerEnteroFechaPrevision(ENTERO_FECHA_DIA_DE_AYER);
 		enteroFechaUmbralPrevision = obtenerEnteroFechaPrevision(ENTERO_FECHA_DIA_DE_HOY);
-		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_5_MESES_DESPUES);
+		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_7_MESES_DESPUES);
 
 		// primero obtengo los valores históricos a mostrar
 		// el último valor es el historico del año actual
@@ -1154,9 +1184,9 @@ public class GraphicsActivity extends Activity {
 		ArrayList<Integer> rangoFechasPrevision;
 
 		rangoFechasHistorico = obtenerRangoFechasMensuales(enteroFechaInicial,
-				enteroFechaUmbralHistorico, 0);
+				enteroFechaUmbralHistorico, 1);
 		rangoFechasPrevision = obtenerRangoFechasMensuales(
-				enteroFechaUmbralPrevision, enteroFechaFinal, 0);
+				enteroFechaUmbralPrevision, enteroFechaFinal, 2);
 
 		// INGRESOS HISTORICOS
 		// Relleno primero los valores hostóricos para mostrar en la gráfica
@@ -1263,13 +1293,11 @@ public class GraphicsActivity extends Activity {
 		} else {
 			// Al no haber más valores de prevision le inserto 0 en la
 			// prevision
-			// del mes actual y los 5 siguientes
-			ingresos.add(0.0);
-			ingresos.add(0.0);
-			ingresos.add(0.0);
-			ingresos.add(0.0);
-			ingresos.add(0.0);
-			ingresos.add(0.0);
+			// del mes actual y los 7 siguientes
+			for (int i = rangoFechasHistorico.size(); i < (rangoFechasHistorico
+					.size() + rangoFechasPrevision.size()); i++) {
+				ingresos.add(0.0);
+			}
 		}
 
 		// Inicializo indiceAux a 0 para utilizarlo de nuevo
@@ -1380,13 +1408,11 @@ public class GraphicsActivity extends Activity {
 		} else {
 			// Al no haber más valores de prevision le inserto 0 en la
 			// prevision
-			// del mes actual y los 5 siguientes
-			gastos.add(0.0);
-			gastos.add(0.0);
-			gastos.add(0.0);
-			gastos.add(0.0);
-			gastos.add(0.0);
-			gastos.add(0.0);
+			// del mes actual y los 7 siguientes			
+			for (int i = rangoFechasHistorico.size(); i < (rangoFechasHistorico
+					.size() + rangoFechasPrevision.size()); i++) {
+				gastos.add(0.0);
+			}
 		}
 
 		// BALANCE
@@ -1397,8 +1423,9 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Me creo el ArrayList para la parte de Histórico
-		// de la leyenda del ejeX
-		for (int i = 0; i < rangoFechasHistorico.size() - 1; i++) {
+		// de la leyenda del ejeX for (int i = 0; i <
+		// rangoFechasHistorico.size() - 1; i++) {
+		for (int i = 0; i < NUMERO_MESES_HISTORICOS_PREVISON - 1; i++) {
 			// leyendaEjeX.add("" + i);
 			leyendaEjeX.add(obtenerLeyendaMensualEjeX(rangoFechasHistorico
 					.get(i)));
@@ -1409,7 +1436,7 @@ public class GraphicsActivity extends Activity {
 		leyendaEjeX.add("Prev.");
 		// Me creo el ArrayList para la parte de Previsión
 		// de la leyenda del ejeX
-		for (int i = 1; i < rangoFechasPrevision.size(); i++) {
+		for (int i = 1; i < NUMERO_MESES_FUTUROS_PREVISON; i++) {
 			// leyendaEjeX.add("" + i);
 			leyendaEjeX.add(obtenerLeyendaMensualEjeX(rangoFechasPrevision
 					.get(i)));
@@ -1464,9 +1491,9 @@ public class GraphicsActivity extends Activity {
 		Double max = Double.MIN_VALUE;
 		Double min = Double.MAX_VALUE;
 
-		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_10_DIAS_ANTES);
+		enteroFechaInicial = obtenerEnteroFechaPrevision(ENTERO_FECHA_3_DIAS_ANTES);
 		enteroFechaUmbralHistorico = obtenerEnteroFechaPrevision(ENTERO_FECHA_DIA_DE_AYER);
-		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_25_DIAS_DESPUES);
+		enteroFechaFinal = obtenerEnteroFechaPrevision(ENTERO_FECHA_10_DIAS_DESPUES);
 
 		listadoValoresIngresos = dba.listadoValoresDiariosGraficas(
 				enteroFechaInicial, enteroFechaFinal, "ingreso");
@@ -1482,10 +1509,11 @@ public class GraphicsActivity extends Activity {
 
 		int dia = enteroFechaInicial;
 
+		// INGRESOS
 		if (!listadoValoresIngresos.isEmpty()) {
 			// Relleno los valores de los ingresos para mostrarlo en la
-			// grafica los 36 días que queremos mostrar de INGRESOS
-			for (int i = 0; i <= 35; i++) {
+			// grafica los 14 días que queremos mostrar de INGRESOS
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 
 				if (indiceAux < listadoValoresIngresos.size()) {
 
@@ -1528,7 +1556,7 @@ public class GraphicsActivity extends Activity {
 				dia = obtenerDiaSiguiente(dia);
 			}
 		} else {
-			for (int i = 0; i <= 35; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 				ingresos.add(0.0);
 			}
 		}
@@ -1537,10 +1565,11 @@ public class GraphicsActivity extends Activity {
 		dia = enteroFechaInicial;
 		indiceAux = 0;
 
+		// GASTOS
 		if (!listadoValoresGastos.isEmpty()) {
-			// Relleno los valores de los ingresos para mostrarlo en la
-			// grafica los 36 días que queremos mostrar de GASTOS
-			for (int i = 0; i <= 35; i++) {
+			// Relleno los valores de los gastos para mostrarlo en la
+			// grafica los 14 días que queremos mostrar de GASTOS
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 
 				if (indiceAux < listadoValoresGastos.size()) {
 
@@ -1583,7 +1612,7 @@ public class GraphicsActivity extends Activity {
 				dia = obtenerDiaSiguiente(dia);
 			}
 		} else {
-			for (int i = 0; i <= 35; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 				gastos.add(0.0);
 			}
 		}
@@ -1598,18 +1627,18 @@ public class GraphicsActivity extends Activity {
 		dia = enteroFechaInicial;
 
 		// Me creo el ArrayList para la leyenda del ejeX
-		for (int i = 0; i <= 35; i++) {
+		for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 			leyendaEjeX.add(obtenerLeyendaDiariaEjeX(dia));
 			dia = obtenerDiaSiguiente(dia);
 		}
 
 		// Relleno el balance a partir de los ingresos y gastos
 		// Balance historico
-		for (int i = 0; i <= 9; i++) {
+		for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON; i++) {
 			balance.add(ingresos.get(i) - gastos.get(i));
 		}
 		// Balance Previsión
-		for (int i = 10; i <= 35; i++) {
+		for (int i = NUMERO_DIAS_HISTORICOS_PREVISON; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 			acumBalancePrevision = acumBalancePrevision
 					+ (ingresos.get(i) - gastos.get(i));
 			balance.add(acumBalancePrevision);
@@ -1683,14 +1712,83 @@ public class GraphicsActivity extends Activity {
 			}
 
 			break;
-		case 1: // Previsión Histórica
+		case 1: // Hiostórico de la Previsión mensual 
 			/*
 			 * Al ser previsión lo que ha elegido el usuario lo que devuelvo es
-			 * un array de integer de 6 items, la parte previsión del mes actual
-			 * y los 5 meses de previsión siguientes al actual
+			 * un array de integer de 4 items, la parte previsión del mes actual
+			 * y los 3 meses anteriores
 			 */
+			rango.add(Integer.valueOf(("" + enteroFechaInicial).substring(0, 6)));
+
+			for (int i = 0; i < NUMERO_MESES_HISTORICOS_PREVISON - 1; i++) {
+
+				if (Integer.valueOf(
+						("" + rango.get(i).intValue()).substring(4, 6))
+						.intValue() == 12) {
+
+					nuevaFecha = (Integer.valueOf(
+							("" + rango.get(i).intValue()).substring(0, 4))
+							.intValue() + 1)
+							+ "01";
+					rango.add(Integer.valueOf(nuevaFecha));
+
+				} else {
+
+					day = ""
+							+ (Integer.valueOf(
+									("" + rango.get(i).intValue()).substring(4,
+											6)).intValue() + 1);
+					if (day.length() == 1) {
+						day = "0" + day;
+					}
+					nuevaFecha = ""
+							+ Integer.valueOf(("" + rango.get(i).intValue())
+									.substring(0, 4)) + day;
+					rango.add(Integer.valueOf(nuevaFecha));
+
+				}
+			}
 
 			break;
+		case 2: // Previsión mensual 
+			/*
+			 * Al ser previsión lo que ha elegido el usuario lo que devuelvo es
+			 * un array de integer de 8 items, la parte previsión del mes actual
+			 * y los 7 meses siguientes
+			 */
+			rango.add(Integer.valueOf(("" + enteroFechaInicial).substring(0, 6)));
+
+			for (int i = 0; i < NUMERO_MESES_FUTUROS_PREVISON - 1; i++) {
+
+				if (Integer.valueOf(
+						("" + rango.get(i).intValue()).substring(4, 6))
+						.intValue() == 12) {
+
+					nuevaFecha = (Integer.valueOf(
+							("" + rango.get(i).intValue()).substring(0, 4))
+							.intValue() + 1)
+							+ "01";
+					rango.add(Integer.valueOf(nuevaFecha));
+
+				} else {
+
+					day = ""
+							+ (Integer.valueOf(
+									("" + rango.get(i).intValue()).substring(4,
+											6)).intValue() + 1);
+					if (day.length() == 1) {
+						day = "0" + day;
+					}
+					nuevaFecha = ""
+							+ Integer.valueOf(("" + rango.get(i).intValue())
+									.substring(0, 4)) + day;
+					rango.add(Integer.valueOf(nuevaFecha));
+
+				}
+			}			
+
+			break;
+			
 		}
 
 		return rango;
@@ -1977,23 +2075,20 @@ public class GraphicsActivity extends Activity {
 		Calendar c = Calendar.getInstance();
 
 		if ((preferenceConfiguracionPrivate
-				.getInt(singleton_csp.KEY_LPYEARS, 0) == c.get(Calendar.YEAR) && c
+				.getInt(singleton_csp.KEY_PYEARS, 0) == c.get(Calendar.YEAR) && c
 				.get(Calendar.MONTH) == (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPMONTHS, 0) - 1))) {
+				singleton_csp.KEY_PMONTHS, 0) - 1))) {
 			perteneceMesActual = true;
 		} else {
 			// Situo la fecha según los valores del archivo de configuración de
 			// las Gráficas
+			c.set(Calendar.DAY_OF_MONTH, preferenceConfiguracionPrivate.getInt(
+					singleton_csp.KEY_PDAY, 0));
 			c.set(Calendar.MONTH, preferenceConfiguracionPrivate.getInt(
-					singleton_csp.KEY_LPMONTHS, 0) - 1);
+					singleton_csp.KEY_PMONTHS, 0) - 1);
 			c.set(Calendar.YEAR, preferenceConfiguracionPrivate.getInt(
-					singleton_csp.KEY_LPYEARS, 0));
-			// Al no pertenecer al mes actual situo la fecha
-			// en el último día del mes
-			c.add(Calendar.MONTH, 1);
-			c.set(Calendar.DATE, 1);
-			c.add(Calendar.DATE, -1);
-
+					singleton_csp.KEY_PYEARS, 0));
+			
 			perteneceMesActual = false;
 		}
 
@@ -2014,9 +2109,9 @@ public class GraphicsActivity extends Activity {
 			c.add(Calendar.MONTH, -5);
 			c.set(Calendar.DATE, 1);
 			break;
-		case ENTERO_FECHA_31_DIAS_ANTES:
+		case ENTERO_FECHA_14_DIAS_ANTES:
 			// Obtengo de la variable Calendar la fecha de hace 31 días antes
-			c.add(Calendar.DATE, -31);
+			c.add(Calendar.DATE, -14);
 			break;
 		case ENTERO_FECHA_DIA_DE_AYER:
 			if (perteneceMesActual) {
@@ -2078,48 +2173,45 @@ public class GraphicsActivity extends Activity {
 			c.set(Calendar.MONTH, 0);
 			c.set(Calendar.DATE, 1);
 			break;
-		case ENTERO_FECHA_5_MESES_ANTES:
+		case ENTERO_FECHA_3_MESES_ANTES:
 			// Obtengo de la variable Calendar la fecha del primer día de hace 5
 			// meses
 			// antes
-			c.add(Calendar.MONTH, -5);
+			c.add(Calendar.MONTH, -3);
 			c.set(Calendar.DATE, 1);
 			break;
-		case ENTERO_FECHA_31_DIAS_ANTES:
+		case ENTERO_FECHA_3_DIAS_ANTES:
 			// Obtengo de la variable Calendar la fecha de hace 31 días antes
-			c.add(Calendar.DATE, -31);
+			c.add(Calendar.DATE, -3);
 			break;
-		case ENTERO_FECHA_1_ANYO_DESPUES:
-			// Obtengo de la variable Calendar la fecha del último día de 1
-			// año
+		case ENTERO_FECHA_2_ANYOS_DESPUES:
+			// Obtengo de la variable Calendar la fecha del último día de 2
+			// años
 			// después
-			c.add(Calendar.YEAR, 2);
+			c.add(Calendar.YEAR, 3);
 			c.set(Calendar.MONTH, 0);
 			c.set(Calendar.DATE, 1);
 			c.add(Calendar.DATE, -1);
 			break;
-		case ENTERO_FECHA_3_ANYOS_ANTES:
-			// Obtengo de la variable Calendar la fecha del primer día de hace 5
+		case ENTERO_FECHA_2_ANYOS_ANTES:
+			// Obtengo de la variable Calendar la fecha del primer día de hace 2
 			// años
 			// antes
-			c.add(Calendar.YEAR, -3);
+			c.add(Calendar.YEAR, -2);
 			c.set(Calendar.MONTH, 0);
 			c.set(Calendar.DATE, 1);
 			break;
 		case ENTERO_FECHA_DIA_DE_AYER:
 			c.add(Calendar.DATE, -1);
 			break;
-		case ENTERO_FECHA_5_MESES_DESPUES:
-			c.add(Calendar.MONTH, 6);
+		case ENTERO_FECHA_7_MESES_DESPUES:
+			c.add(Calendar.MONTH, 8);
 			c.set(Calendar.DATE, 1);
 			c.add(Calendar.DATE, -1);
 			break;
 		case ENTERO_FECHA_10_DIAS_ANTES:
 			c.add(Calendar.DATE, -10);
-			break;
-		case ENTERO_FECHA_25_DIAS_DESPUES:
-			c.add(Calendar.DATE, 20);
-			break;
+			break;		
 		default:
 			break;
 		}
@@ -2316,7 +2408,7 @@ public class GraphicsActivity extends Activity {
 				maxCantidad = 100.0;
 			}
 
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 5);
+			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 3);
 
 		} else if (preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPTIPOGRAFICA, 0) == 0
@@ -2361,7 +2453,7 @@ public class GraphicsActivity extends Activity {
 				maxCantidad = 100.0;
 			}
 
-			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 5);
+			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 3);
 
 		}
 
@@ -2464,15 +2556,7 @@ public class GraphicsActivity extends Activity {
 
 		if (requestCode == RESULT_SETTINGS && resultCode == Activity.RESULT_OK
 				&& data != null) {
-			/*
-			 * int year = data.getExtras().getInt("anyo"); int month =
-			 * data.getExtras().getInt("mes"); boolean ling =
-			 * data.getExtras().getBoolean("lineaIngresos");
-			 * 
-			 * Toast.makeText( getApplicationContext(),
-			 * "Configuración gráfica terminada. Mes: " + month + ", Año: " +
-			 * year + " LIng:" + ling, Toast.LENGTH_SHORT).show();
-			 */
+			
 			dba.openREAD();
 
 			cargarListasDeValores();
@@ -2480,18 +2564,7 @@ public class GraphicsActivity extends Activity {
 			dba.close();
 
 			mySimpleXYPlot.clear();
-			/*
-			 * if (listadoValoresIngresos.isEmpty() &&
-			 * listadoValoresGastos.isEmpty()) { // mySimpleXYPlot.clear();
-			 * Toast.makeText(getApplicationContext(),
-			 * "No hay datos para poder mostrar gŕaficas.",
-			 * Toast.LENGTH_SHORT).show();
-			 * 
-			 * // mySimpleXYPlot.setVisibility(Plot.INVISIBLE); //
-			 * dibujarGrafica();
-			 * 
-			 * }
-			 */
+			
 			if (preferenceConfiguracionPrivate.getBoolean(
 					singleton_csp.KEY_CBPLINEINGRESOS, false) == false
 					&& preferenceConfiguracionPrivate.getBoolean(
@@ -2502,8 +2575,6 @@ public class GraphicsActivity extends Activity {
 				lanzarAdvertencia("Debe seleccionar alguna gráfica en la configuración para mostrar.");
 
 				mySimpleXYPlot.setVisibility(Plot.INVISIBLE);
-				// dibujarGrafica();
-				// mySimpleXYPlot.getSeriesSet().clear();
 
 			} else {
 				prepararLineasGraficas();

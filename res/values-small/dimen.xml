@@ -42,8 +42,8 @@
     <dimen name="calendarItemBackgroundCornersCurrent">0.75dp</dimen>
     <dimen name="calendarCaptionDateSize">11sp</dimen>
     <dimen name="calendarTextViewSpinnerSize">15sp</dimen>
-    <dimen name="calendarImageViewSearchDateWidth">30dp</dimen>
-    <dimen name="calendarImageViewSearchDateHeigth">30dp</dimen>
+    <dimen name="calendarImageViewSearchDateWidth">48dp</dimen>
+    <dimen name="calendarImageViewSearchDateHeigth">48dp</dimen>
     
     <!-- Dimens from ActivityDatas -->
     <dimen name="activityDatasDateSize">15sp</dimen>

@@ -15,29 +15,11 @@
 	<string name="descriptionButtonInforms">Informes</string>
 	<string name="descriptionButtonGraphics">Gráficas</string>
 	<string name="descriptionButtonPrevision">Previsión</string>
-	<string name="menu_settings">Settings</string>
-    
-    <!-- Elementos de la Pantalla Login (LoginActivity) -->
-    <string name="text_buttonLogin">Acceso</string>
-    <string name="title_activity_login">Acceso al programa</string>
-    <string name="textViewWaiterLogin">Introduce los valores para acceder al programa.</string>
-    <string name="textViewLink">(*) Recordar contraseña</string>
-    
-    <!-- Elementos de la Actividad Crear Cuenta (CreateAccountActivity) -->
-    <string name="title_activity_create_account">Crear Cuenta</string>
-    <string name="text_editTextUsername">Nombre de usuario:</string>
-    <string name="text_editTextPassword">Password:</string>
-    <string name="text_editTextPasswordRepeat">Repetir Password:</string>
-    <string name="text_editTextEmail">e-mail:</string>
-    <string name="text_checkBoxShowPassword">Mostrar Contraseñas</string>
-    <string name="descriptionImageWaiter">El camarero te explicará cómo rellenar los campos</string>
-    <string name="textViewWaiterFirst">Introduce los valores correctamente para crear tu cuenta.</string>
+	<string name="menu_settings">Settings</string>   
     
     <!-- Elementos de la Actividad DataActivity) -->
-    <string name="title_activity_datas">Gestión de Datos</string>
-    
+    <string name="title_activity_datas">Gestión de Datos</string>    
     <string name="title_preference_tipo_configuracion">Tipo de configuración</string>
-   
 	
 	<!-- Elementos del layout de configuración -->
 	<string name="mtTipoConfiguracion">Tipo de Configuración</string>
@@ -72,11 +54,17 @@
 	<string name="textViewListViewConceptoIngreso">No hay conceptos de ingreso</string>
 	<string name="textViewListViewConceptoGasto">No hay conceptos de gasto</string>
 	
-	<!-- Elementos de mycalendar -->
+	<!-- Elementos de MyCalendar -->
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
     <string name="calendarContentDescriptionInsertedData">Dato insertado</string>
+    <string name="ivContenDescriptionSearchDate">Search Date</string>
+    <string name="ivContenDescriptionToday">Today</string>
+    <string name="activity_datas_screen_tvHoy">HOY</string>
+    <string name="activity_datas_screen_tvBuscar">BUSCAR</string>
+    
     <!-- Months -->
+    <!--  
     <string-array name="months_long">
         <item>ENERO</item>
         <item>FEBRERO</item>
@@ -91,7 +79,9 @@
         <item>NOVIEMBRE</item>
         <item>DICIEMBRE</item>
     </string-array>
-    <string name="ivContenDescriptionSearchDate">Search Date</string>
+    -->
+    
+    <!--  
     <string-array name="mostrarmeses">
 	    <item>Enero</item>
 	    <item>Febrero</item>
@@ -106,6 +96,7 @@
 	    <item>Noviembre</item>
 	    <item>Diciembre</item>
 	</string-array>
+	-->
 	
     <!-- Elementos de la Lista de la Gestión de Datos -->
     <string name="tvContentDescriptionBorrar">Borrar elemento</string>
@@ -160,6 +151,8 @@
     <string name="preferencesTitleYearsGrafica">Año</string>
     <string name="preferencesContentMonthsGrafica">Elegir el mes límite a visualizar</string>
     <string name="preferencesTitleMonthsGrafica">Mes</string>
+    <string name="preferencesFechaTitle">Fecha</string>
+    <string name="preferencesFechaContent">Elegir la fecha límite para valores históricos</string>
     <string name="menu_settings_graphics">Configurar Gráfica</string>
     <string name="title_GraphicsActivity">Gráficas</string>
     

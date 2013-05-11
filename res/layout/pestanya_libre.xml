@@ -231,26 +231,16 @@
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
             </LinearLayout>
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/imageButtonSearchFechaLibre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/ivContentDescriptionSearchLibre"
-            android:src="@android:drawable/ic_menu_search" />
-        <!--
-       	<ImageView 
-       	    android:id="@+id/imageViewSearchFechaLibre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/ivContentDescriptionSearchLibre"            
-            android:src="@android:drawable/ic_menu_search"
-       	    />
-        -->
-
+        </LinearLayout>        
+        
+        <ImageView
+                android:id="@+id/imageViewSearchFechaLibre"
+                android:layout_width="@dimen/calendarImageViewSearchDateWidth"
+                android:layout_height="@dimen/calendarImageViewSearchDateHeigth"                
+                android:layout_gravity="center"
+            	android:contentDescription="@string/ivContentDescriptionSearchLibre"                
+                android:src="@drawable/calendar" />
+        
     </LinearLayout>
 
 </LinearLayout>

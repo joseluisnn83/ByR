@@ -15,9 +15,13 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
-import com.bugsense.trace.BugSenseHandler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.DatePicker;
+
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 public class PreferencesGraphicsActivity extends PreferenceActivity {
@@ -37,6 +41,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	private int valoresGrafica;
 	private int anyoLimiteGrafica;
 	private int mesLimiteGrafica;
+	private int diaLimiteGrafica;
 	private boolean mostrarValoresIngresos;
 	private boolean mostrarValoresGastos;
 	private boolean mostrarValoresBalance;
@@ -50,10 +55,9 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	private ListPreference listPreferenceTipoGrafica;
 	private ListPreference listPreferenceValoresGrafica;
 	/*
-	 * Listas para las fechas
-	 */
-	private ListPreference listPreferenceYears;
-	private ListPreference listPreferenceMonths;
+	 * Variable para la fecha de histórico
+	 */	
+	private Preference preferenceFecha;
 	/*
 	 * Variables para mostrar líneas y valores en la gráfica
 	 */
@@ -98,8 +102,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		// Obtengo los objetos del PreferenceScreen
 		listPreferenceTipoGrafica = (ListPreference) findPreference("lpTipoGrafica");
 		listPreferenceValoresGrafica = (ListPreference) findPreference("lpValoresGrafica");
-		listPreferenceYears = (ListPreference) findPreference("lpYears");
-		listPreferenceMonths = (ListPreference) findPreference("lpMonths");
+		preferenceFecha = (Preference) findPreference("preferenceFecha");
 		cbLineaIngresos = (CheckBoxPreference) findPreference("cbpLineIngresos");
 		cbLineaGastos = (CheckBoxPreference) findPreference("cbpLineGastos");
 		cbLineaBalance = (CheckBoxPreference) findPreference("cbpLineBalance");
@@ -168,12 +171,10 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 							valoresGrafica = newValoresGrafica;
 							modificado = true;
 
-							if (newValoresGrafica == 0) {
-								listPreferenceYears.setEnabled(true);
-								listPreferenceMonths.setEnabled(true);
+							if (newValoresGrafica == 0) {								
+								preferenceFecha.setEnabled(true);
 							} else {
-								listPreferenceYears.setEnabled(false);
-								listPreferenceMonths.setEnabled(false);
+								preferenceFecha.setEnabled(false);
 							}
 
 						}
@@ -182,87 +183,18 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 					}
 				});
 
-		listPreferenceYears
-				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		preferenceFecha
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 					@Override
-					public boolean onPreferenceChange(Preference preference,
-							Object newValue) {
-						/*
-						 * TODO // Si se ha modificado el valor entra en el if a
-						 * modificar el archivo de configuracion
-						 */
-						int newAnyo = Integer.valueOf(newValue.toString());
-						boolean correcto = false;
+					public boolean onPreferenceClick(Preference preference) {
+						// TODO
 
-						if (newAnyo != anyoLimiteGrafica) {
+						Dialog dialogo;
+						dialogo = crearDialogoBuscarFecha();
+						dialogo.show();
 
-							Calendar c = Calendar.getInstance();
-
-							if ((newAnyo == c.get(Calendar.YEAR) &&
-									mesLimiteGrafica <= (c.get(Calendar.MONTH) + 1)) || 
-									newAnyo < c.get(Calendar.YEAR)) {
-
-								// Actualizo el valor anyo del archivo de
-								// configuración de la gráfica
-								editorPreference.putInt(
-										singleton_csp.KEY_LPYEARS, newAnyo);
-								editorPreference.commit();
-
-								anyoLimiteGrafica = newAnyo;
-								modificado = true;
-
-								correcto = true;
-
-							} else {
-								lanzarAdvertencia("No está permitido seleccionar fechas "
-										+ "futuras para mostrar valores Históricos.");
-							}
-						}
-
-						return correcto;
-					}
-				});
-
-		listPreferenceMonths
-				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-					@Override
-					public boolean onPreferenceChange(Preference preference,
-							Object newValue) {
-						/*
-						 * TODO Si se ha modificado el valor entra en el if a
-						 * modificar el archivo de configuracion
-						 */
-						int newMes = Integer.valueOf(newValue.toString());
-						boolean correcto = false;
-
-						if (newMes != mesLimiteGrafica) {
-
-							Calendar c = Calendar.getInstance();
-
-							if ( (anyoLimiteGrafica == c.get(Calendar.YEAR) &&
-									newMes <= (c.get(Calendar.MONTH) + 1)) || 
-									anyoLimiteGrafica < c.get(Calendar.YEAR)) {
-
-								// Actualizo el valor mes del archivo de
-								// configuración de la gráfica
-								editorPreference.putInt(
-										singleton_csp.KEY_LPMONTHS, newMes);
-								editorPreference.commit();
-
-								mesLimiteGrafica = newMes;
-								modificado = true;
-
-								correcto = true;
-
-							} else {
-								lanzarAdvertencia("No está permitido seleccionar fechas "
-										+ "futuras para mostrar valores Históricos.");
-							}
-						}
-
-						return correcto;
+						return true;
 					}
 				});
 
@@ -426,9 +358,11 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		valoresGrafica = preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_LPVALORESGRAFICA, 0);
 		anyoLimiteGrafica = preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPYEARS, 0);
+				singleton_csp.KEY_PYEARS, 0);
 		mesLimiteGrafica = preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_LPMONTHS, 0);
+				singleton_csp.KEY_PMONTHS, 0);
+		diaLimiteGrafica = preferenceConfiguracionPrivate.getInt(
+				singleton_csp.KEY_PDAY, 0);
 		mostrarLineaIngresos = preferenceConfiguracionPrivate.getBoolean(
 				singleton_csp.KEY_CBPLINEINGRESOS, false);
 		mostrarLineaGastos = preferenceConfiguracionPrivate.getBoolean(
@@ -441,34 +375,31 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 				singleton_csp.KEY_CBPVALUESGASTOS, false);
 		mostrarValoresBalance = preferenceConfiguracionPrivate.getBoolean(
 				singleton_csp.KEY_CBPVALUESBALANCE, false);
-		
+
 		/*
-		 * Entra en el if si es la primera ejecución de esta
-		 * Activity, de esta manera inicio los valores por defecto
-		 * para la configuración de la gráfica.
-		 * En sucesivas ejecuciones no entrará ya que los valores 
+		 * Entra en el if si es la primera ejecución de esta Activity, de esta
+		 * manera inicio los valores por defecto para la configuración de la
+		 * gráfica. En sucesivas ejecuciones no entrará ya que los valores
 		 * quedarán guardados.
-		 *
 		 */
 		if (preferenceConfiguracionPrivate.getBoolean(
-				singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false) == true){
-			
-			editorPreference.putBoolean(singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false);
+				singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false) == true) {
+
+			editorPreference.putBoolean(
+					singleton_csp.KEY_PRIMER_ACCESO_CONFIG_GRAFICA, false);
 			editorPreference.commit();
-			
+
 			cbLineaIngresos.setChecked(mostrarLineaIngresos);
 			cbLineaGastos.setChecked(mostrarLineaGastos);
 			cbLineaBalance.setChecked(mostrarLineaBalance);
 			cbValoresIngresos.setChecked(mostrarValoresIngresos);
 			cbValoresGastos.setChecked(mostrarValoresGastos);
 			cbValoresBalance.setChecked(mostrarValoresBalance);
-			
+
 			listPreferenceTipoGrafica.setValue(new String("" + tipoGrafica));
-			listPreferenceValoresGrafica.setValue(new String("" + valoresGrafica));
-			listPreferenceYears.setValue(new String("" + anyoLimiteGrafica));
-			listPreferenceMonths.setValueIndex(mesLimiteGrafica - 1);
-			
-			
+			listPreferenceValoresGrafica.setValue(new String(""
+					+ valoresGrafica));	
+
 		}
 	}
 
@@ -479,12 +410,10 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	 */
 	private void habilitarFecha() {
 
-		if (valoresGrafica == 0) {
-			listPreferenceYears.setEnabled(true);
-			listPreferenceMonths.setEnabled(true);
+		if (valoresGrafica == 0) {			
+			preferenceFecha.setEnabled(true);
 		} else if (valoresGrafica == 1) {
-			listPreferenceYears.setEnabled(false);
-			listPreferenceMonths.setEnabled(false);
+			preferenceFecha.setEnabled(false);
 		}
 
 	}
@@ -523,6 +452,124 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		return builder.create();
 	}
 
+	/*
+	 * Dialog para situar el calendario en una fecha determinada por el usuario
+	 */
+	private Dialog crearDialogoBuscarFecha() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// Get the layout inflater
+		LayoutInflater inflater = this.getLayoutInflater();
+		View layout = inflater.inflate(
+				R.layout.dialog_search_date_datas_activity, null);
+
+		final DatePicker date = (DatePicker) layout
+				.findViewById(R.id.datePickerDatasActivity);
+
+		// inicializo la fecha en el DatePicker
+		date.updateDate(anyoLimiteGrafica, mesLimiteGrafica-1, diaLimiteGrafica);
+
+		// Le inserto el layout al Dialog con LayoutInflater
+		// Pass null as the parent view because its going in the dialog layout
+		builder.setView(layout);
+
+		builder.setTitle("Situar fecha límite");
+
+		// builder.setView(valorIngreso);
+		builder.setIcon(android.R.drawable.ic_menu_my_calendar);
+
+		builder.setPositiveButton(R.string.botonAceptar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Actualizo la variable calendarToday
+
+						if (date.getYear() != anyoLimiteGrafica
+								|| date.getMonth() != mesLimiteGrafica-1
+								|| date.getDayOfMonth() != diaLimiteGrafica) {
+
+							Calendar c = Calendar.getInstance();
+							int fechaHoy = obtenerEnteroFecha(
+									c.get(Calendar.DAY_OF_MONTH)+1,
+									c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+							int fechaNueva = obtenerEnteroFecha(
+									date.getDayOfMonth()+1, date.getMonth(),
+									date.getYear());
+
+							if (fechaNueva < fechaHoy) {
+								
+								anyoLimiteGrafica = date.getYear();
+								mesLimiteGrafica = date.getMonth()+1;
+								diaLimiteGrafica = date.getDayOfMonth();
+								
+								editorPreference.putInt(
+										singleton_csp.KEY_PYEARS, anyoLimiteGrafica);
+								editorPreference.putInt(
+										singleton_csp.KEY_PMONTHS, mesLimiteGrafica);
+								editorPreference.putInt(
+										singleton_csp.KEY_PDAY, diaLimiteGrafica);
+								editorPreference.commit();
+								
+								modificado = true;
+								
+							} else {
+								lanzarAdvertencia("No está permitido seleccionar fechas "
+										+ "futuras para mostrar valores Históricos.");
+							}
+
+						} else {
+							dialog.cancel();
+						}
+					}
+				});
+
+		builder.setNegativeButton(R.string.botonCancelar,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO No hago nada
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
+	}
+
+	/*
+	 * Método que incrementa en 1 DÍA la fecha que estoy tratando actualmente
+	 */
+	private int obtenerEnteroFecha(int d, int m, int y) {
+
+		String fecha;
+		String month;
+		String day;
+
+		/*
+		 * Recupero la Fecha incrementada en 1 DÍA de la variable Calendar Al
+		 * mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0 Si
+		 * el mes solo tiene un dígito le pongo un cero delante
+		 */
+		month = "" + m;
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+
+		// Si el día solo tiene un dígito le pongo un cero delante
+		day = "" + d;
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+
+		// Obtengo la fecha en el formato AAAAMMDD
+		fecha = "" + y + month + day;
+
+		// Devuelvo el valor de la fecha
+		return Integer.valueOf(fecha).intValue();
+
+	}
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// TODO Evento de levantar la pulsación de una tecla del móvil
@@ -531,18 +578,19 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 
 		// Entra en el IF si la tecla pulsada es la de salir o retorno
 		if (keyCode == KeyEvent.KEYCODE_BACK && modificado) {
-
+			/*
 			resultData.putExtra("tipoGrafica", this.tipoGrafica);
 			resultData.putExtra("valoresGrafica", this.valoresGrafica);
 			resultData.putExtra("anyo", this.anyoLimiteGrafica);
 			resultData.putExtra("mes", this.mesLimiteGrafica);
+			resultData.putExtra("dia", this.diaLimiteGrafica);
 			resultData.putExtra("lineaIngresos", this.mostrarLineaIngresos);
 			resultData.putExtra("lineaGastos", this.mostrarLineaGastos);
 			resultData.putExtra("lineaBalance", this.mostrarLineaBalance);
 			resultData.putExtra("valoresIngresos", this.mostrarValoresIngresos);
 			resultData.putExtra("valoresGastos", this.mostrarValoresGastos);
 			resultData.putExtra("valoresBalance", this.mostrarValoresBalance);
-
+			*/
 			setResult(Activity.RESULT_OK, resultData);
 
 			finish();

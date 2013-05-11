@@ -3,7 +3,6 @@ package com.joseluisnn.byr;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 
@@ -141,9 +139,7 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 			@Override
 			public boolean onLongClick(View v) {
 				// TODO Informo que se ha pulsado de manera prolongada un item del ListView
-				// 		y despliego el menú de previsión si es un día futuro
-				//lanzarMensaje("RelayiveLayout long push !!! ");
-				
+				// 		y despliego el menú de previsión si es un día futuro				
 				lanzarObservador(PULSACION_LARGA,position);
 				
 				return false;
@@ -173,11 +169,6 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 			break;
 		}
 		
-	}
-	
-	public void lanzarMensaje(String e){
-		Toast t = Toast.makeText(this.context, e, Toast.LENGTH_LONG);
-		t.show();
 	}
 
 }

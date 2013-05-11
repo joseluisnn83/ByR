@@ -294,10 +294,12 @@ public class PrincipalScreenActivity extends Activity {
 			prefEditorConfiguracionGraficas.putInt(
 					singleton_csp.KEY_LPVALORESGRAFICA, 0);
 			Calendar c = Calendar.getInstance();
-			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_LPYEARS,
+			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_PYEARS,
 					c.get(Calendar.YEAR));
-			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_LPMONTHS,
+			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_PMONTHS,
 					c.get(Calendar.MONTH) + 1);
+			prefEditorConfiguracionGraficas.putInt(singleton_csp.KEY_PDAY,
+					c.get(Calendar.DAY_OF_MONTH));
 			prefEditorConfiguracionGraficas.putBoolean(
 					singleton_csp.KEY_CBPLINEINGRESOS, true);
 			prefEditorConfiguracionGraficas.putBoolean(

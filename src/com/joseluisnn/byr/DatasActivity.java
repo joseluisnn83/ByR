@@ -1,5 +1,7 @@
 package com.joseluisnn.byr;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -562,7 +564,7 @@ public class DatasActivity extends Activity {
 
 								int cod_error = dba
 										.insertarValor(
-												valor,
+												redondearValor(valor),
 												listaConceptosIngresos
 														.get(spinnerConceptosIngresos
 																.getSelectedItemPosition())
@@ -682,7 +684,7 @@ public class DatasActivity extends Activity {
 
 								int cod_error = dba
 										.actualizarRegistroTablaDatos(
-												valor,
+												redondearValor(valor),
 												listaIngresos.get(
 														posicioAEditar)
 														.getIdConcepto(),
@@ -785,7 +787,7 @@ public class DatasActivity extends Activity {
 
 								int cod_error = dba
 										.insertarValor(
-												valor,
+												redondearValor(valor),
 												listaConceptosGastos
 														.get(spinnerConceptosGastos
 																.getSelectedItemPosition())
@@ -905,7 +907,7 @@ public class DatasActivity extends Activity {
 
 								int cod_error = dba
 										.actualizarRegistroTablaDatos(
-												valor,
+												redondearValor(valor),
 												listaGastos.get(posicioAEditar)
 														.getIdConcepto(),
 												listaConceptosGastos.get(
@@ -1667,6 +1669,19 @@ public class DatasActivity extends Activity {
 		}
 
 		return d;
+	}
+	
+	/*
+	 * Método que me redondea a 2 decimales el número
+	 * pasado por parámetro
+	 */
+	private double redondearValor(double valor){
+		
+		String val = valor+"";
+	    BigDecimal big = new BigDecimal(val);
+	    big = big.setScale(2, RoundingMode.HALF_UP);
+	    
+	    return big.doubleValue();
 	}
 
 	/*

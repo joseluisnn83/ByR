@@ -25,8 +25,9 @@ public class SingletonConfigurationSharedPreferences {
 	 public final String KEY_PRIMER_ACCESO_CONFIG_GRAFICA = "primeracceso";
 	 public final String KEY_LPTIPOGRAFICA = "lpTipoGrafica";
 	 public final String KEY_LPVALORESGRAFICA = "lpValoresGrafica";
-	 public final String KEY_LPYEARS = "lpYears";
-	 public final String KEY_LPMONTHS = "lpMonths";
+	 public final String KEY_PYEARS = "pYears";
+	 public final String KEY_PMONTHS = "pMonths";
+	 public final String KEY_PDAY = "pDay";
 	 public final String KEY_CBPLINEINGRESOS = "cbpLineIngresos";
 	 public final String KEY_CBPLINEGASTOS = "cbpLineGastos";
 	 public final String KEY_CBPLINEBALANCE = "cbpLineBalance";

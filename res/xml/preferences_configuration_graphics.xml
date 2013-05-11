@@ -16,19 +16,12 @@
         android:title="@string/preferencesTitleValoresGrafica" />
 
     <PreferenceCategory android:title="@string/preferencesCategoryYear" >
-        <ListPreference
-            android:entries="@array/anyos_graficas"
-            android:entryValues="@array/anyos_graficas_valores"
-            android:key="lpYears"
-            android:summary="@string/preferencesContentYearsGrafica"
-            android:title="@string/preferencesTitleYearsGrafica" />
+         	
+        <Preference 
+            android:key="preferenceFecha"
+            android:title="@string/preferencesFechaTitle"
+            android:summary="@string/preferencesFechaContent" />
         
-        <ListPreference
-            android:entries="@array/meses_graficas"
-            android:entryValues="@array/meses_graficas_valores"
-            android:key="lpMonths"
-            android:summary="@string/preferencesContentMonthsGrafica"
-            android:title="@string/preferencesTitleMonthsGrafica" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferencesCategoryLines" >
         <CheckBoxPreference

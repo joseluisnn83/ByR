@@ -4,20 +4,25 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 
@@ -33,7 +38,11 @@ public class PestanyaLibreActivity extends Activity {
 	private LinearLayout llListadoGastos;
 	private ImageView ivFlechaListadoIngresos;
 	private ImageView ivFlechaListadoGastos;
-	private ImageButton ibSearchFecha;
+	private ImageView ivSearchDate;
+	// Variables para la animación de los iconos
+	private Animation animacionBotonPulsado, animacionBotonLevantado;
+	// Tiempo de pulsación inicial del icono
+	private long tiempoDePulsacionInicial;
 	// Variables que me despliegan/pliegan los Listados de Ingresos y Gastos
 	private RelativeLayout rlBarraListadoIngresos;
 	private RelativeLayout rlBarraListadoGastos;
@@ -71,6 +80,11 @@ public class PestanyaLibreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.pestanya_libre);
+		
+		animacionBotonPulsado = AnimationUtils.loadAnimation(this,
+				R.anim.animacion_boton_pulsado);
+		animacionBotonLevantado = AnimationUtils.loadAnimation(this,
+				R.anim.animacion_boton_levantado);
 
 		rlBarraListadoIngresos = (RelativeLayout) findViewById(R.id.relativeLayoutBarraListadoIngresosLibre);
 		rlBarraListadoGastos = (RelativeLayout) findViewById(R.id.relativeLayoutBarraListadoGastosLibre);
@@ -81,7 +95,7 @@ public class PestanyaLibreActivity extends Activity {
 		tvTotalIngresos = (TextView) findViewById(R.id.textViewTotalIngresosLibre);
 		tvTotalGastos = (TextView) findViewById(R.id.textViewTotalGastosLibre);
 		tvTotalBalance = (TextView) findViewById(R.id.textViewTotalBalanceLibre);
-		ibSearchFecha = (ImageButton) findViewById(R.id.imageButtonSearchFechaLibre);
+		ivSearchDate = (ImageView) findViewById(R.id.imageViewSearchFechaLibre);
 
 		// Instancio las fechas
 		tvStartDate = (TextView) findViewById(R.id.textViewPestanyaILibreFechaDe);
@@ -136,15 +150,37 @@ public class PestanyaLibreActivity extends Activity {
 			}
 		});
 
-		ibSearchFecha.setOnClickListener(new OnClickListener() {
-
+		ivSearchDate.setOnTouchListener(new OnTouchListener() {
+			
 			@Override
-			public void onClick(View v) {
-				// TODO Método onClick del botón de buscar en un Rango de Fechas
-				Dialog dialogo;
-				dialogo = crearDialogoBuscarFecha();
-				dialogo.show();
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Método onTouch del botón de buscar en un Rango de Fechas
+				switch (event.getAction()) {
 
+				case MotionEvent.ACTION_DOWN:
+					tiempoDePulsacionInicial = event.getEventTime();
+					ivSearchDate.startAnimation(animacionBotonPulsado);
+					break;
+				case MotionEvent.ACTION_UP:
+
+					if (event.getEventTime() - tiempoDePulsacionInicial <= 2000) {
+						// lanzo el dialog con la fecha a buscar por el usuario
+						ivSearchDate.startAnimation(animacionBotonLevantado);
+						Dialog dialogo;
+						dialogo = crearDialogoBuscarFecha();
+						dialogo.show();
+					}
+					// Si he mantenido el botón pulsado más de dos segundos
+					// cancelo la operación
+					ivSearchDate.startAnimation(animacionBotonLevantado);
+					break;
+				case MotionEvent.ACTION_CANCEL:
+					ivSearchDate.startAnimation(animacionBotonLevantado);
+					break;
+
+				}
+
+				return true;
 			}
 		});
 
@@ -766,7 +802,8 @@ public class PestanyaLibreActivity extends Activity {
 	}
 
 	/*
-	 * Dialog para INSERTAR el valor de un concepto de Gasto
+	 * Dialog para situar un rango de fechas y que me devuelva
+	 * los valores contenidos en ellas.
 	 */
 	private Dialog crearDialogoBuscarFecha() {
 
@@ -819,7 +856,7 @@ public class PestanyaLibreActivity extends Activity {
 						if (obtenerEnteroFechaInicio() > obtenerEnteroFechaFin()) {
 							// Entra en el IF si la fecha de inicio es mayor que
 							// la de fin
-							lanzarAdvertencia("ERROR: La fecha de inicio no puede ser mayor que la de fin.");
+							lanzarAdvertencia("La fecha de inicio no puede ser mayor que la de fin.");
 
 						} else {
 
