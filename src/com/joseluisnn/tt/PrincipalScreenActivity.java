@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.util.Calendar;
 import android.app.Activity;
@@ -17,12 +17,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bugsense.trace.BugSenseHandler;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonBroadcastReceiver;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
@@ -65,6 +66,8 @@ public class PrincipalScreenActivity extends Activity {
 		
 		//BugSenseHandler.initAndStartSession(PrincipalScreenActivity.this,"c815f559");
 		
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.activity_principal_screen);
 
 		animacionBotonPulsado = AnimationUtils.loadAnimation(this,
@@ -88,7 +91,7 @@ public class PrincipalScreenActivity extends Activity {
 		// Modifico el tipo de fuente de los TextView
 		// Variable para el tipo tipo de fuente
 		Typeface fuente = Typeface.createFromAsset(getAssets(),
-				"fonts/go_boom.ttf");
+				"fonts/FreedanFont.ttf");
 		tvData.setTypeface(fuente);
 		tvConfig.setTypeface(fuente);
 		tvInform.setTypeface(fuente);
@@ -401,7 +404,7 @@ public class PrincipalScreenActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle("INFORMACIÓN");
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 

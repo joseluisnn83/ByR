@@ -53,7 +53,7 @@
                     android:layout_below="@id/imageButtonData"
                     android:layout_centerInParent="true"
                     android:text="@string/descriptionButtonData"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_large" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -75,7 +75,7 @@
                     android:layout_below="@id/imageButtonConfiguration"
                     android:layout_centerInParent="true"
                     android:text="@string/descriptionButtonConfiguration"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_large" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -107,7 +107,7 @@
                     android:layout_below="@id/imageButtonInforms"
                     android:layout_centerInParent="true"
                     android:text="@string/descriptionButtonInforms"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_large" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -132,7 +132,7 @@
                     android:layout_below="@id/imageButtonGraphics"
                     android:layout_centerInParent="true"
                     android:text="@string/descriptionButtonGraphics"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_large" />
             </RelativeLayout>
         </LinearLayout>
 	<!--  
@@ -168,6 +168,6 @@
         android:layout_height="wrap_content"
         android:gravity="center|bottom"
         android:text="@string/textViewDeveloper"
-        android:textSize="@dimen/text_medium" />
+        android:textSize="@dimen/text_large" />
 
 </LinearLayout>

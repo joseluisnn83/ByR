@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,10 +24,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import com.joseluisnn.byr.MyAdapterListaGestionDatos.ObservadorMyAdapterListViewGD;
+
+import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.Concepto;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.tt.MyAdapterListaGestionDatos.ObservadorMyAdapterListViewGD;
 
 public class DatasActivity extends Activity {
 

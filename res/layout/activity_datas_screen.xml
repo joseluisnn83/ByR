@@ -3,12 +3,12 @@
     android:id="@+id/LLayoutDatasPrincipal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/CalendarioFondoPrincipal"
+    android:background="@drawable/fondo_general"
     android:orientation="vertical"
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="5dip" >
-
+	<!-- android:background="@color/CalendarioFondoPrincipal" -->
     <RelativeLayout
         android:id="@+id/RLCalendario"
         android:layout_width="fill_parent"

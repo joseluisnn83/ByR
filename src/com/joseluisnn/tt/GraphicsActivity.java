@@ -1,10 +1,7 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.app.Activity;
@@ -18,48 +15,39 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.util.FloatMath;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.Window;
-import android.widget.Toast;
 import com.androidplot.Plot;
 import com.androidplot.series.XYSeries;
-import com.androidplot.ui.AnchorPosition;
-import com.androidplot.ui.DynamicTableModel;
-import com.androidplot.ui.SizeLayoutType;
-import com.androidplot.ui.SizeMetrics;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XLayoutStyle;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
-import com.androidplot.xy.YLayoutStyle;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.GraphXLabelFormat;
 import com.joseluisnn.objetos.ValoresElementosGraficas;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
-public class GraphicsActivity extends Activity {
+public class GraphicsActivity extends Activity implements OnTouchListener {
 
 	private static final int ENTERO_FECHA_DIA_DE_HOY = 0;
 	private static final int ENTERO_FECHA_5_ANYOS_ANTES = 1;
 	private static final int ENTERO_FECHA_5_MESES_ANTES = 2;
-	private static final int ENTERO_FECHA_14_DIAS_ANTES = 3;
+	private static final int ENTERO_FECHA_15_DIAS_ANTES = 3;
 	private static final int ENTERO_FECHA_2_ANYOS_DESPUES = 4;
 	private static final int ENTERO_FECHA_2_ANYOS_ANTES = 5;
 	private static final int ENTERO_FECHA_DIA_DE_AYER = 6;
 	private static final int ENTERO_FECHA_7_MESES_DESPUES = 7;
 	private static final int ENTERO_FECHA_10_DIAS_ANTES = 8;
-	private static final int ENTERO_FECHA_25_DIAS_DESPUES = 9;
-	private static final int ENTERO_FECHA_3_MESES_ANTES = 10;
-	private static final int ENTERO_FECHA_3_DIAS_ANTES = 11;
-	private static final int ENTERO_FECHA_10_DIAS_DESPUES = 12;
+	private static final int ENTERO_FECHA_3_MESES_ANTES = 9;
+	private static final int ENTERO_FECHA_3_DIAS_ANTES = 10;
+	private static final int ENTERO_FECHA_10_DIAS_DESPUES = 11;
 	/*
 	 * Variables que me indican la catidad de puntos(años) que voy a mostrar en
 	 * la gráfica anual de previsión
@@ -76,8 +64,8 @@ public class GraphicsActivity extends Activity {
 	 * Variables que me indican la catidad de puntos(días) que voy a mostrar en
 	 * la gráfica diaria de previsión
 	 */
-	private static final int NUMERO_DIAS_HISTORICOS_PREVISON = 4;
-	private static final int NUMERO_DIAS_FUTUROS_PREVISON = 11;
+	private static final int NUMERO_DIAS_HISTORICOS_PREVISON = 3;
+	private static final int NUMERO_DIAS_FUTUROS_PREVISON = 12;
 	/*
 	 * Variable que me indican la catidad de puntos(días) que voy a mostrar en
 	 * la gráfica diaria de Histórico
@@ -133,14 +121,14 @@ public class GraphicsActivity extends Activity {
 	/*
 	 * Variables para saber el Mínimo y Máximo valor de la gráfica
 	 */
-	private Double minCantidad;
-	private Double maxCantidad;
+	private int minCantidad;
+	private int maxCantidad;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-
+		super.onCreate(savedInstanceState);		
+		
 		/*
 		 * Quitamos barra de titulo de la Actividad Debe ser ejecutada esta
 		 * instruccion antes del setContentView para que no cargue las imágenes
@@ -150,7 +138,8 @@ public class GraphicsActivity extends Activity {
 		/*
 		 * Inicializamos el objeto XYPlot búscandolo desde el layout:
 		 */
-		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);		
+		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
+		mySimpleXYPlot.setOnTouchListener(this);
 		/*
 		 * Instancio la Base de Datos
 		 */
@@ -195,14 +184,14 @@ public class GraphicsActivity extends Activity {
 
 			lanzarAdvertencia("Debe seleccionar alguna gráfica en la configuración para mostrar.");
 
-			mySimpleXYPlot.setVisibility(Plot.INVISIBLE);
+			mySimpleXYPlot.setVisibility(View.INVISIBLE);
 
 		} else {
 			prepararLineasGraficas();
 			configurarGrafica();
 			dibujarGrafica();
 
-			mySimpleXYPlot.setVisibility(Plot.VISIBLE);
+			mySimpleXYPlot.setVisibility(View.VISIBLE);
 
 		}
 
@@ -291,7 +280,6 @@ public class GraphicsActivity extends Activity {
 								listadoValoresIngresos.get(indiceAux)
 										.getFecha()).intValue() == i) {
 
-							
 							ingresos.add(listadoValoresIngresos.get(indiceAux)
 									.getCantidad());
 
@@ -408,8 +396,6 @@ public class GraphicsActivity extends Activity {
 				leyendaEjeX.add("" + i);
 			}
 
-			// if (!ingresos.isEmpty() && !gastos.isEmpty()) {
-
 			// Relleno el balance a partir de los ingresos y gastos y la
 			// serie auxiliar
 			for (int i = 0; i < ingresos.size(); i++) {
@@ -427,7 +413,6 @@ public class GraphicsActivity extends Activity {
 					min = balance.get(i);
 				}
 			}
-			// }
 
 			break;
 		case 1: // MENSUAL
@@ -586,7 +571,7 @@ public class GraphicsActivity extends Activity {
 			break;
 		case 2: // DIARIO
 
-			enteroFechaInicial = obtenerEnteroFechaHistorico(ENTERO_FECHA_14_DIAS_ANTES);
+			enteroFechaInicial = obtenerEnteroFechaHistorico(ENTERO_FECHA_15_DIAS_ANTES);
 			integerFechaInicial = Integer.valueOf(("" + enteroFechaInicial));
 			enteroFechaFinal = obtenerEnteroFechaHistorico(ENTERO_FECHA_DIA_DE_AYER);
 			integerFechaFinal = Integer.valueOf(("" + enteroFechaFinal));
@@ -746,8 +731,8 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Actualizo los valores mínimos y máximos de la gráfica
-		maxCantidad = max;
-		minCantidad = min;
+		maxCantidad = max.intValue();
+		minCantidad = min.intValue();
 
 	}
 
@@ -1133,8 +1118,8 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Actualizo los mínimos y máximos de la gráfica
-		maxCantidad = max;
-		minCantidad = min;
+		maxCantidad = max.intValue();
+		minCantidad = min.intValue();
 
 	}
 
@@ -1408,7 +1393,7 @@ public class GraphicsActivity extends Activity {
 		} else {
 			// Al no haber más valores de prevision le inserto 0 en la
 			// prevision
-			// del mes actual y los 7 siguientes			
+			// del mes actual y los 7 siguientes
 			for (int i = rangoFechasHistorico.size(); i < (rangoFechasHistorico
 					.size() + rangoFechasPrevision.size()); i++) {
 				gastos.add(0.0);
@@ -1471,8 +1456,8 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Actualizo los mínimos y máximos de la gráfica
-		maxCantidad = max;
-		minCantidad = min;
+		maxCantidad = max.intValue();
+		minCantidad = min.intValue();
 
 	}
 
@@ -1513,7 +1498,8 @@ public class GraphicsActivity extends Activity {
 		if (!listadoValoresIngresos.isEmpty()) {
 			// Relleno los valores de los ingresos para mostrarlo en la
 			// grafica los 14 días que queremos mostrar de INGRESOS
-			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON
+					+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 
 				if (indiceAux < listadoValoresIngresos.size()) {
 
@@ -1556,7 +1542,8 @@ public class GraphicsActivity extends Activity {
 				dia = obtenerDiaSiguiente(dia);
 			}
 		} else {
-			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON
+					+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 				ingresos.add(0.0);
 			}
 		}
@@ -1569,7 +1556,8 @@ public class GraphicsActivity extends Activity {
 		if (!listadoValoresGastos.isEmpty()) {
 			// Relleno los valores de los gastos para mostrarlo en la
 			// grafica los 14 días que queremos mostrar de GASTOS
-			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON
+					+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 
 				if (indiceAux < listadoValoresGastos.size()) {
 
@@ -1612,7 +1600,8 @@ public class GraphicsActivity extends Activity {
 				dia = obtenerDiaSiguiente(dia);
 			}
 		} else {
-			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+			for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON
+					+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 				gastos.add(0.0);
 			}
 		}
@@ -1627,7 +1616,8 @@ public class GraphicsActivity extends Activity {
 		dia = enteroFechaInicial;
 
 		// Me creo el ArrayList para la leyenda del ejeX
-		for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+		for (int i = 0; i < NUMERO_DIAS_HISTORICOS_PREVISON
+				+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 			leyendaEjeX.add(obtenerLeyendaDiariaEjeX(dia));
 			dia = obtenerDiaSiguiente(dia);
 		}
@@ -1638,7 +1628,8 @@ public class GraphicsActivity extends Activity {
 			balance.add(ingresos.get(i) - gastos.get(i));
 		}
 		// Balance Previsión
-		for (int i = NUMERO_DIAS_HISTORICOS_PREVISON; i < NUMERO_DIAS_HISTORICOS_PREVISON+NUMERO_DIAS_FUTUROS_PREVISON; i++) {
+		for (int i = NUMERO_DIAS_HISTORICOS_PREVISON; i < NUMERO_DIAS_HISTORICOS_PREVISON
+				+ NUMERO_DIAS_FUTUROS_PREVISON; i++) {
 			acumBalancePrevision = acumBalancePrevision
 					+ (ingresos.get(i) - gastos.get(i));
 			balance.add(acumBalancePrevision);
@@ -1657,8 +1648,8 @@ public class GraphicsActivity extends Activity {
 		}
 
 		// Actualizo los valores mínimos y máximos de la gráfica
-		maxCantidad = max;
-		minCantidad = min;
+		maxCantidad = max.intValue();
+		minCantidad = min.intValue();
 
 	}
 
@@ -1712,7 +1703,7 @@ public class GraphicsActivity extends Activity {
 			}
 
 			break;
-		case 1: // Hiostórico de la Previsión mensual 
+		case 1: // Hiostórico de la Previsión mensual
 			/*
 			 * Al ser previsión lo que ha elegido el usuario lo que devuelvo es
 			 * un array de integer de 4 items, la parte previsión del mes actual
@@ -1750,7 +1741,7 @@ public class GraphicsActivity extends Activity {
 			}
 
 			break;
-		case 2: // Previsión mensual 
+		case 2: // Previsión mensual
 			/*
 			 * Al ser previsión lo que ha elegido el usuario lo que devuelvo es
 			 * un array de integer de 8 items, la parte previsión del mes actual
@@ -1785,10 +1776,10 @@ public class GraphicsActivity extends Activity {
 					rango.add(Integer.valueOf(nuevaFecha));
 
 				}
-			}			
+			}
 
 			break;
-			
+
 		}
 
 		return rango;
@@ -2048,6 +2039,8 @@ public class GraphicsActivity extends Activity {
 	 */
 	private void dibujarGrafica() {
 
+		mySimpleXYPlot.redraw();
+
 		// Set of internal variables for keeping track of the boundaries
 		// Calcula los máximos y mínimos para dibujar la gráfica
 		mySimpleXYPlot.calculateMinMaxVals();
@@ -2055,8 +2048,6 @@ public class GraphicsActivity extends Activity {
 				mySimpleXYPlot.getCalculatedMinY().floatValue());
 		maxXY = new PointF(mySimpleXYPlot.getCalculatedMaxX().floatValue(),
 				mySimpleXYPlot.getCalculatedMaxY().floatValue());
-
-		mySimpleXYPlot.redraw();
 
 	}
 
@@ -2074,10 +2065,9 @@ public class GraphicsActivity extends Activity {
 
 		Calendar c = Calendar.getInstance();
 
-		if ((preferenceConfiguracionPrivate
-				.getInt(singleton_csp.KEY_PYEARS, 0) == c.get(Calendar.YEAR) && c
-				.get(Calendar.MONTH) == (preferenceConfiguracionPrivate.getInt(
-				singleton_csp.KEY_PMONTHS, 0) - 1))) {
+		if ((preferenceConfiguracionPrivate.getInt(singleton_csp.KEY_PYEARS, 0) == c
+				.get(Calendar.YEAR) && c.get(Calendar.MONTH) == (preferenceConfiguracionPrivate
+				.getInt(singleton_csp.KEY_PMONTHS, 0) - 1))) {
 			perteneceMesActual = true;
 		} else {
 			// Situo la fecha según los valores del archivo de configuración de
@@ -2088,7 +2078,7 @@ public class GraphicsActivity extends Activity {
 					singleton_csp.KEY_PMONTHS, 0) - 1);
 			c.set(Calendar.YEAR, preferenceConfiguracionPrivate.getInt(
 					singleton_csp.KEY_PYEARS, 0));
-			
+
 			perteneceMesActual = false;
 		}
 
@@ -2109,9 +2099,9 @@ public class GraphicsActivity extends Activity {
 			c.add(Calendar.MONTH, -5);
 			c.set(Calendar.DATE, 1);
 			break;
-		case ENTERO_FECHA_14_DIAS_ANTES:
+		case ENTERO_FECHA_15_DIAS_ANTES:
 			// Obtengo de la variable Calendar la fecha de hace 31 días antes
-			c.add(Calendar.DATE, -14);
+			c.add(Calendar.DATE, -15);
 			break;
 		case ENTERO_FECHA_DIA_DE_AYER:
 			if (perteneceMesActual) {
@@ -2209,9 +2199,9 @@ public class GraphicsActivity extends Activity {
 			c.set(Calendar.DATE, 1);
 			c.add(Calendar.DATE, -1);
 			break;
-		case ENTERO_FECHA_10_DIAS_ANTES:
-			c.add(Calendar.DATE, -10);
-			break;		
+		case ENTERO_FECHA_10_DIAS_DESPUES:
+			c.add(Calendar.DATE, 11);
+			break;
 		default:
 			break;
 		}
@@ -2257,54 +2247,6 @@ public class GraphicsActivity extends Activity {
 		}
 		super.onResume();
 	}
-
-	/*
-	 * @Override public boolean onTouch(View v, MotionEvent event) { // TODO
-	 * Auto-generated method stub switch (event.getAction() &
-	 * MotionEvent.ACTION_MASK) { case MotionEvent.ACTION_DOWN: // Start gesture
-	 * firstFinger = new PointF(event.getX(), event.getY()); mode =
-	 * ONE_FINGER_DRAG; break; case MotionEvent.ACTION_UP: case
-	 * MotionEvent.ACTION_POINTER_UP: //When the gesture ends, a thread is
-	 * created to give inertia to the scrolling and zoom Timer t = new Timer();
-	 * t.schedule(new TimerTask() {
-	 * 
-	 * @Override public void run() { while(Math.abs(lastScrolling)>1f ||
-	 * Math.abs(lastZooming-1)<1.01){ lastScrolling*=.8; scroll(lastScrolling);
-	 * lastZooming+=(1-lastZooming)*.2; zoom(lastZooming);
-	 * mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x, BoundaryMode.AUTO);
-	 * mySimpleXYPlot.redraw(); //mySimpleXYPlot.redraw(); } } }, 0);
-	 * 
-	 * case MotionEvent.ACTION_POINTER_DOWN: // second finger distBetweenFingers
-	 * = spacing(event); // the distance check is done to avoid false alarms if
-	 * (distBetweenFingers > 5f) { mode = TWO_FINGERS_DRAG; } break; case
-	 * MotionEvent.ACTION_MOVE: if (mode == ONE_FINGER_DRAG) { PointF
-	 * oldFirstFinger=firstFinger; firstFinger=new PointF(event.getX(),
-	 * event.getY()); lastScrolling=oldFirstFinger.x-firstFinger.x;
-	 * scroll(lastScrolling);
-	 * lastZooming=(firstFinger.y-oldFirstFinger.y)/mySimpleXYPlot.getHeight();
-	 * if (lastZooming<0) lastZooming=1/(1-lastZooming); else lastZooming+=1;
-	 * zoom(lastZooming); mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
-	 * BoundaryMode.AUTO); mySimpleXYPlot.redraw();
-	 * 
-	 * } else if (mode == TWO_FINGERS_DRAG) { float oldDist =distBetweenFingers;
-	 * distBetweenFingers=spacing(event);
-	 * lastZooming=oldDist/distBetweenFingers; zoom(lastZooming);
-	 * mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x, BoundaryMode.AUTO);
-	 * mySimpleXYPlot.redraw(); } break; } return true; }
-	 * 
-	 * private void zoom(float scale) { float domainSpan = maxXY.x - minXY.x;
-	 * float domainMidPoint = maxXY.x - domainSpan / 2.0f; float offset =
-	 * domainSpan * scale / 2.0f; minXY.x=domainMidPoint- offset;
-	 * maxXY.x=domainMidPoint+offset; }
-	 * 
-	 * private void scroll(float pan) { float domainSpan = maxXY.x - minXY.x;
-	 * float step = domainSpan / mySimpleXYPlot.getWidth(); float offset = pan *
-	 * step; minXY.x+= offset; maxXY.x+= offset; }
-	 * 
-	 * private float spacing(MotionEvent event) { float x = event.getX(0) -
-	 * event.getX(1); float y = event.getY(0) - event.getY(1); return
-	 * FloatMath.sqrt(x * x + y * y); }
-	 */
 
 	/*
 	 * Método para configurar el diseño de la Gráfica
@@ -2378,8 +2320,8 @@ public class GraphicsActivity extends Activity {
 
 			if (listadoValoresIngresos.isEmpty()
 					&& listadoValoresGastos.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
@@ -2391,8 +2333,8 @@ public class GraphicsActivity extends Activity {
 			// Entra aquí si es Historico y Mensual
 			if (listadoValoresIngresos.isEmpty()
 					&& listadoValoresGastos.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
@@ -2404,8 +2346,8 @@ public class GraphicsActivity extends Activity {
 			// Entra aquí si es Historico y Diario
 			if (listadoValoresIngresos.isEmpty()
 					&& listadoValoresGastos.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 3);
@@ -2419,8 +2361,8 @@ public class GraphicsActivity extends Activity {
 					&& listadoValoresGastos.isEmpty()
 					&& listadoValoresIngresosPrevision.isEmpty()
 					&& listadoValoresGastosPrevision.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
@@ -2434,8 +2376,8 @@ public class GraphicsActivity extends Activity {
 					&& listadoValoresGastos.isEmpty()
 					&& listadoValoresIngresosPrevision.isEmpty()
 					&& listadoValoresGastosPrevision.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
@@ -2449,8 +2391,8 @@ public class GraphicsActivity extends Activity {
 					&& listadoValoresGastos.isEmpty()
 					&& listadoValoresIngresosPrevision.isEmpty()
 					&& listadoValoresGastosPrevision.isEmpty()) {
-				minCantidad = 0.0;
-				maxCantidad = 100.0;
+				minCantidad = 0;
+				maxCantidad = 100;
 			}
 
 			mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 3);
@@ -2462,7 +2404,7 @@ public class GraphicsActivity extends Activity {
 
 		// Pongo los límites del ejeY (Cantidad en €)
 		mySimpleXYPlot.setUserRangeOrigin(0);
-		mySimpleXYPlot.setRangeBoundaries(minCantidad - 100, maxCantidad + 100,
+		mySimpleXYPlot.setRangeBoundaries(minCantidad - 50, maxCantidad + 50,
 				BoundaryMode.FIXED);
 		mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL,
 				obtenerRangoEjeY(minCantidad, maxCantidad));
@@ -2475,10 +2417,10 @@ public class GraphicsActivity extends Activity {
 	 * Método que me devuelve el salto entre valores del ejeY a partir de los
 	 * valores mínimos y máximos pasados por parámetro
 	 */
-	private double obtenerRangoEjeY(Double minCantidad2, Double maxCantidad2) {
+	private int obtenerRangoEjeY(int minCantidad2, int maxCantidad2) {
 
-		Double dif = maxCantidad2 - minCantidad2;
-		double salto = Math.round(dif / 15);
+		int dif = maxCantidad2 - minCantidad2;
+		int salto = dif / 15;
 
 		return salto;
 	}
@@ -2556,7 +2498,7 @@ public class GraphicsActivity extends Activity {
 
 		if (requestCode == RESULT_SETTINGS && resultCode == Activity.RESULT_OK
 				&& data != null) {
-			
+
 			dba.openREAD();
 
 			cargarListasDeValores();
@@ -2564,7 +2506,7 @@ public class GraphicsActivity extends Activity {
 			dba.close();
 
 			mySimpleXYPlot.clear();
-			
+
 			if (preferenceConfiguracionPrivate.getBoolean(
 					singleton_csp.KEY_CBPLINEINGRESOS, false) == false
 					&& preferenceConfiguracionPrivate.getBoolean(
@@ -2574,14 +2516,14 @@ public class GraphicsActivity extends Activity {
 
 				lanzarAdvertencia("Debe seleccionar alguna gráfica en la configuración para mostrar.");
 
-				mySimpleXYPlot.setVisibility(Plot.INVISIBLE);
+				mySimpleXYPlot.setVisibility(View.INVISIBLE);
 
 			} else {
 				prepararLineasGraficas();
 				configurarGrafica();
 				dibujarGrafica();
 
-				mySimpleXYPlot.setVisibility(Plot.VISIBLE);
+				mySimpleXYPlot.setVisibility(View.VISIBLE);
 			}
 
 		}
@@ -2607,6 +2549,106 @@ public class GraphicsActivity extends Activity {
 		}
 
 		return true;
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Método que se llama al tocar la pantalla
+		switch (event.getAction() & MotionEvent.ACTION_MASK) {
+		case MotionEvent.ACTION_DOWN: // Start gesture
+			firstFinger = new PointF(event.getX(), event.getY());
+			mode = ONE_FINGER_DRAG;
+			break;
+		case MotionEvent.ACTION_UP:
+		case MotionEvent.ACTION_POINTER_UP:
+			// When the gesture ends, a thread is created to give inertia to the
+			// scrolling and zoom
+			Timer t = new Timer();
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					while (Math.abs(lastScrolling) > 1f
+							|| Math.abs(lastZooming - 1) < 1.01) {
+						lastScrolling *= .8;
+						scroll(lastScrolling);
+						lastZooming += (1 - lastZooming) * .2;
+						zoom(lastZooming);
+						mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
+								BoundaryMode.AUTO);
+						// try {
+						// mySimpleXYPlot.postRedraw();
+						mySimpleXYPlot.redraw();
+						// } catch (InterruptedException e) {
+						// e.printStackTrace();
+						// }
+						// the thread lives until the scrolling and zooming are
+						// imperceptible
+					}
+				}
+			}, 0);
+			
+		case MotionEvent.ACTION_POINTER_DOWN: // second finger
+			distBetweenFingers = spacing(event);
+			// the distance check is done to avoid false alarms
+			if (distBetweenFingers > 5f) {
+				mode = TWO_FINGERS_DRAG;
+			}
+			break;
+		case MotionEvent.ACTION_MOVE:
+			if (mode == ONE_FINGER_DRAG) {
+				PointF oldFirstFinger = firstFinger;
+				firstFinger = new PointF(event.getX(), event.getY());
+				lastScrolling = oldFirstFinger.x - firstFinger.x;
+				scroll(lastScrolling);
+				lastZooming = (firstFinger.y - oldFirstFinger.y)
+						/ mySimpleXYPlot.getHeight();
+				if (lastZooming < 0)
+					lastZooming = 1 / (1 - lastZooming);
+				else
+					lastZooming += 1;
+				zoom(lastZooming);
+				mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
+						BoundaryMode.AUTO);
+				
+				mySimpleXYPlot.redraw();
+				
+
+			} else if (mode == TWO_FINGERS_DRAG) {
+				float oldDist = distBetweenFingers;
+				distBetweenFingers = spacing(event);
+				lastZooming = oldDist / distBetweenFingers;
+				zoom(lastZooming);
+				mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
+						BoundaryMode.AUTO);
+				mySimpleXYPlot.redraw();
+			}
+			break;
+		}
+		
+		return true;
+	}
+
+	private void zoom(float scale) {
+		float domainSpan = maxXY.x - minXY.x;
+		float domainMidPoint = maxXY.x - domainSpan / 2.0f;
+		float offset = domainSpan * scale / 2.0f;
+		minXY.x = domainMidPoint - offset;
+		maxXY.x = domainMidPoint + offset;
+	}
+
+	private void scroll(float pan) {
+		float domainSpan = maxXY.x - minXY.x;
+		float step = domainSpan / mySimpleXYPlot.getWidth();
+		float offset = pan * step;
+		minXY.x += offset;
+		maxXY.x += offset;
+	}
+
+	private float spacing(MotionEvent event) {
+		float x = event.getX(0) - event.getX(1);
+		float y = event.getY(0) - event.getY(1);
+		//return Math.sqrt(x * x + y * y);
+		return (float) Math.sqrt(x * x + y * y);
 	}
 
 }

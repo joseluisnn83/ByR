@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import android.annotation.SuppressLint;
 import android.app.TabActivity;
@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 @SuppressLint("NewApi")
@@ -32,7 +34,8 @@ public class InformesScreenActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
+		
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_informes_screen);
 
 		// Obtengo los valores que se encuentran en el archivo de configuración
@@ -133,13 +136,13 @@ public class InformesScreenActivity extends TabActivity {
 			// Cambio el color del texto del TabWidget
 			tv = (TextView) tabhost.getTabWidget().getChildAt(i)
 					.findViewById(android.R.id.title);
-			tv.setTextColor(reso.getColor(R.color.Azul1));
+			tv.setTextColor(reso.getColor(R.color.colorGeneral));
 		}
 		
 		tabhost.getTabWidget()
 				.getChildAt(tabhost.getCurrentTab())
 				.setBackgroundColor(
-						reso.getColor(R.color.Azul3)); // selected
+						reso.getColor(R.color.colorGeneral)); // selected
 		// Cambio el color del texto del TabWidget
 		tv = (TextView) tabhost.getTabWidget()
 				.getChildAt(tabhost.getCurrentTab())

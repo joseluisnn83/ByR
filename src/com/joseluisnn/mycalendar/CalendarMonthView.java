@@ -12,9 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.joseluisnn.byr.R;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarAdapter.DayCell;
 
 /**
@@ -114,6 +112,7 @@ public class CalendarMonthView extends LinearLayout {
 		// evento Onclick del Calendario
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			// en este método recupero el View (celda del calendario pulsada)
+			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				
 				if (v.getTag() != null) {
@@ -128,9 +127,6 @@ public class CalendarMonthView extends LinearLayout {
 								getMonth(),
 								Integer.valueOf(((DayCell)v.getTag()).getDescr()).intValue()
 								);
-						
-					}else{
-						Toast.makeText(mContext, "Día: " + ((DayCell)v.getTag()).getDescr() + " no pertenece al mes actual", Toast.LENGTH_SHORT).show();
 					}
 				}
 			}

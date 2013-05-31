@@ -2,10 +2,10 @@
 <resources>
 
     <!-- Elementos de la Actividad Principal (MainActivity) -->
-    <string name="app_name">B&amp;R</string>
+    <string name="app_name">TT</string>
     
     <!-- Elementos de la Pantalla Principal (ScreenActivity) -->
-    <string name="title_activity_principal_screen">Bares &amp; Restaurantes</string>
+    <string name="title_activity_principal_screen">TantoTengo</string>
     <string name="title_preferenceScreenConfiguration">Configuración</string>
     <string name="textViewDeveloper">Aplicación desarrollada por José Luis Neira (&#169;)2013</string>
     <string name="descriptionTituloLogo">Título de la Aplicación</string>
@@ -26,16 +26,17 @@
 	<string name="mtIngresos">Ingresos</string>
 	<string name="mtGastos">Gastos</string>
 	<string name="mtInformes">Informes por defecto</string>
-	<string name="mtPassword">Password</string>
-	<string name="mtEmail">e-mail</string>
+	<string name="mtDumpDB">Hacer copia seguridad Base de Datos</string>
+	<string name="mtLoadDB">Cargar Base de Datos</string>
 	<string name="stTipoConfiguracion">Elige entre los dos tipos de configuración</string>
 	<string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
 	<string name="stGastos">Inserta o borra conceptos de Gastos</string>
 	<string name="stInformes">Elija el informe a seleccionar por defecto</string>
-	<string name="stPassword">Puede modificar la contraseña de Usuario</string>
-	<string name="stEmail">Puede modificar el e-mail de Usuario</string>
+	<string name="stDumpDB">Presione si desea hacer una copia de seguridad de su BD en la tarjeta SD</string>	
+	<string name="stLoadDB">Presione si desea cargar los datos de una copia de seguridad de su BD en la tarjeta SD</string>
 	<string name="tvConceptos">Gestión de Conceptos</string>
 	<string name="tvOtrasOpciones">Otras Opciones</string>
+	<string name="tvCopiaSeguridad">Copia de seguridad</string>
 	<string name="title_ConfigurationActivity">Configuración</string>
 	
 	<!-- Elementos de los Dialog de Configuracion -->

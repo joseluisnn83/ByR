@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/listados_pestanya_background"
+    android:background="@drawable/fondo_general"
     android:orientation="vertical"
     android:padding="@dimen/pestanyaInformesTotalesPadding" >
-
+	<!-- android:background="@drawable/listados_pestanya_background" -->
     <!-- LinearLayout que va a contener los Spinner con Años, meses y días -->
 
     <LinearLayout

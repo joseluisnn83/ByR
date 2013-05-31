@@ -19,6 +19,7 @@ public class SingletonConfigurationSharedPreferences {
 	public final String KEY_CUENTA = "key_cuenta_creada";
 	public final String KEY_TIPO_CONFIGURACION = "key_tipo_config";
 	public final String KEY_INFORME_POR_DEFECTO = "key_informe_por_defecto";
+	public final String KEY_FECHA_COPIA_SEGURIDAD = "key_copia_seguridad";
 	/*
 	 *  nombre de los campos claves de los datos de configuración de las gráficas
 	 */

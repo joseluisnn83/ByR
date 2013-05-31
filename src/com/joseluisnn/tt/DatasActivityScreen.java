@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.util.Calendar;
 
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarioView;
 import com.joseluisnn.mycalendar.CalendarioView.ObservadorCalendarioView;
 
@@ -44,6 +46,8 @@ public class DatasActivityScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_datas_screen);
 
 		animacionBotonPulsado = AnimationUtils.loadAnimation(this,

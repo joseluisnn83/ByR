@@ -4,6 +4,7 @@
         android:drawable="@drawable/background_linearlayout_configuration_pulsado" /> <!-- pressed -->
    <!-- <item android:state_focused="true" 
         android:drawable="@drawable/button_focused" />  focused -->
-	<item android:drawable="@color/gris_claro" /> <!-- default --> 
+	<!--  <item android:drawable="@color/gris_claro" />--> 
+	<!-- default --> 
  	
 </selector>

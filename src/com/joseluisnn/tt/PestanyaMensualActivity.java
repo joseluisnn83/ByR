@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 

@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.joseluisnn.byr.R;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 
 /**
@@ -106,14 +106,17 @@ public class CalendarAdapter extends BaseAdapter {
 		
 	}
 
+	@Override
 	public int getCount() {
 		return days.length;
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return null;
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
@@ -134,6 +137,7 @@ public class CalendarAdapter extends BaseAdapter {
 	 * 
 	 * Obtengo el View que hace referencia a la casilla de un día del mes
 	 */
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View currentView = convertView;
 		TextView dayViewTextView;
@@ -157,7 +161,7 @@ public class CalendarAdapter extends BaseAdapter {
 		if (!isCurrentMonth) {
 			
 			dayViewTextView.setTextColor(mContext.getResources().getColor(R.color.gris_claro));
-			ivInsertedData.setVisibility(ImageView.INVISIBLE);
+			ivInsertedData.setVisibility(View.INVISIBLE);
 			
 		} else {// Si es un día del mes actual pasa por el else
 			
@@ -175,9 +179,9 @@ public class CalendarAdapter extends BaseAdapter {
 			 */
 			if (listaFechasConValores.contains(Integer.valueOf(fechaConValores))){
 				// Indico que en la casilla hay algún valor insertado y pongo a visible el icono
-				ivInsertedData.setVisibility(ImageView.VISIBLE);
+				ivInsertedData.setVisibility(View.VISIBLE);
 			}else{
-				ivInsertedData.setVisibility(ImageView.INVISIBLE);
+				ivInsertedData.setVisibility(View.INVISIBLE);
 			}
 			
 		}

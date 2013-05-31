@@ -33,6 +33,8 @@
     <color name="verde">#006400</color>
     <color name="LightYellow">#FFFEBC</color>
 	<color name="DarkYellow">#C8911B</color>
+	<color name="colorGeneral">#AEC5D5</color>
+	
 	<!-- Colores para el Calendario -->
 	<color name="CalendarioAzulCabeceraStart">#2185C5</color>
 	<color name="CalendarioAzulCabeceraCenter">#2492D9</color>

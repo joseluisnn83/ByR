@@ -46,10 +46,10 @@ final class DateHelper {
 	public static Date clearTime(final Date date) {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, 0);
-		calendar.set(GregorianCalendar.MINUTE, 0);
-		calendar.set(GregorianCalendar.SECOND, 0);
-		calendar.set(GregorianCalendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		return calendar.getTime();
 	}
 
@@ -61,40 +61,40 @@ final class DateHelper {
 
 	public static Date replaceDate(final Date sourceDate, final int year,
 			final int monthOfYear, final int dayOfMonth) {
-		java.util.Calendar calendar = GregorianCalendar.getInstance();
+		java.util.Calendar calendar = Calendar.getInstance();
 		calendar.setTime(sourceDate);
 
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, monthOfYear);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, dayOfMonth);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, monthOfYear);
+		calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 		return calendar.getTime();
 	}
 
 	public static void changeDate(final java.util.Calendar calendar,
 			final int year, final int monthOfYear, final int dayOfMonth) {
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, monthOfYear);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, dayOfMonth);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, monthOfYear);
+		calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 	}
 
 	public static Date replaceTime(final Date sourceDate, final int hourOfDay,
 			final int minute, final int second) {
-		java.util.Calendar calendar = GregorianCalendar.getInstance();
+		java.util.Calendar calendar = Calendar.getInstance();
 		calendar.setTime(sourceDate);
 
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay);
-		calendar.set(GregorianCalendar.MINUTE, minute);
-		calendar.set(GregorianCalendar.SECOND, second);
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, second);
 
 		return calendar.getTime();
 	}
 
 	public static void changeTime(final java.util.Calendar calendar,
 			final int hourOfDay, final int minute, final int second) {
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay);
-		calendar.set(GregorianCalendar.MINUTE, minute);
-		calendar.set(GregorianCalendar.SECOND, second);
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, second);
 	}
 
 	public static GregorianCalendar fromDateToCalendar(final Date date) {
@@ -104,32 +104,32 @@ final class DateHelper {
 	}
 
 	public static void changeToBeginDayUTC(final java.util.Calendar calendar) {
-		int year = calendar.get(GregorianCalendar.YEAR);
-		int month = calendar.get(GregorianCalendar.MONTH);
-		int day = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 		calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, month);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, day);
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, 0);
-		calendar.set(GregorianCalendar.MINUTE, 0);
-		calendar.set(GregorianCalendar.SECOND, 0);
-		calendar.set(GregorianCalendar.MILLISECOND, 0);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 	}
 
 	public static void changeTimeAndTimeZone(final java.util.Calendar calendar,
 			final int hours, final int minutes, final String timeZone) {
-		int year = calendar.get(GregorianCalendar.YEAR);
-		int month = calendar.get(GregorianCalendar.MONTH);
-		int day = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 		calendar.setTimeZone(TimeZone.getTimeZone(timeZone));
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, month);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, day);
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, hours);
-		calendar.set(GregorianCalendar.MINUTE, minutes);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		calendar.set(Calendar.HOUR_OF_DAY, hours);
+		calendar.set(Calendar.MINUTE, minutes);
 	}
 	
 	public static Calendar createCalendar(final int year, final int month,
@@ -137,13 +137,13 @@ final class DateHelper {
 		Calendar calendar = Calendar
 				.getInstance(TimeZone.getTimeZone(timezone));
 
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, month);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, day);
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, 0);
-		calendar.set(GregorianCalendar.MINUTE, 0);
-		calendar.set(GregorianCalendar.SECOND, 0);
-		calendar.set(GregorianCalendar.MILLISECOND, 0);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 
 		return calendar;
 	}
@@ -163,13 +163,13 @@ final class DateHelper {
 			final String timezone) {
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(timezone));
 
-		calendar.set(GregorianCalendar.YEAR, year);
-		calendar.set(GregorianCalendar.MONTH, month);
-		calendar.set(GregorianCalendar.DAY_OF_MONTH, day);
-		calendar.set(GregorianCalendar.HOUR_OF_DAY, hour);
-		calendar.set(GregorianCalendar.MINUTE, minute);
-		calendar.set(GregorianCalendar.SECOND, 0);
-		calendar.set(GregorianCalendar.MILLISECOND, 0);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 
 		return calendar;
 	}

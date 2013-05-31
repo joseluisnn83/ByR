@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 
 /*
@@ -99,13 +100,13 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 		tvConcepto.setText(values.get(position).getConcepto());
 		tvCantidad.setText(numeroAFormatear.format(values.get(position).getCantidad())+" €");
 		
-		tvConcepto.setTextColor(this.context.getResources().getColor(com.joseluisnn.byr.R.color.dim_gray));
+		tvConcepto.setTextColor(this.context.getResources().getColor(com.joseluisnn.tt.R.color.dim_gray));
 		
 		// Según si es ingreso o gasto pongo la letra de un color u otro
 		if(this.tipoConcepto.equals("ingreso")){
-			tvCantidad.setTextColor(this.context.getResources().getColor(com.joseluisnn.byr.R.color.verde));
+			tvCantidad.setTextColor(this.context.getResources().getColor(com.joseluisnn.tt.R.color.verde));
 		}else{
-			tvCantidad.setTextColor(this.context.getResources().getColor(com.joseluisnn.byr.R.color.rojo));
+			tvCantidad.setTextColor(this.context.getResources().getColor(com.joseluisnn.tt.R.color.rojo));
 		}
 		
 		/*

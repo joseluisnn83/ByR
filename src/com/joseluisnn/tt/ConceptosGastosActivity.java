@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.util.ArrayList;
 import android.app.AlertDialog;
@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.Concepto;
 

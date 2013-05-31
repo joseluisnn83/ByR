@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import com.joseluisnn.byr.R;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.MonthPagerAdapter.ObservadorMPA;
 
 public class CalendarioView extends LinearLayout {

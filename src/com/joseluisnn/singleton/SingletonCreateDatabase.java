@@ -7,7 +7,7 @@ public class SingletonCreateDatabase {
 	/*
 	 * Me creo las constantes para la creacion de la Base de Datos
 	 */
-	public final String CREAT_TABLE_CONCEPTOS = "CREATE TABLE conceptos( " +
+	public final String CREATE_TABLE_CONCEPTOS = "CREATE TABLE conceptos( " +
 			"id_concepto INTEGER PRIMARY KEY ASC AUTOINCREMENT, " +
 			"nombre VARCHAR2(50) UNIQUE, " +
 			"tipo_concepto VARCHAR2(10), " +

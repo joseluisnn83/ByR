@@ -10,8 +10,8 @@
     <dimen name="button_principal_screen_margin_bottom">80dp</dimen>
     <dimen name="icon_heigth">200dp</dimen>
     <dimen name="icon_width">200dp</dimen>
-    <dimen name="titulo_logo_heigth">266dp</dimen>
-    <dimen name="titulo_logo_width">533dp</dimen>
+    <dimen name="titulo_logo_heigth">300dp</dimen>
+    <dimen name="titulo_logo_width">600dp</dimen>
     
     <!-- Dimens from activity_configuration -->
     <dimen name="mt">36sp</dimen>

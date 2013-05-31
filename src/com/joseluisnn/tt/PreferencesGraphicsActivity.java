@@ -1,4 +1,4 @@
-package com.joseluisnn.byr;
+package com.joseluisnn.tt;
 
 import java.util.Calendar;
 
@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
+import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 public class PreferencesGraphicsActivity extends PreferenceActivity {
@@ -102,7 +103,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		// Obtengo los objetos del PreferenceScreen
 		listPreferenceTipoGrafica = (ListPreference) findPreference("lpTipoGrafica");
 		listPreferenceValoresGrafica = (ListPreference) findPreference("lpValoresGrafica");
-		preferenceFecha = (Preference) findPreference("preferenceFecha");
+		preferenceFecha = findPreference("preferenceFecha");
 		cbLineaIngresos = (CheckBoxPreference) findPreference("cbpLineIngresos");
 		cbLineaGastos = (CheckBoxPreference) findPreference("cbpLineGastos");
 		cbLineaBalance = (CheckBoxPreference) findPreference("cbpLineBalance");

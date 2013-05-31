@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.joseluisnn.byr.R;
+import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarMonthView.ObservadorGestionDatos;
 /*
  * Clase que hereda de PagerAdapter mediante la cual podré tener una lista que se deliza horizontalmente para
@@ -58,9 +58,9 @@ class MonthPagerAdapter extends PagerAdapter {
 		Calendar cal2 = DateHelper.createCurrentBeginDayCalendar();
 		Calendar cal3 = DateHelper.createCurrentBeginDayCalendar();
 
-		CalendarMonthView view1 = (CalendarMonthView) getView(inflater);
-		CalendarMonthView view2 = (CalendarMonthView) getView(inflater);
-		CalendarMonthView view3 = (CalendarMonthView) getView(inflater);
+		CalendarMonthView view1 = getView(inflater);
+		CalendarMonthView view2 = getView(inflater);
+		CalendarMonthView view3 = getView(inflater);
 
 		cal1.add(Calendar.MONTH, -1);
 		cal2.add(Calendar.MONTH, 0);
@@ -133,9 +133,9 @@ class MonthPagerAdapter extends PagerAdapter {
 		
 		int pagerPosition = mPager.getCurrentItem();
 		
-		CalendarMonthView view1 = (CalendarMonthView) pages.get((pagerPosition - 1) % pages.size());
-		CalendarMonthView view2 = (CalendarMonthView) pages.get(pagerPosition % pages.size());
-		CalendarMonthView view3 = (CalendarMonthView) pages.get((pagerPosition + 1) % pages.size());
+		CalendarMonthView view1 = pages.get((pagerPosition - 1) % pages.size());
+		CalendarMonthView view2 = pages.get(pagerPosition % pages.size());
+		CalendarMonthView view3 = pages.get((pagerPosition + 1) % pages.size());
 
 		view1.setCurrentDay(currentDay);
 		view2.setCurrentDay(currentDay);
@@ -156,9 +156,9 @@ class MonthPagerAdapter extends PagerAdapter {
 		
 		int pagerPosition = mPager.getCurrentItem();
 		
-		CalendarMonthView view1 = (CalendarMonthView) pages.get((pagerPosition - 1) % pages.size());
-		CalendarMonthView view2 = (CalendarMonthView) pages.get(pagerPosition % pages.size());
-		CalendarMonthView view3 = (CalendarMonthView) pages.get((pagerPosition + 1) % pages.size());
+		CalendarMonthView view1 = pages.get((pagerPosition - 1) % pages.size());
+		CalendarMonthView view2 = pages.get(pagerPosition % pages.size());
+		CalendarMonthView view3 = pages.get((pagerPosition + 1) % pages.size());
 
 		cal1.add(Calendar.MONTH, -1);
 		cal2.add(Calendar.MONTH, 0);
@@ -177,7 +177,7 @@ class MonthPagerAdapter extends PagerAdapter {
 		
 		int pagerPosition = mPager.getCurrentItem();
 		
-		CalendarMonthView view2 = (CalendarMonthView) pages.get(pagerPosition % pages.size());
+		CalendarMonthView view2 = pages.get(pagerPosition % pages.size());
 		
 		return view2.getMonth();
 	}

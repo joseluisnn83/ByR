@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/gris_claro" >
-
+    android:background="@drawable/fondo_general" >
+	<!-- android:background="@color/gris_claro" -->
     <LinearLayout
         android:id="@+id/llTipoConfiguracion"
         android:background="@drawable/linearlayout_configuration_states"
@@ -14,11 +14,7 @@
         android:paddingLeft="@dimen/paddingLeftConfiguration"
         android:paddingTop="@dimen/paddingTopConfiguration"
         android:paddingBottom="@dimen/paddingBottomConfiguration" >
-
-        <!--
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        -->
+        
         <TextView
             android:id="@+id/textViewMTTipoConfiguracion"
             android:layout_width="wrap_content"
@@ -120,8 +116,7 @@
         android:id="@+id/llOtrasOpciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-         >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textViewOtrasOpciones"
@@ -162,11 +157,82 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <TextView            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:text="@string/tvCopiaSeguridad"
+            android:textSize="@dimen/st"
+            android:textColor="@color/blanco"
+            android:background="@color/dim_gray" />
+        
+        <LinearLayout
+            android:id="@+id/llDumpDB"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:paddingTop="@dimen/paddingTopConfiguration"
+        	android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:orientation="vertical" >
+
+            <TextView                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mtDumpDB"
+                android:textSize="@dimen/mt"
+                android:textStyle="bold" />
+
+            <TextView                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stDumpDB"
+                android:textSize="@dimen/st" />
+
+        </LinearLayout>
+        
         <View
             android:layout_width="fill_parent"
             android:layout_height="@dimen/lineView"
             android:background="#808080" />
+        
+        <LinearLayout
+            android:id="@+id/llLoadDB"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:paddingTop="@dimen/paddingTopConfiguration"
+        	android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:orientation="vertical" >
 
+            <TextView                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mtLoadDB"
+                android:textSize="@dimen/mt"
+                android:textStyle="bold" />
+
+            <TextView                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stLoadDB"
+                android:textSize="@dimen/st" />
+
+        </LinearLayout>
+        
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/lineView"
+            android:background="#808080" />
+        
     </LinearLayout>
 
 </LinearLayout>
