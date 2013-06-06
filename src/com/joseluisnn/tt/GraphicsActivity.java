@@ -2,8 +2,7 @@ package com.joseluisnn.tt;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import pl.polidea.view.ZoomView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,11 +14,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.widget.LinearLayout;
 import com.androidplot.Plot;
 import com.androidplot.series.XYSeries;
 import com.androidplot.xy.BoundaryMode;
@@ -34,7 +33,7 @@ import com.joseluisnn.objetos.GraphXLabelFormat;
 import com.joseluisnn.objetos.ValoresElementosGraficas;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
-public class GraphicsActivity extends Activity implements OnTouchListener {
+public class GraphicsActivity extends Activity {
 
 	private static final int ENTERO_FECHA_DIA_DE_HOY = 0;
 	private static final int ENTERO_FECHA_5_ANYOS_ANTES = 1;
@@ -85,17 +84,6 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 	private PointF minXY;
 	private PointF maxXY;
 	/*
-	 * Definition of the touch states
-	 */
-	static final int NONE = 0;
-	static final int ONE_FINGER_DRAG = 1;
-	static final int TWO_FINGERS_DRAG = 2;
-	int mode = NONE;
-	PointF firstFinger;
-	float lastScrolling;
-	float distBetweenFingers;
-	float lastZooming;
-	/*
 	 * Variable para la BASE DE DATOS
 	 */
 	private DBAdapter dba;
@@ -123,6 +111,10 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 	 */
 	private int minCantidad;
 	private int maxCantidad;
+	/*
+	 * Variable para hacer el zoom del Layout que contiene la Gráfica
+	 */
+	private ZoomView zoomView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,12 +126,20 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 		 * instruccion antes del setContentView para que no cargue las imágenes
 		 */
 		setContentView(R.layout.activity_graphics);
+		
+		// Me creo una Vista con el Layout al cual le quiero hacer Zoom
+		View v = ((LayoutInflater)   getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_graphics_zoom, null, false);		
+		
+		zoomView = new ZoomView(this);
+		zoomView.addView(v);
+
+		LinearLayout main_container = (LinearLayout) findViewById(R.id.main_container);
+		main_container.addView(zoomView);
 
 		/*
 		 * Inicializamos el objeto XYPlot búscandolo desde el layout:
 		 */
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
-		mySimpleXYPlot.setOnTouchListener(this);
 		/*
 		 * Instancio la Base de Datos
 		 */
@@ -197,6 +197,8 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 
 		// Cierro la Base de datos
 		dba.close();
+		
+		
 
 	}
 
@@ -2044,10 +2046,10 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 		// Set of internal variables for keeping track of the boundaries
 		// Calcula los máximos y mínimos para dibujar la gráfica
 		mySimpleXYPlot.calculateMinMaxVals();
-		minXY = new PointF(mySimpleXYPlot.getCalculatedMinX().floatValue(),
-				mySimpleXYPlot.getCalculatedMinY().floatValue());
-		maxXY = new PointF(mySimpleXYPlot.getCalculatedMaxX().floatValue(),
-				mySimpleXYPlot.getCalculatedMaxY().floatValue());
+		this.setMinXY(new PointF(mySimpleXYPlot.getCalculatedMinX().floatValue(),
+				mySimpleXYPlot.getCalculatedMinY().floatValue()));
+		this.setMaxXY(new PointF(mySimpleXYPlot.getCalculatedMaxX().floatValue(),
+				mySimpleXYPlot.getCalculatedMaxY().floatValue()));
 
 	}
 
@@ -2551,104 +2553,20 @@ public class GraphicsActivity extends Activity implements OnTouchListener {
 		return true;
 	}
 
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Método que se llama al tocar la pantalla
-		switch (event.getAction() & MotionEvent.ACTION_MASK) {
-		case MotionEvent.ACTION_DOWN: // Start gesture
-			firstFinger = new PointF(event.getX(), event.getY());
-			mode = ONE_FINGER_DRAG;
-			break;
-		case MotionEvent.ACTION_UP:
-		case MotionEvent.ACTION_POINTER_UP:
-			// When the gesture ends, a thread is created to give inertia to the
-			// scrolling and zoom
-			Timer t = new Timer();
-			t.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					while (Math.abs(lastScrolling) > 1f
-							|| Math.abs(lastZooming - 1) < 1.01) {
-						lastScrolling *= .8;
-						scroll(lastScrolling);
-						lastZooming += (1 - lastZooming) * .2;
-						zoom(lastZooming);
-						mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
-								BoundaryMode.AUTO);
-						// try {
-						// mySimpleXYPlot.postRedraw();
-						mySimpleXYPlot.redraw();
-						// } catch (InterruptedException e) {
-						// e.printStackTrace();
-						// }
-						// the thread lives until the scrolling and zooming are
-						// imperceptible
-					}
-				}
-			}, 0);
-			
-		case MotionEvent.ACTION_POINTER_DOWN: // second finger
-			distBetweenFingers = spacing(event);
-			// the distance check is done to avoid false alarms
-			if (distBetweenFingers > 5f) {
-				mode = TWO_FINGERS_DRAG;
-			}
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if (mode == ONE_FINGER_DRAG) {
-				PointF oldFirstFinger = firstFinger;
-				firstFinger = new PointF(event.getX(), event.getY());
-				lastScrolling = oldFirstFinger.x - firstFinger.x;
-				scroll(lastScrolling);
-				lastZooming = (firstFinger.y - oldFirstFinger.y)
-						/ mySimpleXYPlot.getHeight();
-				if (lastZooming < 0)
-					lastZooming = 1 / (1 - lastZooming);
-				else
-					lastZooming += 1;
-				zoom(lastZooming);
-				mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
-						BoundaryMode.AUTO);
-				
-				mySimpleXYPlot.redraw();
-				
-
-			} else if (mode == TWO_FINGERS_DRAG) {
-				float oldDist = distBetweenFingers;
-				distBetweenFingers = spacing(event);
-				lastZooming = oldDist / distBetweenFingers;
-				zoom(lastZooming);
-				mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x,
-						BoundaryMode.AUTO);
-				mySimpleXYPlot.redraw();
-			}
-			break;
-		}
-		
-		return true;
+	public PointF getMinXY() {
+		return minXY;
 	}
 
-	private void zoom(float scale) {
-		float domainSpan = maxXY.x - minXY.x;
-		float domainMidPoint = maxXY.x - domainSpan / 2.0f;
-		float offset = domainSpan * scale / 2.0f;
-		minXY.x = domainMidPoint - offset;
-		maxXY.x = domainMidPoint + offset;
+	public void setMinXY(PointF minXY) {
+		this.minXY = minXY;
 	}
 
-	private void scroll(float pan) {
-		float domainSpan = maxXY.x - minXY.x;
-		float step = domainSpan / mySimpleXYPlot.getWidth();
-		float offset = pan * step;
-		minXY.x += offset;
-		maxXY.x += offset;
+	public PointF getMaxXY() {
+		return maxXY;
 	}
 
-	private float spacing(MotionEvent event) {
-		float x = event.getX(0) - event.getX(1);
-		float y = event.getY(0) - event.getY(1);
-		//return Math.sqrt(x * x + y * y);
-		return (float) Math.sqrt(x * x + y * y);
+	public void setMaxXY(PointF maxXY) {
+		this.maxXY = maxXY;
 	}
-
+	
 }
