@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 

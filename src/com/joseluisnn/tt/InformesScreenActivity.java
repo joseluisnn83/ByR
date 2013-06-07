@@ -12,7 +12,6 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 @SuppressLint("NewApi")
@@ -34,60 +33,15 @@ public class InformesScreenActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		if (!(currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2)) {
+			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
+
 		setContentView(R.layout.activity_informes_screen);
 
 		// Obtengo los valores que se encuentran en el archivo de configuración
 		singleton_csp = new SingletonConfigurationSharedPreferences();
-
-		// Instanciamos el TabHost de la Actividad
-		tabHost = getTabHost();
-		// Creamos un recurso para las propiedades de la pestaña
-		TabHost.TabSpec spec;
-
-		Intent intent;
-		res = getResources();
-
-		intent = new Intent().setClass(this, PestanyaSemanalActivity.class);
-		spec = tabHost
-				.newTabSpec("Semanal")
-				.setIndicator("Semanal",
-						res.getDrawable(android.R.drawable.ic_menu_week))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, PestanyaMensualActivity.class);
-		spec = tabHost
-				.newTabSpec("Mensual")
-				.setIndicator("Mensual",
-						res.getDrawable(android.R.drawable.ic_menu_month))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, PestanyaTrimestralActivity.class);
-		spec = tabHost
-				.newTabSpec("Trimestral")
-				.setIndicator("Trimest.",
-						res.getDrawable(android.R.drawable.ic_menu_my_calendar))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, PestanyaAnualActivity.class);
-		spec = tabHost
-				.newTabSpec("Anual")
-				.setIndicator("Anual",
-						res.getDrawable(android.R.drawable.ic_menu_agenda))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, PestanyaLibreActivity.class);
-		spec = tabHost
-				.newTabSpec("Libre")
-				.setIndicator("Libre",
-						res.getDrawable(android.R.drawable.ic_menu_today))
-				.setContent(intent);
-		tabHost.addTab(spec);
 
 		// Obtengo el valor del informe a seleccionar por defecto guardado
 		// previamente
@@ -98,14 +52,147 @@ public class InformesScreenActivity extends TabActivity {
 		informeSeleccionado = preferenceConfiguracionPrivate.getInt(
 				singleton_csp.KEY_INFORME_POR_DEFECTO, 0);
 
-		tabHost.setCurrentTab(informeSeleccionado);
-
 		// Si la API es mayor o igual que la 13 entra en el primer if
 		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+			// Instanciamos el TabHost de la Actividad
+			tabHost = getTabHost();
+			// Creamos un recurso para las propiedades de la pestaña
+			TabHost.TabSpec spec;
+
+			Intent intent;
+			res = getResources();
+
+			intent = new Intent().setClass(this, PestanyaSemanalActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeSemanal_title))
+					.setIndicator("",
+							res.getDrawable(android.R.drawable.ic_menu_week))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaMensualActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeMensual_title))
+					.setIndicator("",
+							res.getDrawable(android.R.drawable.ic_menu_month))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this,
+					PestanyaTrimestralActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeTrimestral_title))
+					.setIndicator(
+							"",
+							res.getDrawable(android.R.drawable.ic_menu_my_calendar))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaAnualActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeAnual_title))
+					.setIndicator("",
+							res.getDrawable(android.R.drawable.ic_menu_agenda))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaLibreActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeLibre_title))
+					.setIndicator("",
+							res.getDrawable(android.R.drawable.ic_menu_today))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
 			// Do something for froyo and above versions
 			// lanzarAdvertencia("Versión de API alta.");
 			setTabColor(tabHost, res);
+
+		} else {
+
+			// Instanciamos el TabHost de la Actividad
+			tabHost = getTabHost();
+			// Creamos un recurso para las propiedades de la pestaña
+			TabHost.TabSpec spec;
+
+			Intent intent;
+			res = getResources();
+
+			intent = new Intent().setClass(this, PestanyaSemanalActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeSemanal_title))
+					.setIndicator(
+							getResources().getString(
+									R.string.PestanyaInformeSemanal_title),
+							res.getDrawable(android.R.drawable.ic_menu_week))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaMensualActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeMensual_title))
+					.setIndicator(
+							getResources().getString(
+									R.string.PestanyaInformeMensual_title),
+							res.getDrawable(android.R.drawable.ic_menu_month))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this,
+					PestanyaTrimestralActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeTrimestral_title))
+					.setIndicator(
+							getResources().getString(
+									R.string.PestanyaInformeTrimestral_title),
+							res.getDrawable(android.R.drawable.ic_menu_my_calendar))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaAnualActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeAnual_title))
+					.setIndicator(
+							getResources().getString(
+									R.string.PestanyaInformeAnual_title),
+							res.getDrawable(android.R.drawable.ic_menu_agenda))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
+			intent = new Intent().setClass(this, PestanyaLibreActivity.class);
+			spec = tabHost
+					.newTabSpec(
+							getResources().getString(
+									R.string.PestanyaInformeLibre_title))
+					.setIndicator(
+							getResources().getString(
+									R.string.PestanyaInformeLibre_title),
+							res.getDrawable(android.R.drawable.ic_menu_today))
+					.setContent(intent);
+			tabHost.addTab(spec);
+
 		}
+
+		tabHost.setCurrentTab(informeSeleccionado);
 
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 
@@ -117,9 +204,15 @@ public class InformesScreenActivity extends TabActivity {
 					// Do something for froyo and above versions
 					// lanzarAdvertencia("Versión de API alta.");
 					setTabColor(tabHost, res);
+					actualizarBarraTitulo(tabHost.getCurrentTab());
 				}
 			}
 		});
+
+		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2) {
+			setTabColor(tabHost, res);
+			actualizarBarraTitulo(informeSeleccionado);
+		}
 
 	}
 
@@ -128,26 +221,50 @@ public class InformesScreenActivity extends TabActivity {
 		TextView tv;
 
 		for (int i = 0; i < tabhost.getTabWidget().getChildCount(); i++) {
-			
-			tabhost.getTabWidget()
-					.getChildAt(i)
-					.setBackgroundColor(
-							reso.getColor(R.color.Azul4)); // unselected
+
+			tabhost.getTabWidget().getChildAt(i)
+					.setBackgroundColor(reso.getColor(R.color.Azul4)); // unselected
 			// Cambio el color del texto del TabWidget
 			tv = (TextView) tabhost.getTabWidget().getChildAt(i)
 					.findViewById(android.R.id.title);
 			tv.setTextColor(reso.getColor(R.color.colorGeneral));
 		}
-		
-		tabhost.getTabWidget()
-				.getChildAt(tabhost.getCurrentTab())
-				.setBackgroundColor(
-						reso.getColor(R.color.colorGeneral)); // selected
+
+		tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab())
+				.setBackgroundColor(reso.getColor(R.color.colorGeneral)); // selected
 		// Cambio el color del texto del TabWidget
 		tv = (TextView) tabhost.getTabWidget()
 				.getChildAt(tabhost.getCurrentTab())
 				.findViewById(android.R.id.title);
 		tv.setTextColor(reso.getColor(R.color.Azul4));
+
+	}
+
+	private void actualizarBarraTitulo(int informe) {
+
+		switch (informe) {
+		case 0:
+			this.setTitle(getResources().getString(
+					R.string.PestanyaInformeSemanal_title));
+			break;
+		case 1:
+			this.setTitle(getResources().getString(
+					R.string.PestanyaInformeMensual_title));
+			break;
+		case 2:
+			this.setTitle(getResources().getString(
+					R.string.PestanyaInformeTrimestral_title));
+			break;
+		case 3:
+			this.setTitle(getResources().getString(
+					R.string.PestanyaInformeAnual_title));
+			break;
+		case 4:
+			this.setTitle(getResources().getString(
+					R.string.PestanyaInformeLibre_title));
+			break;
+
+		}
 
 	}
 

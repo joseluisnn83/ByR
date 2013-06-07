@@ -22,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
 public class PreferencesGraphicsActivity extends PreferenceActivity {
@@ -85,10 +84,9 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// BugSenseHandler.initAndStartSession(PreferencesGraphicsActivity.this,
-		// "c815f559");
-
 		addPreferencesFromResource(R.xml.preferences_configuration_graphics);
+				
+		this.setTitle(getResources().getString(R.string.PreferencesGraphicsActivity_Title));
 
 		// Instancio los objetos del SharedPreferences de la configuración de la
 		// gráfica

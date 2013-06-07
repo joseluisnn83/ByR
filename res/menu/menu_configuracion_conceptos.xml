@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item 
-        android:id="@+id/delete" 
-        android:title="Borrar"
+
+    <item
+        android:id="@+id/delete"
         android:icon="@android:drawable/ic_menu_delete"
-        >        
+        android:title="@string/menu_config_conceptos_borrar">
     </item>
-    <item 
-        android:id="@+id/edit" 
-        android:title="Editar"
+    <item
+        android:id="@+id/edit"
         android:icon="@android:drawable/ic_menu_edit"
-        >        
+        android:title="@string/menu_config_conceptos_editar">
     </item>
+
 </menu>

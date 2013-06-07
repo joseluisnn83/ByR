@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarAdapter.DayCell;
+import com.joseluisnn.tt.R;
 
 /**
  * one month view.

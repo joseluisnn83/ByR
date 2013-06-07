@@ -2,6 +2,7 @@ package com.joseluisnn.tt;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import pl.polidea.view.ZoomView;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,11 +15,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
+
 import com.androidplot.Plot;
 import com.androidplot.series.XYSeries;
 import com.androidplot.xy.BoundaryMode;
@@ -27,7 +31,6 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
-import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.GraphXLabelFormat;
 import com.joseluisnn.objetos.ValoresElementosGraficas;
@@ -120,6 +123,18 @@ public class GraphicsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);		
+		
+		/*
+		 * Compruebo si el dispositivo es una TABLET o un MOBILE normal
+		 */
+		TelephonyManager manager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+            //return "Tablet";
+        	;
+        }else{
+            //return "Mobile";
+        	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
 		
 		/*
 		 * Quitamos barra de titulo de la Actividad Debe ser ejecutada esta

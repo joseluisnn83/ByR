@@ -17,7 +17,7 @@
 	<string name="descriptionButtonPrevision">Previsión</string>
 	<string name="menu_settings">Settings</string>   
     
-    <!-- Elementos de la Actividad DataActivity) -->
+    <!-- Elementos de la Actividad DatasActivity -->
     <string name="title_activity_datas">Gestión de Datos</string>    
     <string name="title_preference_tipo_configuracion">Tipo de configuración</string>
 	
@@ -38,6 +38,10 @@
 	<string name="tvOtrasOpciones">Otras Opciones</string>
 	<string name="tvCopiaSeguridad">Copia de seguridad</string>
 	<string name="title_ConfigurationActivity">Configuración</string>
+	
+	<!-- Elementos del menu Configuracion conceptos: editar, borrar -->
+	<string name="menu_config_conceptos_editar">Editar</string>
+	<string name="menu_config_conceptos_borrar">Borrar</string>
 	
 	<!-- Elementos de los Dialog de Configuracion -->
 	<string name="titleDialogUsername">Nombre de Usuario</string>
@@ -63,41 +67,6 @@
     <string name="ivContenDescriptionToday">Today</string>
     <string name="activity_datas_screen_tvHoy">HOY</string>
     <string name="activity_datas_screen_tvBuscar">BUSCAR</string>
-    
-    <!-- Months -->
-    <!--  
-    <string-array name="months_long">
-        <item>ENERO</item>
-        <item>FEBRERO</item>
-        <item>MARZO</item>
-        <item>ABRIL</item>
-        <item>MAYO</item>
-        <item>JUNIO</item>
-        <item>JULIO</item>
-        <item>AGOSTO</item>
-        <item>SEPTIEMBRE</item>
-        <item>OCTUBRE</item>
-        <item>NOVIEMBRE</item>
-        <item>DICIEMBRE</item>
-    </string-array>
-    -->
-    
-    <!--  
-    <string-array name="mostrarmeses">
-	    <item>Enero</item>
-	    <item>Febrero</item>
-	    <item>Marzo</item>
-	    <item>Abril</item>
-	    <item>Mayo</item>
-	    <item>Junio</item>
-	    <item>Julio</item>
-	    <item>Agosto</item>
-	    <item>Septiembre</item>
-	    <item>Octubre</item>
-	    <item>Noviembre</item>
-	    <item>Diciembre</item>
-	</string-array>
-	-->
 	
     <!-- Elementos de la Lista de la Gestión de Datos -->
     <string name="tvContentDescriptionBorrar">Borrar elemento</string>
@@ -110,12 +79,12 @@
     <string name="tvGDGastos">Insertar Gastos</string>
     
     <!-- Elementos de la Actividad de los Informes (InformesScreenActivity) -->
-    <string name="title_InformesScreenActivity">Informes</string>
-    <string name="title_PestanyaInformeSemanal">Informe Semanal</string>
-    <string name="title_PestanyaInformeMensual">Informe Mensual</string>
-    <string name="title_PestanyaInformeTrimestral">Informe Trimestral</string>
-    <string name="title_PestanyaInformeAnual">Informe Annual </string>
-    <string name="title_PestanyaInformeLibre">Informe Libre</string>
+    <string name="InformesScreenActivity_title">Informes</string>
+    <string name="PestanyaInformeSemanal_title">Semanal</string>
+    <string name="PestanyaInformeMensual_title">Mensual</string>
+    <string name="PestanyaInformeTrimestral_title">Trimestral</string>
+    <string name="PestanyaInformeAnual_title">Anual</string>
+    <string name="PestanyaInformeLibre_title">Libre</string>
     <string name="total_ingresos">Total Ingresos: </string>
     <string name="total_gastos">Total Gastos: </string>
     <string name="total_balance">Balance: </string>
@@ -156,9 +125,25 @@
     <string name="preferencesFechaContent">Elegir la fecha límite para valores históricos</string>
     <string name="menu_settings_graphics">Configurar Gráfica</string>
     <string name="title_GraphicsActivity">Gráficas</string>
+    <string name="PreferencesGraphicsActivity_Title">Configurar Gráfica</string>
     
     <!-- Elementos del dialog -->
     <string name="dialogSearachDate_FechaInicio">Fecha Inicio</string>
     <string name="dialogSearchDate_FechaFin">Fecha Fin</string>
+    
+    <!-- Elementos de la Activity AcercaDe -->
+    <string name="AcercaDe_title">TantoTengo</string>
+    <string name="AcercaDe_version">Versión 1.0</string>
+    <string name="AcercaDe_copyright">(&#169;)2013 TantoTengo.</string>
+	<string name="AcercaDe_derechos">Todos los derechos reservados.</string>
+	<string name="AcercaDe_menu">Acerca de</string>
+	
+	<!-- Elementos de Agradecimientos -->
+	<string name="Agradecimientos_menu">Agradecimientos</string>
+	<string name="Agradecimientos_titulo">- A mi buen amigo Javier Morrondo por haber tenido la idea del nombre de mi app. Gracias de verdad.</string>
+	<string name="Agradecimientos_iconos">- A la página web www.iconfinder.com de donde he sacado los iconos de la app.</string>
+	<string name="Agradecimientos_fuentes">- A la página web www.dafont.com/es/ de donde he sacado las fuentes de la app.</string>
+	<string name="Agradecimientos_personas">- Y también quiero agradecer a todas las personas que me dieron su opinión ayudándome a realizar mi primera aplicación en ANDROID. Gracias a todos.</string>
+	
 	
 </resources>

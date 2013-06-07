@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarioView;
 import com.joseluisnn.mycalendar.CalendarioView.ObservadorCalendarioView;
 

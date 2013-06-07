@@ -13,8 +13,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -23,7 +25,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonBroadcastReceiver;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 
@@ -64,9 +65,17 @@ public class PrincipalScreenActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-		//BugSenseHandler.initAndStartSession(PrincipalScreenActivity.this,"c815f559");
-		
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		/*
+		 * Compruebo si el dispositivo es una TABLET o un MOBILE normal
+		 */
+		TelephonyManager manager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
+        	//is a "Tablet";
+        	;
+        }else{
+            //is a "Mobile";
+        	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
 		
 		setContentView(R.layout.activity_principal_screen);
 
@@ -345,6 +354,28 @@ public class PrincipalScreenActivity extends Activity {
 
 		return true;
 
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Lanzo la Actividad que corresponda al ser pulsado el
+		// item del menu
+		Intent i;
+		
+		switch (item.getItemId()) {
+
+		case R.id.agradecimientos:
+			i = new Intent(this, AgradecimientosActivity.class);
+			startActivity(i);
+			break;
+		case R.id.acerca_de:
+			i = new Intent(this, AcercaDeActivity.class);
+			startActivity(i);
+			break;
+		
+		}
+
+		return true;
 	}
 
 	/*

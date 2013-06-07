@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.databases.DBAdapter;
+import com.joseluisnn.tt.R;
 
 /**
  * calendar adapter.

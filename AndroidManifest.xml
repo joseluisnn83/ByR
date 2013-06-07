@@ -59,8 +59,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.joseluisnn.tt.InformesScreenActivity"
-            android:label="@string/title_InformesScreenActivity"
+            android:name="com.joseluisnn.tt.InformesScreenActivity"            
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -88,6 +87,14 @@
             android:label="@string/title_GraphicsActivity" >
         </activity>
         <activity android:name="com.joseluisnn.tt.PreferencesGraphicsActivity" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.AcercaDeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.AgradecimientosActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

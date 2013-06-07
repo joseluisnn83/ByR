@@ -22,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.singleton.SingletonBroadcastReceiver;
 import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
 

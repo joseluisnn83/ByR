@@ -13,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
 
 /*

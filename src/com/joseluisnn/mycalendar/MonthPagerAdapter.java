@@ -10,8 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.joseluisnn.tt.R;
 import com.joseluisnn.mycalendar.CalendarMonthView.ObservadorGestionDatos;
+import com.joseluisnn.tt.R;
 /*
  * Clase que hereda de PagerAdapter mediante la cual podré tener una lista que se deliza horizontalmente para
  * mostrar los meses del año con sus respectivos días

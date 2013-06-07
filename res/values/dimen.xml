@@ -64,6 +64,15 @@
     <dimen name="pestanyaInformesImageViewMovingDataPadding">5dp</dimen>
     <dimen name="pestanyaInformesTextViewDataPadding">2dp</dimen>
     
+    <!-- Dimens from Acerca de -->
+    <dimen name="acercade_icono">100dp</dimen>
+    <dimen name="acercade_icono_margin">20dp</dimen>
+    <dimen name="acercade_title_font_size">40sp</dimen>
+    <dimen name="acercade_text_margin">5dp</dimen>
+    
+    <!-- Dimens from  Agradecimientos-->
+    <dimen name="agradecimientos_cabecera">30sp</dimen>
+    
     <!-- Dimens from text size -->
     <dimen name="text_small">14sp</dimen>
     <dimen name="text_medium">16sp</dimen>
