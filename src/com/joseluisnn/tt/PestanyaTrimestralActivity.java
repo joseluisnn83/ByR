@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.singleton.SingletonTipoMoneda;
 
 public class PestanyaTrimestralActivity extends Activity {
 
@@ -81,11 +82,10 @@ public class PestanyaTrimestralActivity extends Activity {
 	private DecimalFormat numeroAFormatear;
 
 	/*
-	 * Variable para captar cuando es la primera ejecución del programa y
-	 * controlar los cambios en el Spinner de las semanas
+	 * Variables para saber el símbolo de la moneda a utilizar
 	 */
-	// private int posicionSpinnerAnyosAnterior;
-	// private int posicionSpinnerTrimestresAnterior;
+	private SingletonTipoMoneda singleton_tm;
+	private String tipoMoneda;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,10 @@ public class PestanyaTrimestralActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.pestanya_trimestral);
+
+		// Obtengo el tipo de moneda a tulizar
+		singleton_tm = SingletonTipoMoneda.getInstance();
+		tipoMoneda = singleton_tm.obtenerTipoMoneda(getApplicationContext());
 
 		/*
 		 * Instancio los objetos View
@@ -361,8 +365,7 @@ public class PestanyaTrimestralActivity extends Activity {
 						&& trimestres.getSelectedItemPosition() == 1) {
 
 					if (mesActual <= 2) {
-						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
-								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						lanzarAdvertencia(getResources().getString(R.string.informes_aviso_trimestre_futuro));
 						cargarPantalla = false;
 					} else {
 
@@ -381,8 +384,7 @@ public class PestanyaTrimestralActivity extends Activity {
 						&& trimestres.getSelectedItemPosition() == 2) {
 
 					if (mesActual <= 5) {
-						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
-								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						lanzarAdvertencia(getResources().getString(R.string.informes_aviso_trimestre_futuro));
 						cargarPantalla = false;
 					} else {
 						// Cargo las listas con los valores recuperados de la BD
@@ -399,8 +401,7 @@ public class PestanyaTrimestralActivity extends Activity {
 				} else if (anyos.getSelectedItemPosition() == 1
 						&& trimestres.getSelectedItemPosition() == 3) {
 					if (mesActual <= 8) {
-						lanzarAdvertencia("No se puede visualizar valores de previsión (en futuro). "
-								+ "En los informes, sólo se visualizan valores pasados excepto en el informe libre.");
+						lanzarAdvertencia(getResources().getString(R.string.informes_aviso_trimestre_futuro));
 						cargarPantalla = false;
 					} else {
 						// Cargo las listas con los valores recuperados de la BD
@@ -947,7 +948,7 @@ public class PestanyaTrimestralActivity extends Activity {
 			// establecemos el contenido
 			tvCantidad.setText(""
 					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
-							.getCantidad()) + "€");
+							.getCantidad()) + tipoMoneda);
 
 			if (fechaAnterior != listadoValoresIngresos.get(i).getIdFecha()) {
 
@@ -1018,7 +1019,7 @@ public class PestanyaTrimestralActivity extends Activity {
 			// establecemos el contenido
 			tvCantidad.setText(""
 					+ numeroAFormatear.format(listadoValoresGastos.get(i)
-							.getCantidad()) + "€");
+							.getCantidad()) + tipoMoneda);
 
 			if (fechaAnterior != listadoValoresGastos.get(i).getIdFecha()) {
 
@@ -1072,8 +1073,9 @@ public class PestanyaTrimestralActivity extends Activity {
 		// Inicio la variable Calendar con la fecha que tengo actualmente
 		c.set(y, m - 1, d);
 
-		cadenaFecha = obtenerMes(c.get(Calendar.MONTH)) + " de "
-				+ c.get(Calendar.YEAR);
+		cadenaFecha = obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		return cadenaFecha;
 	}
@@ -1088,40 +1090,40 @@ public class PestanyaTrimestralActivity extends Activity {
 		switch (month) {
 
 		case 0:
-			m = "Enero";
+			m = getResources().getString(R.string.informes_ene);
 			break;
 		case 1:
-			m = "Febrero";
+			m = getResources().getString(R.string.informes_feb);
 			break;
 		case 2:
-			m = "Marzo";
+			m = getResources().getString(R.string.informes_mar);
 			break;
 		case 3:
-			m = "Abril";
+			m = getResources().getString(R.string.informes_abr);
 			break;
 		case 4:
-			m = "Mayo";
+			m = getResources().getString(R.string.informes_may);
 			break;
 		case 5:
-			m = "Junio";
+			m = getResources().getString(R.string.informes_jun);
 			break;
 		case 6:
-			m = "Julio";
+			m = getResources().getString(R.string.informes_jul);
 			break;
 		case 7:
-			m = "Agosto";
+			m = getResources().getString(R.string.informes_ago);
 			break;
 		case 8:
-			m = "Septiembre";
+			m = getResources().getString(R.string.informes_sep);
 			break;
 		case 9:
-			m = "Octubre";
+			m = getResources().getString(R.string.informes_oct);
 			break;
 		case 10:
-			m = "Noviembre";
+			m = getResources().getString(R.string.informes_nov);
 			break;
 		case 11:
-			m = "Diciembre";
+			m = getResources().getString(R.string.informes_dic);
 			break;
 		default:
 			m = "error";
@@ -1205,16 +1207,16 @@ public class PestanyaTrimestralActivity extends Activity {
 		double balance = getTotalIngresos() - getTotalGastos();
 
 		tvTotalIngresos.setText(" "
-				+ numeroAFormatear.format(getTotalIngresos()) + " €");
+				+ numeroAFormatear.format(getTotalIngresos()) + " " + tipoMoneda);
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
 		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
-				+ " €");
+				+ " " + tipoMoneda);
 		tvTotalGastos.setTextColor(this.getResources().getColor(
 				R.color.ListadosRojo));
 
-		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
+		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " " + tipoMoneda);
 		if (balance >= 0) {
 			tvTotalBalance.setTextColor(this.getResources().getColor(
 					R.color.ListadosVerdeOscuro));
@@ -1242,7 +1244,8 @@ public class PestanyaTrimestralActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 

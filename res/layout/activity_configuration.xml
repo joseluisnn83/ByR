@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/fondo_general" >
-	<!-- android:background="@color/gris_claro" -->
+    android:background="@drawable/fondo_general"
+    android:orientation="vertical" >
+
+    <!-- android:background="@color/gris_claro" -->
+
     <LinearLayout
         android:id="@+id/llTipoConfiguracion"
-        android:background="@drawable/linearlayout_configuration_states"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
+        android:background="@drawable/linearlayout_configuration_states"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/paddingBottomConfiguration"
         android:paddingLeft="@dimen/paddingLeftConfiguration"
-        android:paddingTop="@dimen/paddingTopConfiguration"
-        android:paddingBottom="@dimen/paddingBottomConfiguration" >
-        
+        android:paddingTop="@dimen/paddingTopConfiguration" >
+
         <TextView
             android:id="@+id/textViewMTTipoConfiguracion"
             android:layout_width="wrap_content"
@@ -29,36 +31,33 @@
             android:layout_height="wrap_content"
             android:text="@string/stTipoConfiguracion"
             android:textSize="@dimen/st" />
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llConceptos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-         >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textViewGestionConceptos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tvConceptos"
-            android:textSize="@dimen/st"
-            android:textColor="@color/blanco"
             android:background="@color/dim_gray"
-            android:paddingLeft="@dimen/paddingLeftConfiguration" />
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:text="@string/tvConceptos"
+            android:textColor="@color/blanco"
+            android:textSize="@dimen/st" />
 
         <LinearLayout
             android:id="@+id/llConceptosIngresos"
-            android:background="@drawable/linearlayout_configuration_states"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/paddingLeftConfiguration"
-            android:paddingTop="@dimen/paddingTopConfiguration"
-        	android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:background="@drawable/linearlayout_configuration_states"
             android:orientation="vertical"
-             >
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:paddingTop="@dimen/paddingTopConfiguration" >
 
             <TextView
                 android:id="@+id/textViewMTConceptosIngresos"
@@ -66,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mtIngresos"
                 android:textSize="@dimen/mt"
-                android:textStyle="bold" />            
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewSTConceptosIngresos"
@@ -74,24 +73,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/stIngresos"
                 android:textSize="@dimen/st" />
-
         </LinearLayout>
 
         <View
-            android:background="#808080"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/lineView" />
+            android:layout_height="@dimen/lineView"
+            android:background="#808080" />
 
         <LinearLayout
             android:id="@+id/llConceptosGastos"
-            android:background="@drawable/linearlayout_configuration_states"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
             android:paddingLeft="@dimen/paddingLeftConfiguration"
-            android:paddingTop="@dimen/paddingTopConfiguration"
-        	android:paddingBottom="@dimen/paddingBottomConfiguration"
-            android:orientation="vertical"                        
-        	 >
+            android:paddingTop="@dimen/paddingTopConfiguration" >
 
             <TextView
                 android:id="@+id/textViewMTConceptosGastos"
@@ -107,9 +104,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/stGastos"
                 android:textSize="@dimen/st" />
-
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -122,23 +117,21 @@
             android:id="@+id/textViewOtrasOpciones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/dim_gray"
             android:paddingLeft="@dimen/paddingLeftConfiguration"
             android:text="@string/tvOtrasOpciones"
-            android:textSize="@dimen/st"
             android:textColor="@color/blanco"
-            android:background="@color/dim_gray" />
+            android:textSize="@dimen/st" />
 
         <LinearLayout
             android:id="@+id/llInformes"
-            android:background="@drawable/linearlayout_configuration_states"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/paddingLeftConfiguration"
-            android:paddingTop="@dimen/paddingTopConfiguration"
-        	android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:background="@drawable/linearlayout_configuration_states"
             android:orientation="vertical"
-            
-             >
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:paddingTop="@dimen/paddingTopConfiguration" >
 
             <TextView
                 android:id="@+id/textViewMTOtrasOpciones"
@@ -154,85 +147,111 @@
                 android:layout_height="wrap_content"
                 android:text="@string/stInformes"
                 android:textSize="@dimen/st" />
-
         </LinearLayout>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/lineView"
+            android:background="#808080" />
+
+        <LinearLayout
+            android:id="@+id/llMonedas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
+            android:paddingLeft="@dimen/paddingLeftConfiguration"
+            android:paddingTop="@dimen/paddingTopConfiguration" >
+
+            <TextView
+                android:id="@+id/textViewMTMonedas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mtMonedas"
+                android:textSize="@dimen/mt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewSTMonedas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stMonedas"
+                android:textSize="@dimen/st" />
+        </LinearLayout>
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-        
-        <TextView            
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/dim_gray"
             android:paddingLeft="@dimen/paddingLeftConfiguration"
             android:text="@string/tvCopiaSeguridad"
-            android:textSize="@dimen/st"
             android:textColor="@color/blanco"
-            android:background="@color/dim_gray" />
-        
+            android:textSize="@dimen/st" />
+
         <LinearLayout
             android:id="@+id/llDumpDB"
-            android:background="@drawable/linearlayout_configuration_states"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
             android:paddingLeft="@dimen/paddingLeftConfiguration"
-            android:paddingTop="@dimen/paddingTopConfiguration"
-        	android:paddingBottom="@dimen/paddingBottomConfiguration"
-            android:orientation="vertical" >
+            android:paddingTop="@dimen/paddingTopConfiguration" >
 
-            <TextView                
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mtDumpDB"
                 android:textSize="@dimen/mt"
                 android:textStyle="bold" />
 
-            <TextView                
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stDumpDB"
                 android:textSize="@dimen/st" />
-
         </LinearLayout>
-        
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="@dimen/lineView"
             android:background="#808080" />
-        
+
         <LinearLayout
             android:id="@+id/llLoadDB"
-            android:background="@drawable/linearlayout_configuration_states"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/linearlayout_configuration_states"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/paddingBottomConfiguration"
             android:paddingLeft="@dimen/paddingLeftConfiguration"
-            android:paddingTop="@dimen/paddingTopConfiguration"
-        	android:paddingBottom="@dimen/paddingBottomConfiguration"
-            android:orientation="vertical" >
+            android:paddingTop="@dimen/paddingTopConfiguration" >
 
-            <TextView                
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mtLoadDB"
                 android:textSize="@dimen/mt"
                 android:textStyle="bold" />
 
-            <TextView                
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stLoadDB"
                 android:textSize="@dimen/st" />
-
         </LinearLayout>
-        
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="@dimen/lineView"
             android:background="#808080" />
-        
     </LinearLayout>
 
 </LinearLayout>

@@ -50,6 +50,8 @@
             android:layout_margin="@dimen/acercade_text_margin"
             android:text="@string/AcercaDe_derechos"
             android:textSize="@dimen/text_large" />
+        
+        
     </LinearLayout>
 
     

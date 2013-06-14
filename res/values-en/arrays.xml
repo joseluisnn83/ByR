@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources >
+	<string-array name="meses">
+	    <item>January</item>
+	    <item>February</item>
+	    <item>March</item>
+	    <item>April</item>
+	    <item>May</item>
+	    <item>June</item>
+	    <item>July</item>
+	    <item>August</item>
+	    <item>September</item>
+	    <item>October</item>
+	    <item>November</item>
+	    <item>December</item>
+	</string-array>
+	
+	<string-array name="tipo_graficas">
+        <item name="0">Yearly</item>
+        <item name="1">Monthly</item>
+        <item name="2">Daily</item>
+    </string-array>
+    <string-array name="tipo_graficas_values">
+        <item name="0">0</item>
+        <item name="1">1</item>
+        <item name="1">2</item>
+    </string-array>
+    
+    <string-array name="valores_graficas">
+        <item name="0">Historical</item>
+        <item name="1">Future Values</item>
+    </string-array>
+    <string-array name="valores_graficas_values">
+        <item name="0">0</item>
+        <item name="1">1</item>
+    </string-array>    
+    
+</resources>

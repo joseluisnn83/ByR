@@ -18,8 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.joseluisnn.mycalendar.CalendarioView;
 import com.joseluisnn.mycalendar.CalendarioView.ObservadorCalendarioView;
 
@@ -45,7 +43,7 @@ public class DatasActivityScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_datas_screen);
 
@@ -67,11 +65,11 @@ public class DatasActivityScreen extends Activity {
 		 */
 		mes = calendarToday.get(Calendar.MONTH);
 		anyo = calendarToday.get(Calendar.YEAR);
-		
+
 		// Evento onTouchListener del icono ivSearchDate el cual
 		// me sitúa el calendario a la fecha elegida por el usuario
 		ivSearchDate.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Evento donde se pulsa el botón para buscar una fecha en
@@ -173,15 +171,7 @@ public class DatasActivityScreen extends Activity {
 			}
 		});
 
-	}
-
-	public void lanzarSMSMes(int i) {
-		Toast.makeText(this, "Mes pulsado: " + i, Toast.LENGTH_SHORT).show();
-	}
-
-	public void lanzarSMSAnyo(int i) {
-		Toast.makeText(this, "Anyo pulsado: " + i, Toast.LENGTH_SHORT).show();
-	}
+	}	
 
 	public void lanzarActividadGD(Calendar c, int dia) {
 
@@ -209,8 +199,11 @@ public class DatasActivityScreen extends Activity {
 		c.set(Calendar.DATE, dia);
 
 		cadena_fecha = "" + obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK))
-				+ ", " + dia + " de " + obtenerMes(c.get(Calendar.MONTH))
-				+ " de " + c.get(Calendar.YEAR);
+				+ ", " + dia + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		// Obtengo la fecha en el formato AAAAMMDD
 		fecha = "" + c.get(Calendar.YEAR) + month + day;
@@ -246,40 +239,40 @@ public class DatasActivityScreen extends Activity {
 		switch (month) {
 
 		case 0:
-			m = "Ene.";
+			m = getResources().getString(R.string.datasactivity_ene);
 			break;
 		case 1:
-			m = "Feb.";
+			m = getResources().getString(R.string.datasactivity_feb);
 			break;
 		case 2:
-			m = "Mar.";
+			m = getResources().getString(R.string.datasactivity_mar);
 			break;
 		case 3:
-			m = "Abr.";
+			m = getResources().getString(R.string.datasactivity_abr);
 			break;
 		case 4:
-			m = "May.";
+			m = getResources().getString(R.string.datasactivity_may);
 			break;
 		case 5:
-			m = "Jun.";
+			m = getResources().getString(R.string.datasactivity_jun);
 			break;
 		case 6:
-			m = "Jul.";
+			m = getResources().getString(R.string.datasactivity_jul);
 			break;
 		case 7:
-			m = "Ago.";
+			m = getResources().getString(R.string.datasactivity_ago);
 			break;
 		case 8:
-			m = "Sep.";
+			m = getResources().getString(R.string.datasactivity_sep);
 			break;
 		case 9:
-			m = "Oct.";
+			m = getResources().getString(R.string.datasactivity_oct);
 			break;
 		case 10:
-			m = "Nov.";
+			m = getResources().getString(R.string.datasactivity_nov);
 			break;
 		case 11:
-			m = "Dic.";
+			m = getResources().getString(R.string.datasactivity_dic);
 			break;
 		default:
 			m = "error";
@@ -300,25 +293,25 @@ public class DatasActivityScreen extends Activity {
 
 		switch (day) {
 		case 1:
-			d = "Dom";
+			d = getResources().getString(R.string.datasactivity_dom);
 			break;
 		case 2:
-			d = "Lun";
+			d = getResources().getString(R.string.datasactivity_lun);
 			break;
 		case 3:
-			d = "Mar";
+			d = getResources().getString(R.string.datasactivity_martes);
 			break;
 		case 4:
-			d = "Mié";
+			d = getResources().getString(R.string.datasactivity_mie);
 			break;
 		case 5:
-			d = "Jue";
+			d = getResources().getString(R.string.datasactivity_jue);
 			break;
 		case 6:
-			d = "Vie";
+			d = getResources().getString(R.string.datasactivity_vie);
 			break;
 		case 7:
-			d = "Sáb";
+			d = getResources().getString(R.string.datasactivity_sab);
 			break;
 		default:
 			break;
@@ -350,7 +343,7 @@ public class DatasActivityScreen extends Activity {
 		// Pass null as the parent view because its going in the dialog layout
 		builder.setView(layout);
 
-		builder.setTitle("Buscar Fecha en el Calendario");
+		builder.setTitle(getResources().getString(R.string.mycalendar_buscar_fecha));
 
 		// builder.setView(valorIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_my_calendar);

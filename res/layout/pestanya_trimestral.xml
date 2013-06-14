@@ -43,6 +43,7 @@
            	android:layout_gravity="center"
            	android:contentDescription="@string/ivContentDescriptionSearchTrimestre"
            	android:src="@android:drawable/ic_menu_search"
+           	android:background="@drawable/report_search_quarterly"
             />
         
     </LinearLayout>    

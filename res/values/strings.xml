@@ -3,63 +3,90 @@
 
     <!-- Elementos de la Actividad Principal (MainActivity) -->
     <string name="app_name">TT</string>
-    
+
     <!-- Elementos de la Pantalla Principal (ScreenActivity) -->
     <string name="title_activity_principal_screen">TantoTengo</string>
     <string name="title_preferenceScreenConfiguration">Configuración</string>
     <string name="textViewDeveloper">Aplicación desarrollada por José Luis Neira (&#169;)2013</string>
     <string name="descriptionTituloLogo">Título de la Aplicación</string>
-	<string name="descriptionLogo">Logo de la Aplicación</string>
-	<string name="descriptionButtonData">Datos</string>
-	<string name="descriptionButtonConfiguration">Configuración</string>
-	<string name="descriptionButtonInforms">Informes</string>
-	<string name="descriptionButtonGraphics">Gráficas</string>
-	<string name="descriptionButtonPrevision">Previsión</string>
-	<string name="menu_settings">Settings</string>   
-    
+    <string name="descriptionLogo">Logo de la Aplicación</string>
+    <string name="descriptionButtonData">Datos</string>
+    <string name="descriptionButtonConfiguration">Config.</string>
+    <string name="descriptionButtonInforms">Informes</string>
+    <string name="descriptionButtonGraphics">Gráficas</string>
+    <string name="descriptionButtonPrevision">Previsión</string>
+    <string name="menu_settings">Settings</string>
+    <string name="psa_aviso_activar_graficas">Para habilitar las Gráficas debe dirigirse a Configuración y cambiar el tipo de configuración a Avanzada.</string>
+
     <!-- Elementos de la Actividad DatasActivity -->
-    <string name="title_activity_datas">Gestión de Datos</string>    
+    <string name="title_activity_datas">Gestión de Datos</string>
     <string name="title_preference_tipo_configuracion">Tipo de configuración</string>
+
+    <!-- Elementos del layout de configuración -->
+    <string name="mtTipoConfiguracion">Tipo de Configuración</string>
+    <string name="mtIngresos">Ingresos</string>
+    <string name="mtGastos">Gastos</string>
+    <string name="mtInformes">Informes por defecto</string>
+    <string name="mtMonedas">Monedas</string>
+    <string name="mtDumpDB">Hacer copia seguridad Base de Datos</string>
+    <string name="mtLoadDB">Cargar Base de Datos</string>
+    <string name="stTipoConfiguracion">Elige entre los dos tipos de configuración</string>
+    <string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
+    <string name="stGastos">Inserta o borra conceptos de Gastos</string>
+    <string name="stInformes">Elija el informe a seleccionar por defecto</string>
+    <string name="stMonedas">Elija el tipo de moneda</string>
+    <string name="stDumpDB">Presione si desea hacer una copia de seguridad de su BD en la tarjeta SD</string>
+    <string name="stLoadDB">Presione si desea cargar los datos de una copia de seguridad de su BD en la tarjeta SD</string>
+    <string name="tvConceptos">Gestión de Conceptos</string>
+    <string name="tvOtrasOpciones">Otras Opciones</string>
+    <string name="tvCopiaSeguridad">Copia de seguridad</string>
+    <string name="title_ConfigurationActivity">Configuración</string>
+    <string name="configuracion_basica">Básica</string>
+    <string name="configuracion_avanzada">Avanzada</string>
+    <string name="configuracion_dialog_informes_title">Informe a mostrar</string>
+    <string name="configuracion_dialog_tipo_moneda_title">Moneda a elegir</string>
+    <string name="configuracion_advertencia">ADVERTENCIA</string>
+    <string name="configuracion_informacion">INFORMACIÓN</string>    
+    <string name="configuracion_dialog_message_importar_valores">¿ Desea importar los datos guardados de la BD almacenada en la tarjeta SD a fecha de </string>
+    <string name="configuracion_bd_guardada">BD guardada en la carpeta /copia_tt de la tarjeta SD a fecha de:</string>
+    <string name="configuracion_bd_solo_lectura">La tarjeta SD sólo es de lectura. Copia cancelada.</string>
+    <string name="configuracion_bd_error_escritura">No se puede leer ni escribir en la tarjeta SD. Compruebe si está insertada o si tiene permisos para poder leer/escribir.</string>
+    <string name="configuracion_bd_importada">Base de Datos importada con éxito.</string>
+	<string name="configuracion_bd_importacion_cancelada">El directorio del programa sólo es de lectura. Importación cancelada.</string>
+	<string name="configuracion_bd_error_escritura_directorio">No se puede leer ni escribir en el directorio del programa. Compruebe si tiene permisos para poder leer/escribir.</string>
+	<string name="moneda_euro">€ (euro)</string>
+	<string name="moneda_dolar">$ (dólar)</string>
+	<string name="moneda_libra">£ (libra esterlina)</string>
+	<string name="valor_euro">€</string>
+	<string name="valor_dolar">$</string>
+	<string name="valor_libra">£</string>
 	
-	<!-- Elementos del layout de configuración -->
-	<string name="mtTipoConfiguracion">Tipo de Configuración</string>
-	<string name="mtIngresos">Ingresos</string>
-	<string name="mtGastos">Gastos</string>
-	<string name="mtInformes">Informes por defecto</string>
-	<string name="mtDumpDB">Hacer copia seguridad Base de Datos</string>
-	<string name="mtLoadDB">Cargar Base de Datos</string>
-	<string name="stTipoConfiguracion">Elige entre los dos tipos de configuración</string>
-	<string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
-	<string name="stGastos">Inserta o borra conceptos de Gastos</string>
-	<string name="stInformes">Elija el informe a seleccionar por defecto</string>
-	<string name="stDumpDB">Presione si desea hacer una copia de seguridad de su BD en la tarjeta SD</string>	
-	<string name="stLoadDB">Presione si desea cargar los datos de una copia de seguridad de su BD en la tarjeta SD</string>
-	<string name="tvConceptos">Gestión de Conceptos</string>
-	<string name="tvOtrasOpciones">Otras Opciones</string>
-	<string name="tvCopiaSeguridad">Copia de seguridad</string>
-	<string name="title_ConfigurationActivity">Configuración</string>
-	
-	<!-- Elementos del menu Configuracion conceptos: editar, borrar -->
-	<string name="menu_config_conceptos_editar">Editar</string>
-	<string name="menu_config_conceptos_borrar">Borrar</string>
-	
-	<!-- Elementos de los Dialog de Configuracion -->
-	<string name="titleDialogUsername">Nombre de Usuario</string>
-	<string name="titleDialogPassword">Password</string>
-	<string name="titleDialogEmail">e-mail</string>
-	<string name="botonAceptar">Aceptar</string>
-	<string name="botonCancelar">Cancelar</string>
-	<string name="botonOmitir">Omitir</string>
-	
-	<!-- Elementos de las Activities de configuracion de Conceptos -->
-	<string name="descriptionIngresos">Crear concepto de ingresos</string>
-	<string name="textoDescriptionIngresos">Crear concepto de ingreso</string>
-	<string name="descriptionGastos">Crear concepto de gastos</string>
-	<string name="textoDescriptionGastos">Crear concepto de gasto</string>
-	<string name="textViewListViewConceptoIngreso">No hay conceptos de ingreso</string>
-	<string name="textViewListViewConceptoGasto">No hay conceptos de gasto</string>
-	
-	<!-- Elementos de MyCalendar -->
+    <!-- Elementos del menu Configuracion conceptos: editar, borrar -->
+    <string name="menu_config_conceptos_editar">Editar</string>
+    <string name="menu_config_conceptos_borrar">Borrar</string>
+
+    <!-- Elementos de los Dialog de Configuracion -->
+    <string name="titleDialogUsername">Nombre de Usuario</string>
+    <string name="titleDialogPassword">Password</string>
+    <string name="titleDialogEmail">e-mail</string>
+    <string name="botonAceptar">Aceptar</string>
+    <string name="botonCancelar">Cancelar</string>
+    <string name="botonOmitir">Omitir</string>
+
+    <!-- Elementos de las Activities de configuracion de Conceptos -->
+    <string name="descriptionIngresos">Crear concepto de ingresos</string>
+    <string name="textoDescriptionIngresos">Crear concepto de ingreso</string>
+    <string name="descriptionGastos">Crear concepto de gastos</string>
+    <string name="textoDescriptionGastos">Crear concepto de gasto</string>
+    <string name="textViewListViewConceptoIngreso">No hay conceptos de ingreso</string>
+    <string name="textViewListViewConceptoGasto">No hay conceptos de gasto</string>
+    <string name="conceptos_confirmacion">Confirmación</string>
+    <string name="conceptos_insertar_cg">Inserta concepto de Gasto</string>
+    <string name="conceptos_actualizar_cg">Actualizar concepto de Gasto</string>
+    <string name="conceptos_insertar_ci">Inserta concepto de Ingreso</string>
+    <string name="conceptos_actualizar_ci">Actualizar concepto de Ingreso</string>
+
+    <!-- Elementos de MyCalendar -->
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
     <string name="calendarContentDescriptionInsertedData">Dato insertado</string>
@@ -67,7 +94,15 @@
     <string name="ivContenDescriptionToday">Today</string>
     <string name="activity_datas_screen_tvHoy">HOY</string>
     <string name="activity_datas_screen_tvBuscar">BUSCAR</string>
-	
+    <string name="mycalendar_short_lunes">LUN</string>
+    <string name="mycalendar_short_martes">MAR</string>
+    <string name="mycalendar_short_miercoles">MIE</string>
+    <string name="mycalendar_short_jueves">JUE</string>
+    <string name="mycalendar_short_viernes">VIE</string>
+    <string name="mycalendar_short_sabado">SAB</string>
+    <string name="mycalendar_short_domingo">DOM</string>
+    <string name="mycalendar_buscar_fecha">Buscar Fecha en el Calendario</string>
+
     <!-- Elementos de la Lista de la Gestión de Datos -->
     <string name="tvContentDescriptionBorrar">Borrar elemento</string>
     <string name="tvContentDescriptionEditar">Editar elemento</string>
@@ -77,6 +112,50 @@
     <string name="listaVaciaGDGastos">No hay ningún Gasto</string>
     <string name="tvGDIngresos">Insertar Ingresos</string>
     <string name="tvGDGastos">Insertar Gastos</string>
+    <string name="datasactivity_advertencia_insertar_ingresos">Para insertar valores debe crear al menos un concepto de INGRESOS. Diríjase a la configuración del programa y añada un concepto en la sección "Gestión de Conceptos".</string>
+    <string name="datasactivity_advertencia_insertar_gastos">Para insertar valores debe crear al menos un concepto de GASTOS. Diríjase a la configuración del programa y añada un concepto en la sección "Gestión de Conceptos".</string>
+    <string name="datasactivity_error_insertar_ingresos">No se puede insertar el INGRESO de un concepto que ya se encuentra con la misma fecha en la base de datos.	Por favor, modifíquelo actualizándolo.</string>
+    <string name="datasactivity_error_insertar_gastos">No se puede insertar el GASTO de un concepto que ya se encuentra con la misma fecha en la base de datos.	Por favor, modifíquelo actualizándolo.</string>
+    <string name="datasactivity_error_actualizar_ingreso">Error en la actualización del INGRESO.</string>
+    <string name="datasactivity_error_actualizar_gasto">Error en la actualización del GASTO.</string>
+    <string name="datasactivity_error_borrar_ingreso">Error al borrar el INGRESO.</string>
+    <string name="datasactivity_error_borrar_gasto">Error al borrar el GASTO.</string>
+	<string name="datasactivity_error_insertar_fecha_ingresos">Error al insertar la fecha, inserción del INGRESO anulado.</string>
+	<string name="datasactivity_error_insertar_fecha_gastos">Error al insertar la fecha, inserción del GASTO anulado.</string>
+	<string name="datasactivity_error_borrar_fecha">Error al borrar la fecha en la base de datos.</string>	
+	<string name="datasactivity_error_insertar_valores_grandes">No está permitido insertar valores mayores de 9.999.999.999</string>
+	<string name="datasactivity_editar_ingreso">Editar Ingreso</string>
+	<string name="datasactivity_editar_gasto">Editar Gasto</string>
+	<string name="datasactivity_borrar_ingreso">Borrar Ingreso</string>
+	<string name="datasactivity_borrar_gasto">Borrar Gasto</string>
+	<string name="datasactivity_borrar_gasto_message_1">¿Desea borrar el Gasto de</string>
+	<string name="datasactivity_conjuncion">de</string>
+	<string name="datasactivity_borrar_ingreso_message_1">¿Desea borrar el Ingreso de</string>	
+	<string name="datasactivity_repetir_valores">¿Desea repetir el valor seleccionado los siguientes meses del año?</string>
+	<string name="datasactivity_error">ERROR</string>
+	<string name="datasactivity_sobreescribir">SOBRESCRIBIR</string>
+    <string name="datasactivity_sobreescribir_valor_message_1">¿Desea modificar un valor existente a fecha de</string>
+    <string name="datasactivity_sobreescribir_valor_message_2">por el valor de</string>
+    <string name="datasactivity_ene">Ene.</string>
+    <string name="datasactivity_feb">Feb.</string>
+    <string name="datasactivity_mar">Mar.</string>
+    <string name="datasactivity_abr">Abr.</string>
+    <string name="datasactivity_may">May.</string>
+    <string name="datasactivity_jun">Jun.</string>
+    <string name="datasactivity_jul">Jul.</string>
+    <string name="datasactivity_ago">Ago.</string>
+    <string name="datasactivity_sep">Sep.</string>
+    <string name="datasactivity_oct">Oct.</string>
+    <string name="datasactivity_nov">Nov.</string>
+    <string name="datasactivity_dic">Dic.</string>
+    <string name="datasactivity_dom">Dom</string>
+    <string name="datasactivity_lun">Lun</string>
+    <string name="datasactivity_martes">Mar</string>
+    <string name="datasactivity_mie">Mie</string>
+    <string name="datasactivity_jue">Jue</string>
+    <string name="datasactivity_vie">Vie</string>
+    <string name="datasactivity_sab">Sab</string>
+    
     
     <!-- Elementos de la Actividad de los Informes (InformesScreenActivity) -->
     <string name="InformesScreenActivity_title">Informes</string>
@@ -96,8 +175,29 @@
     <string name="textViewPestanyaInformesLibreFechaFin">Hasta: </string>
     <string name="ivContentDescriptionSearchTrimestre">Genera el informe del Trimestre</string>
     <string name="ivContentDescriptionSearchLibre">Genera el informe del Rango a elegir</string>
+    <string name="informes_ene">Enero</string>
+    <string name="informes_feb">Febrero</string>
+    <string name="informes_mar">Marzo</string>
+    <string name="informes_abr">Abril</string>
+    <string name="informes_may">Mayo</string>
+    <string name="informes_jun">Junio</string>
+    <string name="informes_jul">Julio</string>
+    <string name="informes_ago">Agosto</string>
+    <string name="informes_sep">Septiembre</string>
+    <string name="informes_oct">Octubre</string>
+    <string name="informes_nov">Noviembre</string>
+    <string name="informes_dic">Diciembre</string>
+    <string name="informes_libre_elegir_fecha">Elegir Fechas</string>
+    <string name="informes_libre_fechaini_mayor">La fecha de inicio no puede ser mayor que la de fin.</string>
+    <string name="informes_aviso_trimestre_futuro">No se puede visualizar valores de previsión (en futuro). En los informes, sólo se visualizan valores pasados excepto en el informe libre.</string>
     
-    <!-- Elementos de la Actividad de configuración de Gráficas (PreferencesGraphicsActivity)  -->
+    <!-- Elementos de la actividad de la Gráfica -->
+    <string name="graphicsgctivity_no_grafica_seleccionada">Debe seleccionar alguna gráfica en la configuración para mostrar.</string>
+    <string name="graphicsgctivity_ingresos">INGRESOS</string>
+    <string name="graphicsgctivity_gastos">GASTOS</string>
+    <string name="graphicsgctivity_balance">BALANCE</string>
+
+    <!-- Elementos de la Actividad de configuración de Gráficas (PreferencesGraphicsActivity) -->
     <string name="preferencesContentTipoGrafica">Elegir el tipo de gráfica a mostrar</string>
     <string name="preferencesTitleTipoGrafica">Tipo de Gráfica</string>
     <string name="preferencesContentValoresGrafica">Elegir el tipo de valores a mostrar</string>
@@ -109,7 +209,7 @@
     <string name="preferencesContentValuesGastos">Mostrar los valores de los Gastos</string>
     <string name="preferencesTitleValuesGastos">Gastos</string>
     <string name="preferencesContentValuesBalance">Mostrar los valores del Balance</string>
-    <string name="preferencesTitleValuesBalance">Balance</string>    
+    <string name="preferencesTitleValuesBalance">Balance</string>
     <string name="preferencesContentLinesIngresos">Mostrar la línea de Ingresos</string>
     <string name="preferencesTitleLinesIngresos">Línea Ingresos</string>
     <string name="preferencesContentLinesGastos">Mostrar la línea de Gastos</string>
@@ -125,25 +225,30 @@
     <string name="preferencesFechaContent">Elegir la fecha límite para valores históricos</string>
     <string name="menu_settings_graphics">Configurar Gráfica</string>
     <string name="title_GraphicsActivity">Gráficas</string>
-    <string name="PreferencesGraphicsActivity_Title">Configurar Gráfica</string>
+    <string name="PreferencesGraphicsActivity_Title">Configurar Gráfica</string>    
+    <string name="PreferencesGraphicsActivity_fechalimite">Situar fecha límite</string>
+	<string name="PreferencesGraphicsActivity_no_fechas_futuras">No está permitido seleccionar fechas futuras para mostrar valores Históricos.</string>
     
     <!-- Elementos del dialog -->
     <string name="dialogSearachDate_FechaInicio">Fecha Inicio</string>
     <string name="dialogSearchDate_FechaFin">Fecha Fin</string>
-    
+
     <!-- Elementos de la Activity AcercaDe -->
     <string name="AcercaDe_title">TantoTengo</string>
     <string name="AcercaDe_version">Versión 1.0</string>
     <string name="AcercaDe_copyright">(&#169;)2013 TantoTengo.</string>
-	<string name="AcercaDe_derechos">Todos los derechos reservados.</string>
-	<string name="AcercaDe_menu">Acerca de</string>
-	
-	<!-- Elementos de Agradecimientos -->
-	<string name="Agradecimientos_menu">Agradecimientos</string>
-	<string name="Agradecimientos_titulo">- A mi buen amigo Javier Morrondo por haber tenido la idea del nombre de mi app. Gracias de verdad.</string>
-	<string name="Agradecimientos_iconos">- A la página web www.iconfinder.com de donde he sacado los iconos de la app.</string>
-	<string name="Agradecimientos_fuentes">- A la página web www.dafont.com/es/ de donde he sacado las fuentes de la app.</string>
-	<string name="Agradecimientos_personas">- Y también quiero agradecer a todas las personas que me dieron su opinión ayudándome a realizar mi primera aplicación en ANDROID. Gracias a todos.</string>
-	
-	
+    <string name="AcercaDe_derechos">Todos los derechos reservados.</string>
+    <string name="AcercaDe_menu">Acerca de</string>
+
+    <!-- Elementos de Agradecimientos -->
+    <string name="Agradecimientos_menu">Agradecimientos</string>
+    <string name="Agradecimientos_titulo">- A mi buen amigo Javier Morrondo por haber tenido la idea del nombre de mi app. Gracias de verdad.</string>
+    <string name="Agradecimientos_iconos">- A la página web www.iconfinder.com de donde he sacado los iconos de la app.</string>
+    <string name="Agradecimientos_fuentes">- A la página web www.dafont.com/es/ de donde he sacado las fuentes de la app.</string>
+    <string name="Agradecimientos_personas">- Y también quiero agradecer a todas las personas que me dieron su opinión ayudándome a realizar mi primera aplicación en ANDROID. Gracias a todos.</string>
+
+    <!-- Diálogos grandes -->
+    <string name="conceptos_borrar_concepto">Borrar el concepto acarreará la eliminación de sus valores asociados en este concepto, ¿Desea continuar?</string>
+    <string name="configuration_activity_importar_valores">No se pueden importar los valores ya que no existen datos guardados previamente.</string>
+
 </resources>

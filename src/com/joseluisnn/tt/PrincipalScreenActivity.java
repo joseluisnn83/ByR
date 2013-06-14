@@ -227,8 +227,7 @@ public class PrincipalScreenActivity extends Activity {
 					if (event.getEventTime() - tiempoDePulsacionInicial <= 2000) {
 						
 						if (getTipoConfiguracion() == 0){
-							lanzarAdvertencia("Para habilitar las Gráficas debe dirigirse a Configuración " +
-									"y cambiar el tipo de configuración a Avanzada.");
+							lanzarAdvertencia(getResources().getString(R.string.psa_aviso_activar_graficas));
 						}else{
 							// Lanzo la Actividad CreateAccountActivity
 							b_graphic.startAnimation(animacionBotonLevantado);
@@ -290,6 +289,12 @@ public class PrincipalScreenActivity extends Activity {
 			 */
 			prefEditorConfiguracion.putInt(
 					singleton_csp.KEY_INFORME_POR_DEFECTO, 0);
+			/*
+			 * La moneda seleccionada por defecto será el euro hast que el usuario la modifique
+			 * 0: euro , 1 : dolar , 2 : libra		  
+			 */
+			prefEditorConfiguracion.putInt(
+					singleton_csp.KEY_TIPO_MONEDA, 0);
 			// Guardo los valores
 			prefEditorConfiguracion.commit();
 
@@ -435,7 +440,7 @@ public class PrincipalScreenActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("INFORMACIÓN");
+		builder.setTitle(getResources().getString(R.string.configuracion_informacion));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 

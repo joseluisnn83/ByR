@@ -11,6 +11,7 @@
     	android:layout_height="wrap_content"
     	android:layout_margin="@dimen/acercade_icono_margin"
     	android:gravity="center_horizontal"
+    	
     	 >
         
         <ImageView
@@ -39,27 +40,35 @@
         android:layout_height="wrap_content"
         android:text="@string/Agradecimientos_titulo"
         android:textSize="@dimen/text_medium"
-        android:layout_margin="@dimen/acercade_text_margin" />
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Agradecimientos_iconos"
         android:textSize="@dimen/text_medium"
-        android:layout_margin="@dimen/acercade_text_margin" />
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Agradecimientos_fuentes"
         android:textSize="@dimen/text_medium"
-        android:layout_margin="@dimen/acercade_text_margin" />
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Agradecimientos_personas"
         android:textSize="@dimen/text_medium"
-        android:layout_margin="@dimen/acercade_text_margin" />
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
 
 </LinearLayout>

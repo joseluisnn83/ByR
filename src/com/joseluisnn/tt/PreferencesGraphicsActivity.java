@@ -434,7 +434,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 
@@ -472,7 +472,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 		// Pass null as the parent view because its going in the dialog layout
 		builder.setView(layout);
 
-		builder.setTitle("Situar fecha límite");
+		builder.setTitle(getResources().getString(R.string.PreferencesGraphicsActivity_fechalimite));
 
 		// builder.setView(valorIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_my_calendar);
@@ -513,8 +513,7 @@ public class PreferencesGraphicsActivity extends PreferenceActivity {
 								modificado = true;
 								
 							} else {
-								lanzarAdvertencia("No está permitido seleccionar fechas "
-										+ "futuras para mostrar valores Históricos.");
+								lanzarAdvertencia(getResources().getString(R.string.PreferencesGraphicsActivity_no_fechas_futuras));
 							}
 
 						} else {

@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.singleton.SingletonTipoMoneda;
 
 /*
  * Clase Adaptador para la lista con los conceptos y su cantidad en euros respectivas
@@ -31,6 +32,10 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
+	
+	//tipo de moneda
+	private SingletonTipoMoneda singleton_tipomoneda;
+	private String tipoMoneda;
 	
 	public ObservadorMyAdapterListViewGD observador;
 	
@@ -53,6 +58,10 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 		separadores.setDecimalSeparator(',');
 		separadores.setGroupingSeparator('.');
 		numeroAFormatear = new DecimalFormat("###,###.##", separadores);
+		
+		// Obtengo el tipo de moneda elegida por el usuario
+		singleton_tipomoneda = SingletonTipoMoneda.getInstance();		
+		tipoMoneda = singleton_tipomoneda.obtenerTipoMoneda(c.getApplicationContext());
 	}
 
 	@Override
@@ -97,7 +106,7 @@ public class MyAdapterListaGestionDatos extends BaseAdapter{
 		ImageButton ibBorrar = (ImageButton)rowView.findViewById(R.id.buttonElementoListaGDBorrar);
 		
 		tvConcepto.setText(values.get(position).getConcepto());
-		tvCantidad.setText(numeroAFormatear.format(values.get(position).getCantidad())+" €");
+		tvCantidad.setText(numeroAFormatear.format(values.get(position).getCantidad())+" " + tipoMoneda);
 		
 		tvConcepto.setTextColor(this.context.getResources().getColor(com.joseluisnn.tt.R.color.dim_gray));
 		

@@ -215,19 +215,19 @@ public class CalendarMonthView extends LinearLayout {
 			DateHelper.increment(weekDay);
 		}
 		 */
-		dayCaptions[0] = "LUN";
+		dayCaptions[0] = getResources().getString(R.string.mycalendar_short_lunes);
 		DateHelper.increment(weekDay);
-		dayCaptions[1] = "MAR";
+		dayCaptions[1] = getResources().getString(R.string.mycalendar_short_martes);
 		DateHelper.increment(weekDay);
-		dayCaptions[2] = "MIE";
+		dayCaptions[2] = getResources().getString(R.string.mycalendar_short_miercoles);
 		DateHelper.increment(weekDay);
-		dayCaptions[3] = "JUE";
+		dayCaptions[3] = getResources().getString(R.string.mycalendar_short_jueves);
 		DateHelper.increment(weekDay);
-		dayCaptions[4] = "VIE";
+		dayCaptions[4] = getResources().getString(R.string.mycalendar_short_viernes);
 		DateHelper.increment(weekDay);
-		dayCaptions[5] = "SAB";
+		dayCaptions[5] = getResources().getString(R.string.mycalendar_short_sabado);
 		DateHelper.increment(weekDay);
-		dayCaptions[6] = "DOM";
+		dayCaptions[6] = getResources().getString(R.string.mycalendar_short_domingo);
 		DateHelper.increment(weekDay);
 		
 		// Obtengo por el ID el gridview donde van las etiquetas de los días de la semana

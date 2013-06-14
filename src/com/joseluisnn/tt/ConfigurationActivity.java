@@ -34,6 +34,7 @@ public class ConfigurationActivity extends Activity {
 	private static final int DIALOGO_INFORMES = 1;
 	private static final int DIALOGO_EXPORT_DB = 2;
 	private static final int DIALOGO_IMPORT_DB = 3;
+	private static final int DIALOGO_MONEDAS = 4;
 	/*
 	 * Constantes para indicar las rutas del archivo de la BD
 	 */
@@ -55,6 +56,7 @@ public class ConfigurationActivity extends Activity {
 	private LinearLayout llConceptosIngresos;
 	private LinearLayout llConceptosGastos;
 	private LinearLayout llInformes;
+	private LinearLayout llMonedas;
 	private LinearLayout llDumpDB;
 	private LinearLayout llLoadDB;
 
@@ -65,7 +67,7 @@ public class ConfigurationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_configuration);
 
@@ -79,6 +81,7 @@ public class ConfigurationActivity extends Activity {
 		llConceptosIngresos = (LinearLayout) findViewById(R.id.llConceptosIngresos);
 		llConceptosGastos = (LinearLayout) findViewById(R.id.llConceptosGastos);
 		llInformes = (LinearLayout) findViewById(R.id.llInformes);
+		llMonedas = (LinearLayout) findViewById(R.id.llMonedas);
 		llDumpDB = (LinearLayout) findViewById(R.id.llDumpDB);
 		llLoadDB = (LinearLayout) findViewById(R.id.llLoadDB);
 
@@ -134,6 +137,20 @@ public class ConfigurationActivity extends Activity {
 			}
 		});
 
+		// Evento OnClick del Layout de las monedas
+		llMonedas.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+
+				Bundle b = new Bundle();
+				Dialog d = onCreateDialog(DIALOGO_MONEDAS, b);
+
+				d.show();
+			}
+		});
+
 		// Evento OnClick del Layout de la copia de seguridad de la BD
 		llDumpDB.setOnClickListener(new OnClickListener() {
 
@@ -175,7 +192,8 @@ public class ConfigurationActivity extends Activity {
 
 					d.show();
 				} else {
-					lanzarAdvertencia("No se pueden importar los valores ya que no existen datos guardados previamente.");
+					lanzarAdvertencia(getResources().getString(
+							R.string.configuration_activity_importar_valores));
 				}
 			}
 		});
@@ -205,6 +223,9 @@ public class ConfigurationActivity extends Activity {
 		case DIALOGO_IMPORT_DB:
 			dialogo = crearDialogImportDB();
 			break;
+		case DIALOGO_MONEDAS:
+			dialogo = crearDialogoTipoMoneda();
+			break;
 		default:
 			dialogo = new Dialog(this);
 			break;
@@ -217,7 +238,9 @@ public class ConfigurationActivity extends Activity {
 	 * Dialog para elegir el tipo de configuración que quiere el usuario
 	 */
 	private Dialog crearDialogoSeleccionTipoConfiguracion() {
-		final String[] items = { "Básica", "Avanzada" };
+		final String[] items = {
+				getResources().getString(R.string.configuracion_basica),
+				getResources().getString(R.string.configuracion_avanzada) };
 		// Obtengo el valor del tipo de configuración guardado previamente
 		preferenceConfiguracionPrivate = getSharedPreferences(
 				singleton_csp.NOMBRE_ARCHIVO_CONFIGURACION,
@@ -231,7 +254,7 @@ public class ConfigurationActivity extends Activity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Tipo de Configuración");
+		builder.setTitle(getResources().getString(R.string.mtTipoConfiguracion));
 		builder.setIcon(getResources().getDrawable(
 				android.R.drawable.ic_menu_preferences));
 		builder.setSingleChoiceItems(items, tipoConfiguracion,
@@ -269,8 +292,13 @@ public class ConfigurationActivity extends Activity {
 	 * por defecto
 	 */
 	private Dialog crearDialogoSeleccionInformes() {
-		final String[] items = { "Semanal", "Mensual", "Trimestral", "Anual",
-				"Libre" };
+		final String[] items = {
+				getResources().getString(R.string.PestanyaInformeSemanal_title),
+				getResources().getString(R.string.PestanyaInformeMensual_title),
+				getResources().getString(
+						R.string.PestanyaInformeTrimestral_title),
+				getResources().getString(R.string.PestanyaInformeAnual_title),
+				getResources().getString(R.string.PestanyaInformeLibre_title) };
 		// Obtengo el valor del informe a seleccionar por defecto guardado
 		// previamente
 		preferenceConfiguracionPrivate = getSharedPreferences(
@@ -285,7 +313,8 @@ public class ConfigurationActivity extends Activity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Informe a mostrar");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_dialog_informes_title));
 		builder.setIcon(getResources().getDrawable(
 				android.R.drawable.ic_menu_agenda));
 		builder.setSingleChoiceItems(items, informeSeleccionado,
@@ -299,6 +328,54 @@ public class ConfigurationActivity extends Activity {
 							// fichero
 							editorPreference
 									.putInt(singleton_csp.KEY_INFORME_POR_DEFECTO,
+											item);
+							editorPreference.commit();
+
+						}
+						dialog.cancel();
+					}
+				});
+
+		return builder.create();
+	}
+
+	/*
+	 * Dialog para elegir el tipo de moneda que quiere el usuario utilizar
+	 */
+	private Dialog crearDialogoTipoMoneda() {
+		final String[] items = {
+				getResources().getString(R.string.moneda_euro),
+				getResources().getString(R.string.moneda_dolar),
+				getResources().getString(R.string.moneda_libra) };
+		// Obtengo el valor del tipo de moneda guardado
+		// previamente
+		preferenceConfiguracionPrivate = getSharedPreferences(
+				singleton_csp.NOMBRE_ARCHIVO_CONFIGURACION,
+				Context.MODE_PRIVATE);
+
+		final int tipoMoneda = preferenceConfiguracionPrivate.getInt(
+				singleton_csp.KEY_TIPO_MONEDA, 0);
+
+		// Variable para modificar los valores del archivo de configuración
+		editorPreference = preferenceConfiguracionPrivate.edit();
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_dialog_tipo_moneda_title));
+		builder.setIcon(getResources().getDrawable(
+				android.R.drawable.ic_menu_mylocation));
+		builder.setSingleChoiceItems(items, tipoMoneda,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int item) {
+						if (tipoMoneda != item) {
+							// Si se ha pulsado una opción diferente a la
+							// anterior guardada se realiza el cambio en el
+							// fichero
+							editorPreference
+									.putInt(singleton_csp.KEY_TIPO_MONEDA,
 											item);
 							editorPreference.commit();
 
@@ -328,7 +405,8 @@ public class ConfigurationActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String aviso) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_alert);
 		builder.setMessage(aviso);
 
@@ -351,7 +429,8 @@ public class ConfigurationActivity extends Activity {
 	private Dialog crearDialogExportDB() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("INFORMACIÓN");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_informacion));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage("¿Desea guardar una copia de seguridad de la base de datos?");
 
@@ -391,9 +470,12 @@ public class ConfigurationActivity extends Activity {
 				singleton_csp.NOMBRE_ARCHIVO_CONFIGURACION,
 				Context.MODE_PRIVATE);
 
-		builder.setTitle("INFORMACIÓN");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_informacion));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
-		builder.setMessage("¿ Desea importar los datos guardados de la BD almacenada en la tarjeta SD a fecha de "
+		builder.setMessage(getResources().getString(
+				R.string.configuracion_dialog_message_importar_valores)
+				+ " "
 				+ preferenceConfiguracionPrivate.getString(
 						singleton_csp.KEY_FECHA_COPIA_SEGURIDAD, "?") + " ?");
 
@@ -470,7 +552,7 @@ public class ConfigurationActivity extends Activity {
 				// Inserto la fecha de la copia de seguridad en el archivo de
 				// configuración
 				String copia_fecha = obtenerFechaHoy();
-				
+
 				preferenceConfiguracionPrivate = getSharedPreferences(
 						singleton_csp.NOMBRE_ARCHIVO_CONFIGURACION,
 						Context.MODE_PRIVATE);
@@ -486,14 +568,17 @@ public class ConfigurationActivity extends Activity {
 				// Toast.LENGTH_LONG).show();
 				Toast.makeText(
 						getBaseContext(),
-						"BD guardada en la carpeta /copia_tt de la tarjeta SD a fecha de: "
-								+ copia_fecha, Toast.LENGTH_LONG).show();
+						getResources().getString(
+								R.string.configuracion_bd_guardada)
+								+ " " + copia_fecha, Toast.LENGTH_LONG).show();
 
 			} else if (sd.canRead() && !sd.canWrite()) {
 
 				// Sólo se puede leer en la tarjeta SD
-				Toast.makeText(getBaseContext(),
-						"La tarjeta SD sólo es de lectura. Copia cancelada.",
+				Toast.makeText(
+						getBaseContext(),
+						getResources().getString(
+								R.string.configuracion_bd_solo_lectura),
 						Toast.LENGTH_LONG).show();
 
 			} else if (!sd.canRead() && !sd.canWrite()) {
@@ -501,9 +586,8 @@ public class ConfigurationActivity extends Activity {
 				// No se puede leer ni escribir
 				Toast.makeText(
 						getBaseContext(),
-						"No se puede leer ni escribir en la tarjeta SD. "
-								+ "Compruebe si está insertada o si tiene permisos "
-								+ "para poder leer/escribir.",
+						getResources().getString(
+								R.string.configuracion_bd_error_escritura),
 						Toast.LENGTH_LONG).show();
 
 			}
@@ -542,16 +626,20 @@ public class ConfigurationActivity extends Activity {
 				dst.transferFrom(src, 0, src.size());
 				src.close();
 				dst.close();
-				Toast.makeText(getBaseContext(),
-						"Base de Datos importada con éxito.", Toast.LENGTH_LONG)
-						.show();
+				Toast.makeText(
+						getBaseContext(),
+						getResources().getString(
+								R.string.configuracion_bd_importada),
+						Toast.LENGTH_LONG).show();
 
 			} else if (backupDB.canRead() && !backupDB.canWrite()) {
 
 				// Sólo se puede leer en el directorio del programa de la app
 				Toast.makeText(
 						getBaseContext(),
-						"El directorio del programa sólo es de lectura. Importación cancelada.",
+						getResources()
+								.getString(
+										R.string.configuracion_bd_importacion_cancelada),
 						Toast.LENGTH_LONG).show();
 
 			} else if (!backupDB.canRead() && !backupDB.canWrite()) {
@@ -559,9 +647,9 @@ public class ConfigurationActivity extends Activity {
 				// No se puede leer ni escribir
 				Toast.makeText(
 						getBaseContext(),
-						"No se puede leer ni escribir en el directorio del programa. "
-								+ "Compruebe si tiene permisos "
-								+ "para poder leer/escribir.",
+						getResources()
+								.getString(
+										R.string.configuracion_bd_error_escritura_directorio),
 						Toast.LENGTH_LONG).show();
 
 			}

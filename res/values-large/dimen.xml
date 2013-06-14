@@ -73,6 +73,7 @@
     
     <!-- Dimens from  Agradecimientos-->
     <dimen name="agradecimientos_cabecera">45sp</dimen>
+    <dimen name="agradecimientos_margin_texto">15dp</dimen>
     
     <!-- Dimens from text size -->
     <dimen name="text_small">18sp</dimen>

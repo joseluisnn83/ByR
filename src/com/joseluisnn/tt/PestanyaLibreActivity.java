@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.singleton.SingletonTipoMoneda;
 
 public class PestanyaLibreActivity extends Activity {
 
@@ -73,6 +74,12 @@ public class PestanyaLibreActivity extends Activity {
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
+	
+	/*
+	 * Variables para saber el símbolo de la moneda a utilizar
+	 */
+	private SingletonTipoMoneda singleton_tm;
+	private String tipoMoneda;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +88,10 @@ public class PestanyaLibreActivity extends Activity {
 
 		setContentView(R.layout.pestanya_libre);
 		
+		// Obtengo el tipo de moneda a tulizar
+		singleton_tm = SingletonTipoMoneda.getInstance();
+		tipoMoneda = singleton_tm.obtenerTipoMoneda(getApplicationContext());
+
 		animacionBotonPulsado = AnimationUtils.loadAnimation(this,
 				R.anim.animacion_boton_pulsado);
 		animacionBotonLevantado = AnimationUtils.loadAnimation(this,
@@ -151,7 +162,7 @@ public class PestanyaLibreActivity extends Activity {
 		});
 
 		ivSearchDate.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Método onTouch del botón de buscar en un Rango de Fechas
@@ -235,9 +246,11 @@ public class PestanyaLibreActivity extends Activity {
 		String fecha;
 
 		// Obtengo la fecha en el formato Día de Mes de Año
-		fecha = "" + cInicio.get(Calendar.DAY_OF_MONTH) + " de "
-				+ obtenerMes(cInicio.get(Calendar.MONTH)) + " de "
-				+ cInicio.get(Calendar.YEAR);
+		fecha = "" + cInicio.get(Calendar.DAY_OF_MONTH) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(cInicio.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + cInicio.get(Calendar.YEAR);
 
 		return fecha;
 
@@ -252,9 +265,11 @@ public class PestanyaLibreActivity extends Activity {
 		String fecha;
 
 		// Obtengo la fecha en el formato Día de Mes de Año
-		fecha = "" + cFin.get(Calendar.DAY_OF_MONTH) + " de "
-				+ obtenerMes(cFin.get(Calendar.MONTH)) + " de "
-				+ cFin.get(Calendar.YEAR);
+		fecha = "" + cFin.get(Calendar.DAY_OF_MONTH) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(cFin.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + cFin.get(Calendar.YEAR);
 
 		return fecha;
 
@@ -370,7 +385,7 @@ public class PestanyaLibreActivity extends Activity {
 			// establecemos el contenido
 			tvCantidad.setText(""
 					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
-							.getCantidad()) + "€");
+							.getCantidad()) + tipoMoneda);
 
 			fechaBD = "" + listadoValoresIngresos.get(i).getIdFecha();
 
@@ -487,7 +502,7 @@ public class PestanyaLibreActivity extends Activity {
 			// establecemos el contenido
 			tvCantidad.setText(""
 					+ numeroAFormatear.format(listadoValoresGastos.get(i)
-							.getCantidad()) + "€");
+							.getCantidad()) + tipoMoneda);
 
 			fechaBD = "" + listadoValoresGastos.get(i).getIdFecha();
 
@@ -585,8 +600,9 @@ public class PestanyaLibreActivity extends Activity {
 		// Inicio la variable Calendar con la fecha que tengo actualmente
 		c.set(y, m - 1, d);
 
-		cadenaFecha = obtenerMes(c.get(Calendar.MONTH)) + " de "
-				+ c.get(Calendar.YEAR);
+		cadenaFecha = obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		return cadenaFecha;
 	}
@@ -627,40 +643,40 @@ public class PestanyaLibreActivity extends Activity {
 		switch (month) {
 
 		case 0:
-			m = "Enero";
+			m = getResources().getString(R.string.informes_ene);
 			break;
 		case 1:
-			m = "Febrero";
+			m = getResources().getString(R.string.informes_feb);
 			break;
 		case 2:
-			m = "Marzo";
+			m = getResources().getString(R.string.informes_mar);
 			break;
 		case 3:
-			m = "Abril";
+			m = getResources().getString(R.string.informes_abr);
 			break;
 		case 4:
-			m = "Mayo";
+			m = getResources().getString(R.string.informes_may);
 			break;
 		case 5:
-			m = "Junio";
+			m = getResources().getString(R.string.informes_jun);
 			break;
 		case 6:
-			m = "Julio";
+			m = getResources().getString(R.string.informes_jul);
 			break;
 		case 7:
-			m = "Agosto";
+			m = getResources().getString(R.string.informes_ago);
 			break;
 		case 8:
-			m = "Septiembre";
+			m = getResources().getString(R.string.informes_sep);
 			break;
 		case 9:
-			m = "Octubre";
+			m = getResources().getString(R.string.informes_oct);
 			break;
 		case 10:
-			m = "Noviembre";
+			m = getResources().getString(R.string.informes_nov);
 			break;
 		case 11:
-			m = "Diciembre";
+			m = getResources().getString(R.string.informes_dic);
 			break;
 		default:
 			m = "error";
@@ -681,25 +697,25 @@ public class PestanyaLibreActivity extends Activity {
 
 		switch (day) {
 		case 1:
-			d = "Dom";
+			d = getResources().getString(R.string.datasactivity_dom);
 			break;
 		case 2:
-			d = "Lun";
+			d = getResources().getString(R.string.datasactivity_lun);
 			break;
 		case 3:
-			d = "Mar";
+			d = getResources().getString(R.string.datasactivity_martes);
 			break;
 		case 4:
-			d = "Mié";
+			d = getResources().getString(R.string.datasactivity_mie);
 			break;
 		case 5:
-			d = "Jue";
+			d = getResources().getString(R.string.datasactivity_jue);
 			break;
 		case 6:
-			d = "Vie";
+			d = getResources().getString(R.string.datasactivity_vie);
 			break;
 		case 7:
-			d = "Sáb";
+			d = getResources().getString(R.string.datasactivity_sab);
 			break;
 		default:
 			break;
@@ -781,16 +797,16 @@ public class PestanyaLibreActivity extends Activity {
 		double balance = getTotalIngresos() - getTotalGastos();
 
 		tvTotalIngresos.setText(" "
-				+ numeroAFormatear.format(getTotalIngresos()) + " €");
+				+ numeroAFormatear.format(getTotalIngresos()) + " " + tipoMoneda);
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
 		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
-				+ " €");
+				+ " " + tipoMoneda);
 		tvTotalGastos.setTextColor(this.getResources().getColor(
 				R.color.ListadosRojo));
 
-		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
+		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " " + tipoMoneda);
 		if (balance >= 0) {
 			tvTotalBalance.setTextColor(this.getResources().getColor(
 					R.color.ListadosVerdeOscuro));
@@ -802,8 +818,8 @@ public class PestanyaLibreActivity extends Activity {
 	}
 
 	/*
-	 * Dialog para situar un rango de fechas y que me devuelva
-	 * los valores contenidos en ellas.
+	 * Dialog para situar un rango de fechas y que me devuelva los valores
+	 * contenidos en ellas.
 	 */
 	private Dialog crearDialogoBuscarFecha() {
 
@@ -829,7 +845,7 @@ public class PestanyaLibreActivity extends Activity {
 		// Pass null as the parent view because its going in the dialog layout
 		builder.setView(layout);
 
-		builder.setTitle("Elegir Fechas");
+		builder.setTitle(getResources().getString(R.string.informes_libre_elegir_fecha));
 
 		// builder.setView(valorIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_my_calendar);
@@ -842,7 +858,7 @@ public class PestanyaLibreActivity extends Activity {
 						// TODO Si la fechaInicio es mayor que la FechaFin no se
 						// puede
 						// realizar la búsqueda
-						
+
 						// Actualizo las variables Calendar
 						cInicio.set(Calendar.YEAR, startDate.getYear());
 						cInicio.set(Calendar.MONTH, startDate.getMonth());
@@ -850,13 +866,12 @@ public class PestanyaLibreActivity extends Activity {
 								startDate.getDayOfMonth());
 						cFin.set(Calendar.YEAR, endDate.getYear());
 						cFin.set(Calendar.MONTH, endDate.getMonth());
-						cFin.set(Calendar.DAY_OF_MONTH,
-								endDate.getDayOfMonth());
+						cFin.set(Calendar.DAY_OF_MONTH, endDate.getDayOfMonth());
 
 						if (obtenerEnteroFechaInicio() > obtenerEnteroFechaFin()) {
 							// Entra en el IF si la fecha de inicio es mayor que
 							// la de fin
-							lanzarAdvertencia("La fecha de inicio no puede ser mayor que la de fin.");
+							lanzarAdvertencia(getResources().getString(R.string.informes_libre_fechaini_mayor));
 
 						} else {
 
@@ -906,7 +921,7 @@ public class PestanyaLibreActivity extends Activity {
 
 		return builder.create();
 	}
-	
+
 	/*
 	 * Método que lanza un Dialog de una advertencia producida
 	 */
@@ -917,14 +932,14 @@ public class PestanyaLibreActivity extends Activity {
 		d.show();
 
 	}
-	
+
 	/*
 	 * Dialog para avisar de un movimiento no permitido
 	 */
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 

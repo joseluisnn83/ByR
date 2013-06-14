@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Elementos de la Actividad Principal (MainActivity) -->
+    <string name="app_name">TT</string>
+
+    <!-- Elementos de la Pantalla Principal (ScreenActivity) -->
+    <string name="title_activity_principal_screen">TantoTengo</string>
+    <string name="title_preferenceScreenConfiguration">Configuration</string>
+    <string name="textViewDeveloper">Application developed by José Luis Neira (&#169;)2013</string>
+    <string name="descriptionTituloLogo">Título de la Aplicación</string>
+    <string name="descriptionLogo">Logo de la Aplicación</string>
+    <string name="descriptionButtonData">Datas</string>
+    <string name="descriptionButtonConfiguration">Config.</string>
+    <string name="descriptionButtonInforms">Reports</string>
+    <string name="descriptionButtonGraphics">Gaphics</string>
+    <string name="descriptionButtonPrevision">Previsión</string>
+    <string name="menu_settings">Settings</string>
+    <string name="psa_aviso_activar_graficas">To show the graphics, go to the configuration and change type of configuration to Advanced.</string>
+
+    <!-- Elementos de la Actividad DatasActivity -->
+    <string name="title_activity_datas">Data Management</string>
+    <string name="title_preference_tipo_configuracion">Type of configuration</string>
+
+    <!-- Elementos del layout de configuración -->
+    <string name="mtTipoConfiguracion">Type of configuration</string>
+    <string name="mtIngresos">Incomes</string>
+    <string name="mtGastos">Expenses</string>
+    <string name="mtInformes">Reports default</string>
+    <string name="mtMonedas">Coins</string>
+    <string name="mtDumpDB">Back up the database</string>
+    <string name="mtLoadDB">Load database</string>
+    <string name="stTipoConfiguracion">Choose between the two types of configuration</string>
+    <string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
+    <string name="stGastos">Insert or delete Income concepts</string>
+    <string name="stInformes">Choose the default report</string>
+    <string name="stMonedas">Choose the type of coin</string>
+    <string name="stDumpDB">Press if you want to back up your DB into the SD card</string>
+    <string name="stLoadDB">Press if you want to load the DB back up from SD card to your application</string>
+    <string name="tvConceptos">Concepts Management</string>
+    <string name="tvOtrasOpciones">Other Options</string>
+    <string name="tvCopiaSeguridad">Backup</string>
+    <string name="title_ConfigurationActivity">Configuration</string>
+    <string name="configuracion_basica">Basic</string>
+    <string name="configuracion_avanzada">Advanced</string>
+    <string name="configuracion_dialog_informes_title">Report to show</string>
+    <string name="configuracion_dialog_tipo_moneda_title">Coin to choose</string>
+    <string name="configuracion_advertencia">WARNING</string>
+    <string name="configuracion_informacion">INFORMATION</string>    
+    <string name="configuracion_dialog_message_importar_valores">Do you want to import the database stored on the SD card on </string>
+    <string name="configuracion_bd_guardada">DB saved in the folder /copia_tt SD card on:</string>
+    <string name="configuracion_bd_solo_lectura">The SD card is read only. Copy canceled.</string>
+    <string name="configuracion_bd_error_escritura">Unable to read or write into the SD card. Check if it has been inserted or if you have permissions to read / write.</string>
+    <string name="configuracion_bd_importada">Base de Datos importada con éxito.</string>
+	<string name="configuracion_bd_importacion_cancelada">The program directory is read-only. Import canceled.</string>
+	<string name="configuracion_bd_error_escritura_directorio">Unable to read or write in the program directory. Verify that you have permissions to read / write.</string>
+	<string name="moneda_euro">€ (euro)</string>
+	<string name="moneda_dolar">$ (dollar)</string>
+	<string name="moneda_libra">£ (pound)</string>
+	<string name="valor_euro">€</string>
+	<string name="valor_dolar">$</string>
+	<string name="valor_libra">£</string>
+	
+    <!-- Elementos del menu Configuracion conceptos: editar, borrar -->
+    <string name="menu_config_conceptos_editar">Edit</string>
+    <string name="menu_config_conceptos_borrar">Delete</string>
+
+    <!-- Elementos de los Dialog de Configuracion -->
+    <string name="titleDialogUsername">Nombre de Usuario</string>
+    <string name="titleDialogPassword">Password</string>
+    <string name="titleDialogEmail">e-mail</string>
+    <string name="botonAceptar">Accept</string>
+    <string name="botonCancelar">Cancel</string>
+    <string name="botonOmitir">Omit</string>
+
+    <!-- Elementos de las Activities de configuracion de Conceptos -->
+    <string name="descriptionIngresos">Creating income concept</string>
+    <string name="textoDescriptionIngresos">Creating income concept</string>
+    <string name="descriptionGastos">Creating expense concept</string>
+    <string name="textoDescriptionGastos">Creating expense concept</string>
+    <string name="textViewListViewConceptoIngreso">There are not income concepts</string>
+    <string name="textViewListViewConceptoGasto">There are not expense concepts</string>
+    <string name="conceptos_confirmacion">Confirmation</string>
+    <string name="conceptos_insertar_cg">Enter expense concept</string>
+    <string name="conceptos_actualizar_cg">Update expense concept</string>
+    <string name="conceptos_insertar_ci">Enter income concept</string>
+    <string name="conceptos_actualizar_ci">Update income concept</string>
+
+    <!-- Elementos de MyCalendar -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="calendarContentDescriptionInsertedData">Inserted data</string>
+    <string name="ivContenDescriptionSearchDate">Search Date</string>
+    <string name="ivContenDescriptionToday">Today</string>
+    <string name="activity_datas_screen_tvHoy">TODAY</string>
+    <string name="activity_datas_screen_tvBuscar">LOOK FOR</string>
+    <string name="mycalendar_short_lunes">MON</string>
+    <string name="mycalendar_short_martes">TUE</string>
+    <string name="mycalendar_short_miercoles">WED</string>
+    <string name="mycalendar_short_jueves">THU</string>
+    <string name="mycalendar_short_viernes">FRI</string>
+    <string name="mycalendar_short_sabado">SAT</string>
+    <string name="mycalendar_short_domingo">SUN</string>
+    <string name="mycalendar_buscar_fecha">Looking for a date on the calendar</string>
+
+    <!-- Elementos de la Lista de la Gestión de Datos -->
+    <string name="tvContentDescriptionBorrar">Borrar elemento</string>
+    <string name="tvContentDescriptionEditar">Editar elemento</string>
+    <string name="ivContentDescriptionBackSearch">Fecha anterior</string>
+    <string name="ivContentDescriptionForwardSearch">Fecha siguiente</string>
+    <string name="listaVaciaGDIngresos">There are not incomes</string>
+    <string name="listaVaciaGDGastos">There are not expenses</string>
+    <string name="tvGDIngresos">Insert Incomes</string>
+    <string name="tvGDGastos">Insert Expenses</string>
+    <string name="datasactivity_advertencia_insertar_ingresos">To insert values you ​​must create at least one INCOME concept. Go to settings and add a concept in "Management Concepts".</string>
+    <string name="datasactivity_advertencia_insertar_gastos">To insert values you ​​must create at least one EXPENSE concept. Go to settings and add a concept in "Management Concepts".</string>
+    <string name="datasactivity_error_insertar_ingresos">You can not insert an ICOME concept which has the same date into the database. Please, update it.</string>
+    <string name="datasactivity_error_insertar_gastos">You can not insert an EXPENSE concept which has the same date into the database. Please, update it.</string>
+    <string name="datasactivity_error_actualizar_ingreso">Error updating the INCOME.</string>
+    <string name="datasactivity_error_actualizar_gasto">Error updating the EXPENSE.</string>
+    <string name="datasactivity_error_borrar_ingreso">Error deleting the INCOME.</string>
+    <string name="datasactivity_error_borrar_gasto">Error deleting the EXPENSE.</string>
+	<string name="datasactivity_error_insertar_fecha_ingresos">Failed to insert the date, INCOME insertion canceled.</string>
+	<string name="datasactivity_error_insertar_fecha_gastos">Failed to insert the date, EXPENSE insertion canceled.</string>
+	<string name="datasactivity_error_borrar_fecha">Failed to clear the date from the database.</string>	
+	<string name="datasactivity_error_insertar_valores_grandes">It is not allowed to insert values ​​larger than 9.999.999.999</string>
+	<string name="datasactivity_editar_ingreso">Update Income</string>
+	<string name="datasactivity_editar_gasto">Update Expense</string>
+	<string name="datasactivity_borrar_ingreso">Delete Income</string>
+	<string name="datasactivity_borrar_gasto">Delete Expense</string>
+	<string name="datasactivity_borrar_gasto_message_1">Do you want to delete the expense on</string>	
+	<string name="datasactivity_conjuncion">of</string>
+	<string name="datasactivity_borrar_ingreso_message_1">Do you want to delete the income on</string>	
+	<string name="datasactivity_repetir_valores">Do you want to repeat the selected value following months of the year ?</string>
+	<string name="datasactivity_error">ERROR</string>
+	<string name="datasactivity_sobreescribir">OVERWRITE</string>
+    <string name="datasactivity_sobreescribir_valor_message_1">Do you want to modify an existing value on</string>
+    <string name="datasactivity_sobreescribir_valor_message_2">by the value</string>
+    <string name="datasactivity_ene">Jan.</string>
+    <string name="datasactivity_feb">Feb.</string>
+    <string name="datasactivity_mar">Mar.</string>
+    <string name="datasactivity_abr">Apr.</string>
+    <string name="datasactivity_may">May.</string>
+    <string name="datasactivity_jun">Jun.</string>
+    <string name="datasactivity_jul">Jul.</string>
+    <string name="datasactivity_ago">Aug.</string>
+    <string name="datasactivity_sep">Sep.</string>
+    <string name="datasactivity_oct">Oct.</string>
+    <string name="datasactivity_nov">Nov.</string>
+    <string name="datasactivity_dic">Dec.</string>
+    <string name="datasactivity_dom">Sun</string>
+    <string name="datasactivity_lun">Mon</string>
+    <string name="datasactivity_martes">Tue</string>
+    <string name="datasactivity_mie">Wed</string>
+    <string name="datasactivity_jue">Thu</string>
+    <string name="datasactivity_vie">Fri</string>
+    <string name="datasactivity_sab">Sat</string>
+    
+    
+    <!-- Elementos de la Actividad de los Informes (InformesScreenActivity) -->
+    <string name="InformesScreenActivity_title">Reports</string>
+    <string name="PestanyaInformeSemanal_title">Weekly</string>
+    <string name="PestanyaInformeMensual_title">Monthly</string>
+    <string name="PestanyaInformeTrimestral_title">Quarterly</string>
+    <string name="PestanyaInformeAnual_title">Yearly</string>
+    <string name="PestanyaInformeLibre_title">Free</string>
+    <string name="total_ingresos">Incomes: </string>
+    <string name="total_gastos">Expenses: </string>
+    <string name="total_balance">Balance sheet: </string>
+    <string name="ivContentDescriptionListadoIngresos">Desplegar Listado Ingresos</string>
+    <string name="ivContentDescriptionListadoGastos">Desplegar Listado Gastos</string>
+    <string name="textViewListadoIngresos">INCOMES</string>
+    <string name="textViewListadoGastos">EXPENSES</string>
+    <string name="textViewPestanyaInformesLibreFechaInicio">From: </string>
+    <string name="textViewPestanyaInformesLibreFechaFin">To: </string>
+    <string name="ivContentDescriptionSearchTrimestre">Genera el informe del Trimestre</string>
+    <string name="ivContentDescriptionSearchLibre">Genera el informe del Rango a elegir</string>
+    <string name="informes_ene">January</string>
+    <string name="informes_feb">February</string>
+    <string name="informes_mar">March</string>
+    <string name="informes_abr">April</string>
+    <string name="informes_may">May</string>
+    <string name="informes_jun">June</string>
+    <string name="informes_jul">July</string>
+    <string name="informes_ago">August</string>
+    <string name="informes_sep">September</string>
+    <string name="informes_oct">October</string>
+    <string name="informes_nov">November</string>
+    <string name="informes_dic">December</string>
+    <string name="informes_libre_elegir_fecha">Choose dates</string>
+    <string name="informes_libre_fechaini_mayor">Start date can not be greater than the end.</string>
+    <string name="informes_aviso_trimestre_futuro">Can not display future values. In the reports, You can only display past values ​​except in the free reports.</string>
+    
+    <!-- Elementos de la actividad de la Gráfica -->
+    <string name="graphicsgctivity_no_grafica_seleccionada">You have to select some graphic in the configuraion to show it.</string>
+    <string name="graphicsgctivity_ingresos">INCOMES</string>
+    <string name="graphicsgctivity_gastos">EXPENSES</string>
+    <string name="graphicsgctivity_balance">BALANCE SHEET</string>
+
+    <!-- Elementos de la Actividad de configuración de Gráficas (PreferencesGraphicsActivity) -->
+    <string name="preferencesContentTipoGrafica">Choose the type of graphic to display</string>
+    <string name="preferencesTitleTipoGrafica">Type of Graphic</string>
+    <string name="preferencesContentValoresGrafica">Choose the type of values to display</string>
+    <string name="preferencesTitleValoresGrafica">Type of Values</string>
+    <string name="preferencesCategoryValues">Graphic Lines Values</string>
+    <string name="preferencesCategoryLines">Graphic Lines</string>
+    <string name="preferencesContentValuesIngresos">Display the Incomes Values</string>
+    <string name="preferencesTitleValuesIngresos">Incomes</string>
+    <string name="preferencesContentValuesGastos">Display the Expenses Values</string>
+    <string name="preferencesTitleValuesGastos">Expenses</string>
+    <string name="preferencesContentValuesBalance">Display the Balance Sheet Values</string>
+    <string name="preferencesTitleValuesBalance">Balance Sheet</string>
+    <string name="preferencesContentLinesIngresos">Display the Incomes Line</string>
+    <string name="preferencesTitleLinesIngresos">Incomes Line</string>
+    <string name="preferencesContentLinesGastos">Display the Expenses Line</string>
+    <string name="preferencesTitleLinesGastos">Expenses Line</string>
+    <string name="preferencesContentLinesBalance">Display the Balance Sheet Line</string>
+    <string name="preferencesTitleLinesBalance">Balance Sheet Line</string>
+    <string name="preferencesCategoryYear">Date for historical values</string>
+    <string name="preferencesContentYearsGrafica">Choose the year</string>
+    <string name="preferencesTitleYearsGrafica">Year</string>
+    <string name="preferencesContentMonthsGrafica">Choose the month</string>
+    <string name="preferencesTitleMonthsGrafica">Month</string>
+    <string name="preferencesFechaTitle">Date</string>
+    <string name="preferencesFechaContent">Choose the date for historical values</string>
+    <string name="menu_settings_graphics">Graphic Setting</string>
+    <string name="title_GraphicsActivity">Graphics</string>
+    <string name="PreferencesGraphicsActivity_Title">Graphic Setting</string>    
+    <string name="PreferencesGraphicsActivity_fechalimite">Choose the date</string>
+	<string name="PreferencesGraphicsActivity_no_fechas_futuras">You can not choose future dates for historical values.</string>
+    
+    <!-- Elementos del dialog -->
+    <string name="dialogSearachDate_FechaInicio">Start Date</string>
+    <string name="dialogSearchDate_FechaFin">End Date</string>
+
+    <!-- Elementos de la Activity AcercaDe -->
+    <string name="AcercaDe_title">TantoTengo</string>
+    <string name="AcercaDe_version">Versión 1.0</string>
+    <string name="AcercaDe_copyright">(&#169;)2013 TantoTengo.</string>
+    <string name="AcercaDe_derechos">All rights reserved.</string>
+    <string name="AcercaDe_menu">About</string>
+
+    <!-- Elementos de Agradecimientos -->
+    <string name="Agradecimientos_menu">Thanks</string>
+    <string name="Agradecimientos_titulo">- To my good friend Javier Morrondo because he has have the idea for my apps name. Thank you very much.</string>
+    <string name="Agradecimientos_iconos">- www.iconfinder.com website where I got the app icons.</string>
+    <string name="Agradecimientos_fuentes">- www.dafont.com/es/ website where I got the app fonts.</string>
+    <string name="Agradecimientos_personas">- And I also want to thank all the people who gave me their opinions to help me make my first application in ANDROID. Thanks to all.</string>
+
+    <!-- Diálogos grandes -->
+    <string name="conceptos_borrar_concepto">Remove the concept lead to the removal of their associated values ​​in this concept, do you want to continue?</string>
+    <string name="configuration_activity_importar_valores">Can not import the values ​​as there are no previously saved data.</string>
+
+</resources>

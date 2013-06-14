@@ -2,7 +2,6 @@ package com.joseluisnn.tt;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import pl.polidea.view.ZoomView;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
-
 import com.androidplot.Plot;
 import com.androidplot.series.XYSeries;
 import com.androidplot.xy.BoundaryMode;
@@ -122,29 +120,31 @@ public class GraphicsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);		
-		
+		super.onCreate(savedInstanceState);
+
 		/*
 		 * Compruebo si el dispositivo es una TABLET o un MOBILE normal
 		 */
-		TelephonyManager manager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){
-            //return "Tablet";
-        	;
-        }else{
-            //return "Mobile";
-        	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-		
+		TelephonyManager manager = (TelephonyManager) getApplicationContext()
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		if (manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
+			// return "Tablet";
+			;
+		} else {
+			// return "Mobile";
+			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
+
 		/*
 		 * Quitamos barra de titulo de la Actividad Debe ser ejecutada esta
 		 * instruccion antes del setContentView para que no cargue las imágenes
 		 */
 		setContentView(R.layout.activity_graphics);
-		
+
 		// Me creo una Vista con el Layout al cual le quiero hacer Zoom
-		View v = ((LayoutInflater)   getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_graphics_zoom, null, false);		
-		
+		View v = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+				.inflate(R.layout.activity_graphics_zoom, null, false);
+
 		zoomView = new ZoomView(this);
 		zoomView.addView(v);
 
@@ -197,7 +197,8 @@ public class GraphicsActivity extends Activity {
 				&& preferenceConfiguracionPrivate.getBoolean(
 						singleton_csp.KEY_CBPLINEBALANCE, false) == false) {
 
-			lanzarAdvertencia("Debe seleccionar alguna gráfica en la configuración para mostrar.");
+			lanzarAdvertencia(getResources().getString(
+					R.string.graphicsgctivity_no_grafica_seleccionada));
 
 			mySimpleXYPlot.setVisibility(View.INVISIBLE);
 
@@ -212,8 +213,6 @@ public class GraphicsActivity extends Activity {
 
 		// Cierro la Base de datos
 		dba.close();
-		
-		
 
 	}
 
@@ -1855,40 +1854,40 @@ public class GraphicsActivity extends Activity {
 
 		switch (Integer.valueOf(fechaComprobacion.substring(4, 6)).intValue()) {
 		case 1:
-			fecha = "Ene.";
+			fecha = getResources().getString(R.string.datasactivity_ene);
 			break;
 		case 2:
-			fecha = "Feb.";
+			fecha = getResources().getString(R.string.datasactivity_feb);
 			break;
 		case 3:
-			fecha = "Mar.";
+			fecha = getResources().getString(R.string.datasactivity_mar);
 			break;
 		case 4:
-			fecha = "Abr.";
+			fecha = getResources().getString(R.string.datasactivity_abr);
 			break;
 		case 5:
-			fecha = "May.";
+			fecha = getResources().getString(R.string.datasactivity_may);
 			break;
 		case 6:
-			fecha = "Jun.";
+			fecha = getResources().getString(R.string.datasactivity_jun);
 			break;
 		case 7:
-			fecha = "Jul.";
+			fecha = getResources().getString(R.string.datasactivity_jul);
 			break;
 		case 8:
-			fecha = "Ago.";
+			fecha = getResources().getString(R.string.datasactivity_ago);
 			break;
 		case 9:
-			fecha = "Sep.";
+			fecha = getResources().getString(R.string.datasactivity_sep);
 			break;
 		case 10:
-			fecha = "Oct.";
+			fecha = getResources().getString(R.string.datasactivity_oct);
 			break;
 		case 11:
-			fecha = "Nov.";
+			fecha = getResources().getString(R.string.datasactivity_nov);
 			break;
 		case 12:
-			fecha = "Dic.";
+			fecha = getResources().getString(R.string.datasactivity_dic);
 			break;
 		}
 
@@ -1927,7 +1926,8 @@ public class GraphicsActivity extends Activity {
 		if (!ingresos.isEmpty()) {
 
 			XYSeries seriesIngresos = new SimpleXYSeries(ingresos,
-					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "INGRESOS");
+					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, getResources()
+							.getString(R.string.graphicsgctivity_ingresos));
 
 			if (preferenceConfiguracionPrivate.getBoolean(
 					singleton_csp.KEY_CBPLINEINGRESOS, false) == true) {
@@ -1967,7 +1967,8 @@ public class GraphicsActivity extends Activity {
 		// Serie de GASTOS
 		if (!gastos.isEmpty()) {
 			XYSeries seriesGastos = new SimpleXYSeries(gastos,
-					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "GASTOS");
+					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, getResources()
+							.getString(R.string.graphicsgctivity_gastos));
 
 			if (preferenceConfiguracionPrivate.getBoolean(
 					singleton_csp.KEY_CBPLINEGASTOS, false) == true) {
@@ -2007,7 +2008,8 @@ public class GraphicsActivity extends Activity {
 		// Serie de BALANCE
 		if (!ingresos.isEmpty() && !gastos.isEmpty()) {
 			XYSeries seriesBalance = new SimpleXYSeries(balance,
-					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "BALANCE");
+					SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, getResources()
+							.getString(R.string.graphicsgctivity_balance));
 
 			if (preferenceConfiguracionPrivate.getBoolean(
 					singleton_csp.KEY_CBPLINEBALANCE, false) == true) {
@@ -2061,10 +2063,10 @@ public class GraphicsActivity extends Activity {
 		// Set of internal variables for keeping track of the boundaries
 		// Calcula los máximos y mínimos para dibujar la gráfica
 		mySimpleXYPlot.calculateMinMaxVals();
-		this.setMinXY(new PointF(mySimpleXYPlot.getCalculatedMinX().floatValue(),
-				mySimpleXYPlot.getCalculatedMinY().floatValue()));
-		this.setMaxXY(new PointF(mySimpleXYPlot.getCalculatedMaxX().floatValue(),
-				mySimpleXYPlot.getCalculatedMaxY().floatValue()));
+		this.setMinXY(new PointF(mySimpleXYPlot.getCalculatedMinX()
+				.floatValue(), mySimpleXYPlot.getCalculatedMinY().floatValue()));
+		this.setMaxXY(new PointF(mySimpleXYPlot.getCalculatedMaxX()
+				.floatValue(), mySimpleXYPlot.getCalculatedMaxY().floatValue()));
 
 	}
 
@@ -2271,7 +2273,7 @@ public class GraphicsActivity extends Activity {
 	private void configurarGrafica() {
 
 		// Título de la Gráfica
-		mySimpleXYPlot.setTitle("Balance Económico");
+		mySimpleXYPlot.setTitle("");
 		// Título ejeY
 		mySimpleXYPlot.setRangeLabel("Catindad (€)");
 		// Título ejeX
@@ -2283,24 +2285,17 @@ public class GraphicsActivity extends Activity {
 				mySimpleXYPlot.getDomainLabelWidget());
 		mySimpleXYPlot.getLayoutManager().remove(
 				mySimpleXYPlot.getRangeLabelWidget());
-		// mySimpleXYPlot.getLayoutManager().remove(mySimpleXYPlot.getTitleWidget());
+		mySimpleXYPlot.getLayoutManager().remove(
+				mySimpleXYPlot.getTitleWidget());
 
 		mySimpleXYPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 		mySimpleXYPlot.setPlotMargins(0, 0, 0, 0);
 		mySimpleXYPlot.setPlotPadding(0, 0, 0, 0);
 		mySimpleXYPlot.setGridPadding(20, 10, 20, 0); // left,top,right,bottom
 
-		// mySimpleXYPlot.setBackgroundColor(Color.WHITE);
-		/*
-		 * mySimpleXYPlot.position( mySimpleXYPlot.getGraphWidget(), 0,
-		 * XLayoutStyle.RELATIVE_TO_LEFT, 0, YLayoutStyle.RELATIVE_TO_CENTER,
-		 * AnchorPosition.LEFT_MIDDLE);
-		 */
-
-		// mySimpleXYPlot.getLegendWidget().setMargins(5, 5, 5, 5);
-		// mySimpleXYPlot.getLegendWidget().setPadding(10, 10, 10, 10);
 		Paint p = new Paint();
-		p.setColor(Color.BLACK);
+		p.setColor(getResources().getColor(R.color.gris_claro));
+
 		mySimpleXYPlot.getLegendWidget().setTextPaint(p);
 
 		mySimpleXYPlot.getGraphWidget().getBackgroundPaint()
@@ -2426,8 +2421,6 @@ public class GraphicsActivity extends Activity {
 		mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL,
 				obtenerRangoEjeY(minCantidad, maxCantidad));
 
-		// mySimpleXYPlot.disableAllMarkup();
-
 	}
 
 	/*
@@ -2488,7 +2481,7 @@ public class GraphicsActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 
@@ -2531,7 +2524,7 @@ public class GraphicsActivity extends Activity {
 					&& preferenceConfiguracionPrivate.getBoolean(
 							singleton_csp.KEY_CBPLINEBALANCE, false) == false) {
 
-				lanzarAdvertencia("Debe seleccionar alguna gráfica en la configuración para mostrar.");
+				lanzarAdvertencia(getResources().getString(R.string.graphicsgctivity_no_grafica_seleccionada));
 
 				mySimpleXYPlot.setVisibility(View.INVISIBLE);
 
@@ -2583,5 +2576,5 @@ public class GraphicsActivity extends Activity {
 	public void setMaxXY(PointF maxXY) {
 		this.maxXY = maxXY;
 	}
-	
+
 }

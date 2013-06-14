@@ -9,8 +9,10 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,6 +30,8 @@ import android.widget.TextView;
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.Concepto;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.singleton.SingletonConfigurationSharedPreferences;
+import com.joseluisnn.singleton.SingletonTipoMoneda;
 import com.joseluisnn.tt.MyAdapterListaGestionDatos.ObservadorMyAdapterListViewGD;
 
 public class DatasActivity extends Activity {
@@ -107,6 +111,10 @@ public class DatasActivity extends Activity {
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
+	
+	// tipo de moneda
+	private SingletonTipoMoneda singleton_tipomoneda;
+	private String tipoMoneda;	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +128,10 @@ public class DatasActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_datas);
+		
+		// Obtengo el tipo de moneda elegida por el usuario
+		singleton_tipomoneda = SingletonTipoMoneda.getInstance();		
+		tipoMoneda = singleton_tipomoneda.obtenerTipoMoneda(getApplicationContext());
 
 		// Instancio la Base de Datos
 		dba = DBAdapter.getInstance(this);
@@ -302,8 +314,9 @@ public class DatasActivity extends Activity {
 					d.show();
 				} else {
 
-					lanzarAdvertencia("Para insertar valores debe crear al menos un concepto de INGRESOS. "
-							+ "Diríjase a la configuración del programa y añada un concepto en la sección 'Gestión de Conceptos'.");
+					lanzarAdvertencia(getResources()
+							.getString(
+									R.string.datasactivity_advertencia_insertar_ingresos));
 
 				}
 			}
@@ -325,8 +338,8 @@ public class DatasActivity extends Activity {
 					d.show();
 
 				} else {
-					lanzarAdvertencia("Para insertar valores debe crear al menos un concepto de GASTOS. "
-							+ "Diríjase a la configuración del programa y añada un concepto en la sección 'Gestión de Conceptos'.");
+					lanzarAdvertencia(getResources().getString(
+							R.string.datasactivity_advertencia_insertar_gastos));
 				}
 
 			}
@@ -542,7 +555,7 @@ public class DatasActivity extends Activity {
 		spinnerConceptosIngresos.setAdapter(adapterConceptoIngresos);
 		spinnerConceptosIngresos.setSelection(0);
 
-		builder.setTitle("Inserta Ingreso");
+		builder.setTitle(getResources().getString(R.string.tvGDIngresos));
 
 		// builder.setView(valorIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_add);
@@ -598,19 +611,23 @@ public class DatasActivity extends Activity {
 									if (cod_error == -1) {
 										// error al insertar el valor porque ya
 										// existe un concepto igual
-										lanzarAdvertencia("No se puede insertar el INGRESO de un concepto "
-												+ "que ya se encuentra con la misma fecha en la base de datos."
-												+ " Por favor, modifíquelo actualizándolo.");
+										lanzarAdvertencia(getResources()
+												.getString(
+														R.string.datasactivity_error_insertar_ingresos));
 									} else if (cod_error == -2) {
 										// error al insertar la fecha, inserción
 										// del
 										// valor anulada
-										lanzarError("Error al insertar la fecha, inserción del INGRESO anulado.");
+										lanzarError(getResources()
+												.getString(
+														R.string.datasactivity_error_insertar_fecha_ingresos));
 									}
 
 								}
 							} else {
-								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
+								lanzarAdvertencia(getResources()
+										.getString(
+												R.string.datasactivity_error_insertar_valores_grandes));
 							}
 						}
 					}
@@ -660,7 +677,8 @@ public class DatasActivity extends Activity {
 				+ listaIngresos.get(posicioAEditar).getCantidad());
 
 		// propiedades del Dialog
-		builder.setTitle("Editar Ingreso");
+		builder.setTitle(getResources().getString(
+				R.string.datasactivity_editar_ingreso));
 		builder.setIcon(android.R.drawable.ic_menu_edit);
 
 		builder.setPositiveButton(R.string.botonAceptar,
@@ -719,11 +737,15 @@ public class DatasActivity extends Activity {
 								} else {
 
 									// error al actualizar el valor
-									lanzarError("Error en la actualización del INGRESO.");
+									lanzarError(getResources()
+											.getString(
+													R.string.datasactivity_error_actualizar_ingreso));
 
 								}
 							} else {
-								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
+								lanzarAdvertencia(getResources()
+										.getString(
+												R.string.datasactivity_error_insertar_valores_grandes));
 							}
 						}
 					}
@@ -822,19 +844,23 @@ public class DatasActivity extends Activity {
 									if (cod_error == -1) {
 										// error al insertar el valor porque ya
 										// existe un concepto igual
-										lanzarAdvertencia("No se puede insertar el GASTO de un concepto "
-												+ "que ya se encuentra con la misma fecha en la base de datos."
-												+ " Por favor, modifíquelo actualizándolo.");
+										lanzarAdvertencia(getResources()
+												.getString(
+														R.string.datasactivity_error_insertar_gastos));
 									} else if (cod_error == -2) {
 										// error al insertar la fecha, inserción
 										// del
 										// valor anulada
-										lanzarError("Error al insertar la fecha, inserción del GASTO anulado.");
+										lanzarError(getResources()
+												.getString(
+														R.string.datasactivity_error_insertar_fecha_gastos));
 									}
 
 								}
 							} else {
-								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
+								lanzarAdvertencia(getResources()
+										.getString(
+												R.string.datasactivity_error_insertar_valores_grandes));
 							}
 						}
 					}
@@ -883,7 +909,8 @@ public class DatasActivity extends Activity {
 		valorGasto.setText("" + listaGastos.get(posicioAEditar).getCantidad());
 
 		// propiedades del Dialog
-		builder.setTitle("Editar Gasto");
+		builder.setTitle(getResources().getString(
+				R.string.datasactivity_editar_gasto));
 		builder.setIcon(android.R.drawable.ic_menu_edit);
 
 		builder.setPositiveButton(R.string.botonAceptar,
@@ -940,11 +967,15 @@ public class DatasActivity extends Activity {
 								} else {
 
 									// error al actualizar el valor
-									lanzarError("Error en la actualización del GASTO.");
+									lanzarError(getResources()
+											.getString(
+													R.string.datasactivity_error_actualizar_gasto));
 
 								}
 							} else {
-								lanzarAdvertencia("No está permitido insertar valores mayores de 9.999.999.999 €");
+								lanzarAdvertencia(getResources()
+										.getString(
+												R.string.datasactivity_error_insertar_valores_grandes));
 							}
 						}
 					}
@@ -969,13 +1000,20 @@ public class DatasActivity extends Activity {
 	private Dialog crearDialogBorrarValorGasto() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Borrar Gasto");
+		builder.setTitle(getResources().getString(
+				R.string.datasactivity_borrar_gasto));
 		builder.setIcon(android.R.drawable.ic_menu_delete);
-		builder.setMessage("¿Desea borrar el Gasto de "
+		builder.setMessage(getResources().getString(
+				R.string.datasactivity_borrar_gasto_message_1)
+				+ " "
 				+ listaGastos.get(posicioABorrar).getConcepto().toUpperCase()
-				+ " de "
+				+ " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " "
 				+ numeroAFormatear.format(listaGastos.get(posicioABorrar)
-						.getCantidad()) + " € " + "seleccionado?");
+						.getCantidad())
+				+ " "
+				+ tipoMoneda + "?");
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1004,16 +1042,20 @@ public class DatasActivity extends Activity {
 
 							if (cod_error == -1) {
 								// error al borrar el Gasto
-								lanzarError("Error al borrar el GASTO.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_gasto));
 							} else if (cod_error == -2) {
 								// error al borrar la fecha
-								lanzarError("Error al borrar la fecha en la base de datos.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_fecha));
 							}
 						}
 					}
 				});
 
-		builder.setNegativeButton("Cancelar",
+		builder.setNegativeButton(R.string.botonCancelar,
 				new DialogInterface.OnClickListener() {
 
 					@Override
@@ -1032,13 +1074,20 @@ public class DatasActivity extends Activity {
 	private Dialog crearDialogBorrarValorIngreso() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Borrar Ingreso");
+		builder.setTitle(getResources().getString(
+				R.string.datasactivity_borrar_ingreso));
 		builder.setIcon(android.R.drawable.ic_menu_delete);
-		builder.setMessage("¿Desea borrar el Ingreso de "
+		builder.setMessage(getResources().getString(
+				R.string.datasactivity_borrar_ingreso_message_1)
+				+ " "
 				+ listaIngresos.get(posicioABorrar).getConcepto().toUpperCase()
-				+ " de "
+				+ " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " "
 				+ numeroAFormatear.format(listaIngresos.get(posicioABorrar)
-						.getCantidad()) + " € " + "seleccionado?");
+						.getCantidad())
+				+ " "
+				+ tipoMoneda + "?");
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1067,16 +1116,20 @@ public class DatasActivity extends Activity {
 
 							if (cod_error == -1) {
 								// error al borrar el Ingreso
-								lanzarError("Error al borrar el INGRESO.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_ingreso));
 							} else if (cod_error == -2) {
 								// error al borrar la fecha
-								lanzarError("Error al borrar la fecha en la base de datos.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_fecha));
 							}
 						}
 					}
 				});
 
-		builder.setNegativeButton("Cancelar",
+		builder.setNegativeButton(R.string.botonCancelar,
 				new DialogInterface.OnClickListener() {
 
 					@Override
@@ -1095,15 +1148,20 @@ public class DatasActivity extends Activity {
 	private Dialog crearDialogRepetirValoresIngresos() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Confirmación");
+		builder.setTitle(getResources().getString(
+				R.string.conceptos_confirmacion));
 		builder.setIcon(android.R.drawable.ic_menu_save);
-		builder.setMessage("¿Desea repetir el Ingreso de "
-				+ listaIngresos.get(posicionARepetir).getConcepto()
-						.toUpperCase()
-				+ " de "
-				+ numeroAFormatear.format(listaIngresos.get(posicionARepetir)
-						.getCantidad()) + " € "
-				+ "seleccionado los siguientes meses del año?");
+		/*
+		 * builder.setMessage("¿Desea repetir el Ingreso de " +
+		 * listaIngresos.get(posicionARepetir).getConcepto() .toUpperCase() +
+		 * " " + getResources().getString(R.string.datasactivity_conjuncion) +
+		 * " " + numeroAFormatear.format(listaIngresos.get(posicionARepetir)
+		 * .getCantidad()) + " € " +
+		 * "seleccionado los siguientes meses del año?");
+		 */
+
+		builder.setMessage(getResources().getString(
+				R.string.datasactivity_repetir_valores));
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1143,14 +1201,17 @@ public class DatasActivity extends Activity {
 										fechaMesSiguiente);
 
 							} else if (cod_error == -2) {
-								lanzarError("Error al insertar la fecha en la Base de Datos.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_fecha));
 							}
 
 						}
 					}
 				});
 
-		builder.setNegativeButton("Cancelar",
+		builder.setNegativeButton(
+				getResources().getString(R.string.botonCancelar),
 				new DialogInterface.OnClickListener() {
 
 					@Override
@@ -1170,14 +1231,19 @@ public class DatasActivity extends Activity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Confirmación");
+		builder.setTitle(getResources().getString(
+				R.string.conceptos_confirmacion));
 		builder.setIcon(android.R.drawable.ic_menu_save);
-		builder.setMessage("¿Desea repetir el Gasto de "
-				+ listaGastos.get(posicionARepetir).getConcepto().toUpperCase()
-				+ " de "
-				+ numeroAFormatear.format(listaGastos.get(posicionARepetir)
-						.getCantidad()) + " € "
-				+ "seleccionado los siguientes meses del año?");
+		/*
+		 * builder.setMessage("¿Desea repetir el Gasto de " +
+		 * listaGastos.get(posicionARepetir).getConcepto().toUpperCase() +
+		 * " de " + numeroAFormatear.format(listaGastos.get(posicionARepetir)
+		 * .getCantidad()) + " € " +
+		 * "seleccionado los siguientes meses del año?");
+		 */
+
+		builder.setMessage(getResources().getString(
+				R.string.datasactivity_repetir_valores));
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1219,13 +1285,15 @@ public class DatasActivity extends Activity {
 										fechaMesSiguiente);
 
 							} else if (cod_error == -2) {
-								lanzarError("Error al insertar la fecha en la Base de Datos.");
+								lanzarError(getResources()
+										.getString(
+												R.string.datasactivity_error_borrar_fecha));
 							}
 						}
 					}
 				});
 
-		builder.setNegativeButton("Cancelar",
+		builder.setNegativeButton(R.string.botonCancelar,
 				new DialogInterface.OnClickListener() {
 
 					@Override
@@ -1244,7 +1312,8 @@ public class DatasActivity extends Activity {
 	private Dialog crearDialogAdvertencia(String advice) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ADVERTENCIA");
+		builder.setTitle(getResources().getString(
+				R.string.configuracion_advertencia));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(advice);
 
@@ -1267,7 +1336,7 @@ public class DatasActivity extends Activity {
 	private Dialog crearDialogError(String error) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("ERROR");
+		builder.setTitle(getResources().getString(R.string.datasactivity_error));
 		builder.setIcon(android.R.drawable.ic_dialog_alert);
 		builder.setMessage(error);
 
@@ -1293,12 +1362,21 @@ public class DatasActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		String fecha_aux = "" + fecha;
 
-		builder.setTitle("SOBREESCRIBIR");
+		builder.setTitle(getResources().getString(
+				R.string.datasactivity_sobreescribir));
 		builder.setIcon(android.R.drawable.ic_menu_upload);
-		builder.setMessage("¿Desea modificar un valor existente a fecha de "
-				+ fecha_aux.substring(6) + "-" + fecha_aux.substring(4, 6)
-				+ "-" + fecha_aux.substring(0, 4) + " por el valor de " + valor
-				+ "€?");
+		builder.setMessage(getResources().getString(
+				R.string.datasactivity_sobreescribir_valor_message_1)
+				+ " "
+				+ fecha_aux.substring(6)
+				+ "-"
+				+ fecha_aux.substring(4, 6)
+				+ "-"
+				+ fecha_aux.substring(0, 4)
+				+ " "
+				+ getResources().getString(
+						R.string.datasactivity_sobreescribir_valor_message_2)
+				+ " " + valor + tipoMoneda + "?");
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {
@@ -1422,9 +1500,11 @@ public class DatasActivity extends Activity {
 		}
 
 		cadena_fecha = "" + obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK))
-				+ ", " + c.get(Calendar.DAY_OF_MONTH) + " de "
-				+ obtenerMes(c.get(Calendar.MONTH)) + " de "
-				+ c.get(Calendar.YEAR);
+				+ ", " + c.get(Calendar.DAY_OF_MONTH) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		// Actualizo la Fecha en el Título de la Activity
 		this.setCadenaFecha(cadena_fecha);
@@ -1474,9 +1554,11 @@ public class DatasActivity extends Activity {
 		}
 
 		cadena_fecha = "" + obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK))
-				+ ", " + c.get(Calendar.DAY_OF_MONTH) + " de "
-				+ obtenerMes(c.get(Calendar.MONTH)) + " de "
-				+ c.get(Calendar.YEAR);
+				+ ", " + c.get(Calendar.DAY_OF_MONTH) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		// Actualizo la Fecha en el Título de la Activity
 		this.setCadenaFecha(cadena_fecha);
@@ -1591,40 +1673,40 @@ public class DatasActivity extends Activity {
 		switch (month) {
 
 		case 0:
-			m = "Ene.";
+			m = getResources().getString(R.string.datasactivity_ene);
 			break;
 		case 1:
-			m = "Feb.";
+			m = getResources().getString(R.string.datasactivity_feb);
 			break;
 		case 2:
-			m = "Mar.";
+			m = getResources().getString(R.string.datasactivity_mar);
 			break;
 		case 3:
-			m = "Abr.";
+			m = getResources().getString(R.string.datasactivity_abr);
 			break;
 		case 4:
-			m = "May.";
+			m = getResources().getString(R.string.datasactivity_may);
 			break;
 		case 5:
-			m = "Jun.";
+			m = getResources().getString(R.string.datasactivity_jun);
 			break;
 		case 6:
-			m = "Jul.";
+			m = getResources().getString(R.string.datasactivity_jul);
 			break;
 		case 7:
-			m = "Ago.";
+			m = getResources().getString(R.string.datasactivity_ago);
 			break;
 		case 8:
-			m = "Sep.";
+			m = getResources().getString(R.string.datasactivity_sep);
 			break;
 		case 9:
-			m = "Oct.";
+			m = getResources().getString(R.string.datasactivity_oct);
 			break;
 		case 10:
-			m = "Nov.";
+			m = getResources().getString(R.string.datasactivity_nov);
 			break;
 		case 11:
-			m = "Dic.";
+			m = getResources().getString(R.string.datasactivity_dic);
 			break;
 		default:
 			m = "error";
@@ -1645,25 +1727,25 @@ public class DatasActivity extends Activity {
 
 		switch (day) {
 		case 1:
-			d = "Dom";
+			d = getResources().getString(R.string.datasactivity_dom);
 			break;
 		case 2:
-			d = "Lun";
+			d = getResources().getString(R.string.datasactivity_lun);
 			break;
 		case 3:
-			d = "Mar";
+			d = getResources().getString(R.string.datasactivity_martes);
 			break;
 		case 4:
-			d = "Mié";
+			d = getResources().getString(R.string.datasactivity_mie);
 			break;
 		case 5:
-			d = "Jue";
+			d = getResources().getString(R.string.datasactivity_jue);
 			break;
 		case 6:
-			d = "Vie";
+			d = getResources().getString(R.string.datasactivity_vie);
 			break;
 		case 7:
-			d = "Sáb";
+			d = getResources().getString(R.string.datasactivity_sab);
 			break;
 		default:
 			break;
@@ -1671,18 +1753,17 @@ public class DatasActivity extends Activity {
 
 		return d;
 	}
-	
+
 	/*
-	 * Método que me redondea a 2 decimales el número
-	 * pasado por parámetro
+	 * Método que me redondea a 2 decimales el número pasado por parámetro
 	 */
-	private double redondearValor(double valor){
-		
-		String val = valor+"";
-	    BigDecimal big = new BigDecimal(val);
-	    big = big.setScale(2, RoundingMode.HALF_UP);
-	    
-	    return big.doubleValue();
+	private double redondearValor(double valor) {
+
+		String val = valor + "";
+		BigDecimal big = new BigDecimal(val);
+		big = big.setScale(2, RoundingMode.HALF_UP);
+
+		return big.doubleValue();
 	}
 
 	/*

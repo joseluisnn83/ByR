@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.joseluisnn.databases.DBAdapter;
 import com.joseluisnn.objetos.ValoresElementoListaGD;
+import com.joseluisnn.singleton.SingletonTipoMoneda;
 
 public class PestanyaMensualActivity extends Activity {
 
@@ -51,16 +52,20 @@ public class PestanyaMensualActivity extends Activity {
 	// Variables para tener el total de ingresos y gastos
 	private double totalIngresos;
 	private double totalGastos;
-	
+
 	// Variable para el formato de los números DOUBLE
 	private DecimalFormatSymbols separadores;
 	private DecimalFormat numeroAFormatear;
-
 	/*
 	 * Variable para captar cuando es la primera ejecución del programa y
 	 * controlar los cambios en el Spinner de las semanas
 	 */
 	private int posicionSpinnerAnterior;
+	/*
+	 * Variables para saber el símbolo de la moneda a utilizar
+	 */
+	private SingletonTipoMoneda singleton_tm;
+	private String tipoMoneda;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,10 @@ public class PestanyaMensualActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.pestanya_mensual);
+
+		// Obtengo el tipo de moneda a tulizar
+		singleton_tm = SingletonTipoMoneda.getInstance();
+		tipoMoneda = singleton_tm.obtenerTipoMoneda(getApplicationContext());
 
 		/*
 		 * Instancio los objetos View
@@ -90,18 +99,22 @@ public class PestanyaMensualActivity extends Activity {
 		listaMeses = new ArrayList<String>();
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.MONTH, -1);
-		listaMeses.add(obtenerMes(c.get(Calendar.MONTH)) + " de " + c.get(Calendar.YEAR));
+		listaMeses.add(obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR));
 		c.add(Calendar.MONTH, 1);
-		listaMeses.add(obtenerMes(c.get(Calendar.MONTH)) + " de " + c.get(Calendar.YEAR));
+		listaMeses.add(obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR));
 		// Instancio y creo el Adaptador para el spinner
-		adapterMeses = new ArrayAdapter<String>(this,
-				R.layout.own_spinner, listaMeses);
+		adapterMeses = new ArrayAdapter<String>(this, R.layout.own_spinner,
+				listaMeses);
 		adapterMeses
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// le añado el adapter al spinner
 		meses.setAdapter(adapterMeses);
-		
+
 		// Instancio los formateadores de números
 		separadores = new DecimalFormatSymbols();
 		separadores.setDecimalSeparator(',');
@@ -321,8 +334,8 @@ public class PestanyaMensualActivity extends Activity {
 	}
 
 	/*
-	 * Método que me devuelve en un entero el último dia de la semana actual
-	 * En mi caso me interesa que el útimo día sea el de hoy para que no me muestre
+	 * Método que me devuelve en un entero el último dia de la semana actual En
+	 * mi caso me interesa que el útimo día sea el de hoy para que no me muestre
 	 * valores futuros
 	 */
 	private int obtenerFinEnteroFechaMesActual() {
@@ -334,11 +347,11 @@ public class PestanyaMensualActivity extends Activity {
 
 		// Obtengo de la variable Calendar la fecha del día actual
 		Calendar c = Calendar.getInstance();
-		
+
 		// Aquí se obtendría el último dia del mes actual
-		//c.add(Calendar.MONTH, 1);
-		//c.set(Calendar.DATE, 1);
-		//c.add(Calendar.DATE, -1);
+		// c.add(Calendar.MONTH, 1);
+		// c.set(Calendar.DATE, 1);
+		// c.add(Calendar.DATE, -1);
 
 		/*
 		 * Al mes le sumo +1 porque el mes inicial (Enero) empieza desde cero:0
@@ -484,8 +497,9 @@ public class PestanyaMensualActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresIngresos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresIngresos.get(i)
+							.getCantidad()) + tipoMoneda);
 
 			if (fechaAnterior != listadoValoresIngresos.get(i).getIdFecha()) {
 
@@ -554,8 +568,9 @@ public class PestanyaMensualActivity extends Activity {
 			TextView tvCantidad = (TextView) rowViewContenido
 					.findViewById(R.id.textViewListadoInformesCantidad);
 			// establecemos el contenido
-			tvCantidad.setText("" + numeroAFormatear.format(listadoValoresGastos.get(i).getCantidad())
-					+ "€");
+			tvCantidad.setText(""
+					+ numeroAFormatear.format(listadoValoresGastos.get(i)
+							.getCantidad()) + tipoMoneda);
 
 			if (fechaAnterior != listadoValoresGastos.get(i).getIdFecha()) {
 
@@ -609,11 +624,12 @@ public class PestanyaMensualActivity extends Activity {
 		// Inicio la variable Calendar con la fecha que tengo actualmente
 		c.set(y, m - 1, d);
 
-		cadenaFecha = obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK))
-				+ ", " 
-				+ c.get(Calendar.DAY_OF_MONTH) + " de "
-				+ obtenerMes(c.get(Calendar.MONTH)) + " de "
-				+ c.get(Calendar.YEAR);
+		cadenaFecha = obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK)) + ", "
+				+ c.get(Calendar.DAY_OF_MONTH) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + obtenerMes(c.get(Calendar.MONTH)) + " "
+				+ getResources().getString(R.string.datasactivity_conjuncion)
+				+ " " + c.get(Calendar.YEAR);
 
 		return cadenaFecha;
 	}
@@ -628,40 +644,40 @@ public class PestanyaMensualActivity extends Activity {
 		switch (month) {
 
 		case 0:
-			m = "Enero";
+			m = getResources().getString(R.string.informes_ene);
 			break;
 		case 1:
-			m = "Febrero";
+			m = getResources().getString(R.string.informes_feb);
 			break;
 		case 2:
-			m = "Marzo";
+			m = getResources().getString(R.string.informes_mar);
 			break;
 		case 3:
-			m = "Abril";
+			m = getResources().getString(R.string.informes_abr);
 			break;
 		case 4:
-			m = "Mayo";
+			m = getResources().getString(R.string.informes_may);
 			break;
 		case 5:
-			m = "Junio";
+			m = getResources().getString(R.string.informes_jun);
 			break;
 		case 6:
-			m = "Julio";
+			m = getResources().getString(R.string.informes_jul);
 			break;
 		case 7:
-			m = "Agosto";
+			m = getResources().getString(R.string.informes_ago);
 			break;
 		case 8:
-			m = "Septiembre";
+			m = getResources().getString(R.string.informes_sep);
 			break;
 		case 9:
-			m = "Octubre";
+			m = getResources().getString(R.string.informes_oct);
 			break;
 		case 10:
-			m = "Noviembre";
+			m = getResources().getString(R.string.informes_nov);
 			break;
 		case 11:
-			m = "Diciembre";
+			m = getResources().getString(R.string.informes_dic);
 			break;
 		default:
 			m = "error";
@@ -671,40 +687,41 @@ public class PestanyaMensualActivity extends Activity {
 		return m;
 
 	}
-	
+
 	/*
-	 * Método que me devuelve el día de la semana según el entero pasado por parámetro
+	 * Método que me devuelve el día de la semana según el entero pasado por
+	 * parámetro
 	 */
-	private String obtenerDiaSemana(int day){
-		
-		String d = new String();		
-		
+	private String obtenerDiaSemana(int day) {
+
+		String d = new String();
+
 		switch (day) {
 		case 1:
-			d = "Dom";
+			d = getResources().getString(R.string.datasactivity_dom);
 			break;
 		case 2:
-			d = "Lun";
+			d = getResources().getString(R.string.datasactivity_lun);
 			break;
 		case 3:
-			d = "Mar";
+			d = getResources().getString(R.string.datasactivity_martes);
 			break;
 		case 4:
-			d = "Mié";
+			d = getResources().getString(R.string.datasactivity_mie);
 			break;
 		case 5:
-			d = "Jue";
+			d = getResources().getString(R.string.datasactivity_jue);
 			break;
 		case 6:
-			d = "Vie";
+			d = getResources().getString(R.string.datasactivity_vie);
 			break;
 		case 7:
-			d = "Sáb";
+			d = getResources().getString(R.string.datasactivity_sab);
 			break;
 		default:
 			break;
 		}
-		
+
 		return d;
 	}
 
@@ -780,14 +797,17 @@ public class PestanyaMensualActivity extends Activity {
 
 		double balance = getTotalIngresos() - getTotalGastos();
 
-		tvTotalIngresos.setText(" " + numeroAFormatear.format(getTotalIngresos()) + " €");
+		tvTotalIngresos.setText(" "
+				+ numeroAFormatear.format(getTotalIngresos()) + " " + tipoMoneda);
 		tvTotalIngresos.setTextColor(this.getResources().getColor(
 				R.color.ListadosVerdeOscuro));
 
-		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos()) + " €");
-		tvTotalGastos.setTextColor(this.getResources().getColor(R.color.ListadosRojo));
+		tvTotalGastos.setText(" " + numeroAFormatear.format(getTotalGastos())
+				+ " " + tipoMoneda);
+		tvTotalGastos.setTextColor(this.getResources().getColor(
+				R.color.ListadosRojo));
 
-		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " €");
+		tvTotalBalance.setText(" " + numeroAFormatear.format(balance) + " " + tipoMoneda);
 		if (balance >= 0) {
 			tvTotalBalance.setTextColor(this.getResources().getColor(
 					R.color.ListadosVerdeOscuro));

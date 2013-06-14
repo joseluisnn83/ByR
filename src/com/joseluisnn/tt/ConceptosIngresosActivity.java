@@ -137,7 +137,7 @@ public class ConceptosIngresosActivity extends ListActivity{
 		
 		final EditText conceptoIngreso = new EditText(this);
 	    
-		builder.setTitle("Inserta concepto de Ingreso");
+		builder.setTitle(getResources().getString(R.string.conceptos_insertar_ci));
 		builder.setView(conceptoIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_add);
 		
@@ -195,7 +195,7 @@ public class ConceptosIngresosActivity extends ListActivity{
 		final EditText conceptoIngreso = new EditText(this);
 		final Concepto conceptoAnterior = listaConceptosIngresos.get(getConceptoPulsado());
 	    
-		builder.setTitle("Actualizar concepto de Ingreso");
+		builder.setTitle(getResources().getString(R.string.conceptos_actualizar_ci));
 		builder.setView(conceptoIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_edit);
 		
@@ -248,11 +248,9 @@ public class ConceptosIngresosActivity extends ListActivity{
 	{
 	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	 
-	    builder.setTitle("Confirmación");
+	    builder.setTitle(getResources().getString(R.string.conceptos_confirmacion));
 	    builder.setIcon(android.R.drawable.ic_menu_delete);
-	    builder.setMessage("Borrar el concepto acarreará la " +
-	    		"eliminación de sus valores (en €) asociados" +
-	    		"en este concepto, ¿Desea continuar?");
+	    builder.setMessage(getResources().getString(R.string.conceptos_borrar_concepto));
 	    
 	    builder.setPositiveButton(R.string.botonAceptar, new DialogInterface.OnClickListener() {
 			
@@ -278,7 +276,7 @@ public class ConceptosIngresosActivity extends ListActivity{
 			}
 		});
 		
-	    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+	    builder.setNegativeButton(R.string.botonCancelar, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
