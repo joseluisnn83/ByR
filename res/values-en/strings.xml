@@ -31,8 +31,8 @@
     <string name="mtDumpDB">Back up the database</string>
     <string name="mtLoadDB">Load database</string>
     <string name="stTipoConfiguracion">Choose between the two types of configuration</string>
-    <string name="stIngresos">Inserta o borra conceptos de Ingresos</string>
-    <string name="stGastos">Insert or delete Income concepts</string>
+    <string name="stIngresos">Insert or delete Income concepts</string>
+    <string name="stGastos">Insert or delete Expense concepts</string>
     <string name="stInformes">Choose the default report</string>
     <string name="stMonedas">Choose the type of coin</string>
     <string name="stDumpDB">Press if you want to back up your DB into the SD card</string>
@@ -46,7 +46,8 @@
     <string name="configuracion_dialog_informes_title">Report to show</string>
     <string name="configuracion_dialog_tipo_moneda_title">Coin to choose</string>
     <string name="configuracion_advertencia">WARNING</string>
-    <string name="configuracion_informacion">INFORMATION</string>    
+    <string name="configuracion_informacion">INFORMATION</string>
+    <string name="configuracion_dialog_message_exportar_valores">Do you want to save a backup of the database ?</string>
     <string name="configuracion_dialog_message_importar_valores">Do you want to import the database stored on the SD card on </string>
     <string name="configuracion_bd_guardada">DB saved in the folder /copia_tt SD card on:</string>
     <string name="configuracion_bd_solo_lectura">The SD card is read only. Copy canceled.</string>
@@ -81,9 +82,9 @@
     <string name="textViewListViewConceptoIngreso">There are not income concepts</string>
     <string name="textViewListViewConceptoGasto">There are not expense concepts</string>
     <string name="conceptos_confirmacion">Confirmation</string>
-    <string name="conceptos_insertar_cg">Enter expense concept</string>
+    <string name="conceptos_insertar_cg">Enter an expense concept</string>
     <string name="conceptos_actualizar_cg">Update expense concept</string>
-    <string name="conceptos_insertar_ci">Enter income concept</string>
+    <string name="conceptos_insertar_ci">Enter an income concept</string>
     <string name="conceptos_actualizar_ci">Update income concept</string>
 
     <!-- Elementos de MyCalendar -->
@@ -190,6 +191,12 @@
     <string name="informes_libre_elegir_fecha">Choose dates</string>
     <string name="informes_libre_fechaini_mayor">Start date can not be greater than the end.</string>
     <string name="informes_aviso_trimestre_futuro">Can not display future values. In the reports, You can only display past values ​​except in the free reports.</string>
+    <string name="informe_semanal_semana_ant">Last week</string>
+    <string name="informe_semanal_semana_act">Current week</string>
+    <string name="informe_trimestral_1">1st Quarterly</string>
+    <string name="informe_trimestral_2">2nd Quarterly</string>
+    <string name="informe_trimestral_3">3rd Quarterly</string>
+    <string name="informe_trimestral_4">4th Quarterly</string>
     
     <!-- Elementos de la actividad de la Gráfica -->
     <string name="graphicsgctivity_no_grafica_seleccionada">You have to select some graphic in the configuraion to show it.</string>

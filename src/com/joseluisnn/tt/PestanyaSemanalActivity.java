@@ -97,8 +97,8 @@ public class PestanyaSemanalActivity extends Activity {
 
 		// Instancio y creo las semanas en la lista
 		listaSemanas = new ArrayList<String>();
-		listaSemanas.add("Semana anterior");
-		listaSemanas.add("Semana actual");
+		listaSemanas.add(getResources().getString(R.string.informe_semanal_semana_ant));
+		listaSemanas.add(getResources().getString(R.string.informe_semanal_semana_act));
 		// Instancio y creo el Adaptador para el spinner
 		adapterSemanas = new ArrayAdapter<String>(this, R.layout.own_spinner,
 				listaSemanas);

@@ -34,6 +34,7 @@
     <color name="LightYellow">#FFFEBC</color>
 	<color name="DarkYellow">#C8911B</color>
 	<color name="colorGeneral">#AEC5D5</color>
+	<color name="colorLeyenda">#6E95AE</color>
 	
 	<!-- Colores para el Calendario -->
 	<color name="CalendarioAzulCabeceraStart">#2185C5</color>

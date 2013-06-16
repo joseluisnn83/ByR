@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import com.androidplot.Plot;
 import com.androidplot.series.XYSeries;
+import com.androidplot.ui.SizeMetrics;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
@@ -2294,9 +2295,8 @@ public class GraphicsActivity extends Activity {
 		mySimpleXYPlot.setGridPadding(20, 10, 20, 0); // left,top,right,bottom
 
 		Paint p = new Paint();
-		p.setColor(getResources().getColor(R.color.gris_claro));
-
-		mySimpleXYPlot.getLegendWidget().setTextPaint(p);
+		p.setColor(getResources().getColor(R.color.colorLeyenda));
+		mySimpleXYPlot.getLegendWidget().setTextPaint(p);		
 
 		mySimpleXYPlot.getGraphWidget().getBackgroundPaint()
 				.setColor(Color.WHITE);

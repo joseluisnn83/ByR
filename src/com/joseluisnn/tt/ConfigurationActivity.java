@@ -363,8 +363,8 @@ public class ConfigurationActivity extends Activity {
 
 		builder.setTitle(getResources().getString(
 				R.string.configuracion_dialog_tipo_moneda_title));
-		builder.setIcon(getResources().getDrawable(
-				android.R.drawable.ic_menu_mylocation));
+		//builder.setIcon(getResources().getDrawable(
+		//		android.R.drawable.ic_menu_mylocation));
 		builder.setSingleChoiceItems(items, tipoMoneda,
 				new DialogInterface.OnClickListener() {
 
@@ -432,7 +432,7 @@ public class ConfigurationActivity extends Activity {
 		builder.setTitle(getResources().getString(
 				R.string.configuracion_informacion));
 		builder.setIcon(android.R.drawable.ic_dialog_info);
-		builder.setMessage("¿Desea guardar una copia de seguridad de la base de datos?");
+		builder.setMessage(getResources().getString(R.string.configuracion_dialog_message_exportar_valores));
 
 		builder.setPositiveButton(R.string.botonAceptar,
 				new DialogInterface.OnClickListener() {

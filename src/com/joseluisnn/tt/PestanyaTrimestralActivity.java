@@ -132,10 +132,10 @@ public class PestanyaTrimestralActivity extends Activity {
 
 		// Instancio y creo los trimestres en la lista
 		listaTrimestres = new ArrayList<String>();
-		listaTrimestres.add("1º Trimestre");
-		listaTrimestres.add("2º Trimestre");
-		listaTrimestres.add("3º Trimestre");
-		listaTrimestres.add("4º Trimestre");
+		listaTrimestres.add(getResources().getString(R.string.informe_trimestral_1));
+		listaTrimestres.add(getResources().getString(R.string.informe_trimestral_2));
+		listaTrimestres.add(getResources().getString(R.string.informe_trimestral_3));
+		listaTrimestres.add(getResources().getString(R.string.informe_trimestral_4));
 		// Instancio y creo el Adaptador para el spinner
 		adapterTrimestres = new ArrayAdapter<String>(this,
 				R.layout.own_spinner, listaTrimestres);

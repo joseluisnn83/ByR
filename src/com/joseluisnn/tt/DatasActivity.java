@@ -787,7 +787,7 @@ public class DatasActivity extends Activity {
 		spinnerConceptosGastos.setAdapter(adapterConceptoGastos);
 		spinnerConceptosGastos.setSelection(0);
 
-		builder.setTitle("Inserta Gasto");
+		builder.setTitle(getResources().getString(R.string.tvGDGastos));
 
 		// builder.setView(valorIngreso);
 		builder.setIcon(android.R.drawable.ic_menu_add);

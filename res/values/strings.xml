@@ -36,7 +36,7 @@
     <string name="stInformes">Elija el informe a seleccionar por defecto</string>
     <string name="stMonedas">Elija el tipo de moneda</string>
     <string name="stDumpDB">Presione si desea hacer una copia de seguridad de su BD en la tarjeta SD</string>
-    <string name="stLoadDB">Presione si desea cargar los datos de una copia de seguridad de su BD en la tarjeta SD</string>
+    <string name="stLoadDB">Presione si desea cargar los datos de la copia de su BD que hizo en la tarjeta SD</string>
     <string name="tvConceptos">Gestión de Conceptos</string>
     <string name="tvOtrasOpciones">Otras Opciones</string>
     <string name="tvCopiaSeguridad">Copia de seguridad</string>
@@ -46,7 +46,8 @@
     <string name="configuracion_dialog_informes_title">Informe a mostrar</string>
     <string name="configuracion_dialog_tipo_moneda_title">Moneda a elegir</string>
     <string name="configuracion_advertencia">ADVERTENCIA</string>
-    <string name="configuracion_informacion">INFORMACIÓN</string>    
+    <string name="configuracion_informacion">INFORMACIÓN</string>
+    <string name="configuracion_dialog_message_exportar_valores">¿ Desea guardar una copia de seguridad de la base de datos ?</string>
     <string name="configuracion_dialog_message_importar_valores">¿ Desea importar los datos guardados de la BD almacenada en la tarjeta SD a fecha de </string>
     <string name="configuracion_bd_guardada">BD guardada en la carpeta /copia_tt de la tarjeta SD a fecha de:</string>
     <string name="configuracion_bd_solo_lectura">La tarjeta SD sólo es de lectura. Copia cancelada.</string>
@@ -190,6 +191,12 @@
     <string name="informes_libre_elegir_fecha">Elegir Fechas</string>
     <string name="informes_libre_fechaini_mayor">La fecha de inicio no puede ser mayor que la de fin.</string>
     <string name="informes_aviso_trimestre_futuro">No se puede visualizar valores de previsión (en futuro). En los informes, sólo se visualizan valores pasados excepto en el informe libre.</string>
+    <string name="informe_semanal_semana_ant">Semana anterior</string>
+    <string name="informe_semanal_semana_act">Semana actual</string>
+    <string name="informe_trimestral_1">1º Trimestre</string>
+    <string name="informe_trimestral_2">2º Trimestre</string>
+    <string name="informe_trimestral_3">3º Trimestre</string>
+    <string name="informe_trimestral_4">4º Trimestre</string>
     
     <!-- Elementos de la actividad de la Gráfica -->
     <string name="graphicsgctivity_no_grafica_seleccionada">Debe seleccionar alguna gráfica en la configuración para mostrar.</string>
