@@ -67,9 +67,6 @@
     <string name="menu_config_conceptos_borrar">Borrar</string>
 
     <!-- Elementos de los Dialog de Configuracion -->
-    <string name="titleDialogUsername">Nombre de Usuario</string>
-    <string name="titleDialogPassword">Password</string>
-    <string name="titleDialogEmail">e-mail</string>
     <string name="botonAceptar">Aceptar</string>
     <string name="botonCancelar">Cancelar</string>
     <string name="botonOmitir">Omitir</string>

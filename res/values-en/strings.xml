@@ -52,7 +52,7 @@
     <string name="configuracion_bd_guardada">DB saved in the folder /copia_tt SD card on:</string>
     <string name="configuracion_bd_solo_lectura">The SD card is read only. Copy canceled.</string>
     <string name="configuracion_bd_error_escritura">Unable to read or write into the SD card. Check if it has been inserted or if you have permissions to read / write.</string>
-    <string name="configuracion_bd_importada">Base de Datos importada con éxito.</string>
+    <string name="configuracion_bd_importada">Database loaded successfully.</string>
 	<string name="configuracion_bd_importacion_cancelada">The program directory is read-only. Import canceled.</string>
 	<string name="configuracion_bd_error_escritura_directorio">Unable to read or write in the program directory. Verify that you have permissions to read / write.</string>
 	<string name="moneda_euro">€ (euro)</string>
@@ -67,9 +67,6 @@
     <string name="menu_config_conceptos_borrar">Delete</string>
 
     <!-- Elementos de los Dialog de Configuracion -->
-    <string name="titleDialogUsername">Nombre de Usuario</string>
-    <string name="titleDialogPassword">Password</string>
-    <string name="titleDialogEmail">e-mail</string>
     <string name="botonAceptar">Accept</string>
     <string name="botonCancelar">Cancel</string>
     <string name="botonOmitir">Omit</string>
