@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/pestanyaInformesListadoContenidoPadding" >
+    
+    <TextView
+        android:id="@+id/textViewListadoInformesConcepto"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentLeft="true"
+    	android:text=""
+    	android:textColor="@color/ListadosNegro"
+    	android:textStyle="italic"
+    	android:textSize="@dimen/text_small"
+        />
+     
+    <TextView
+        android:id="@+id/textViewListadoInformesCantidad"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingRight="@dimen/pestanyaInformesListadoCantidadPaddingRight"
+    	android:gravity="right"    	
+    	android:layout_toRightOf="@id/textViewListadoInformesConcepto"
+    	android:text=""
+    	android:textColor="@color/ListadosNegro"
+    	android:textSize="@dimen/text_small"
+        />
+	 
+</RelativeLayout>

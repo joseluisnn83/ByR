@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_general" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutAcercaDeContenido"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/AcercaDe_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/acercade_text_margin"
+            android:text="@string/AcercaDe_title"
+            android:textSize="@dimen/acercade_title_font_size" />
+
+        <TextView
+            android:id="@+id/AcercaDe_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/acercade_text_margin"
+            android:text="@string/AcercaDe_version"
+            android:textSize="@dimen/text_large" />
+
+        <ImageView
+            android:layout_width="@dimen/acercade_icono"
+            android:layout_height="@dimen/acercade_icono"
+            android:layout_margin="@dimen/acercade_icono_margin"
+            android:contentDescription="@string/AcercaDe_title"
+            android:src="@drawable/icono_acercade" />
+
+        <TextView
+            android:id="@+id/AcercaDe_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/acercade_text_margin"
+            android:text="@string/AcercaDe_copyright"
+            android:textSize="@dimen/text_large" />
+
+        <TextView
+            android:id="@+id/AcercaDe_derechos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/acercade_text_margin"
+            android:text="@string/AcercaDe_derechos"
+            android:textSize="@dimen/text_large" />
+        
+        
+    </LinearLayout>
+
+    
+
+</RelativeLayout>

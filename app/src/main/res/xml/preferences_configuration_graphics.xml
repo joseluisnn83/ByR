@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferences_graphics" >
+
+    <ListPreference
+        android:entries="@array/tipo_graficas"
+        android:entryValues="@array/tipo_graficas_values"
+        android:key="lpTipoGrafica"
+        android:summary="@string/preferencesContentTipoGrafica"
+        android:title="@string/preferencesTitleTipoGrafica" />
+    <ListPreference
+        android:entries="@array/valores_graficas"
+        android:entryValues="@array/valores_graficas_values"
+        android:key="lpValoresGrafica"
+        android:summary="@string/preferencesContentValoresGrafica"
+        android:title="@string/preferencesTitleValoresGrafica" />
+
+    <PreferenceCategory android:title="@string/preferencesCategoryYear" >
+         	
+        <Preference 
+            android:key="preferenceFecha"
+            android:title="@string/preferencesFechaTitle"
+            android:summary="@string/preferencesFechaContent" />
+        
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/preferencesCategoryLines" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="cbpLineIngresos"
+            android:summary="@string/preferencesContentLinesIngresos"
+            android:title="@string/preferencesTitleLinesIngresos" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="cbpLineGastos"
+            android:summary="@string/preferencesContentLinesGastos"
+            android:title="@string/preferencesTitleLinesGastos" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="cbpLineBalance"
+            android:summary="@string/preferencesContentLinesBalance"
+            android:title="@string/preferencesTitleLinesBalance" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/preferencesCategoryValues" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="cbpValuesIngresos"
+            android:summary="@string/preferencesContentValuesIngresos"
+            android:title="@string/preferencesTitleValuesIngresos" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="cbpValuesGastos"
+            android:summary="@string/preferencesContentValuesGastos"
+            android:title="@string/preferencesTitleValuesGastos" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="cbpValuesBalance"
+            android:summary="@string/preferencesContentValuesBalance"
+            android:title="@string/preferencesTitleValuesBalance" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_elemento_gestion_datos_states"
+    android:padding="@dimen/activityDatasElementoListaGDPadding" >
+    
+    <TextView
+        android:id="@+id/tvElementoListaGDConcepto"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentTop="true"
+    	android:layout_alignParentLeft="true"
+    	android:textSize="@dimen/activityDatasElementoListaGDSize"
+    	android:textColor="@color/negro"
+    	android:textIsSelectable="true" />
+    
+    <TextView 
+        android:id="@+id/tvSubElementoListaGDCantidad"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentBottom="true"
+    	android:layout_alignParentLeft="true"
+    	android:textSize="@dimen/activityDatasElementoListaGDSize"
+    	android:textColor="@color/rojo"
+    	android:textIsSelectable="true" />
+    
+    <ImageButton
+        android:id="@+id/buttonElementoListaGDBorrar"
+        android:layout_width="@dimen/activityDatasButtonElementoListaGDWidth"
+        android:layout_height="@dimen/activityDatasButtonElementoListaGDHeigth"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/tvContentDescriptionBorrar"
+        android:src="@android:drawable/ic_menu_delete" />
+    
+    <ImageButton
+        android:id="@+id/buttonElementoListaGDEditar"
+        android:layout_width="@dimen/activityDatasButtonElementoListaGDWidth"
+        android:layout_height="@dimen/activityDatasButtonElementoListaGDHeigth"
+        android:layout_toLeftOf="@+id/buttonElementoListaGDBorrar"
+        android:contentDescription="@string/tvContentDescriptionEditar"
+        android:src="@android:drawable/ic_menu_edit" />
+     
+     <!--android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"  -->
+
+</RelativeLayout>

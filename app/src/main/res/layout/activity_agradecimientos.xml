@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    
+    android:background="@drawable/fondo_general"
+    android:gravity="left"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_margin="@dimen/acercade_icono_margin"
+    	android:gravity="center_horizontal"
+    	
+    	 >
+        
+        <ImageView
+            android:id="@+id/agradecimientos_iv"
+            android:layout_width="@dimen/acercade_icono"
+            android:layout_height="@dimen/acercade_icono"
+            android:contentDescription="@string/AcercaDe_title"            
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icono_acercade" />
+        
+        <TextView
+        	android:id="@+id/agradecimientos_textview_cabecera"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/agradecimientos_iv"
+        	android:layout_centerVertical="true"
+        	android:text="@string/Agradecimientos_menu"
+        	android:textSize="@dimen/agradecimientos_cabecera" />          
+        
+        
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Agradecimientos_titulo"
+        android:textSize="@dimen/text_medium"
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Agradecimientos_iconos"
+        android:textSize="@dimen/text_medium"
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Agradecimientos_fuentes"
+        android:textSize="@dimen/text_medium"
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Agradecimientos_personas"
+        android:textSize="@dimen/text_medium"
+        android:layout_marginLeft="@dimen/agradecimientos_margin_texto"
+        android:layout_marginRight="@dimen/agradecimientos_margin_texto"
+        android:layout_marginBottom="@dimen/agradecimientos_margin_texto" />
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_elemento_gestion_datos_states"
+    android:padding="@dimen/activityDatasElementoListaGDPadding" >
+
+    <TextView
+        android:id="@+id/tvElementoFiltroConcepto"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:layout_marginLeft="20dip"
+        android:textColor="@color/negro"
+        android:textIsSelectable="true"
+        android:textSize="@dimen/activityDatasElementoListaGDSize"
+        android:gravity="center_vertical" />
+
+    <CheckBox
+        android:id="@+id/cbElementoFiltroConcepto"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:gravity="center_vertical" />
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/agradecimientos"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/Agradecimientos_menu">
+    </item>
+    <item
+        android:id="@+id/acerca_de"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/AcercaDe_menu">
+    </item>
+</menu>
+

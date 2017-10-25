@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.joseluisnn.mycalendar.CalendarMonthView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calendar_month_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+        
+    />
+
+<!-- 
+	android:dividerHeight="1px"
+    tools:ignore="PxUsage"
+    android:divider="@color/agenda_divider_color"  -->

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.joseluisnn.tt"
+    android:versionCode="3"
+    android:versionName="1.2"
+    android:installLocation="auto" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <!-- Permisos que se exigen -->
+    <!--  <uses-permission android:name="android.permission.INTERNET" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.joseluisnn.TTApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- android:label="@string/title_activity_principal_screen" -->
+		<activity 
+		    android:name="com.joseluisnn.tt.PrincipalScreenActivity"
+		    android:screenOrientation="portrait">
+		    <intent-filter >
+		        <action android:name="android.intent.action.MAIN"/>
+		        <category android:name="android.intent.category.LAUNCHER"/>
+		        
+		    </intent-filter>
+		    
+		</activity>
+        
+        <activity
+            android:name="com.joseluisnn.tt.DatasActivityScreen"
+            android:label="@string/title_activity_datas"
+            android:screenOrientation="portrait" >
+        </activity>       
+                
+        <activity
+            android:name="com.joseluisnn.tt.PreferenciasConfiguration"
+            android:label="@string/title_preferenceScreenConfiguration"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.ConfigurationActivity"
+            android:label="@string/title_ConfigurationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.ConceptosIngresosActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.ConceptosGastosActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.DatasActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.InformesScreenActivity"            
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.PestanyaSemanalActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.PestanyaMensualActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.PestanyaTrimestralActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.PestanyaAnualActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.PestanyaLibreActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.Graphics.GraphicsActivity"
+            android:label="@string/title_GraphicsActivity" >
+        </activity>
+        <activity android:name="com.joseluisnn.tt.PreferencesGraphicsActivity" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.AcercaDeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.joseluisnn.tt.AgradecimientosActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity 
+            android:name="com.joseluisnn.tt.FiltroConceptosActivity"
+            android:screenOrientation="portrait" >            
+        </activity>
+    </application>
+
+</manifest>

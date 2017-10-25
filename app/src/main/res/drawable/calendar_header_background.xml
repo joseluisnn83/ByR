@@ -1,0 +1,17 @@
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+  
+    <gradient
+        android:startColor="@color/CalendarioAzulCabeceraStart"
+        android:centerColor="@color/CalendarioAzulCabeceraCenter"
+        android:endColor="@color/CalendarioAzulCabeceraEnd"
+        android:angle="270"
+        />
+        
+    <corners 
+        android:topLeftRadius="5dip"
+        android:topRightRadius="5dip" />
+
+    <!-- <solid android:color="@color/agenda_white"/>-->
+</shape>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:background="@drawable/activity_datas_header_background" >
+
+        <ImageView 
+            android:id="@+id/imageViewBackSearch"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentLeft="true"
+        	android:layout_centerVertical="true"        	
+            android:contentDescription="@string/ivContentDescriptionBackSearch"
+            android:src="@android:drawable/ic_media_previous"
+            android:background="@drawable/report_search_quarterly"
+            />
+        
+        <TextView
+        	android:id="@+id/textViewGDFecha"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerInParent="true"
+        	android:gravity="center"
+        	android:textColor="@color/blanco"
+        	android:textSize="@dimen/activityDatasDateSize"
+        	android:textIsSelectable="false"
+        />
+        
+        <ImageView 
+            android:id="@+id/imageViewForwardSearch"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentRight="true"
+        	android:layout_centerVertical="true"
+            android:contentDescription="@string/ivContentDescriptionForwardSearch"
+            android:src="@android:drawable/ic_media_next"
+            android:background="@drawable/report_search_quarterly"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:id="@+id/LinearLayoutGDAddIngresos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activityDatasLinearLayoutGDPadding"
+        android:paddingBottom="@dimen/activityDatasLinearLayoutGDPadding"
+        android:background="@color/ListadosVerde" >
+
+        <ImageView
+            android:id="@+id/imageViewGDAddIngresos"
+            android:contentDescription="@string/descriptionIngresos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activityDatasImageViewGDPadding"
+        	android:paddingRight="@dimen/activityDatasImageViewGDPadding"
+            android:src="@android:drawable/ic_menu_add" />
+    
+    	<TextView
+    	    android:id="@+id/textViewGDAddIngresos"
+        	android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:layout_gravity="center"
+        	android:text="@string/tvGDIngresos"
+        	android:textSize="@dimen/activityDatasTextViewGDSize"
+        	android:textColor="@color/blanco" />
+    </LinearLayout>
+    
+    <FrameLayout
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+    	android:layout_weight="1"
+    	android:background="@color/NormalItemGD" >
+        
+        <ListView 
+            android:id="@+id/listIngresos"
+            android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:divider="@color/gris_claro"
+            android:dividerHeight="@dimen/lineView" >            
+        </ListView>
+        
+        <TextView 
+            android:id="@+id/empyViewIngresos"
+            android:layout_width="fill_parent"
+			android:layout_height="fill_parent"			
+			android:gravity="center"
+			android:text="@string/listaVaciaGDIngresos"
+			android:textSize="@dimen/activityDatasTextEmptyViewSize" />
+    </FrameLayout>
+    
+    <LinearLayout
+        android:id="@+id/LinearLayoutGDAddGastos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activityDatasLinearLayoutGDPadding"
+        android:paddingBottom="@dimen/activityDatasLinearLayoutGDPadding"
+        android:background="@color/ListadosRojo" >
+
+        <ImageView
+            android:id="@+id/imageViewGDAddGastos"
+            android:contentDescription="@string/descriptionIngresos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activityDatasImageViewGDPadding"
+        	android:paddingRight="@dimen/activityDatasImageViewGDPadding"
+            android:src="@android:drawable/ic_menu_add" />
+    
+    	<TextView
+    	    android:id="@+id/textViewGDAddGastos"
+        	android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:layout_gravity="center"
+        	android:text="@string/tvGDGastos"
+        	android:textSize="@dimen/activityDatasTextViewGDSize"
+        	android:textColor="@color/blanco" />
+    </LinearLayout>
+    
+    <FrameLayout
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+    	android:layout_weight="1"
+    	android:background="@color/NormalItemGD" >
+        
+        <ListView 
+            android:id="@+id/listGastos"
+            android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:divider="@color/gris_claro"
+            android:dividerHeight="@dimen/lineView" >
+        </ListView>
+        
+        <TextView 
+            android:id="@+id/empyViewGastos"
+            android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="center"
+			android:text="@string/listaVaciaGDGastos"
+			android:textSize="@dimen/activityDatasTextEmptyViewSize" />
+    </FrameLayout>
+
+</LinearLayout>

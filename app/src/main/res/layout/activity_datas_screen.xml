@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LLayoutDatasPrincipal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_general"
+    android:orientation="vertical"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="5dip" >
+	<!-- android:background="@color/CalendarioFondoPrincipal" -->
+    <RelativeLayout
+        android:id="@+id/RLCalendario"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tvHoy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:text="@string/activity_datas_screen_tvHoy"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/text_small" />
+
+            <ImageView
+                android:id="@+id/ivActivityDatasScreenToday"
+                android:layout_width="@dimen/calendarImageViewSearchDateWidth"
+                android:layout_height="@dimen/calendarImageViewSearchDateHeigth"
+                android:layout_below="@id/tvHoy"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:contentDescription="@string/ivContenDescriptionToday"
+                android:src="@drawable/calendar_today" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tvSearchDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:text="@string/activity_datas_screen_tvBuscar"
+                android:textColor="@color/blanco"
+                android:textSize="@dimen/text_small" />
+
+            <ImageView
+                android:id="@+id/ivActivityDatasScreenSearchDate"
+                android:layout_width="@dimen/calendarImageViewSearchDateWidth"
+                android:layout_height="@dimen/calendarImageViewSearchDateHeigth"
+                android:layout_below="@id/tvSearchDate"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:contentDescription="@string/ivContenDescriptionSearchDate"
+                android:src="@drawable/calendar" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

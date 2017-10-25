@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/FiltroConceptos_textview_titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:paddingLeft="@dimen/calendarTitlePadding"
+        android:gravity="center_vertical"
+        android:background="@color/agenda_gray_dark"
+        android:textColor="@color/negro"
+        android:textSize="@dimen/text_medium" 
+        android:text="@string/filtro_conceptos_titulo"
+        android:layout_weight="0.5"/>
+    
+    <ListView
+        android:id="@+id/FiltroConceptos_listview" 
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="5" >
+        
+    </ListView>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@color/agenda_gray_dark"
+        android:gravity="center_vertical|center_horizontal" >
+        
+        <Button 
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/FiltroConceptos_button_aplicar"
+            android:text="@string/filtro_conceptos_aplicar" />
+        
+        <Button
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/FiltroConceptos_button_salir"
+            android:text="@string/filtro_conceptos_salir" />
+        
+    </LinearLayout>
+
+</LinearLayout>

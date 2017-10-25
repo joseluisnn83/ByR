@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Dimension NORMAL -->
+    
+    <!-- Dimens from activity_principal_screen -->
+    <dimen name="button_principal_screen_margin_left">30dp</dimen>    
+    <dimen name="button_principal_screen_margin_right">30dp</dimen>
+    <dimen name="button_principal_screen_margin_top">30dp</dimen>
+    <dimen name="button_principal_screen_margin_bottom">30dp</dimen>
+    <dimen name="icon_heigth">96dp</dimen>
+    <dimen name="icon_width">96dp</dimen>
+    <dimen name="titulo_logo_heigth">125dp</dimen>
+    <dimen name="titulo_logo_width">300dp</dimen>
+    
+    <!-- Dimens from activity_configuration -->
+    <dimen name="mt">18sp</dimen>
+    <dimen name="st">14sp</dimen>
+    <dimen name="paddingTopConfiguration">5dp</dimen>
+    <dimen name="paddingBottomConfiguration">5dp</dimen>
+    <dimen name="paddingLeftConfiguration">10dp</dimen>
+    <dimen name="lineView">1dp</dimen>
+    <dimen name="paddingTopConceptos">10dp</dimen>
+    <dimen name="paddingBottomConceptos">10dp</dimen>
+    <dimen name="paddingLeftImageViewConceptos">5dp</dimen>
+    <dimen name="paddingRightImageViewConceptos">5dp</dimen>
+    <dimen name="textViewEmptyConcepto">20sp</dimen>
+    <dimen name="imageViewAddConceptoWidth">40dp</dimen>
+    <dimen name="imageViewAddConceptoHeigth">40dp</dimen>
+    
+    <!-- Dimens from Calendar -->
+    <dimen name="calendarTitleSize">25sp</dimen>
+    <dimen name="calendarTitlePadding">5dp</dimen>
+    <dimen name="calendarImageViewInsertedDataWidth">20dp</dimen>
+    <dimen name="calendarImageViewInsertedDataHeigth">20dp</dimen>
+    <dimen name="calendarDataSize">15sp</dimen>
+    <dimen name="calendarItemBackgroundStroke">1dp</dimen>    
+    <dimen name="calendarItemBackgroundPadding">5dp</dimen>
+    <dimen name="calendarItemBackgroundFocusedStroke">1dp</dimen>
+    <dimen name="calendarItemBackgroundFocusedCorners">2dp</dimen>
+    <dimen name="calendarItemBackgroundPaddingCurrent">2dp</dimen>
+    <dimen name="calendarItemBackgroundCornersCurrent">1dp</dimen>
+    <dimen name="calendarCaptionDateSize">14sp</dimen>
+    <dimen name="calendarTextViewSpinnerSize">20sp</dimen>
+    <dimen name="calendarImageViewSearchDateWidth">64dp</dimen>
+    <dimen name="calendarImageViewSearchDateHeigth">64dp</dimen>
+    
+    <!-- Dimens from ActivityDatas -->
+    <dimen name="activityDatasDateSize">20sp</dimen>
+    <dimen name="activityDatasLinearLayoutGDPadding">5dp</dimen>
+    <dimen name="activityDatasImageViewGDPadding">5dp</dimen>
+    <dimen name="activityDatasTextViewGDSize">15sp</dimen>
+    <dimen name="activityDatasTextEmptyViewSize">20sp</dimen>
+    <dimen name="activityDatasElementoListaGDPadding">3dp</dimen>
+    <dimen name="activityDatasElementoListaGDSize">15sp</dimen>
+    <dimen name="activityDatasButtonElementoListaGDWidth">50dp</dimen>
+    <dimen name="activityDatasButtonElementoListaGDHeigth">50dp</dimen>
+    
+    <!-- Dimens from PestanyaInformes -->
+    <dimen name="pestanyaInformesTotalesPadding">5dp</dimen>
+    <dimen name="pestanyaInformesListadoEncabezadoFechaPadding">15dp</dimen>
+    <dimen name="pestanyaInformesListadoContenidoPadding">20dp</dimen>
+    <dimen name="pestanyaInformesListadoCantidadPaddingRight">10dp</dimen>
+    <dimen name="pestanyaInformesImageViewMovingDataPadding">5dp</dimen>
+    <dimen name="pestanyaInformesTextViewDataPadding">2dp</dimen>
+    
+    <!-- Dimens from Acerca de -->
+    <dimen name="acercade_icono">100dp</dimen>
+    <dimen name="acercade_icono_margin">20dp</dimen>
+    <dimen name="acercade_title_font_size">40sp</dimen>
+    <dimen name="acercade_text_margin">5dp</dimen>
+    
+    <!-- Dimens from  Agradecimientos-->
+    <dimen name="agradecimientos_cabecera">30sp</dimen>
+    <dimen name="agradecimientos_margin_texto">10dp</dimen>
+    
+    <!-- Dimens from text size -->
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Calendar colors -->
+    <color name="calendar_font_color">#515151</color>
+    <color name="calendar_secondary_font_color">#999999</color>
+    <color name="calendar_weekend_font_color">#E01B6A</color>
+    <color name="calendar_secondary_weekend_font_color">#AC889E</color>
+    <color name="calendar_transparent">#00FFFFFF</color>
+    <color name="calendar_header_font_color">#FFFFFF</color>
+    <color name="agenda_dayline_box_edge_color">#525252</color>
+    <color name="agenda_header_background_color">#5450FF</color>
+    <color name="calendar_notcurrent_item_background_color">#D3D3D3</color>
+    <color name="calendar_captions_item_background_color">#808080</color>
+    <color name="grid_view_captions">#F8F8FF</color>
+    <color name="grid_view_days">#F8F8FF</color>
+    <color name="agenda_gray_dark">#D7D7D7</color>
+    <color name="agenda_divider_color">#BBBBBB</color>
+    
+    <!-- Colores propios joseluisnn -->
+    <color name="blanco">#FFFFFF</color>
+    <color name="negro">#000000</color>
+    <color name="gris_claro">#D3D3D3</color>
+    <color name="dim_gray">#696969</color>
+    <color name="rojo">#FF0000</color>
+    <color name="LightRed">#F68888</color>
+    <color name="FireBrick">#B22222</color>
+    <color name="DarkRed">#8B0000</color>
+    <color name="azul">#0000CD</color>
+    <color name="PaleGreen">#98FB98</color>
+    <color name="LightGreen">#83D083</color>
+    <color name="ForestGreen">#228B22</color>
+    <color name="verde">#006400</color>
+    <color name="LightYellow">#FFFEBC</color>
+	<color name="DarkYellow">#C8911B</color>
+	<color name="colorGeneral">#AEC5D5</color>
+	<color name="colorLeyenda">#6E95AE</color>
+	
+	<!-- Colores para el Calendario -->
+	<color name="CalendarioAzulCabeceraStart">#2185C5</color>
+	<color name="CalendarioAzulCabeceraCenter">#2492D9</color>
+	<color name="CalendarioAzulCabeceraEnd">#2AAAFC</color>
+	<color name="CalendarioFondoPrincipal">#3E454C</color>
+	<color name="CalendarioDomingos">#FF7F66</color>
+	<color name="CalendarioDiaPulsado">#FFF6E5</color>
+	<color name="CalendarioHoy">#7ECEFD</color>
+	<color name="NormalItemGD">#EAEAEA</color>
+	<color name="PressedItemGD">#d5dce7</color>
+	
+	<!-- Colores para los Listados -->
+	<color name="ListadosNegro">#232621</color>
+	<color name="ListadosRojo">#C74223</color>
+	<color name="ListadosVerde">#5E7D4D</color>
+	<color name="ListadosRojoClaro">#FF9682</color>
+	<color name="ListadosVerdeClaro">#87B26D</color>
+	<color name="ListadosVerdeOscuro">#435936</color>
+	<color name="ListadosGold">#7D603E</color>
+	<color name="ListadosLightGold">#E0D1A3</color>
+	<color name="ListadosBrown">#4F3D27</color>
+	
+	<!-- Colores para las pestañas de los informes-->	
+	<color name="Azul1">#336699</color>
+	<color name="Azul2">#6699CC</color>
+	<color name="Azul3">#D4E5ff</color>
+	<color name="Azul4">#0C2A58</color>
+	<color name="Azul5">#CCFFFF</color>
+	
+</resources>

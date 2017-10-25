@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/list_item_states"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+     >
+     
+    <ImageView
+        android:id="@+id/imageViewInsertedData"
+        android:src="@drawable/inserted_data"
+        android:layout_width="@dimen/calendarImageViewInsertedDataWidth"
+        android:layout_height="@dimen/calendarImageViewInsertedDataHeigth"
+        android:layout_gravity="top|right"
+        android:contentDescription="@string/calendarContentDescriptionInsertedData"        
+         />
+    
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/calendar_header_font_color"
+        android:textSize="@dimen/calendarDataSize"
+        android:typeface="sans"
+        android:gravity="bottom|left"
+        android:textIsSelectable="false"
+         >
+    </TextView>
+
+</LinearLayout>

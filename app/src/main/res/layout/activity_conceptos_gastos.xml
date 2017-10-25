@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_general" >
+    
+    <LinearLayout
+        android:id="@+id/LinearLayoutConceptosGGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:paddingTop="@dimen/paddingTopConceptos"
+        android:paddingBottom="@dimen/paddingBottomConceptos"
+        android:background="@color/dim_gray" >
+
+        <ImageView
+            android:id="@+id/imageViewConceptosGastos"
+            android:contentDescription="@string/descriptionGastos"
+            android:layout_width="@dimen/imageViewAddConceptoWidth"
+            android:layout_height="@dimen/imageViewAddConceptoHeigth"
+            android:paddingRight="@dimen/paddingRightImageViewConceptos"
+        	android:paddingLeft="@dimen/paddingLeftImageViewConceptos"
+            android:src="@android:drawable/ic_menu_add" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/textoDescriptionGastos"
+            android:textColor="@color/blanco"
+            android:textSize="@dimen/text_medium" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/gris_claro"
+            android:dividerHeight="@dimen/lineView" >
+        </ListView>
+        
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textSize="@dimen/textViewEmptyConcepto"
+            android:text="@string/textViewListViewConceptoGasto"            
+            />
+
+    </FrameLayout>
+
+</LinearLayout>
